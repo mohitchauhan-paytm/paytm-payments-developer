@@ -12,6 +12,7 @@ gatsby build
 ~~~
 
 ### Issues
+Found anything missing, want to suggest updates or have any query in general? Feel free to raise an issue [here](https://github.com/Paytm-Payments/paytm-payments-developer/issues)
 
 
 
