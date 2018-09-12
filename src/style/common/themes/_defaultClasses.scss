@@ -1,0 +1,46 @@
+@import '../variables';
+body {
+    color: $textColor2;
+    background: $white;
+}
+
+.wrapper-content {
+    background: $white;
+}
+
+a {
+    color: $primary;
+}
+
+a:hover,
+a:focus {
+    color: $anchorHover;
+}
+
+.wrapper:before {
+    content: '';
+    background-color: $headTripGradient1;
+    background-image: linear-gradient(to bottom, $headTripGradient1, $headTripGradient2);
+}
+
+.btn-primary {
+    background-color: $primary;
+    color: $white;
+    border: 1px solid $primary;
+    &:hover,
+    &:focus {
+        background-color: $btnHover;
+        border-color: $btnHover;
+    }
+}
+
+.btn-default {
+    background-color: $white;
+    color: $primary;
+    border: 1px solid $defaultbtnborder;
+    &:hover,
+    &:focus {
+        border-color: $primary;
+        color: $white;
+    }
+}

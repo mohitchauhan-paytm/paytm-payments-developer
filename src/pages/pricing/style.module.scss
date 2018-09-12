@@ -1,0 +1,203 @@
+
+// Brand
+$primary: #00B9F5;
+$secondary:#002E6E;
+// States
+$positive: #00c673;
+$alert:#ff9e00;
+$error:#ff4b55;
+// Typography
+$sidebarLabel: #536e92;
+$dark1:#29394f;
+$dark2:#536d90;
+$dark3:#7b93b4;
+$darkgray:#536e92;
+$slateBlue: #5e779a;
+$textColor2: #222;
+$textColor3:#182233;
+// Sectioning
+$line:#e6ebf3;
+$line1:#e8edf4;
+$sectionBG:#F6F8FC;
+$white:#fff;
+// Elements
+$overlay: rgba(0, 0, 0, .1);
+// Anchor Hover 
+$anchorHover: #3c8dbc;
+// Button Hover 
+$btnHover:#27B7EA;
+// Background
+$backgroundColor:#f6f8fc;
+$headTripGradient1:#002e91;
+$headTripGradient2:#087fdb;
+// Border
+$defaultbtnborder: #ebeff5;
+$borderBlue: #e6ebf3;
+$borderGrey: #eaeaea;
+// shadow 
+$shadow:rgba(123, 147, 180, 0.2);
+// common padding for mobile
+$p16:16px;
+$plr40: 40px;
+$commonpadding:40px;
+// Form Styles
+$formInput: #86a0c2;
+.banner-wrap{
+    background:$sectionBG;
+    padding:60px 0 208px 0;
+    .main-para{
+        margin:8px auto $commonpadding auto;
+        color:$sidebarLabel;
+        font-size:1.4rem;
+    }
+}
+.main-heading{
+    font-size:2.8rem;
+    margin:0;
+    color:$textColor3;
+    font-weight:800;
+}
+.main-para{
+    margin:8px auto $commonpadding auto;
+    color:$sidebarLabel;
+    font-size:1.4rem;
+}
+.grid-wrap{
+    max-width:1005px;
+    width:100%;
+    margin:-211px auto 0 auto;
+    border:1px solid #e6ebf3;
+    background:$white;
+}
+.box-wrap{
+    background:$white;
+    border-bottom:1px solid #e6ebf3;
+    padding:$commonpadding;
+}
+.box{
+    max-width:306px;
+    h3{
+        font-size:20px;
+        margin:0;
+        line-height: 1.2;
+        color:$textColor3;
+        font-weight:800;
+        margin-bottom:8px;
+    }
+    p{
+        margin:0 0 16px 0;
+        line-height:1.43;
+    }
+}
+
+ 
+.box-para{
+    color:$textColor3;
+    padding:20px 10px;
+    
+    p{
+        font-size:1.4rem;
+    }
+}
+.w100{
+    width:100%;
+    border-spacing:0;
+    border-collapse: collapse;
+    margin-bottom:0!important;
+    th{
+        font-size: 1.2rem;
+        line-height: 1.33;
+        font-weight: 600;
+        padding: 25px $commonpadding 10px;
+        border-bottom: 1px solid $line;
+        text-align: left;
+        color: $sidebarLabel;
+        text-transform: uppercase;
+        flex-grow:1;
+        border-top: 1px solid $line;
+        
+        &:first-child{
+            width: 292px;
+        
+        }
+        &:last-child {
+            text-align: right;
+            border-right:none;
+        }
+        &.highlighted{
+            color:$textColor3;
+            font-weight:800;
+        }
+    }
+    tr{ 
+        &:last-child{
+            td{
+                border-bottom:none;
+                &.highlighted{
+                    color:$textColor3;
+                }
+            }
+
+            
+        }
+        td {
+            padding: 21px $commonpadding 23px;
+            border-bottom: 1px solid $line;
+            font-size: 2rem;
+            color: $textColor3;
+            line-height: 1.43;
+            position: relative;
+            border-right:1px solid #e6ebf3;
+            &.highlighted{
+                color:$textColor3;
+                border-top:1px solid #e6ebf3;
+                font-size:1.2rem;
+                line-height:1.33;
+                letter-spacing: 0.8px;
+                font-weight:800;
+            }
+            &:last-child {
+       
+                border-right:none;
+            }
+            &:first-child{
+                border-bottom:none;
+                color: $dark3;
+            }
+        }
+        p{
+            font-size:1.4rem;
+            margin:0;
+            color: $dark3;
+        }
+    }
+}
+
+
+
+
+
+.border-refine{
+    border-bottom:none;
+    border-right:1px solid $line;
+}
+    
+.helping-box{
+    text-align: center;
+    padding:60px 0;
+    h5{
+        font-size:1.6rem;
+        margin:0 0 12px 0;
+        color:$sidebarLabel;
+        font-weight:800;
+        
+    }
+}
+.highlighted{
+    font-size:12px;
+    line-height:1.33;
+    letter-spacing: 0.8px;
+    font-weight:800;
+    color:$textColor3;
+    text-transform: uppercase;
+}

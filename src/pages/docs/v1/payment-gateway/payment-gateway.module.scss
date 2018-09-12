@@ -1,0 +1,127 @@
+$headcolor:#182223;
+$gridvalue:40px;
+$neggridvalue:-40px;
+$editor:#f8f9f9;
+$line:#e6ebf3;
+.checkout-wrapper {
+    width: 100%;
+    background:#fff;
+    padding: 0px;
+    margin-bottom: 40px;
+    border-radius: 4px;
+    p {
+        color: #fff;
+        span:first-child {
+            width: 100px;
+            color: #00b9f5;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+        span:last-child {
+            width: calc(100% - 100px);
+            font-size: 1.2rem;
+        }
+    }
+    h2 {
+        color: #00b9f5;
+        margin-bottom: 20px;
+    }
+    div[role='tablist'] {
+        display: flex;
+        margin-top: 15px;
+        flex-direction: row;
+        border-bottom: none;
+        padding-right: 0;
+        button[role='tab'] {
+            margin-right: 5px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            background: transparent;
+            border: none;
+            min-height: 32px;
+            min-width:50px;
+            padding:5px 10px;
+            color:#000;
+        }
+        button[role='tab'][aria-selected='true'] {
+            background:none;;
+            color: #00b9f5;
+            border: none;
+        }
+        &::after {
+            border: none;
+        }
+    }
+    div[role='tabpanel']{
+        margin-top:-25px;
+    pre{
+        background:#f8f9f9;
+        color:$headcolor;
+    }
+    }
+    h6 {
+        border-top: 1px solid #4f585a;
+        border-bottom: 1px solid #4f585a;
+        padding: 15px 0;
+        margin: 20px 0;
+        span {
+            font-size: 1.6rem;
+            color: #ffffff;
+            font-weight: normal;
+        }
+    }
+    code{
+        background:#f8f9f9;
+
+    }
+}
+ .ecom-platform{
+ 
+ margin-top:20px;
+ margin-bottom: 40px;
+}
+.ecom-card{
+border:1px solid $line;
+width:10%;
+margin-right:1%;
+padding:10px 10px;
+margin-bottom:10px;
+-webkit-transition:all ease 500ms;
+transition:all ease 500ms;
+min-height:50px;
+&:hover{
+    box-shadow:0px 5px 10px #ddd;
+}
+a{
+    font-size:1.4rem;
+    color:$headcolor;
+    font-weight:600;
+    cursor: pointer;
+    height:100%;
+}
+}
+.card-link{
+    span{
+        margin:0 auto;
+        img{
+            align-items: center;
+            width:35px;
+        }
+        label{
+            text-align: center;
+            line-height:normal;
+            font-size:12px;
+            margin-top:5px;
+        }
+    }
+}
+.common-margin{
+    height:1px;
+    padding:15px 0; 
+
+}
+.stage-txt{
+    color:#00c673;
+    font-weight:normal;
+    font-size:1.4rem;
+}

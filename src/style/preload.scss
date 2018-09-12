@@ -1,0 +1,420 @@
+@import 'common/reset';
+@import 'common/variables';
+@import './common/typography';
+@import './common/common';
+@import './common/grid';
+@import './common/popup';
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,800');
+.btn {
+    font-size: 1.4rem;
+    padding: 6px 15px;
+    min-height: 40px;
+    border-radius: 2px;
+    line-height: 1;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    &.small {
+        font-size: 1.4rem;
+        padding: 6px 18px;
+        min-width: 78px;
+        min-height: 32px;
+    }
+    &.large {
+        font-size: 2rem;
+        padding: 16px 24px;
+        min-width: 169px;
+        min-height: 56px;
+    }
+}
+
+.btn-primary {
+    background-color: $primary;
+    color: $white;
+    border: 1px solid $primary;
+    &:hover,
+    &:focus {
+        background-color: $btnHover;
+        border-color: $btnHover;
+    }
+}
+
+.btn-default {
+    background-color: $white;
+    color: $dark2;
+    border: 1px solid $defaultbtnborder;
+    transition: all 0.3s ease;
+    &:hover,
+    &:focus {
+        background-color: $btnHover;
+        border-color: $btnHover;
+        color: $white;;
+    }
+}
+
+.btn-blueBorder {
+    background-color: $white;
+    color: $primary;
+    border: 1px solid $primary;
+    transition: all 0.3s ease;
+    &:hover,
+    &:focus {
+        background-color: $btnHover;
+        border-color: $btnHover;
+        color: $white;
+    }
+}
+
+.btn-disabled {
+    background-color: $sectionBG;
+    color: rgba($dark3, .5);
+    border: 1px solid $sectionBG;
+}
+
+.wrapper:before {
+    background-color: $headTripGradient1;
+    background-image: url('/assets/bg.png'), linear-gradient(to bottom, $headTripGradient1, $headTripGradient2);
+}
+
+.wrapper:after {
+    display: none;
+}
+
+// Input Styles
+.inputWrap {
+    border: 1px solid $primary;
+    padding: 10px 16px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+}
+
+.inputDiv {
+    flex: 1;
+}
+
+.inputLabel {
+    color: $slateBlue;
+    font-size: 1.2rem;
+    line-height: 1.33;
+    display: block;
+}
+
+.input {
+    color: $dark1;
+    font-size: 1.4rem;
+    line-height: 1.43;
+    font-weight: bold;
+    border: 1px solid transparent;
+    width: 100%;
+}
+
+
+@media screen and (max-width: 767px) {
+    .wrapper {
+        max-width: 100%;
+        margin-top: 56px;
+        min-height: calc( 100% - 56px - 8px);
+        &:before {
+            display: none;
+        }
+    }
+}
+
+
+
+
+
+
+.btn.arrow{
+    
+    background:$white;
+    border:1px solid $line;
+    color:$primary;
+    padding: 8px 10px;
+    font-size:1.4rem;
+    margin:1%;
+    font-weight:400;
+    min-height:36px;
+    
+   /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);*/
+
+    &:hover{
+        color:$white;
+        background: $btnHover;
+        border:1px solid $btnHover;
+    }
+   
+
+}
+$value40:40px;
+p{
+    color:$headcolor;
+    font-size:1.4rem;
+    line-height:1.43;
+}
+
+
+.light-bg{
+    background:$sectionBG;
+    border-top:1px solid $line;
+    border-bottom:1px solid $line;
+}
+
+.head-left{
+   width:65%;
+    .big-head-txt {
+        font-size: 3.6rem;
+        font-weight: 800;
+        font-style: normal;
+        line-height: 1;
+        color: $dark1;
+        margin-bottom: 8px;
+    }
+    .med-head-txt{
+        font-size: 2.0rem;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1.2;
+        color: $headcolor;
+        margin:12px 0;
+    }
+    .small-head-txt{
+        color:$dark4;
+    }
+    
+}
+.small-head-txt{
+    font-size:1.4rem;
+    color:$dark4;
+    line-height:1.43;
+    margin-bottom:16px;
+}
+.head-right{
+    width:30%;
+    text-align: right;
+    
+}
+.box-container{
+    /*padding:0 40px;*/
+    margin-top:40px;
+    .bold-heading{
+        margin:15px 0 4px 0;
+        font-size:1.6rem;
+    }
+}
+.bold-heading{
+   
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.25;
+    color: $headcolor;
+}
+.box-item{
+    padding:30px;
+    border: solid 1px $line;
+    max-width:348px;
+    width:32%;
+   
+}
+.box-bg{
+   img{
+       -webkit-border-radius:4px;
+      border-radius:4px; 
+   }
+}
+.information-box{
+   /* padding:$value40 $value40 43px $value40;*/
+    margin:$value40 -40px 0 -40px;
+    padding:30px 40px 20px 40px;
+    p{
+        margin-top:8px;
+    }
+    .bold-heading{
+        font-size:1.6rem;
+    }
+    ul.info-list{
+        max-width:100%;
+        li{
+            max-width:100%;
+        }
+    }
+}
+.info-list{
+    margin-top:18px;
+    padding-left:0!important;
+    li{
+        padding-left:$value40;
+        color:$headcolor;
+        font-size:1.4rem;
+        line-height:1.43;
+        padding:5px 0 5px 36px;
+        background:url('/assets/ic-check-cirlce.svg') no-repeat left top 4px;
+        background-size:20px;
+        margin-bottom:10px!important;
+        max-width:600px;
+        list-style: none;
+        
+    }
+}
+.account-detail-box{
+    padding:$value40 0 0 0;
+    .heading24{
+        font-size: 2.4rem;
+        font-weight: 800;
+        line-height: 1.17;
+        margin-bottom:0;
+        color: $headcolor;
+        
+    }
+    .stage-list{
+        margin-top:0;
+        margin-bottom:0;
+        li{
+            color:#536e92;
+        }
+        
+    }
+}
+
+.stage{
+    color:$dark3;
+    text-transform:uppercase;
+    font-size:1.2rem;
+    font-weight:800;
+}
+.stage-detail{
+    button{
+        margin-top:8px;
+    }
+    .btn-default {
+        background-color: $white;
+        color: $dark4;
+        border: 1px solid $line;
+        transition: all 0.3s ease;
+        
+    }
+    button:first-child
+    {
+        margin-right:20px;
+    }
+    p{margin:8px 0 0 0;}
+}
+.stage-list{
+    max-width:700px;
+    li{
+        padding:20px 0 20px 5px;
+        border-bottom:1px solid $line;
+        list-style-type: disc;
+        margin-bottom:0!important;
+        color:$dark3;
+        font-size:2rem;
+        color:$dark4;
+        &:last-child{
+            border:none;
+        }
+        .stage{
+            margin-bottom:0;
+            color:$dark4;
+        }
+    }
+}
+.library-div{
+    display:none;
+    position: absolute;
+    top:0;
+    left:0;
+    background:rgba(255,255,255,1);
+    text-align:center;
+    font-size:1.2rem;
+    padding-top:40px;
+    transition:all ease 400ms;
+    opacity:0;
+    font-weight:800;
+}
+.sdk-area{
+    margin-top:12px;
+    position: relative;
+    div{
+        border:1px solid $line;
+        width:120px;
+        height:100px;
+        padding:10px 0;
+        
+        margin-right:12px;
+            p{
+                font-size:1.2rem;
+                font-weight:800;
+                color:$dark3;
+                margin:auto;
+                margin-top:0;
+            }
+            &:hover .library-div{
+                display:block;
+                opacity:1;
+            }
+    }
+}
+
+
+.wrapper-content{
+    margin-bottom:0px;
+}
+
+
+
+.list-descrpt-box{
+    margin-top:60px;
+    position:relative;
+    &::before{
+        content: '';
+        width:48px;
+        height:1px;
+        background-color:$line;
+        position: absolute;
+        top:-30px;
+    }
+}
+.list-descrpt{
+    list-style-type: disc;
+    padding-left:20px;
+    color:$dark3;
+    font-size:1.4rem;
+    max-width:700px;
+    li{
+        margin-bottom:16px;
+    }
+    
+}
+.payment-process-box{
+   
+    padding-top:$value40;
+    ul{
+        margin-top:14px;
+        
+    }
+}
+.payment-collect-box{
+    padding-top:$value40;
+    border-top:1px solid $line;
+   
+}
+.basic-info-box{
+    padding:16px 0;
+    p.bold-para{
+        color:$headcolor;
+        font-size:1.6rem;
+    }
+    p{
+        color:$dark3;
+    }
+}
+@media screen and (max-width: 1368px) {
+    .box-item{
+        padding:30px 20px;
+    }
+    .btn.arrow{
+        font-size:1.3rem;
+        padding:8px;
+    }
+ }
+ 

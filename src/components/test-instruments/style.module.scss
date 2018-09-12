@@ -1,0 +1,96 @@
+.grid {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+.test-instrument-wrapper{
+    margin-top:50px;
+    max-width:524px;
+    .tab-list-box{
+        border:1px solid #e6ebf3;
+    }
+    .tab-panel-box{
+        border:1px solid #e6ebf3;
+        border-top:none;
+    }
+    div[role='tablist'] {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        border-bottom: none;
+        padding: 0 20px;
+        min-width:524px;
+        button{
+            background:#fff;
+            color:#536e92;
+            border:none;
+            border-bottom:4px solid transparent;
+            font-size:1.6rem;
+            font-weight:800;
+            padding:20px 0 16px 0;
+            margin-right:40px;
+            margin-bottom:0;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+        button[role='tab'][aria-selected='true'] {
+            background: #ffffff;
+            color: #00b9f5;
+            border-bottom:4px solid #00b9f5;
+        }
+    }
+    div[role='tabpanel'] {
+        margin-top: 0px;
+        padding:20px;
+        min-width:524px;
+        min-height:50px;
+    }
+    .bluePara{
+        font-size:1.2rem;
+        color: #86a0c2;
+        margin-top:16px;
+    }
+}
+.card-wallet-box{
+    table{
+        width:100%;
+        margin-bottom:0;
+        tr{
+            
+            td{
+                font-size:1.4rem;
+                color:#536e92;
+                padding:6px 0;
+                border:none;
+                &:first-child{
+                    text-align:left;
+                    
+                }
+                &:last-child{
+                    text-align:right;
+                    font-weight: 800;
+                }
+                p{
+                    font-size:1.2rem;
+                    color:#86a0c2;
+                    line-height: 16px;
+                    margin-bottom:0;
+                }
+            }
+            
+        }
+        
+    }
+}
+.img-box{
+    margin-bottom:10px;
+    img{
+            margin-right:19px;
+    }
+    
+}
+

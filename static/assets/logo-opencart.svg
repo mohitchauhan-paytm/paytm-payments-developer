@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120" height="120" viewBox="0 0 120 120">
+    <defs>
+        <path id="a" d="M0 0v120h120V0z"/>
+        <path id="c" d="M1 1v118h118V1H1zM0 0h120v120H0V0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <g fill="#D8D8D8" mask="url(#b)">
+                <path fill="none" d="M0 0h120v120H0z"/>
+            </g>
+        </g>
+        <g>
+            <mask id="d" fill="#fff">
+                <use xlink:href="#c"/>
+            </mask>
+            <g fill="#D8D8D8" mask="url(#d)">
+                <path fill="none" d="M0 0h120v120H0z"/>
+            </g>
+        </g>
+        <g fill="#29B6F6" fill-rule="nonzero">
+            <path d="M68.75 86c4.745 0 8.75 4.005 8.75 8.75s-4.005 8.75-8.75 8.75S60 99.495 60 94.75 64.005 86 68.75 86zm-37.5 0c4.745 0 8.75 4.005 8.75 8.75s-4.005 8.75-8.75 8.75-8.75-4.005-8.75-8.75S26.505 86 31.25 86zM0 16c13.25 12.5 28.75 17.755 57 17.755 28.255 0 63-1.505 63 7.5 0 4.49-4.745 8.75-13.25 16.25C98.493 65.005 82.5 78.5 82.5 78.5c0-3.75 22.755-23.25 22.755-29.25 0-7.995-32.755-6.745-47.5-7C32.5 41.75 11.747 38.245 0 16z"/>
+        </g>
+    </g>
+</svg>

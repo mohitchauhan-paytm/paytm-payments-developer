@@ -1,0 +1,20 @@
+.head-left {
+    width: 65%;
+}
+.head-right {
+    width: 30%;
+    text-align:right;
+}
+.grid {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+.justify-between {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}

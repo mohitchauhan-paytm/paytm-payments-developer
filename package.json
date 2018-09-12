@@ -1,0 +1,56 @@
+{
+  "name": "paytm-payments-developer",
+  "description": "Paytm Developer Network",
+  "version": "1.0.0",
+  "author": "Apurav Chauhan <Twitter: @apuravchauhan>",
+  "dependencies": {
+    "@mdx-js/mdx": "^0.15.0",
+    "@mdx-js/tag": "^0.15.0",
+    "core-js": "^2.5.7",
+    "gatsby": "next",
+    "gatsby-mdx": "0.0.11",
+    "gatsby-plugin-catch-links": "next",
+    "gatsby-plugin-manifest": "next",
+    "gatsby-plugin-react-helmet": "next",
+    "gatsby-plugin-sass": "next",
+    "gatsby-source-filesystem": "next",
+    "mdx-deck": "^1.5.7",
+    "node-sass": "^4.9.3",
+    "prop-types": "^15.5.4",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-helmet": "^5.2.0",
+    "react-intl": "^2.4.0",
+    "react-redux": "^5.0.7",
+    "react-web-tabs": "^1.0.1",
+    "redux": "^4.0.0",
+    "remark-highlight.js": "^5.0.0"
+  },
+  "keywords": [
+    "paytm",
+    "documentation",
+    "developer",
+    "payment gateway",
+    "integration",
+    "documentation-as-code"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write '**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "prettier": "^1.14.2",
+    "webpack": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Paytm-Payments/paytm-payments-developer"
+  },
+  "bugs": {
+    "url": "https://github.com/Paytm-Payments/paytm-payments-developer/issues"
+  }
+}

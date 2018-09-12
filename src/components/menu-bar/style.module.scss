@@ -1,0 +1,107 @@
+    @import '../../style/common/themes/default';
+    
+    .nav-desk {
+        position: fixed;
+        left: 0;
+        height: calc( 100% - 64px);
+        max-width: 300px;
+        min-width: 56px;
+        top: 64px;
+        width: 100%;
+        z-index: 1; // background: blue;
+        padding-bottom: 72px;
+        border-right: 1px solid #e6ebf3;
+        overflow:auto;
+    }
+    
+    .menu-left-block {
+        padding-top: 40px;
+        & hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid $line;
+            margin: 10px 40px;
+            padding: 0;
+        }
+    }
+
+   
+    
+    a.active-link {
+            color: $primary;
+    }
+
+    .left-link {
+        height: 40px;
+        padding-left: 40px;
+        padding-right: 5px;
+        color: $dark2;
+        font-size: 1.4rem;
+        line-height:normal;
+        font-weight: normal;
+        & img {
+            margin-right: 10px;
+        }
+        
+        &:hover {
+            color: $primary;
+        }
+        &:focus{
+            color:$primary;
+        }
+        &:active{
+            color:$primary;
+        }
+    }
+    a:focus{
+        color:$primary;
+    }
+
+    .left-block-heading {
+        font-size: 1.2rem;
+        color: $dark2;
+        padding-left: 40px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 800;
+        line-height: 1.6rem;
+        margin-bottom: 8px;
+    }
+    .menu-sub-list{
+        padding-left:20px;
+        .left-link{
+            font-size:1.3rem;
+        }
+    }
+
+    @mixin leftMenuOverlay {
+        height: 100%;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        transition: all 0.5s cubic-bezier(0, 0, .2, 1);
+    }
+    .leftNoLink {
+        cursor: pointer;
+        
+        &:hover {
+        color: #536d90;
+        }
+        }
+        
+        .menuSubList {
+        max-height: 200px;
+        transition: all 0.3s linear;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin-left: 16px;
+        
+        &.visibleMenu {
+        visibility: visible;
+        height: auto;
+        opacity: 1;
+        }
+        }
