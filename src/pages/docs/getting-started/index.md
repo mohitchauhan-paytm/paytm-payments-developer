@@ -77,13 +77,13 @@ If the customer drops out from the payment process or in the event of payment au
 
 ##### Pending Transaction
 
-Sometimes we do not receive real-time transaction status from the bank. This can due to many reasons such as network issues, technical errors at customer's/bank's end etc. This is marked as pending transaction. Refer this for detailed handling of pending transaction.
+Sometimes we do not receive real-time transaction status from the bank. This can due to many reasons such as network issues, technical errors at customer's/bank's end etc. This is marked as pending transaction. Refer     <Link to="/docs/late-notification">this</Link> for detailed handling of pending transaction.
 
 ---
 
 ##### Settled Transaction 
 
-Payment recieved against successful transactions are credited in to your bank account on T+1 where T is the date of being successful. Once the transaction is credited, it is marked as settled.
+Payments received against successful transactions are credited into your bank account on T+1, where T is the date of successful transaction. Once the payment is credited, corresponding transaction is marked as Settled.
 
 ---
 

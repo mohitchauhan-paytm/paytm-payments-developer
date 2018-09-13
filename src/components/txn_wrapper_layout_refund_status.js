@@ -33,22 +33,29 @@ export default class TransactionWrapperLayoutRefundStatus extends React.Componen
 <span class="hljs-keyword">import</span> org.json.JSONObject;
 
 <span class="hljs-keyword">import</span> com.paytm.pg.merchant.CheckSumServiceHelper;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Get_txn_status</span> </span>{
+
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Refund_status_API</span> </span>{
+
 String mid;
 String orderid;
+String Refid;
 String merchant_key;
 
-Get_txn_status(String mid1,String orderid1,String merchant_key)
+Refund_status_API(String mid1,String orderid1,String merchant_key,String Refid)
 {	
 <span class="hljs-keyword">this</span>.mid=mid1;
 <span class="hljs-keyword">this</span>.orderid=orderid1;
 <span class="hljs-keyword">this</span>.merchant_key=merchant_key;
+<span class="hljs-keyword">this</span>.Refid=Refid;
 }
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] arg)</span></span>{
-Get_txn_status s1= <span class="hljs-keyword">new</span> Get_txn_status(<span class="hljs-string">"TATAAi73794562338526"</span>,<span class="hljs-string">"5060"</span>,<span class="hljs-string">"6z8Yq2H!LQ75_dx8"</span>);<span class="hljs-comment">// please place your values</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] arg)</span>
+</span>{
+Refund_status_API s1= <span class="hljs-keyword">new</span> Refund_status_API(<span class="hljs-string">"TATAAi73794562338526"</span>,<span class="hljs-string">"5060"</span>,<span class="hljs-string">"6z8Yq2H!LQ75_dx8"</span>,<span class="hljs-string">"Refid_value"</span>);<span class="hljs-comment">// please place your values</span>
 s1.checkstatus();	
 } 
-<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">checkstatus</span><span class="hljs-params">()</span></span>{
+<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">checkstatus</span><span class="hljs-params">()</span>
+</span>{
 HttpURLConnection connection = <span class="hljs-keyword">null</span>;
 TreeMap tmap= <span class="hljs-keyword">new</span> TreeMap();
 
@@ -56,6 +63,7 @@ String checksum;
 <span class="hljs-keyword">try</span>{	
 tmap.put(<span class="hljs-string">"MID"</span>, mid); 
 tmap.put(<span class="hljs-string">"ORDERID"</span>, orderid);	
+tmap.put(<span class="hljs-string">"REFID"</span>, Refid);
 }
 <span class="hljs-keyword">catch</span>(Exception e)
 {
@@ -70,7 +78,7 @@ tmap.put(<span class="hljs-string">"CHECKSUMHASH"</span>, checksum);
 JSONObject obj = <span class="hljs-keyword">new</span> JSONObject(tmap);
 String urlParameters=obj.toString();
 
-URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://securegw.paytm.in/merchant-status/getTxnStatus"</span>);
+URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://securegw.paytm.in/refund/HANDLER_INTERNAL/getRefundStatus"</span>);
 connection = (HttpURLConnection)url.openConnection();	
 connection.setRequestMethod(<span class="hljs-string">"POST"</span>);
 connection.setRequestProperty(<span class="hljs-string">"contentType"</span>,<span class="hljs-string">"application/json"</span>);
@@ -108,35 +116,30 @@ e.printStackTrace();
 <span class="hljs-keyword">return</span> <span class="hljs-string">"empyty"</span>+line;
 }	
 
-}</code></pre>`}
+} </code></pre>`}
     }
 
     getCurlHTML = () => {
         return {
             __html: `
 <pre><code class="hljs language-bash">curl -X POST
-https://securegw.paytm.in/merchant-status/getTxnStatus -H 
-<span class="hljs-string">'cache-control: no-cache'</span> -H 
-<span class="hljs-string">'content-type: application/json'</span> -d 
-<span class="hljs-string">'JsonData={"MID":"XXXOPG01851465523919",
-"ORDERID":"5362906000",
-"CHECKSUMHASH":"CsTeIGhOnegWColuGQaGphMizcsECToTPZ9x/oFPrNZk1TaiV2bFJZzfCwlU7/7ZDbDZIdIfCXfrNjNlFmoUjOMmg8tlR4/0gakLfFNIe2c="}'</span></code></pre>            
-            `
+https://securegw.paytm.in/refund/HANDLER_INTERNAL/getRefundStatus -H
+<span class="hljs-string">'Cache-Control: no-cache'</span> -d
+<span class="hljs-string">'JsonData={"MID":"AliOPG01851465523919",
+"ORDERID":"5362906000","REFID":"REFID0000000004",
+"CHECKSUMHASH":"b%2BhFyBK9XUc8Sa%2BVzv7QFNoOQp%2FepntTjl15SQ%2FssJnJGbDfLAY9RIbLsYM9D5c3P0c44vQeB5b1A3qoGDStO6QjfdwpwxafS4wm8%2B%2B8S6k%3D"}'</span> </code></pre>         
+`
         }
     }
     getNetHTML = () => {
         return {
             __html: `
-<pre><code class="hljs language-cs">String <span class="hljs-keyword">value</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus?JsonData="</span>;
-
-String Merchant_key=<span class="hljs-string">"I%VyKUMWdwEDyh4z"</span>;
-String MID=<span class="hljs-string">"PaytmS01829682567544"</span>;
-String order_id=<span class="hljs-string">""</span>;
-
+<pre><code class="hljs language-cs"><span class="hljs-keyword">string</span> <span class="hljs-keyword">value</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/refund/HANDLER_INTERNAL/getRefundStatus?JsonData="</span>;
 Dictionary innerrequest = <span class="hljs-keyword">new</span> Dictionary();
 Dictionary outerrequest = <span class="hljs-keyword">new</span> Dictionary();
-innerrequest.Add(<span class="hljs-string">"MID"</span>, MID);
-innerrequest.Add(<span class="hljs-string">"ORDERID"</span>, order_id);
+innerrequest.Add(<span class="hljs-string">"MID"</span>, PaytmS01829682567544);
+innerrequest.Add(<span class="hljs-string">"ORDERID"</span>, ORDS33963513);
+innerrequest.Add(<span class="hljs-string">"REFID"</span>,REFID0000000006);
 String first_jason = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
 <span class="hljs-keyword">try</span>
 {
@@ -145,57 +148,68 @@ String correct_check = Check.Replace(<span class="hljs-string">"+"</span>, <span
 innerrequest.Add(<span class="hljs-string">"CHECKSUMHASH"</span>, correct_check);
 String final = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
 final = final.Replace(<span class="hljs-string">"\"</span>, <span class="hljs-string">""</span>).Replace(<span class="hljs-string">":"{"</span>, <span class="hljs-string">":{"</span>).Replace(<span class="hljs-string">"}","</span>, <span class="hljs-string">"},"</span>);
+String url = <span class="hljs-keyword">value</span> + final;
 
-String url = <span class="hljs-keyword">value</span> + final; 
 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
 request.Headers.Add(<span class="hljs-string">"ContentType"</span>, <span class="hljs-string">"application/json"</span>);
 request.Method = <span class="hljs-string">"POST"</span>;
+
 <span class="hljs-keyword">using</span> (StreamWriter requestWriter2 = <span class="hljs-keyword">new</span> StreamWriter(request.GetRequestStream()))
 {
 requestWriter2.Write(final);
-
 }
+
 <span class="hljs-keyword">string</span> responseData = <span class="hljs-keyword">string</span>.Empty;
 <span class="hljs-keyword">using</span> (StreamReader responseReader = <span class="hljs-keyword">new</span> StreamReader(request.GetResponse().GetResponseStream()))
 {
 responseData = responseReader.ReadToEnd();
-Response.Write(responseData);
-Response.Write(<span class="hljs-string">"Requested Json= "</span> + final);
+Response.Write(<span class="hljs-string">"Requested Json= "</span> + final.ToString() + <span class="hljs-string">"
 
+"</span>); 
+Response.Write(<span class="hljs-string">"Response Json= "</span> + responseData);
 }
 }
-<span class="hljs-keyword">catch</span> (Exception ex)
-{
-Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString());
-}</code></pre>            `
+<span class="hljs-keyword">catch</span> (WebException ex)
+{ 
+Response.Write(<span class="hljs-string">"Response Json= "</span> + ex.toString());
+} </code></pre>           `
         }
     }
 
     getPHPHTML = () => {
         return {
             __html: `
-            <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
+<pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
 header(<span class="hljs-string">"Pragma: no-cache"</span>);
 header(<span class="hljs-string">"Cache-Control: no-cache"</span>);
 header(<span class="hljs-string">"Expires: 0"</span>);
 
-<span class="hljs-comment">// following files need to be included</span><span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/config_paytm.php"</span>);
+<span class="hljs-comment">// following files need to be included</span>
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/config_paytm.php"</span>);
 <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/encdec_paytm.php"</span>);
 
-$ORDER_ID = <span class="hljs-string">""</span>;
-$requestParamList = <span class="hljs-keyword">array</span>();
-$responseParamList = <span class="hljs-keyword">array</span>();
+$checkSum = <span class="hljs-string">""</span>;
+$paramList = <span class="hljs-keyword">array</span>();
 
-$requestParamList = <span class="hljs-keyword">array</span>(<span class="hljs-string">"MID"</span> =&gt; PAYTM_MERCHANT_MID , <span class="hljs-string">"ORDERID"</span> =&gt; <span class="hljs-string">"ORDS51973186"</span>); 
+<span class="hljs-comment">//$ORDER_ID = $_POST["ORDER_ID"];</span>
+<span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
+$paramList[<span class="hljs-string">"MID"</span>] = PAYTM_MERCHANT_MID;
+$paramList[<span class="hljs-string">"ORDERID"</span>] = <span class="hljs-string">'ORDS33963513'</span>;
+$paramList[<span class="hljs-string">"REFID"</span>] = <span class="hljs-string">'REFID0000000006'</span>; <span class="hljs-comment">//Unique value all time</span>
 
-$checkSum = getChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY);
-$requestParamList[<span class="hljs-string">'CHECKSUMHASH'</span>] = urlencode($checkSum);
+<span class="hljs-comment">//Here checksum string will return by getChecksumFromArray() function.</span>
+$checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 
-$data_string = <span class="hljs-string">"JsonData="</span>.json_encode($requestParamList);
-<span class="hljs-keyword">echo</span> $data_string;
+<span class="hljs-comment">//$paramList["CHECKSUM"] = urlencode($checkSum);</span>
+$paramList[<span class="hljs-string">"CHECKSUMHASH"</span>] = urlencode($checkSum);
+
+$data_string = <span class="hljs-string">'JsonData='</span>.json_encode($paramList);
+
+print_r($data_string);
 
 $ch = curl_init(); <span class="hljs-comment">// initiate curl</span>
-$url = PAYTM_STATUS_QUERY_URL; <span class="hljs-comment">//Paytm server where you want to post data</span>
+$url = PAYTM_REFUND_STATUS_QUERY_URL;
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="hljs-number">0</span>);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="hljs-number">0</span>);
@@ -206,13 +220,15 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>)
 $headers = <span class="hljs-keyword">array</span>();
 $headers[] = <span class="hljs-string">'Content-Type: application/json'</span>;
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-$output = curl_exec($ch); <span class="hljs-comment">// execute</span>
+$output = curl_exec ($ch); <span class="hljs-comment">// execute</span>
 $info = curl_getinfo($ch);
+<span class="hljs-comment">//echo $output;</span>
 
 $data = json_decode($output, <span class="hljs-keyword">true</span>);
 <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>;
 print_r($data);
 <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>;
+<span class="hljs-comment">//echo $data['RESPONSE_CODE']; </span>
 <span class="hljs-meta">?&gt;</span></code></pre>
             `
         }
