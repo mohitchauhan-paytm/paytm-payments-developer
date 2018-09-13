@@ -408,6 +408,10 @@ p{
         color:$dark3;
     }
 }
+
+.full-container {
+    margin:0 -12.35%;
+}
 @media screen and (max-width: 1368px) {
     .box-item{
         padding:30px 20px;
@@ -417,4 +421,6 @@ p{
         padding:8px;
     }
  }
+
+
  

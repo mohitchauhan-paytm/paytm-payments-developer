@@ -287,6 +287,7 @@ print_r($data);
     }
     render() {
         return (
+        <div className={`full-container`}>
             <div className={`${style.apiMain} grid`}>
                 <div className={`${style.apiWrapper}`}> {this.props.children} </div>
                 <div className={`${style.editorWrapper}`}>
@@ -340,7 +341,7 @@ print_r($data);
 
                 </div>
             </div>
-
+        </div>
 
         );
     }

@@ -11,7 +11,7 @@ body {
 }
 
 .code-wrapper {
-  padding: 40px 40px 240px 40px;
+  padding: 40px 0px 240px 0px;
   max-width:1170px;
   margin:0 auto;
 }
@@ -24,6 +24,30 @@ body>div {
 .height100 {
   height: 100%;
 }
+.edit-github{
+  border-top:1px solid #e6ebf3;
+  padding:20px 0; 
+  text-align:right;
+}
+.edit-github .github-btn{
+  font-size:1.4rem;
+  color:#536d90;
+  float:right;
+  cursor: pointer;
+  transition:all ease 300ms;
+}
+.edit-github .github-btn:hover{
+  color:#00b9f5;
+}
+.github-btn img{
+  float:left;
+  width:18px;
+}
+.github-btn span{
+  float:left;
+  margin:0px 0 0 4px;
+}
+
 
 /*
 Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
@@ -103,6 +127,7 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
 
 
 .small-container{
-  max-width:850px;
+  width:74.56%;
+  
   margin:0 auto;
 }

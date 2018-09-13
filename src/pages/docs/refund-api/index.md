@@ -1,13 +1,17 @@
+---
+path:  "/docs/refund-api/index.md"
+---    
+
 import TransactionWrapperLayoutRefund from '../../../components/txn_wrapper_layout_refund.js';
 import Layout from './../../../components/layout';
 import * as style from './style.module.scss';
 
-export default ({children,location}) => (
-        <Layout>
-            <TransactionWrapperLayoutRefund checked={false}>
-                {children}
-            </TransactionWrapperLayoutRefund>
-        </Layout>
+export default ({children,location, pageContext}) => (
+    <Layout pageContext={pageContext}>
+        <TransactionWrapperLayoutRefund checked={false}>
+            {children}
+        </TransactionWrapperLayoutRefund>
+    </Layout>
 )
 
 <div>

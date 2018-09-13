@@ -1,13 +1,7 @@
-import CenterLayout from '../../../components/center-layout';
-import Layout from './../../../components/layout';
+---
+path:  "/docs/refund-management/index.md"
+---
 
-export default ({children,location}) => (
-        <Layout>
-            <CenterLayout>
-                {children}
-            </CenterLayout>
-        </Layout>
-)
 
 
 # Refunds

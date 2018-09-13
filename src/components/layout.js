@@ -9,7 +9,7 @@ import Header from "./header/index";
 import Menubar from './menu-bar/index';
 import './../style/preload.scss';
 import * as style from './markdown.module.scss';
-
+import Git from './githublink';
 /* eslint-disable */
 
 export default class Layout extends Component {
@@ -26,7 +26,7 @@ export default class Layout extends Component {
 
   render() {
     const root = this.state.locale === 'en' ? '' : this.state.locale;
-    const { children } = this.props;
+    const { children, pageContext = {} } = this.props;
     return <StaticQuery
       query={graphql`
       query SiteTitleQuery {
@@ -53,11 +53,15 @@ export default class Layout extends Component {
             </Helmet>
           <div id='app' className = "grid justify-between activeOverlayClass" >
               <Header />
-                <div className='wrapper'>
+                <div className='wrapper grid'>
                     < Menubar />
                 <div className={`wrapper-content max-wrap`}>
-                <div id='child' className={`code-wrapper ${style.markdown}`}>
-                {this.props.children}
+                <div id='child' className={`code-wrapper grid ${style.markdown}`}>
+                <div className={`small-container`}>
+                  {children} 
+                </div>
+                
+                <Git meta={pageContext.frontmatter}/>
                 </div>
                 </div>
                 </div>

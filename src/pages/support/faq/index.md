@@ -1,15 +1,11 @@
-import CenterLayout from '../../../components/center-layout';
-import Layout from './../../../components/layout';
+---
+title: "FAQ's Page"
+path:  "/support/faq/index.md"
+---
+
+
 import * as style from './style.module.scss';
 
-
-export default ({children,location}) => (
-        <Layout>
-            <CenterLayout>
-                {children}
-            </CenterLayout>
-        </Layout>
-)
 
 # Frequently Asked questions (FAQs)
 

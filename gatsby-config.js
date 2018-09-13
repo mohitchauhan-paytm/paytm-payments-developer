@@ -4,6 +4,7 @@ const remarkHighlight = require('remark-highlight.js')
 module.exports = {
   siteMetadata: {
     title: 'Paytm Developer Network',
+    githubProject:'https://github.com/Paytm-Payments/paytm-payments-developer/tree/master/src/pages'
   },
   plugins: [
     {

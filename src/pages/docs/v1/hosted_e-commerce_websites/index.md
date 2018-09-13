@@ -1,13 +1,8 @@
-import CenterLayout from '../../../../components/center-layout';
-import Layout from './../../../../components/layout';
+---
+path:  "/docs/v1/hosted_e-commerce_websites/index.md"
+---
 
-export default ({children,location}) => (
-        <Layout>
-            <CenterLayout>
-                {children}
-            </CenterLayout>
-        </Layout>
-)
+
 
 # Paytm Checkout Flow - Hosted E-Commerce Platform
 

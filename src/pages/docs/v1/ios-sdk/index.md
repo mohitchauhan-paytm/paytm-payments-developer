@@ -1,22 +1,30 @@
 ---
-path:  "/docs/v1/android-sdk/index.md"
+path:  "/docs/v1/ios-sdk/index.md"
 ---
 
-import * as style from './android-sdk.module.scss';
+import * as style from './ios-sdk.module.scss';
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
+import { Helmet } from "react-helmet";
 
-# Collect online payments with our Android SDK
+<Helmet>
+    <title>Paytm iOS SDK: Accept payments in your iOS mobile app</title>
+</Helmet>
 
-Paytm has created Android SDK over our powerful APIs, allowing you to take payments in minutes. With our SDK, we shoulder the burden of PCI compliance by eliminating the need to send card data directly to your server.
+# Collect online payments with our iOS SDK
+
+Paytm has created iOS SDK over our powerful APIs, allowing you to take payments in minutes. With our SDK, we shoulder the burden of PCI compliance by eliminating the need to send card data directly to your server.
  
-Our MavenCentral Based SDK is easy to integrate, featherlight & self updating. Hence If a bank launches a new series of cards or wallet, the same is provided to your customers without any new integration. Additionally our SDK auto reads the OTP sent by bank for account verification significantly improving the overall transaction success rates
+Our iOS SDK is easy to integrate, featherlight & self updating. Hence If a bank launches a new series of cards or wallet, the same is provided to your customers without any new integration.
 
 
-## Demo of Paytm checkout flow in your app - 
+## Demo of Paytm checkout flow in your app -  
+
 ---
+
 <br/>
 
-<img src='/assets/merchant-pg-android.gif' width="250" alt='' />
+<img src='/assets/merchant-pg.gif' width="250" alt='' />
+
 
 ## Overview of payment processing via Paytm checkout
 ---
@@ -24,105 +32,137 @@ Our MavenCentral Based SDK is easy to integrate, featherlight & self updating. H
 1. At click of the pay button by customer, order related payload is passed to your server by the APP 
 2. This order payload is used to generate checksumhash by our server side utility & merchant key on your server. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered
 3. Your server passes the payload and checksumhash back to the APP which hands over these details to Paytm SDK    
-4. SDK verifies payload and displays payment Paytm checkout page
+4. Paytm SDK connects with Paytm server to fetch the paymodes and render the payment page
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your APP via callback
-6. Verify checksumhash received in response on your server side. Utility for same is provided later 
+6. Verify checksumhash received in response on your server side 
 7. Lastly, verify transaction status with Transaction Status API via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
 
 Find the detailed interaction of each system component in the flow chart below
 
 <br/>
+
 <img src='/assets/img-flow-android-ios-sdk.png' alt='' />
 
-## Steps to start accepting payments via Android SDK
----
-
-There are 6 steps to accept payment your APP. First four steps are are required to integrate SDK on your APP and last two needs to done on your server for checksumhash generation & verification
-
-
-### Step 1: Installation & setup
-
-#### Install SDK 
-Install our Android SDK using Android Studio and IntelliJ. To add our SDK to your app, add the following dependency in your build.gradle:
-
-```java
-dependencies {
-compile('com.paytm:pgplussdk:1.2.3') {
-transitive = true; 
-}
-}
-```
-
-#### SMS Permission
-To allow SDK to autoread the OTP sent by bank during account verification, you need static and at runtime permissions
-
-Add the following code to your AndroidManifest.xml to get static permission
-
-```java
-<uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.READ_SMS"/>
-<uses-permission android:name="android.permission.RECEIVE_SMS"/>  
-```
-
-Via below code, you get runtime permissions needed from user to read the OTP
-
-```java
-if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
-}
-```
-
-#### Progaurd Rules
-
-If you're using proguard for your build, you need to add the following lines to your proguard file:
-proguard-rules.pro
-
-```java
--keepclassmembers class com.paytm.pgsdk.PaytmWebView$PaytmJavaScriptInterface {
-   public *;
-}
-```
+## Steps to start accepting payments via iOS SDK
 
 ---
-### Step 2: Initialization 
-To initialize the Paytm SDK, use below classes
 
-#### Object: Service
-Service object is used to used to access PG services such to initiate or cancel transaction. This is different for staging and production and created with following snippet
 
-**For  Staging service:**
+### Step 1:  Importing the library
 
-```java
-PaytmPGService Service = PaytmPGService.getStagingService();
-```
-**For Production service:**
+Follow the below steps to download import the library in your project
 
-```java
-PaytmPGService Service = PaytmPGService.getProductionService();
-```
 
-#### Object: Order
-Stores all order related information which are required to be passed by you to Paytm. Order object is created by following code snippet - 
+#### For Swift:
+* Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
+* Open your project in XCode and from File menu, select Add files to "yourproject" 
+* Select Paytm.framework in the directory you just unzipped
+* Make sure 'Copy items if needed' is checked and Click 'Add'
+* Under "Link Binary With Libraries" in the "Build Phases" tab of your project settings, add SystemConfiguration.framework
+* Check PaytmSDK.framework is added in both “Link Binary With Libraries” and “Embedded Binaries”. If not add by clicking on plus icon
 
-```java
-PaytmOrder Order = new PaytmOrder(paramMap);
-Where paramap is a HASHMAP object that includes the order details in key value pair. Each parameter is explained in detail below -
-Map<String, String> paramMap = new HashMap<String,String>();
-paramMap.put( "MID" , "PAYTM_MERCHANT_ID");
-paramMap.put( "ORDER_ID" , "ORDER0000000001");
-paramMap.put( "CUST_ID" , "10000988111");
-paramMap.put( "INDUSTRY_TYPE_ID" , "PAYTM_INDUSTRY_TYPE_ID");
-paramMap.put( "CHANNEL_ID" , "WAP");
-paramMap.put( "TXN_AMOUNT" , "1.00");
-paramMap.put( "WEBSITE" , "PAYTM_WEBSITE");
-paramMap.put( "CALLBACK_URL", "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=ORDER0000000001");
-paramMap.put( "EMAIL" , "abc@gmail.com");
-paramMap.put( "MOBILE_NO" , "9999999999");
-paramMap.put( "CHECKSUMHASH" , "w2QDRMgp1234567JEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmGSt3Ddzw+oTaGCLneJwxFFq5mqTMwJXdQE2EzK4px2xruDqKZjHupz9yXev4=")
-```
+---
 
-#### Description of Parameters used in hashmap objects:
+#### For Objective C:
+* Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
+* Open the existing project in XCode 
+* Go to the Build Phases tab, expand the Link Binary With Libraries section, click the "+" button
+* In the newly appeared “Choose items to add” window, click the “Add Other..” button. and specify the path to libPaymentsSDK.a library file and click the Open button
+* In the Link Frameworks and Libraries section, click the "+" button again, find the  SystemConfiguration.framework. in the list, and click the Add button.
+
+---
+
+### Step 2: Initiate Payment
+
+Begin the transaction by calling the below method.
+
+1. Choose the PG server based on the environment you need to connect with. <br/>
+For staging - Create an instance of the `PGServerEnvironment` and set the `serverType` to `eServerTypeStaging` <br/>
+For Production - Create an instance of the `PGServerEnvironment` and set the `serverType` to `eServerTypeProduction` 
+2. Create an `PGOrder` instance with the mandatory parameters as given below in the code snippet. In addition to this, you may add other optional parameters as needed. Parameters with their detailed meaning is provided after the code snippet
+
+3. Create an instance of `PGTransactionViewController` by calling `initTransactionForOrder` and pass the `PGOrder` instance as parameter. 
+
+4. Push the `PGTransactionViewController` as given below in the code snippet.
+
+
+<div className={`${style.iosCodeWrapper}`}>
+
+<Tabs defaultTab="swift">
+	<TabList>
+            <Tab tabFor="swift">Swift</Tab>
+            <Tab tabFor="c">Objective C</Tab>
+    </TabList>
+    <TabPanel tabId="swift">
+<span dangerouslySetInnerHTML={{
+            __html: `
+<pre><code class="hljs language-swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">beginPayment</span><span class="hljs-params">()</span></span>
+&#123;
+serv = serv.createProductionEnvironment()
+<span class="hljs-keyword">let</span> type :<span class="hljs-type">ServerType</span> = .eServerTypeProduction
+<span class="hljs-keyword">let</span> order = <span class="hljs-type">PGOrder</span>(orderID: <span class="hljs-string">""</span>, customerID: <span class="hljs-string">""</span>, amount: <span class="hljs-string">""</span>, eMail: <span class="hljs-string">""</span>, mobile: <span class="hljs-string">""</span>)
+order.params = [<span class="hljs-string">"MID"</span>: <span class="hljs-string">"TECHOP10964184510936"</span>,
+<span class="hljs-string">"ORDER_ID"</span>: <span class="hljs-string">"1520843747900"</span>,
+<span class="hljs-string">"CUST_ID"</span>: <span class="hljs-string">"test111"</span>,
+<span class="hljs-string">"CHANNEL_ID"</span>: <span class="hljs-string">"WAP"</span>,
+<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>: <span class="hljs-string">"Retail"</span>,
+<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"TECHweb"</span>,
+<span class="hljs-string">"TXN_AMOUNT"</span>: <span class="hljs-string">"1"</span>,
+<span class="hljs-string">"CHECKSUMHASH"</span>: <span class="hljs-string">"oCDBVF+hvVb68JvzbKI40TOtcxlNjMdixi9FnRSh80Ub7XfjvgNr9NrfrOCPLmt65UhStCkrDnlYkclz1qE0uBMOrmuKLGlybuErulbLYSQ="</span>,
+<span class="hljs-string">"CALLBACK_URL"</span>: <span class="hljs-string">"https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=1520843747900"</span>]
+<span class="hljs-keyword">self</span>.txnController =  <span class="hljs-keyword">self</span>.txnController.initTransaction(<span class="hljs-keyword">for</span>: order) <span class="hljs-keyword">as</span>?<span class="hljs-type">PGTransactionViewController</span>
+<span class="hljs-keyword">self</span>.txnController.title = <span class="hljs-string">"Paytm Payments"</span>
+<span class="hljs-keyword">self</span>.txnController.setLoggingEnabled(<span class="hljs-literal">true</span>)
+<span class="hljs-keyword">if</span>(type != <span class="hljs-type">ServerType</span>.eServerTypeNone)
+&#123;
+<span class="hljs-keyword">self</span>.txnController.serverType = type;
+&#125;
+<span class="hljs-keyword">else</span>
+&#123;
+<span class="hljs-keyword">return</span>
+&#125;
+<span class="hljs-keyword">self</span>.txnController.merchant = <span class="hljs-type">PGMerchantConfiguration</span>.defaultConfiguration()
+<span class="hljs-keyword">self</span>.txnController.delegate = <span class="hljs-keyword">self</span>
+<span class="hljs-keyword">self</span>.navigationController?.pushViewController(<span class="hljs-keyword">self</span>.txnController
+, animated: <span class="hljs-literal">true</span>)
+&#125;
+</code></pre>`}}></span>
+    </TabPanel>
+    <TabPanel tabId="c">
+<span dangerouslySetInnerHTML={{
+            __html:  `
+<pre><code class="hljs language-objectivec">- (<span class="hljs-keyword">void</span>)beginPayment&#123;
+PGOrder *order = [PGOrder orderForOrderID:<span class="hljs-string">@""</span>
+customerID:<span class="hljs-string">@""</span>
+amount:<span class="hljs-string">@""</span>
+customerMail:<span class="hljs-string">@""</span>
+customerMobile:<span class="hljs-string">@""</span>];
+order.params =   @&#123;<span class="hljs-string">@"MID"</span> : <span class="hljs-string">@"TECHOP10964184510936"</span>,
+<span class="hljs-string">@"ORDER_ID"</span>: <span class="hljs-string">@"1520843747890"</span>,
+<span class="hljs-string">@"CUST_ID"</span> : <span class="hljs-string">@"test111"</span>,
+<span class="hljs-string">@"CHANNEL_ID"</span>: <span class="hljs-string">@"WAP"</span>,
+<span class="hljs-string">@"INDUSTRY_TYPE_ID"</span>: <span class="hljs-string">@"Retail"</span>,
+<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"TECHweb"</span>,
+<span class="hljs-string">@"TXN_AMOUNT"</span>: <span class="hljs-string">@"1"</span>,
+<span class="hljs-string">@"CHECKSUMHASH"</span>:<span class="hljs-string">@"Bzk47IMatCI7T3b21iB403MsRBNhJ9DWHeK79iD+dli6GUg5w+JKDk6gk6roSjuKrtFzDiXwuUsfgVz30Xa2+W+kgwnNQaZXJTSfKPy6gU4="</span>,
+<span class="hljs-string">@"CALLBACK_URL"</span>:<span class="hljs-string">@"https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=1520843747890"</span>
+&#125;
+PGTransactionViewController *txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
+txnController.loggingEnabled = <span class="hljs-literal">YES</span>;
+<span class="hljs-keyword">if</span> (type != eServerTypeNone)
+txnController.serverType = type;
+<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span>;
+txnController.merchant = [PGMerchantConfiguration defaultConfiguration];
+txnController.delegate = <span class="hljs-keyword">self</span>;
+[<span class="hljs-keyword">self</span>.navigationController pushViewController:txnController animated:<span class="hljs-literal">YES</span>];
+&#125;
+</code></pre>`}}></span>
+</TabPanel>
+</Tabs>
+
+</div>
+
+### Description of Parameters:
 
 | **Parameter Name**     |    **Description** |
 | ------------- | ----- | ----- |
@@ -138,153 +178,84 @@ paramMap.put( "CHECKSUMHASH" , "w2QDRMgp1234567JEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmG
 |**EMAIL** Email(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
 |**CALLBACK_URL** URL(255)  | URL on which response of transaction request will be posted 
 
-#### Object: Certificate (Optional to create)
+---
 
-Certificate object Stores client side SSL certificate related information and ensures secured handshake between your APP and Paytm server. Code snippet to create certificate object is below
+### STEP 3: Handle error and success responses
+To handle success/errors on completion of payment, implement `didFinishedResponse`, `didCancelTrasaction`, `errorMisssingParameter` methods of the `PGTransactionDelegate`. Code snippet provided below
 
-```java
-PaytmClientCertificate Certificate = new PaytmClientCertificate(String inPassword, String inFileName);
-// inPassword is the password for client side certificate 
-//inFileName is the file name of client side certificate
-```
 
-Note: 
-* This file must be present in “raw” folder
-* Pass filename without extension. **E.g if filename is “clientCert.cert” then pass only “clientCert”.**
+<div className={`${style.iosCodeWrapper}`}>
+
+<Tabs defaultTab="swift">
+	<TabList>
+            <Tab tabFor="swift">Swift</Tab>
+            <Tab tabFor="c">Objective C</Tab>
+    </TabList>
+    <TabPanel tabId="swift">
+<span dangerouslySetInnerHTML={{
+                     __html: `
+<pre><code class="hljs language-swift"><span class="hljs-comment">//this function triggers when transaction gets finished
+</span><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didFinishedResponse</span><span class="hljs-params">(<span class="hljs-number">_</span> controller: PGTransactionViewController, response responseString: String)</span></span>
+&#123;
+<span class="hljs-keyword">let</span> msg : <span class="hljs-type">String</span> = responseString
+<span class="hljs-keyword">var</span> titlemsg : <span class="hljs-type">String</span> = <span class="hljs-string">""</span>
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> data = responseString.data(using: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8) &#123;
+<span class="hljs-keyword">do</span> &#123;
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> jsonresponse = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONSerialization</span>.jsonObject(with: data, options: .mutableContainers) <span class="hljs-keyword">as</span>? [<span class="hljs-type">String</span>:<span class="hljs-type">Any</span>] , jsonresponse.<span class="hljs-built_in">count</span> &gt; <span class="hljs-number">0</span>&#123;
+titlemsg = jsonresponse[<span class="hljs-string">"STATUS"</span>] <span class="hljs-keyword">as</span>? <span class="hljs-type">String</span> ?? <span class="hljs-string">""</span>
+&#125;
+&#125; <span class="hljs-keyword">catch</span> &#123;
+<span class="hljs-built_in">print</span>(<span class="hljs-string">"Something went wrong"</span>)
+&#125;
+&#125;
+<span class="hljs-keyword">let</span> actionSheetController: <span class="hljs-type">UIAlertController</span> = <span class="hljs-type">UIAlertController</span>(title: titlemsg , message: msg, preferredStyle: .alert)
+<span class="hljs-keyword">let</span> cancelAction : <span class="hljs-type">UIAlertAction</span> = <span class="hljs-type">UIAlertAction</span>(title: <span class="hljs-string">"OK"</span>, style: .cancel) &#123; action -&gt; <span class="hljs-type">Void</span> <span class="hljs-keyword">in</span>
+controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+&#125;
+actionSheetController.addAction(cancelAction)
+<span class="hljs-keyword">self</span>.present(actionSheetController, animated: <span class="hljs-literal">true</span>, completion: <span class="hljs-literal">nil</span>)
+&#125;  
+<span class="hljs-comment">//this function triggers when transaction gets cancelled</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didCancelTrasaction</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController)</span></span>
+&#123;
+controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+&#125;
+<span class="hljs-comment">//Called when a required parameter is missing.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">errorMisssingParameter</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController, error : NSError?)</span></span> &#123;
+controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+&#125;</code></pre>`}}></span>
+</TabPanel>
+<TabPanel tabId="c">
+<span dangerouslySetInnerHTML={{
+        __html: `
+<pre><code class="hljs language-objectivec"><span class="hljs-comment">//this function triggers when transaction gets finished</span>
+-(<span class="hljs-keyword">void</span>)didFinishedResponse:(PGTransactionViewController *)controller response:(<span class="hljs-built_in">NSString</span> *)responseString &#123;
+[controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
+&#125;
+<span class="hljs-comment">//this function triggers when transaction gets cancelled</span>
+-(<span class="hljs-keyword">void</span>)didCancelTrasaction:(PGTransactionViewController *)controller &#123;
+[_statusTimer invalidate];
+<span class="hljs-built_in">NSString</span> *msg = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"UnSuccessful"</span>];    
+[[[<span class="hljs-built_in">UIAlertView</span> alloc] initWithTitle:<span class="hljs-string">@"Transaction Cancel"</span> message:msg delegate:<span class="hljs-literal">nil</span> cancelButtonTitle:<span class="hljs-string">@"OK"</span> otherButtonTitles:<span class="hljs-literal">nil</span>] show];
+[controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
+&#125;
+<span class="hljs-comment">//Called when a required parameter is missing.</span>
+-(<span class="hljs-keyword">void</span>)errorMisssingParameter:(PGTransactionViewController *)controller error:(<span class="hljs-built_in">NSError</span> *) error &#123;
+[controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
+&#125;
+</code></pre>`}}></span>
+</TabPanel>
+</Tabs>
+
+</div>
 
 ---
 
-### Step 3: Initiate Payments
-
-#### Initialize Service: 
-
-Parameters required  to  invoke [initialize method]() are Order and Certificate Objects. 
-
-```java
-Service.initialize(Order, Certificate);
-```
-
-In case you do not wish to pass the certificate, use the below code
-
-```java
-Service.initialize(Order, null);
-```
-Call start transaction method using service object 
-
-
-```java
- Service.startPaymentTransaction(this, true, true, new PaytmPaymentTransactionCallback() {
-	/*Call Backs*/
-                       public void someUIErrorOccurred(String inErrorMessage) {}
-                       public void onTransactionResponse(Bundle inResponse) {}
-                       public void networkNotAvailable() {}
-                       public void clientAuthenticationFailed(String inErrorMessage) {}
-                       public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl) {}
-                       public void onBackPressedCancelTransaction() {}
-                       public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {}
-     });
-```
-
-
-Description of parameters used in `startPaymentTransaction` in order used are - 
-
-* [contextofyourActivity]() is the activity context in where this method is called
-* **A boolean variable (true/false)** to hide or show header bar.
-* **A boolean variable (true/false)** to determine whether to send all checksum response parameters to PG server or not
-* [inPaymentTransactionCallback]() is a [PaytmPaymentTransactionCallback]() instance to send callback messages back to your application. Details and description provided in next section
-
----
-
-### Step 4: Handling of callbacks from PG
-
-
-You need to implement the callback methods to handle the response upon payment completion or failures. Transaction callbacks can be listened via overriding methods of **PaytmPaymentTransactionCallback**
-
-
-#### Completion of transaction:
-Once the transaction is complete, you will get a response in the json format. Note that completion of transaction does not imply that payment is successful. Payment can be in successful or failed state which needs to be derived from JSON
-
-```java
-public void onTransactionResponse(Bundle inResponse) {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
-}
-```
-
-
-#### UI Error: 
-This may be due to initialization of views in payment gateway activity or initialization of webview
-
-```java
-public void someUIErrorOccurred(String inErrorMessage) {
-/*Display the error message as below */
-Toast.makeText(getApplicationContext(), "UI Error " + inErrorMessage , Toast.LENGTH_LONG).show();
-}
-```
-
-#### Network Error: 
-Due to weak or no internet connectivity
-
-```java
-public void networkNotAvailable() {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
-}
-```
-
-
-####  Client authentication failure
-
-Due to : 
-1. Server error or downtime
-2. Server unable to generate checksum or checksum response is not in proper format
-3. Server failed to authenticate that client. That is value of payt_STATUS is 2. //
-
-
-```java
-public void clientAuthenticationFailed(String inErrorMessage)  {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Authentication failed: Server error" + inResponse.toString(), Toast.LENGTH_LONG).show();
-}
-```
-
-
-#### Error in loading web page 
-
-```java
-public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl)  {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Unable to load webpage " + inResponse.toString(), Toast.LENGTH_LONG).show();
-}
-```
-
-#### On press of back button
-
-```java
-public void onBackPressedCancelTransaction(){
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Transaction cancelled" , Toast.LENGTH_LONG).show();
-}
-
-```
-
-
-#### On transaction cancelled - 
-
-```java
-public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Transaction Cancelled" + inResponse.toString(), Toast.LENGTH_LONG).show();
-}
-```
-
----
-
-### Step 5: Checksum generation & verification
+### Step 4: Checksum generation & verification
 
 #### Checksumhash Generation -
 
-All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. All the parameters which are being sent in the request need to be sent to the server. Server will use our server side utility code to generate checkssum. 
+All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. All the parameters which are being sent in the request need to be sent to the server. Server will use our server side utility code to generate checksum. 
 Use the code below to generate 
 
 
@@ -448,11 +419,11 @@ document.f1.submit();
 </Tabs>
 </div>
 
+
+
 #### Checksumhash Verification-
 
-
 All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server by server side utility. Code snippets and github link provided below
-
 
 <div className={`${style.checkoutWrapper}`}>
 
@@ -545,8 +516,6 @@ For further details & codes in multiple languages, click below links -
 
 **For App:**
 
-
-
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
@@ -622,11 +591,3 @@ Once the test transaction is complete, move your code to live environment with p
 Additionally to better manage payments on your platform, kindly though [Refund Management](https://developer.paytm.com/docs/refund-management) and [Late Notification](https://developer.paytm.com/docs/late-notification)
 
 In case of any issues, please search or post your query on our <a href="http://paywithpaytm.com/developer/discussion/" target="_blank">Developer Forum</a> or send your queries to devsupport@paytm.com
-
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm Android SDK: Accept payments in your Android mobile app</title>
-</Helmet>
-

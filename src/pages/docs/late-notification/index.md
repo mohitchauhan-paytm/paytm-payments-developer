@@ -1,3 +1,8 @@
+---
+path:  "/docs/late-notification/index.md"
+---
+
+
 # Delayed Notification
 
 
@@ -21,17 +26,6 @@ There are two ways to get status of transactions where response is not received 
 
 ## Transaction notification requirement by business needs - 
 ---
-
-import CenterLayout from '../../../components/center-layout';
-import Layout from './../../../components/layout';
-
-export default ({children,location}) => (
-        <Layout>
-            <CenterLayout>
-                {children}
-            </CenterLayout>
-        </Layout>
-)
 
 ### Real-time notifications requirement:  
 
