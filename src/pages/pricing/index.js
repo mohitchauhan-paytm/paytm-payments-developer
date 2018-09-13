@@ -1,14 +1,11 @@
 import React from 'react';
 import * as style from './style.module.scss';
 import Layout from './../../components/layout';
-import Link from 'gatsby-link';
-import CenterLayout from '../../components/center-layout';
 
 
 const Pricing = (props) => {
     return (
         <Layout>
-            <CenterLayout>
         <div>
             
             <div class={`${style.bannerWrap} grid vertical justify-center align-center`}>
@@ -124,7 +121,6 @@ const Pricing = (props) => {
         
         
     </div>
-    </CenterLayout>
     </Layout>
 );
 }

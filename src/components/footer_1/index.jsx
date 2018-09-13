@@ -1,6 +1,5 @@
 import * as style from './style.module.scss';
 import React from "react";
-import Link from 'gatsby-link';
 
 const Footer = () => (
 	<footer className={`${style.footer}`}>
@@ -18,11 +17,7 @@ const Footer = () => (
 					<h6>Contact Us</h6>
 					<p>In case of any queries, reach us</p>
 					<p><a href="mailto:devsupport@paytm.com">devsupport@paytm.com</a></p>
-					{/*<ul className={`${style.socialMediaList} grid-inline`}>
-						<li><img src='./assets/ic-mail.svg' alt='Email' /></li>
-						<li><img src='./assets/ic-facebook.svg' alt='facebook' /></li>
-						<li><img src='./assets/ic-twitter.svg' alt='twitter' /></li>
-</ul>*/}
+					<p><a className={`grid align-center`} target="_blank" href="https://github.com/Paytm-Payments/paytm-payments-developer">GitHub<img src='/assets/ic-launch.svg' width="18"/></a></p>
 				</div>
 			</div>
 		</div>

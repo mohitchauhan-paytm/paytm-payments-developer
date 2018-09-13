@@ -13,7 +13,9 @@ export default class Docs extends Component {
     {
         return (
             <Layout>
+                <div className={`full-container`}>
                 <Home></Home>
+                </div>  
             </Layout>
     )
     }

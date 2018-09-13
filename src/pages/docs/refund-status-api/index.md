@@ -1,9 +1,14 @@
+---
+path:  "/docs/refund-status-api/index.md"
+---
+
+
 import TransactionWrapperLayoutRefundStatus from '../../../components/txn_wrapper_layout_refund_status.js';
 import Layout from './../../../components/layout';
 import * as style from './style.module.scss';
 
-export default ({children,location}) => (
-        <Layout>
+export default ({children,location, pageContext}) => (
+        <Layout pageContext={pageContext}>
             <TransactionWrapperLayoutRefundStatus checked={false}>
                 {children}
             </TransactionWrapperLayoutRefundStatus>

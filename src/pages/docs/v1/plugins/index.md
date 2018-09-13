@@ -1,13 +1,7 @@
-import CenterLayout from '../../../../components/center-layout';
-import Layout from './../../../../components/layout';
+---
+path:  "/docs/v1/plugins/index.md"
+---
 
-export default ({children,location}) => (
-        <Layout>
-            <CenterLayout>
-                {children}
-            </CenterLayout>
-        </Layout>
-)
 
 # Collect online payments using pre-built Paytm Plugins
 

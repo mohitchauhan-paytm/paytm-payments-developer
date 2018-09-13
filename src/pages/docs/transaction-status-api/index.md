@@ -1,9 +1,14 @@
+---
+path:  "/docs/transaction-status-api/index.md"
+---
+
+
 import TransactionWrapperLayoutTxnStatus from '../../../components/txn_wrapper_layout_txn_status';
 import Layout from './../../../components/layout';
 import * as style from './style.module.scss';
 
-export default ({children,location}) => (
-        <Layout>
+export default ({children,location, pageContext}) => (
+        <Layout pageContext={pageContext}>
             <TransactionWrapperLayoutTxnStatus checked={false}>
                 {children}
             </TransactionWrapperLayoutTxnStatus>
