@@ -134,7 +134,8 @@ paramMap.put( "CHECKSUMHASH" , "w2QDRMgp1234567JEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmG
 |**CHECKSUMHASH** Alphanumeric(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
 |**MOBILE_NO** Numeric (15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** Email(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
-|**CALLBACK_URL** URL(255)  | URL on which response of transaction request will be posted 
+|**CALLBACK_URL** URL(255)  | URL on which response of transaction request will be posted
+| **MERC_UNQ_REF** Optional Alphanumeric (50) | An extra (optional) field that is passed by merchant in form POST, the values of this field passes through the system and returns to merchant along with other fields. This should be enabled by Paytm 
 
 #### Object: Certificate (Optional to create)
 

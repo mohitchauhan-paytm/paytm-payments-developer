@@ -35,7 +35,7 @@ export default ({children,location, pageContext}) => (
 | **MID**  Alphanumeric(20)       | This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation.
 |**ORDERID** Alphanumeric(50)      | This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request.     
 |**REFID**  Alphanumeric(50) | This is reference ID shared while raising Refund. Each refund request will have unique REFID. Different Refunds for same order will also have differen REFID.
-|**CHECKSUMHASH**  Alphanumeric(108) | URL encoded checksum which is calculated based on a pre-defined logic.
+|**CHECKSUM**  Alphanumeric(108) | URL encoded checksum computed by Paytm provided utility with request parameters
 
 <div className={`${style.space10}`}></div>
 

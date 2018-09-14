@@ -58,7 +58,7 @@ At the click of payment button by customer,create the required payload for check
 |**PROMO_CAMP_ID** Alphanumeric(50)  | This parameter is required when merchant is running any promotional campaign and it is configured at dashboard
 | **PAYMENT_MODE_ONLY** Alpha(10)   | If merchant wants to allow payment mode selection on his website, the value to be passed is “Yes”
 | **AUTH_MODE** Alphanumeric(50)  | Required If PAYMENT_MODE_ONLY = Yes, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
-| **PAYMENT_TYPE_ID** Alpha(10)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI
+| **PAYMENT_TYPE_ID** Alpha(10)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> Saved Card - SC
 | **CARD_TYPE** Alphanumeric(50)   | Required If PAYMENT_MODE_ONLY = Yes & AUTH_MODE = 3D Possible values of this parameter depending upon the card type - VISA/MASTER/AMEX
 | **BANK_CODE** Alphanumeric(50)  | Required If PAYMENT_MODE_ONLY = Yes<br/>PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in PDF below
 | **MERC_UNQ_REF** Optional Alphanumeric (50) | An extra (optional) field that is passed by merchant in form POST, the values of this field passes through the system and returns to merchant along with other fields. This should be enabled by Paytm

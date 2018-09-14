@@ -54,96 +54,79 @@ POST https://securegw.paytm.in/refund/HANDLER_INTERNAL/REFUND -H
 
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Refund_api_call</span> </span>{
 
-String mid;
-String orderid;
-String merchant_key;
-String TXNTYPE;
-String REFUNDAMOUNT;
-String TXNID;
-String REFID;
-String COMMENTS;	
+    String mid;
+    String orderid;
+    String merchant_key;
+    String TXNTYPE;
+    String REFUNDAMOUNT;
+    String TXNID;
+    String REFID;
+    String COMMENTS;	
 
-Refund_api_call(String mid1,String orderid1,String merchant_key,String REFUNDAMOUNT,String TXNID,String REFID,String Comment)
-{	
-<span class="hljs-keyword">this</span>.mid=mid1;
-<span class="hljs-keyword">this</span>.orderid=orderid1;
-<span class="hljs-keyword">this</span>.merchant_key=merchant_key;
-<span class="hljs-keyword">this</span>.TXNTYPE=<span class="hljs-string">"REFUND"</span>;
-<span class="hljs-keyword">this</span>.REFUNDAMOUNT=REFUNDAMOUNT;
-<span class="hljs-keyword">this</span>.TXNID=TXNID;
-<span class="hljs-keyword">this</span>.REFID=REFID;
-<span class="hljs-keyword">this</span>.COMMENTS=Comment;	
+    Refund_api_call(String mid1,String orderid1,String merchant_key,String REFUNDAMOUNT,String TXNID,String REFID,String Comment) {
+        <span class="hljs-keyword">this</span>.mid=mid1;
+        <span class="hljs-keyword">this</span>.orderid=orderid1;
+        <span class="hljs-keyword">this</span>.merchant_key=merchant_key;
+        <span class="hljs-keyword">this</span>.TXNTYPE=<span class="hljs-string">"REFUND"</span>;
+        <span class="hljs-keyword">this</span>.REFUNDAMOUNT=REFUNDAMOUNT;
+        <span class="hljs-keyword">this</span>.TXNID=TXNID;
+        <span class="hljs-keyword">this</span>.REFID=REFID;
+        <span class="hljs-keyword">this</span>.COMMENTS=Comment;	
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] arg)</span></span>{
+        Refund_api_call s1= <span class="hljs-keyword">new</span> Refund_api_call(<span class="hljs-string">"TAXXXXXXXXXXXXXXXX26"</span>,<span class="hljs-string">"5060"</span>,<span class="hljs-string">"6XXXXXXXXXXXXdx8"</span>,<span class="hljs-string">"REFUNDAMOUNT"</span>,<span class="hljs-string">"TXNID"</span>,<span class="hljs-string">"REFID"</span>,<span class="hljs-string">"comment string"</span>);<span class="hljs-comment">// please place your values</span>
+        s1.checkstatus();	
+    } 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">checkstatus</span><span class="hljs-params">()</span></span>{
+        HttpURLConnection connection = <span class="hljs-keyword">null</span>;
+        TreeMap tmap= <span class="hljs-keyword">new</span> TreeMap();
 
-}
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] arg)</span></span>{
-Refund_api_call s1= <span class="hljs-keyword">new</span> Refund_api_call(<span class="hljs-string">"TATAAi73794562338526"</span>,<span class="hljs-string">"5060"</span>,<span class="hljs-string">"6z8Yq2H!LQ75_dx8"</span>,<span class="hljs-string">"REFUNDAMOUNT"</span>,<span class="hljs-string">"TXNID"</span>,<span class="hljs-string">"REFID"</span>,<span class="hljs-string">"comment string"</span>);<span class="hljs-comment">// please place your values</span>
-s1.checkstatus();	
-} 
-<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">checkstatus</span><span class="hljs-params">()</span></span>{
-HttpURLConnection connection = <span class="hljs-keyword">null</span>;
-TreeMap tmap= <span class="hljs-keyword">new</span> TreeMap();
+        String checksum;	
+        <span class="hljs-keyword">try</span>{	
+            tmap.put(<span class="hljs-string">"MID"</span>, mid); 
+            tmap.put(<span class="hljs-string">"ORDERID"</span>, orderid);
+            tmap.put(<span class="hljs-string">"TXNTYPE"</span>, TXNTYPE); 
+            tmap.put(<span class="hljs-string">"REFUNDAMOUNT"</span>, REFUNDAMOUNT);	
+            tmap.put(<span class="hljs-string">"TXNID"</span>, TXNID); 
+            tmap.put(<span class="hljs-string">"REFID"</span>, REFID);	
+            tmap.put(<span class="hljs-string">"COMMENTS"</span>, COMMENTS);
 
-String checksum;	
-<span class="hljs-keyword">try</span>{	
-tmap.put(<span class="hljs-string">"MID"</span>, mid); 
-tmap.put(<span class="hljs-string">"ORDERID"</span>, orderid);
-tmap.put(<span class="hljs-string">"TXNTYPE"</span>, TXNTYPE); 
-tmap.put(<span class="hljs-string">"REFUNDAMOUNT"</span>, REFUNDAMOUNT);	
-tmap.put(<span class="hljs-string">"TXNID"</span>, TXNID); 
-tmap.put(<span class="hljs-string">"REFID"</span>, REFID);	
-tmap.put(<span class="hljs-string">"COMMENTS"</span>, COMMENTS);
+        } <span class="hljs-keyword">catch</span>(Exception e) {
+            System.out.print(e);
+        }
+        String line=<span class="hljs-string">""</span>;
 
-}
-<span class="hljs-keyword">catch</span>(Exception e)
-{
-System.out.print(e);
-}
-String line=<span class="hljs-string">""</span>;
+        <span class="hljs-keyword">try</span> {	
+            checksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(merchant_key,tmap);
+            <span class="hljs-comment">//	please use your merchant key in above code line</span>
+            tmap.put(<span class="hljs-string">"CHECKSUM"</span>, checksum);
+            JSONObject obj = <span class="hljs-keyword">new</span> JSONObject(tmap);
+            String urlParameters=obj.toString();
 
-<span class="hljs-keyword">try</span> {	
-checksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(merchant_key,tmap);
-<span class="hljs-comment">//	please use your merchant key in above code line</span>
-tmap.put(<span class="hljs-string">"CHECKSUM"</span>, checksum);
-JSONObject obj = <span class="hljs-keyword">new</span> JSONObject(tmap);
-String urlParameters=obj.toString();
+            URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://securegw.paytm.in/refund/HANDLER_INTERNAL/REFUND"</span>);
+            connection = (HttpURLConnection)url.openConnection();	
+            connection.setRequestMethod(<span class="hljs-string">"POST"</span>);
+            connection.setRequestProperty(<span class="hljs-string">"contentType"</span>,<span class="hljs-string">"application/json"</span>);
 
-URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://securegw.paytm.in/refund/HANDLER_INTERNAL/REFUND"</span>);
-connection = (HttpURLConnection)url.openConnection();	
-connection.setRequestMethod(<span class="hljs-string">"POST"</span>);
-connection.setRequestProperty(<span class="hljs-string">"contentType"</span>,<span class="hljs-string">"application/json"</span>);
-
-connection.setUseCaches(<span class="hljs-keyword">false</span>);
-connection.setDoOutput(<span class="hljs-keyword">true</span>);
-DataOutputStream wr = <span class="hljs-keyword">new</span> DataOutputStream (connection.getOutputStream());
-wr.writeBytes(<span class="hljs-string">"JsonData="</span>+urlParameters);	
-wr.close();
-
-InputStream is = connection.getInputStream();
-BufferedReader rd = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(is));
-
-<span class="hljs-keyword">while</span>((line = rd.readLine()) != <span class="hljs-keyword">null</span>) {
-
-System.out.append(<span class="hljs-string">"Request : "</span>+<span class="hljs-string">"JsonData="</span>+urlParameters+<span class="hljs-string">"
-
-"</span>);
-
-System.out.append(<span class="hljs-string">"output : "</span>+line);
-<span class="hljs-comment">// System.out.append('
-');</span>
-
-<span class="hljs-keyword">return</span> <span class="hljs-string">"Return"</span>+line;
-}
-rd.close();
-
-
-}
-
-<span class="hljs-keyword">catch</span> (Exception e) {
-e.printStackTrace();
-}
-
-<span class="hljs-keyword">return</span> <span class="hljs-string">"empyty"</span>+line;
-}	
+            connection.setUseCaches(<span class="hljs-keyword">false</span>);
+            connection.setDoOutput(<span class="hljs-keyword">true</span>);
+            DataOutputStream wr = <span class="hljs-keyword">new</span> DataOutputStream (connection.getOutputStream());
+            wr.writeBytes(<span class="hljs-string">"JsonData="</span>+urlParameters);	
+            wr.close();
+            InputStream is = connection.getInputStream();
+            BufferedReader rd = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(is));
+            <span class="hljs-keyword">while</span>((line = rd.readLine()) != <span class="hljs-keyword">null</span>) {
+                System.out.append(<span class="hljs-string">"Request : "</span>+<span class="hljs-string">"JsonData="</span>+urlParameters+<span class="hljs-string">""</span>);
+                System.out.append(<span class="hljs-string">"output : "</span>+line);
+                <span class="hljs-comment">// System.out.append('');</span>
+                <span class="hljs-keyword">return</span> <span class="hljs-string">"Return"</span>+line;
+            }
+            rd.close();
+        } <span class="hljs-keyword">catch</span> (Exception e) {
+            e.printStackTrace();
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"empyty"</span>+line;
+    }	
 
 } </code></pre>
  
@@ -154,8 +137,8 @@ e.printStackTrace();
         return {
             __html: `
 <pre><code class="hljs language-cs">String <span class="hljs-keyword">value</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/refund/HANDLER_INTERNAL/REFUND?JsonData="</span>; 
-String Merchant_key=<span class="hljs-string">"I%VyKUMWdwEDyh4z"</span>;
-String MID=<span class="hljs-string">"PaytmS01829682567544"</span>;
+String Merchant_key=<span class="hljs-string">"I%XXXXXXXXXXXX4z"</span>;
+String MID=<span class="hljs-string">"PXXXXXXXXXXXXXXXX544"</span>;
 String order_id=<span class="hljs-string">""</span>;
 String txnid_text=<span class="hljs-string">""</span>;
 String ref_id=<span class="hljs-string">""</span>;
@@ -171,94 +154,74 @@ innerrequest.Add(<span class="hljs-string">"REFID"</span>, ref_id);
 
 String first_jason = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
 
-<span class="hljs-keyword">try</span>
-{
-<span class="hljs-keyword">string</span> Check = paytm.CheckSum.generateCheckSumForRefund(Merchant_key, innerrequest);
-<span class="hljs-keyword">string</span> correct_check = Server.UrlEncode(Check);
+<span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">string</span> Check = paytm.CheckSum.generateCheckSumForRefund(Merchant_key, innerrequest);
+    <span class="hljs-keyword">string</span> correct_check = Server.UrlEncode(Check);
 
-innerrequest.Add(<span class="hljs-string">"CHECKSUM"</span>, correct_check);
-String final = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
-final = final.Replace(<span class="hljs-string">"\"</span>, <span class="hljs-string">""</span>).Replace(<span class="hljs-string">":"{"</span>, <span class="hljs-string">":{"</span>).Replace(<span class="hljs-string">"}","</span>, <span class="hljs-string">"},"</span>);
+    innerrequest.Add(<span class="hljs-string">"CHECKSUM"</span>, correct_check);
+    String final = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
+    final = final.Replace(<span class="hljs-string">""</span>, <span class="hljs-string">""</span>).Replace(<span class="hljs-string">":"</span>{<span class="hljs-string">", "</span>:{<span class="hljs-string">").Replace("</span>}<span class="hljs-string">","</span>, <span class="hljs-string">"},"</span>);
 
-String url = <span class="hljs-keyword">value</span> + final;
+    String url = <span class="hljs-keyword">value</span> + final;
 
-HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-request.Headers.Add(<span class="hljs-string">"ContentType"</span>, <span class="hljs-string">"application/json"</span>);
-request.Method = <span class="hljs-string">"POST"</span>;
-<span class="hljs-keyword">using</span> (StreamWriter requestWriter2 = <span class="hljs-keyword">new</span> StreamWriter(request.GetRequestStream()))
-{
-requestWriter2.Write(final);
+    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+    request.Headers.Add(<span class="hljs-string">"ContentType"</span>, <span class="hljs-string">"application/json"</span>);
+    request.Method = <span class="hljs-string">"POST"</span>;
+    <span class="hljs-keyword">using</span> (StreamWriter requestWriter2 = <span class="hljs-keyword">new</span> StreamWriter(request.GetRequestStream())) {
+        requestWriter2.Write(final);
+    }
+    <span class="hljs-keyword">string</span> responseData = <span class="hljs-keyword">string</span>.Empty;
+    <span class="hljs-keyword">using</span> (StreamReader responseReader = <span class="hljs-keyword">new</span> StreamReader(request.GetResponse().GetResponseStream())) {
+        responseData = responseReader.ReadToEnd(); 
+        Response.Write(<span class="hljs-string">"Requested Json= "</span> + final); 
+        Response.Write(<span class="hljs-string">"Response Json= "</span> + responseData);
+    }
 
-}
-<span class="hljs-keyword">string</span> responseData = <span class="hljs-keyword">string</span>.Empty;
-<span class="hljs-keyword">using</span> (StreamReader responseReader = <span class="hljs-keyword">new</span> StreamReader(request.GetResponse().GetResponseStream()))
-{
-responseData = responseReader.ReadToEnd();
-
-Response.Write(<span class="hljs-string">"Requested Json= "</span> + final); 
-Response.Write(<span class="hljs-string">"Response Json= "</span> + responseData);
-}
-
-}
-<span class="hljs-keyword">catch</span> (Exception ex)
-{
-Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString());
-} </code></pre>            
+} <span class="hljs-keyword">catch</span> (Exception ex) {
+    Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString());
+}</code></pre>         
             `
         }
     }
     getPhpHTML = () => {
         return {
             __html: `
-<pre><code class=" language-php">                                                   
-<span class="hljs-meta">&lt;?php</span>
-header(<span class="hljs-string">"Pragma: no-cache"</span>);
-header(<span class="hljs-string">"Cache-Control: no-cache"</span>);
-header(<span class="hljs-string">"Expires: 0"</span>);
-
-<span class="hljs-comment">// following files need to be included</span><span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/config_paytm.php"</span>);
-<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/encdec_paytm.php"</span>);
-
-$checkSum = <span class="hljs-string">""</span>;
-$paramList = <span class="hljs-keyword">array</span>();
+<pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// following file need to be included</span>
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
 
 <span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
-$paramList[<span class="hljs-string">"MID"</span>] = PAYTM_MERCHANT_MID;
-$paramList[<span class="hljs-string">"ORDERID"</span>] = <span class="hljs-string">'ORDS50239961'</span>; <span class="hljs-comment">//get during paytm transaction response</span>
+$paramList = <span class="hljs-keyword">array</span>();
+$paramList[<span class="hljs-string">"MID"</span>] = <span class="hljs-string">"PAYTM_MERCHANT_MID_HERE"</span>;
 $paramList[<span class="hljs-string">"TXNTYPE"</span>] = <span class="hljs-string">'REFUND'</span>;
-$paramList[<span class="hljs-string">"REFUNDAMOUNT"</span>] = <span class="hljs-string">'0.10'</span>;
-$paramList[<span class="hljs-string">"TXNID"</span>] = <span class="hljs-string">'70000782780'</span>; <span class="hljs-comment">// get during paytm transaction response</span>
-$paramList[<span class="hljs-string">"REFID"</span>] = <span class="hljs-string">'REFID0000000004'</span>; <span class="hljs-comment">// ref id should be unique every time.</span>
+$paramList[<span class="hljs-string">"ORDERID"</span>] = <span class="hljs-string">'ORDS50239961'</span>; <span class="hljs-comment">// Order Id received from Paytm in Response</span>
+$paramList[<span class="hljs-string">"REFUNDAMOUNT"</span>] = <span class="hljs-string">'0.10'</span>; <span class="hljs-comment">// amount to be refunded</span>
+$paramList[<span class="hljs-string">"TXNID"</span>] = <span class="hljs-string">'20180914111212800110168018200018021'</span>; <span class="hljs-comment">// Transaction Id received from Paytm in Response</span>
+$paramList[<span class="hljs-string">"REFID"</span>] = <span class="hljs-string">'REFID0000000004'</span>; <span class="hljs-comment">// an unique reference id for every refund</span>
 
 <span class="hljs-comment">//Here checksum string will return by getChecksumFromArray() function.</span>
-$checkSum = getRefundChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
+$checkSum = getRefundChecksumFromArray($paramList, <span class="hljs-string">"PAYTM_MERCHANT_KEY_HERE"</span>);
 
 $paramList[<span class="hljs-string">"CHECKSUM"</span>] = urlencode($checkSum);
+$post_data = <span class="hljs-string">'JsonData='</span>.json_encode($paramList, JSON_UNESCAPED_SLASHES);
 
-$data_string = <span class="hljs-string">'JsonData='</span>.json_encode($paramList);
-print_r($data_string);
-<span class="hljs-comment">// initiate curl</span>
 $ch = curl_init(); 
-$url = PAYTM_REFUND_URL;
+
+<span class="hljs-comment">// $url = "https://securegw.paytm.in/refund/HANDLER_INTERNAL/REFUND"; // for production</span>
+$url = <span class="hljs-string">"https://securegw-stage.paytm.in/refund/HANDLER_INTERNAL/REFUND"</span>; <span class="hljs-comment">// for production</span>
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="hljs-number">0</span>);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="hljs-number">0</span>);
-
-curl_setopt($ch, CURLOPT_URL,$url);
-curl_setopt($ch, CURLOPT_POST, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// tell curl you want to post something</span>
-curl_setopt($ch, CURLOPT_POSTFIELDS,$data_string); <span class="hljs-comment">// define what you want to post</span>
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// return the output in string format</span>
-$headers = <span class="hljs-keyword">array</span>();
-$headers[] = <span class="hljs-string">'Content-Type: application/json'</span>;
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-$output = curl_exec ($ch); <span class="hljs-comment">// execute</span>
-$info = curl_getinfo($ch);
-<span class="hljs-comment">//echo $output;</span>
-
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, <span class="hljs-keyword">true</span>);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>);
+curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="hljs-keyword">array</span>(<span class="hljs-string">'Content-Type: application/json'</span>));
+$output = curl_exec($ch);
 $data = json_decode($output, <span class="hljs-keyword">true</span>);
-<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>;
-print_r($data);
-<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>; </code></pre>            
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>; print_r($data); <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></code></pre>      
             `
         }
     }
@@ -313,8 +276,8 @@ print_r($data);
                 <div className={`${style.apiWrapper}`}> {this.props.children} </div>
                 <div className={`${style.editorWrapper}`}>
                         <h2>Definition</h2>
-                        <p className={` grid justify-between`}><span>Staging:</span> <span>https://securegw-stage.paytm.in/merchant-status/getTxnStatus</span></p>
-                        <p className={` grid justify-between`}><span>Production:</span> <span>https://securegw.paytm.in/merchant-status/getTxnStatus </span></p>
+                        <p className={` grid justify-between`}><span>Staging:</span> <span>https://securegw-stage.paytm.in/refund/HANDLER_INTERNAL/REFUND</span></p>
+                        <p className={` grid justify-between`}><span>Production:</span> <span>https://securegw.paytm.in/refund/HANDLER_INTERNAL/REFUND </span></p>
                         <h6 className={` grid justify-center align-center`}><span>Request Code</span>
                         <label className={`${style.switch}`}>
                             < input type = "checkbox"

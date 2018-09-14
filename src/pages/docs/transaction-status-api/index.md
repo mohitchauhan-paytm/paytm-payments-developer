@@ -29,6 +29,7 @@ export default ({children,location, pageContext}) => (
 * To fetch status of transacion where real time communication did not take place
 * To fetch status of transacion where transaction status was communicated as pending 
 
+
 <div className={`${style.space10}`}></div>
 
 ## Request Attributes
@@ -37,7 +38,7 @@ export default ({children,location, pageContext}) => (
 | --- | --- |
 | **MID**  Alphanumeric(20)       | This is a unique Merchant identifier that is issued by Paytm to the Merchant
 |**ORDER_ID** Alphanumeric(50)      | Order ID for which STATUS needs to be checked      
-|**CHECKSUMHASH**  Alphanumeric(108) | Checksumhash computed by Paytm with response parameters
+|**CHECKSUMHASH**  Alphanumeric(108) | Checksum computed by Paytm provided utility with request parameters
 ---
 
 <div className={`${style.space10}`}></div>

@@ -36,7 +36,7 @@ To initiate partial or complete refund to source account from which the transact
 | **ORDERID**  Alphanumeric(50)   | This is the merchant’s reference transaction Id for which refund is being made.
 |**REFUNDAMOUNT** Amount(50)      | Amount value for which refund is supposed to be made.<br/>1. It can be equal to or lesser than the transaction amount <br/>2. It should be upto two decimal place<br/>3. Should not include any separator like (“,”)  
 |**TXNTYPE**  Alphanumeric(50) | REFUND
-| **CHECKSUMHASH**  Alphanumeric(108)       | Checksum to be calculated based by server side utility
+| **CHECKSUM**  Alphanumeric(108)       | Checksum computed by Paytm provided utility with request parameters
 |**COMMENTS** Optional Alphanumeric(50)      | Any comments can be given here like why is this refund being made   
 
 <div className={`${style.space10}`}></div>
