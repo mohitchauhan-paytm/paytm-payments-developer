@@ -154,45 +154,36 @@ String first_jason = <span class="hljs-keyword">new</span> JavaScriptSerializer(
     getPHPHTML = () => {
         return {
             __html: `
-            <pre><code class=" language-php"><span class="hljs-meta">&lt;?php</span>
-header(<span class="hljs-string">"Pragma: no-cache"</span>);
-header(<span class="hljs-string">"Cache-Control: no-cache"</span>);
-header(<span class="hljs-string">"Expires: 0"</span>);
+<pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// following file need to be included</span>
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
 
-<span class="hljs-comment">// following files need to be included</span><span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/config_paytm.php"</span>);
-<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/encdec_paytm.php"</span>);
+<span class="hljs-comment">// Order Id to check status for</span>
+$order_id = <span class="hljs-string">"ORDS51973186"</span>;
 
-$ORDER_ID = <span class="hljs-string">""</span>;
-$requestParamList = <span class="hljs-keyword">array</span>();
-$responseParamList = <span class="hljs-keyword">array</span>();
+$requestParamList = <span class="hljs-keyword">array</span>(<span class="hljs-string">"MID"</span> =&gt; <span class="hljs-string">"PAYTM_MERCHANT_MID_HERE"</span> , <span class="hljs-string">"ORDERID"</span> =&gt; $order_id); 
 
-$requestParamList = <span class="hljs-keyword">array</span>(<span class="hljs-string">"MID"</span> =&gt; PAYTM_MERCHANT_MID , <span class="hljs-string">"ORDERID"</span> =&gt; <span class="hljs-string">"ORDS51973186"</span>); 
-
-$checkSum = getChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY);
+$checkSum = getChecksumFromArray($requestParamList, <span class="hljs-string">"PAYTM_MERCHANT_KEY_HERE"</span>);
 $requestParamList[<span class="hljs-string">'CHECKSUMHASH'</span>] = urlencode($checkSum);
 
-$data_string = <span class="hljs-string">"JsonData="</span>.json_encode($requestParamList);
-<span class="hljs-keyword">echo</span> $data_string;
+$post_data = <span class="hljs-string">"JsonData="</span>.json_encode($requestParamList, JSON_UNESCAPED_SLASHES);
 
 $ch = curl_init(); <span class="hljs-comment">// initiate curl</span>
-$url = PAYTM_STATUS_QUERY_URL; <span class="hljs-comment">//Paytm server where you want to post data</span>
+
+<span class="hljs-comment">// $url = "https://securegw.paytm.in/merchant-status/getTxnStatus"; // for production</span>
+$url = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus"</span>;
 
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="hljs-number">0</span>);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="hljs-number">0</span>);
-curl_setopt($ch, CURLOPT_URL,$url);
-curl_setopt($ch, CURLOPT_POST, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// tell curl you want to post something</span>
-curl_setopt($ch, CURLOPT_POSTFIELDS,$data_string); <span class="hljs-comment">// define what you want to post</span>
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// return the output in string format</span>
-$headers = <span class="hljs-keyword">array</span>();
-$headers[] = <span class="hljs-string">'Content-Type: application/json'</span>;
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-$output = curl_exec($ch); <span class="hljs-comment">// execute</span>
-$info = curl_getinfo($ch);
-
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, <span class="hljs-keyword">true</span>);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>);
+curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="hljs-keyword">array</span>(<span class="hljs-string">'Content-Type: application/json'</span>));
+$output = curl_exec($ch);
 $data = json_decode($output, <span class="hljs-keyword">true</span>);
-<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>;
-print_r($data);
-<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>; print_r($data); <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>;
 <span class="hljs-meta">?&gt;</span></code></pre>
             `
         }

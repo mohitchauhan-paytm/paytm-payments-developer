@@ -38,6 +38,8 @@ h1 {
             width: calc(100% - 115px);
             font-size: 1.4rem;
             color:#ccc;
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
         }
     }
     h2 {
