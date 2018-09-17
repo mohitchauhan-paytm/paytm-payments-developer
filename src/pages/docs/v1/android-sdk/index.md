@@ -47,9 +47,9 @@ Install our Android SDK using Android Studio and IntelliJ. To add our SDK to you
 
 ```java
 dependencies {
-compile('com.paytm:pgplussdk:1.2.3') {
-transitive = true; 
-}
+	compile('com.paytm:pgplussdk:1.2.3') {
+		transitive = true; 
+	}
 }
 ```
 
@@ -69,7 +69,7 @@ Via below code, you get runtime permissions needed from user to read the OTP
 
 ```java
 if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
+	ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
 }
 ```
 
@@ -109,7 +109,7 @@ Stores all order related information which are required to be passed by you to P
 PaytmOrder Order = new PaytmOrder(paramMap);
 Where paramap is a HASHMAP object that includes the order details in key value pair. Each parameter is explained in detail below -
 Map<String, String> paramMap = new HashMap<String,String>();
-paramMap.put( "MID" , "TESTRZ75000326065913");
+paramMap.put( "MID" , "TEXXXXXXXXXXXXXXX913");
 paramMap.put( "ORDER_ID" , "ord1");
 paramMap.put( "CUST_ID" , "cust123");
 paramMap.put( "CHANNEL_ID" , "WAP");
@@ -205,8 +205,8 @@ Once the transaction is complete, you will get a response in the json format. No
 
 ```java
 public void onTransactionResponse(Bundle inResponse) {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
+	/*Display the message as below */
+	Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
 }
 ```
 
@@ -216,8 +216,8 @@ This may be due to initialization of views in payment gateway activity or initia
 
 ```java
 public void someUIErrorOccurred(String inErrorMessage) {
-/*Display the error message as below */
-Toast.makeText(getApplicationContext(), "UI Error " + inErrorMessage , Toast.LENGTH_LONG).show();
+	/*Display the error message as below */
+	Toast.makeText(getApplicationContext(), "UI Error " + inErrorMessage , Toast.LENGTH_LONG).show();
 }
 ```
 
@@ -226,8 +226,8 @@ Due to weak or no internet connectivity
 
 ```java
 public void networkNotAvailable() {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
+	/*Display the message as below */
+	Toast.makeText(getApplicationContext(), "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
 }
 ```
 
@@ -242,8 +242,8 @@ Due to :
 
 ```java
 public void clientAuthenticationFailed(String inErrorMessage)  {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Authentication failed: Server error" + inResponse.toString(), Toast.LENGTH_LONG).show();
+        /*Display the message as below */
+        Toast.makeText(getApplicationContext(), "Authentication failed: Server error" + inResponse.toString(), Toast.LENGTH_LONG).show();
 }
 ```
 
@@ -252,8 +252,8 @@ Toast.makeText(getApplicationContext(), "Authentication failed: Server error" + 
 
 ```java
 public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl)  {
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Unable to load webpage " + inResponse.toString(), Toast.LENGTH_LONG).show();
+	/*Display the message as below */
+	Toast.makeText(getApplicationContext(), "Unable to load webpage " + inResponse.toString(), Toast.LENGTH_LONG).show();
 }
 ```
 
@@ -261,19 +261,18 @@ Toast.makeText(getApplicationContext(), "Unable to load webpage " + inResponse.t
 
 ```java
 public void onBackPressedCancelTransaction(){
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Transaction cancelled" , Toast.LENGTH_LONG).show();
+	/*Display the message as below */
+	Toast.makeText(getApplicationContext(), "Transaction cancelled" , Toast.LENGTH_LONG).show();
 }
-
 ```
 
-
+`
 #### On transaction cancelled - 
 
 ```java
 public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
-/*Display the message as below */
-Toast.makeText(getApplicationContext(), "Transaction Cancelled" + inResponse.toString(), Toast.LENGTH_LONG).show();
+	/*Display the message as below */
+	Toast.makeText(getApplicationContext(), "Transaction Cancelled" + inResponse.toString(), Toast.LENGTH_LONG).show();
 }
 ```
 
@@ -299,7 +298,7 @@ Use the code below to generate
         <span dangerouslySetInnerHTML={{
             __html: `
 <pre><code class="hljs language-java">TreeMap&lt;String, String&gt; parameters = <span class="hljs-keyword">new</span> TreeMap();
-parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"TESTRZ75000326065913"</span>);
+parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"TESXXXXXXXXXXXXXXX13"</span>);
 parameters.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"ord1"</span>);
 parameters.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
 parameters.put(<span class="hljs-string">"CUST_ID"</span>,<span class="hljs-string">"cust123"</span>);
@@ -308,15 +307,15 @@ parameters.put(<span class="hljs-string">"WEBSITE"</span>,<span class="hljs-stri
 parameters.put(<span class="hljs-string">"MOBILE_NO"</span>,<span class="hljs-string">"9999999999"</span>);
 parameters.put(<span class="hljs-string">"EMAIL"</span>,<span class="hljs-string">"customer@gmail.com"</span>);
 parameters.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>);
-String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"WavZ_VTwsM018CP@"</span>, parameters);</code></pre>
+String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"WaXXXXXXXXXX18CP@"</span>, parameters);</code></pre>
             `}}></span>
     </TabPanel>
 	<TabPanel tabId="net">
         <span dangerouslySetInnerHTML={{
         __html:  ` 
 <pre><code class="hljs language-cs">Dictionary parameters = <span class="hljs-keyword">new</span> Dictionary();
-String Merchant_key=<span class="hljs-string">"I%VyKUMWdwEDyh4z"</span>;
-String MID=<span class="hljs-string">"TESTRZ75000326065913"</span>;
+String Merchant_key=<span class="hljs-string">"IXXXXXXXXXXXXX4z"</span>;
+String MID=<span class="hljs-string">"TEXXXXXXXXXXXXXXXXX13"</span>;
 String Website=<span class="hljs-string">"WEBSTAGING"</span>;
 parameters.Add(<span class="hljs-string">"MID"</span>, MID);
 parameters.Add(<span class="hljs-string">"REQUEST_TYPE"</span>, <span class="hljs-string">"DEFAULT"</span>);
@@ -380,31 +379,32 @@ All responses sent by Paytm consists checksumhash. This checksumhash needs to be
 <span class="hljs-keyword">import</span> com.paytm.pg.merchant.*;
 <span class="hljs-keyword">import</span> java.util.Map;
 <span class="hljs-keyword">import</span> java.util.TreeMap;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">checksumVerification</span> </span>&#123;
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String MercahntKey = <span class="hljs-string">"XXXXXXXXXXX"</span>;
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>&#123;
-String paytmChecksum = <span class="hljs-string">""</span>;
-Map&lt;String, String&gt; mapData = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-<span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : mapData.entrySet())
-&#123;
-<span class="hljs-keyword">if</span>(entry.getKey().equals(<span class="hljs-string">"CHECKSUMHASH"</span>))&#123;
-paytmChecksum = entry.getKey();
-&#125;<span class="hljs-keyword">else</span>&#123;
-paytmParams.put(entry.getKey(), entry.getValue());
-&#125;
-&#125;
-<span class="hljs-keyword">boolean</span> isValideChecksum = <span class="hljs-keyword">false</span>;
-<span class="hljs-keyword">try</span>&#123;
-isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().
-verifycheckSum(MercahntKey, paytmParams, paytmChecksum);	
-System.out.println(isValideChecksum);
-<span class="hljs-comment">// if checksum is validated Kindly verify the amount and status </span><span class="hljs-comment">// if transaction is successful </span><span class="hljs-comment">// kindly call Paytm Transaction Status API and verify the transaction amount and status.</span><span class="hljs-comment">// If everything is fine then mark that transaction as successful into your DB.</span>
-&#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;
-e.printStackTrace();
-&#125;
-&#125;
-&#125;</code></pre>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">checksumVerification</span> </span>{
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String MercahntKey = <span class="hljs-string">"XXXXXXXXXXX"</span>;
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{
+		String paytmChecksum = <span class="hljs-string">""</span>;
+		Map&lt;String, String&gt; mapData = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
+		TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
+		<span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : mapData.entrySet()) {
+			<span class="hljs-keyword">if</span>(entry.getKey().equals(<span class="hljs-string">"CHECKSUMHASH"</span>)){
+				paytmChecksum = entry.getKey();
+			}<span class="hljs-keyword">else</span>{
+				paytmParams.put(entry.getKey(), entry.getValue());
+			}
+		}
+		<span class="hljs-keyword">boolean</span> isValideChecksum = <span class="hljs-keyword">false</span>;
+		<span class="hljs-keyword">try</span>{
+			isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(MercahntKey, paytmParams, paytmChecksum); 
+			System.out.println(isValideChecksum);
+			
+			<span class="hljs-comment">// if checksum is validated Kindly verify the amount and status </span>
+			<span class="hljs-comment">// if transaction is successful // kindly call Paytm Transaction Status API and verify the transaction amount and status.</span>
+			<span class="hljs-comment">// If everything is fine then mark that transaction as successful into your DB.</span>
+		}<span class="hljs-keyword">catch</span>(Exception e){
+			e.printStackTrace();
+		}
+	}
+}</code></pre>
         `}}></span>
     </TabPanel>
 	<TabPanel tabId="net">

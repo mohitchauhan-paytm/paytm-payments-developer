@@ -96,65 +96,60 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
     <TabPanel tabId="swift">
 <span dangerouslySetInnerHTML={{
             __html: `
-<pre><code class="hljs language-swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">beginPayment</span><span class="hljs-params">()</span></span>
-&#123;
-serv = serv.createProductionEnvironment()
-<span class="hljs-keyword">let</span> type :<span class="hljs-type">ServerType</span> = .eServerTypeProduction
-<span class="hljs-keyword">let</span> order = <span class="hljs-type">PGOrder</span>(orderID: <span class="hljs-string">""</span>, customerID: <span class="hljs-string">""</span>, amount: <span class="hljs-string">""</span>, eMail: <span class="hljs-string">""</span>, mobile: <span class="hljs-string">""</span>)
-order.params = [<span class="hljs-string">"MID"</span>: <span class="hljs-string">"TESTRZ75000326065913"</span>,
-<span class="hljs-string">"ORDER_ID"</span>: <span class="hljs-string">"ord1"</span>,
-<span class="hljs-string">"CUST_ID"</span>: <span class="hljs-string">"cust123"</span>,
-<span class="hljs-string">"CHANNEL_ID"</span>: <span class="hljs-string">"WAP"</span>,
-<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"TECHweb"</span>,
-<span class="hljs-string">"TXN_AMOUNT"</span>: <span class="hljs-string">"100.12"</span>,
-<span class="hljs-string">"CHECKSUMHASH"</span>: <span class="hljs-string">"oCDBVF+hvVb68JvzbKI40TOtcxlNjMdixi9FnRSh80Ub7XfjvgNr9NrfrOCPLmt65UhStCkrDnlYkclz1qE0uBMOrmuKLGlybuErulbLYSQ="</span>,
-<span class="hljs-string">"CALLBACK_URL"</span>: <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>]
-<span class="hljs-keyword">self</span>.txnController =  <span class="hljs-keyword">self</span>.txnController.initTransaction(<span class="hljs-keyword">for</span>: order) <span class="hljs-keyword">as</span>?<span class="hljs-type">PGTransactionViewController</span>
-<span class="hljs-keyword">self</span>.txnController.title = <span class="hljs-string">"Paytm Payments"</span>
-<span class="hljs-keyword">self</span>.txnController.setLoggingEnabled(<span class="hljs-literal">true</span>)
-<span class="hljs-keyword">if</span>(type != <span class="hljs-type">ServerType</span>.eServerTypeNone)
-&#123;
-<span class="hljs-keyword">self</span>.txnController.serverType = type;
-&#125;
-<span class="hljs-keyword">else</span>
-&#123;
-<span class="hljs-keyword">return</span>
-&#125;
-<span class="hljs-keyword">self</span>.txnController.merchant = <span class="hljs-type">PGMerchantConfiguration</span>.defaultConfiguration()
-<span class="hljs-keyword">self</span>.txnController.delegate = <span class="hljs-keyword">self</span>
-<span class="hljs-keyword">self</span>.navigationController?.pushViewController(<span class="hljs-keyword">self</span>.txnController
-, animated: <span class="hljs-literal">true</span>)
-&#125;
-</code></pre>`}}></span>
+<pre><code class="hljs language-swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">beginPayment</span><span class="hljs-params">()</span></span> {
+	serv = serv.createProductionEnvironment()
+	<span class="hljs-keyword">let</span> type :<span class="hljs-type">ServerType</span> = .eServerTypeProduction
+	<span class="hljs-keyword">let</span> order = <span class="hljs-type">PGOrder</span>(orderID: <span class="hljs-string">""</span>, customerID: <span class="hljs-string">""</span>, amount: <span class="hljs-string">""</span>, eMail: <span class="hljs-string">""</span>, mobile: <span class="hljs-string">""</span>)
+	order.params = [<span class="hljs-string">"MID"</span>: <span class="hljs-string">"TESTRZ75000326065913"</span>,
+		<span class="hljs-string">"ORDER_ID"</span>: <span class="hljs-string">"ord1"</span>,
+		<span class="hljs-string">"CUST_ID"</span>: <span class="hljs-string">"cust123"</span>,
+		<span class="hljs-string">"CHANNEL_ID"</span>: <span class="hljs-string">"WAP"</span>,
+		<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"TECHweb"</span>,
+		<span class="hljs-string">"TXN_AMOUNT"</span>: <span class="hljs-string">"100.12"</span>,
+		<span class="hljs-string">"CHECKSUMHASH"</span>: <span class="hljs-string">"oCDBVF+hvVb68JvzbKI40TOtcxlNjMdixi9FnRSh80Ub7XfjvgNr9NrfrOCPLmt65UhStCkrDnlYkclz1qE0uBMOrmuKLGlybuErulbLYSQ="</span>,
+		<span class="hljs-string">"CALLBACK_URL"</span>: <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>]
+	<span class="hljs-keyword">self</span>.txnController =  <span class="hljs-keyword">self</span>.txnController.initTransaction(<span class="hljs-keyword">for</span>: order) <span class="hljs-keyword">as</span>?<span class="hljs-type">PGTransactionViewController</span>
+	<span class="hljs-keyword">self</span>.txnController.title = <span class="hljs-string">"Paytm Payments"</span>
+	<span class="hljs-keyword">self</span>.txnController.setLoggingEnabled(<span class="hljs-literal">true</span>)
+	<span class="hljs-keyword">if</span>(type != <span class="hljs-type">ServerType</span>.eServerTypeNone) {
+		<span class="hljs-keyword">self</span>.txnController.serverType = type;
+	} <span class="hljs-keyword">else</span> {
+		<span class="hljs-keyword">return</span>
+	}
+	<span class="hljs-keyword">self</span>.txnController.merchant = <span class="hljs-type">PGMerchantConfiguration</span>.defaultConfiguration()
+	<span class="hljs-keyword">self</span>.txnController.delegate = <span class="hljs-keyword">self</span>
+	<span class="hljs-keyword">self</span>.navigationController?.pushViewController(<span class="hljs-keyword">self</span>.txnController, animated: <span class="hljs-literal">true</span>)
+}</code></pre>`}}></span>
     </TabPanel>
     <TabPanel tabId="c">
 <span dangerouslySetInnerHTML={{
             __html:  `
-<pre><code class="hljs language-objectivec">- (<span class="hljs-keyword">void</span>)beginPayment&#123;
-PGOrder *order = [PGOrder orderForOrderID:<span class="hljs-string">@""</span>
-customerID:<span class="hljs-string">@""</span>
-amount:<span class="hljs-string">@""</span>
-customerMail:<span class="hljs-string">@""</span>
-customerMobile:<span class="hljs-string">@""</span>];
-order.params =   @&#123;<span class="hljs-string">@"MID"</span> : <span class="hljs-string">@"TESTRZ75000326065913"</span>,
-<span class="hljs-string">@"ORDER_ID"</span>: <span class="hljs-string">@"ord1"</span>,
-<span class="hljs-string">@"CUST_ID"</span> : <span class="hljs-string">@"cust123"</span>,
-<span class="hljs-string">@"CHANNEL_ID"</span>: <span class="hljs-string">@"WAP"</span>,
-<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"TECHweb"</span>,
-<span class="hljs-string">@"TXN_AMOUNT"</span>: <span class="hljs-string">@"100.12"</span>,
-<span class="hljs-string">@"CHECKSUMHASH"</span>:<span class="hljs-string">@"Bzk47IMatCI7T3b21iB403MsRBNhJ9DWHeK79iD+dli6GUg5w+JKDk6gk6roSjuKrtFzDiXwuUsfgVz30Xa2+W+kgwnNQaZXJTSfKPy6gU4="</span>,
-<span class="hljs-string">@"CALLBACK_URL"</span>:<span class="hljs-string">@"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>
-&#125;
-PGTransactionViewController *txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
-txnController.loggingEnabled = <span class="hljs-literal">YES</span>;
-<span class="hljs-keyword">if</span> (type != eServerTypeNone)
-txnController.serverType = type;
-<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span>;
-txnController.merchant = [PGMerchantConfiguration defaultConfiguration];
-txnController.delegate = <span class="hljs-keyword">self</span>;
-[<span class="hljs-keyword">self</span>.navigationController pushViewController:txnController animated:<span class="hljs-literal">YES</span>];
-&#125;
-</code></pre>`}}></span>
+<pre><code class="hljs language-objectivec">- (<span class="hljs-keyword">void</span>)beginPayment{
+	PGOrder *order = [PGOrder orderForOrderID:<span class="hljs-string">@""</span>
+		customerID:<span class="hljs-string">@""</span>
+		amount:<span class="hljs-string">@""</span>
+		customerMail:<span class="hljs-string">@""</span>
+		customerMobile:<span class="hljs-string">@""</span>];
+	order.params =   @{<span class="hljs-string">@"MID"</span> : <span class="hljs-string">@"TESTRZ75000326065913"</span>,
+		<span class="hljs-string">@"ORDER_ID"</span>: <span class="hljs-string">@"ord1"</span>,
+		<span class="hljs-string">@"CUST_ID"</span> : <span class="hljs-string">@"cust123"</span>,
+		<span class="hljs-string">@"CHANNEL_ID"</span>: <span class="hljs-string">@"WAP"</span>,
+		<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"TECHweb"</span>,
+		<span class="hljs-string">@"TXN_AMOUNT"</span>: <span class="hljs-string">@"100.12"</span>,
+		<span class="hljs-string">@"CHECKSUMHASH"</span>:<span class="hljs-string">@"Bzk47IMatCI7T3b21iB403MsRBNhJ9DWHeK79iD+dli6GUg5w+JKDk6gk6roSjuKrtFzDiXwuUsfgVz30Xa2+W+kgwnNQaZXJTSfKPy6gU4="</span>,
+		<span class="hljs-string">@"CALLBACK_URL"</span>:<span class="hljs-string">@"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>
+	}
+	PGTransactionViewController *txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
+	txnController.loggingEnabled = <span class="hljs-literal">YES</span>;
+	
+	<span class="hljs-keyword">if</span> (type != eServerTypeNone)
+		txnController.serverType = type;
+	<span class="hljs-keyword">else</span> 
+		<span class="hljs-keyword">return</span>;
+	txnController.merchant = [PGMerchantConfiguration defaultConfiguration];
+	txnController.delegate = <span class="hljs-keyword">self</span>;
+	[<span class="hljs-keyword">self</span>.navigationController pushViewController:txnController animated:<span class="hljs-literal">YES</span>];
+}</code></pre>`}}></span>
 </TabPanel>
 </Tabs>
 
@@ -183,6 +178,7 @@ txnController.delegate = <span class="hljs-keyword">self</span>;
 To handle success/errors on completion of payment, implement `didFinishedResponse`, `didCancelTrasaction`, `errorMisssingParameter` methods of the `PGTransactionDelegate`. Code snippet provided below
 
 
+
 <div className={`${style.iosCodeWrapper}`}>
 
 <Tabs defaultTab="swift">
@@ -193,56 +189,72 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
     <TabPanel tabId="swift">
 <span dangerouslySetInnerHTML={{
                      __html: `
-<pre><code class="hljs language-swift"><span class="hljs-comment">//this function triggers when transaction gets finished
-</span><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didFinishedResponse</span><span class="hljs-params">(<span class="hljs-number">_</span> controller: PGTransactionViewController, response responseString: String)</span></span>
-&#123;
-<span class="hljs-keyword">let</span> msg : <span class="hljs-type">String</span> = responseString
-<span class="hljs-keyword">var</span> titlemsg : <span class="hljs-type">String</span> = <span class="hljs-string">""</span>
-<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> data = responseString.data(using: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8) &#123;
-<span class="hljs-keyword">do</span> &#123;
-<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> jsonresponse = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONSerialization</span>.jsonObject(with: data, options: .mutableContainers) <span class="hljs-keyword">as</span>? [<span class="hljs-type">String</span>:<span class="hljs-type">Any</span>] , jsonresponse.<span class="hljs-built_in">count</span> &gt; <span class="hljs-number">0</span>&#123;
-titlemsg = jsonresponse[<span class="hljs-string">"STATUS"</span>] <span class="hljs-keyword">as</span>? <span class="hljs-type">String</span> ?? <span class="hljs-string">""</span>
-&#125;
-&#125; <span class="hljs-keyword">catch</span> &#123;
-<span class="hljs-built_in">print</span>(<span class="hljs-string">"Something went wrong"</span>)
-&#125;
-&#125;
-<span class="hljs-keyword">let</span> actionSheetController: <span class="hljs-type">UIAlertController</span> = <span class="hljs-type">UIAlertController</span>(title: titlemsg , message: msg, preferredStyle: .alert)
-<span class="hljs-keyword">let</span> cancelAction : <span class="hljs-type">UIAlertAction</span> = <span class="hljs-type">UIAlertAction</span>(title: <span class="hljs-string">"OK"</span>, style: .cancel) &#123; action -&gt; <span class="hljs-type">Void</span> <span class="hljs-keyword">in</span>
-controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
-&#125;
-actionSheetController.addAction(cancelAction)
-<span class="hljs-keyword">self</span>.present(actionSheetController, animated: <span class="hljs-literal">true</span>, completion: <span class="hljs-literal">nil</span>)
-&#125;  
+<pre><code class="hljs language-swift"><span class="hljs-comment">//this function triggers when transaction gets finished</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didFinishedResponse</span><span class="hljs-params">(<span class="hljs-number">_</span> controller: PGTransactionViewController, response responseString: String)</span></span> {
+	<span class="hljs-keyword">let</span> msg : <span class="hljs-type">String</span> = responseString
+	<span class="hljs-keyword">var</span> titlemsg : <span class="hljs-type">String</span> = <span class="hljs-string">""</span>
+	<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> data = responseString.data(using: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8) {
+		<span class="hljs-keyword">do</span> {
+			<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> jsonresponse = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONSerialization</span>.jsonObject(with: data, options: .mutableContainers) <span class="hljs-keyword">as</span>? [<span class="hljs-type">String</span>:<span class="hljs-type">Any</span>] , jsonresponse.<span class="hljs-built_in">count</span> &gt; <span class="hljs-number">0</span>{
+				titlemsg = jsonresponse[<span class="hljs-string">"STATUS"</span>] <span class="hljs-keyword">as</span>? <span class="hljs-type">String</span> ?? <span class="hljs-string">""</span>
+			}
+		} <span class="hljs-keyword">catch</span> {
+			<span class="hljs-built_in">print</span>(<span class="hljs-string">"Something went wrong"</span>)
+		}
+	}
+	<span class="hljs-keyword">let</span> actionSheetController: <span class="hljs-type">UIAlertController</span> = <span class="hljs-type">UIAlertController</span>(title: titlemsg , message: msg, preferredStyle: .alert)
+	<span class="hljs-keyword">let</span> cancelAction : <span class="hljs-type">UIAlertAction</span> = <span class="hljs-type">UIAlertAction</span>(title: <span class="hljs-string">"OK"</span>, style: .cancel) { 
+		action -&gt; <span class="hljs-type">Void</span> <span class="hljs-keyword">in</span>
+		controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+	}
+	actionSheetController.addAction(cancelAction)
+	<span class="hljs-keyword">self</span>.present(actionSheetController, animated: <span class="hljs-literal">true</span>, completion: <span class="hljs-literal">nil</span>)
+}  
+
 <span class="hljs-comment">//this function triggers when transaction gets cancelled</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didCancelTrasaction</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController)</span></span>
-&#123;
-controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
-&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didCancelTrasaction</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController)</span></span> {
+	controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+}
+
 <span class="hljs-comment">//Called when a required parameter is missing.</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">errorMisssingParameter</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController, error : NSError?)</span></span> &#123;
-controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
-&#125;</code></pre>`}}></span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">errorMisssingParameter</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController, error : NSError?)</span></span> {
+	controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+}</code></pre>`}}></span>
 </TabPanel>
 <TabPanel tabId="c">
 <span dangerouslySetInnerHTML={{
         __html: `
-<pre><code class="hljs language-objectivec"><span class="hljs-comment">//this function triggers when transaction gets finished</span>
--(<span class="hljs-keyword">void</span>)didFinishedResponse:(PGTransactionViewController *)controller response:(<span class="hljs-built_in">NSString</span> *)responseString &#123;
-[controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
-&#125;
+<pre><code class="hljs language-swift"><span class="hljs-comment">//this function triggers when transaction gets finished</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didFinishedResponse</span><span class="hljs-params">(<span class="hljs-number">_</span> controller: PGTransactionViewController, response responseString: String)</span></span> {
+	<span class="hljs-keyword">let</span> msg : <span class="hljs-type">String</span> = responseString
+	<span class="hljs-keyword">var</span> titlemsg : <span class="hljs-type">String</span> = <span class="hljs-string">""</span>
+	<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> data = responseString.data(using: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8) {
+		<span class="hljs-keyword">do</span> {
+			<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> jsonresponse = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONSerialization</span>.jsonObject(with: data, options: .mutableContainers) <span class="hljs-keyword">as</span>? [<span class="hljs-type">String</span>:<span class="hljs-type">Any</span>] , jsonresponse.<span class="hljs-built_in">count</span> &gt; <span class="hljs-number">0</span>{
+				titlemsg = jsonresponse[<span class="hljs-string">"STATUS"</span>] <span class="hljs-keyword">as</span>? <span class="hljs-type">String</span> ?? <span class="hljs-string">""</span>
+			}
+		} <span class="hljs-keyword">catch</span> {
+			<span class="hljs-built_in">print</span>(<span class="hljs-string">"Something went wrong"</span>)
+		}
+	}
+	<span class="hljs-keyword">let</span> actionSheetController: <span class="hljs-type">UIAlertController</span> = <span class="hljs-type">UIAlertController</span>(title: titlemsg , message: msg, preferredStyle: .alert)
+	<span class="hljs-keyword">let</span> cancelAction : <span class="hljs-type">UIAlertAction</span> = <span class="hljs-type">UIAlertAction</span>(title: <span class="hljs-string">"OK"</span>, style: .cancel) { 
+		action -&gt; <span class="hljs-type">Void</span> <span class="hljs-keyword">in</span>
+		controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+	}
+	actionSheetController.addAction(cancelAction)
+	<span class="hljs-keyword">self</span>.present(actionSheetController, animated: <span class="hljs-literal">true</span>, completion: <span class="hljs-literal">nil</span>)
+}  
+
 <span class="hljs-comment">//this function triggers when transaction gets cancelled</span>
--(<span class="hljs-keyword">void</span>)didCancelTrasaction:(PGTransactionViewController *)controller &#123;
-[_statusTimer invalidate];
-<span class="hljs-built_in">NSString</span> *msg = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"UnSuccessful"</span>];    
-[[[<span class="hljs-built_in">UIAlertView</span> alloc] initWithTitle:<span class="hljs-string">@"Transaction Cancel"</span> message:msg delegate:<span class="hljs-literal">nil</span> cancelButtonTitle:<span class="hljs-string">@"OK"</span> otherButtonTitles:<span class="hljs-literal">nil</span>] show];
-[controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
-&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didCancelTrasaction</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController)</span></span> {
+	controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+}
+
 <span class="hljs-comment">//Called when a required parameter is missing.</span>
--(<span class="hljs-keyword">void</span>)errorMisssingParameter:(PGTransactionViewController *)controller error:(<span class="hljs-built_in">NSError</span> *) error &#123;
-[controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
-&#125;
-</code></pre>`}}></span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">errorMisssingParameter</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController, error : NSError?)</span></span> {
+	controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+}</code></pre>`}}></span>
 </TabPanel>
 </Tabs>
 
@@ -270,7 +282,7 @@ Use the code below to generate
         <span dangerouslySetInnerHTML={{
             __html: `
 <pre><code class="hljs language-java">TreeMap&lt;String, String&gt; parameters = <span class="hljs-keyword">new</span> TreeMap();
-parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"TESTRZ75000326065913"</span>);
+parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"TEXXXXXXXXXXXXXXX5913"</span>);
 parameters.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"ord1"</span>);
 parameters.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
 parameters.put(<span class="hljs-string">"CUST_ID"</span>,<span class="hljs-string">"cust123"</span>);
@@ -279,15 +291,15 @@ parameters.put(<span class="hljs-string">"WEBSITE"</span>,<span class="hljs-stri
 parameters.put(<span class="hljs-string">"MOBILE_NO"</span>,<span class="hljs-string">"9999999999"</span>);
 parameters.put(<span class="hljs-string">"EMAIL"</span>,<span class="hljs-string">"customer@gmail.com"</span>);
 parameters.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>);
-String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"WavZ_VTwsM018CP@"</span>, parameters);</code></pre>
+String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"WaXXXXXXXXXXXXXP@"</span>, parameters);</code></pre>
             `}}></span>
     </TabPanel>
 	<TabPanel tabId="net">
         <span dangerouslySetInnerHTML={{
         __html:  ` 
 <pre><code class="hljs language-cs">Dictionary parameters = <span class="hljs-keyword">new</span> Dictionary();
-String Merchant_key=<span class="hljs-string">"I%VyKUMWdwEDyh4z"</span>;
-String MID=<span class="hljs-string">"TESTRZ75000326065913"</span>;
+String Merchant_key=<span class="hljs-string">"IXXXXXXXXXXXXXXz"</span>;
+String MID=<span class="hljs-string">"TEXXXXXXXXXXXXXXXX13"</span>;
 String Website=<span class="hljs-string">"WEBSTAGING"</span>;
 parameters.Add(<span class="hljs-string">"MID"</span>, MID);
 parameters.Add(<span class="hljs-string">"REQUEST_TYPE"</span>, <span class="hljs-string">"DEFAULT"</span>);
@@ -335,6 +347,8 @@ $checkSum = getChecksumFromArray($paramList, PAYTM_MERCHANT_KEY);
 
 All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server by server side utility. Code snippets and github link provided below
 
+
+
 <div className={`${style.checkoutWrapper}`}>
 
 
@@ -351,31 +365,33 @@ All responses sent by Paytm consists checksumhash. This checksumhash needs to be
 <span class="hljs-keyword">import</span> com.paytm.pg.merchant.*;
 <span class="hljs-keyword">import</span> java.util.Map;
 <span class="hljs-keyword">import</span> java.util.TreeMap;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">checksumVerification</span> </span>&#123;
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String MercahntKey = <span class="hljs-string">"XXXXXXXXXXX"</span>;
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>&#123;
-String paytmChecksum = <span class="hljs-string">""</span>;
-Map&lt;String, String&gt; mapData = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-<span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : mapData.entrySet())
-&#123;
-<span class="hljs-keyword">if</span>(entry.getKey().equals(<span class="hljs-string">"CHECKSUMHASH"</span>))&#123;
-paytmChecksum = entry.getKey();
-&#125;<span class="hljs-keyword">else</span>&#123;
-paytmParams.put(entry.getKey(), entry.getValue());
-&#125;
-&#125;
-<span class="hljs-keyword">boolean</span> isValideChecksum = <span class="hljs-keyword">false</span>;
-<span class="hljs-keyword">try</span>&#123;
-isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().
-verifycheckSum(MercahntKey, paytmParams, paytmChecksum);	
-System.out.println(isValideChecksum);
-<span class="hljs-comment">// if checksum is validated Kindly verify the amount and status </span><span class="hljs-comment">// if transaction is successful </span><span class="hljs-comment">// kindly call Paytm Transaction Status API and verify the transaction amount and status.</span><span class="hljs-comment">// If everything is fine then mark that transaction as successful into your DB.</span>
-&#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;
-e.printStackTrace();
-&#125;
-&#125;
-&#125;</code></pre>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">checksumVerification</span> </span>{
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String MercahntKey = <span class="hljs-string">"XXXXXXXXXXX"</span>;
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{
+		String paytmChecksum = <span class="hljs-string">""</span>;
+		Map&lt;String, String&gt; mapData = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
+		TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
+		<span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : mapData.entrySet()) {
+			<span class="hljs-keyword">if</span>(entry.getKey().equals(<span class="hljs-string">"CHECKSUMHASH"</span>)){
+				paytmChecksum = entry.getKey();
+			}<span class="hljs-keyword">else</span>{
+				paytmParams.put(entry.getKey(), entry.getValue());
+			}
+		}
+		<span class="hljs-keyword">boolean</span> isValideChecksum = <span class="hljs-keyword">false</span>;
+		<span class="hljs-keyword">try</span>{
+			isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().
+			verifycheckSum(MercahntKey, paytmParams, paytmChecksum);	
+			System.out.println(isValideChecksum);
+			
+			<span class="hljs-comment">// if checksum is validated Kindly verify the amount and status </span>
+			<span class="hljs-comment">// if transaction is successful // kindly call Paytm Transaction Status API and verify the transaction amount and status.</span>
+			<span class="hljs-comment">// If everything is fine then mark that transaction as successful into your DB.</span>
+		}<span class="hljs-keyword">catch</span>(Exception e){
+			e.printStackTrace();
+		}
+	}
+}</code></pre>
         `}}></span>
     </TabPanel>
 	<TabPanel tabId="net">
