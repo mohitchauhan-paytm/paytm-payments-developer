@@ -30,13 +30,13 @@ To initiate partial or complete refund to source account from which the transact
 
 |    |    
 | ------------- | -----|
-| **MID**  Alphanumeric(50)       | This is a unique merchant Id provided to merchant by Paytm at the time of integration
+| **MID**  Alphanumeric(20)       | This is a unique merchant Id provided to merchant by Paytm at the time of integration
 |**REFID** Alphanumeric(50)      | Merchant’s reference ID unique for every refund transaction. Duplicate order id will be rejected by the Paytm gateway     
 |**TXNID**  Alphanumeric(50) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked
 | **ORDERID**  Alphanumeric(50)   | This is the merchant’s reference transaction Id for which refund is being made.
 |**REFUNDAMOUNT** Amount(50)      | Amount value for which refund is supposed to be made.<br/>1. It can be equal to or lesser than the transaction amount <br/>2. It should be upto two decimal place<br/>3. Should not include any separator like (“,”)  
 |**TXNTYPE**  Alphanumeric(50) | REFUND
-| **CHECKSUM**  Alphanumeric(500)       | Checksum to be calculated based by server side utility
+| **CHECKSUM**  Alphanumeric(108)       | Checksum computed by Paytm provided utility with request parameters
 |**COMMENTS** Optional Alphanumeric(50)      | Any comments can be given here like why is this refund being made   
 
 <div className={`${style.space10}`}></div>
@@ -45,11 +45,11 @@ To initiate partial or complete refund to source account from which the transact
 
 | |
 | --- | --- |
-| **MID**  Alphanumeric(50)       | Same as request
+| **MID**  Alphanumeric(20)       | Same as request
 |**TXNID** Numeric (64) | This is a unique Paytm transaction Id corresponding to order ID for which the refund is being made
 |**ORDERID** Alphanumeric (50) | Same as request
 |**REFUNDAMOUNT** Amount (50) | Same as request
-|**TXNAMOUNT** Amount (50) | The amount of original transaction
+|**TXNAMOUNT** Numeric (10) | The amount of original transaction
 |**REFID** Alphanumeric (20) | Unique ID for every refund request sent by merchant to Paytm
 |**STATUS** Alphanumeric (50) | This contains following refund transaction status<br/>1. TXN_SUCCESS<br/>2. TXN_FAILURE<br/>3. PENDING
 |**RESPCODE** Alphanumeric (100) | This is a numeric transaction response code. All codes refer to a transaction failure or success with each code representing a different reason for failure. These are detailed later

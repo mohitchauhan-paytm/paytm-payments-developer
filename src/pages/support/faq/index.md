@@ -59,7 +59,7 @@ In Android or iOS SDK, static callback URL is used to send response to Paytm SDK
  
 **Can multiple call back URL be configured**
  
-Multiple callback URL can be passed in the transaction request itself. We do not have a limit on callback against a merchant
+Different callback URL can be passed in every transaction request itself. We do not have a limit on callback against a merchant
  
 **Can I bypass passing callback URL in transaction payload in Paytm checkout?**
  
@@ -133,8 +133,7 @@ You may have downloaded the outdated plugin. Please download and use the latest 
  
  **While installing plug-ins, I am getting error “server to server communication error, please contact your Administrator”.  How can I resolve this?**
  
-While passing response to merchant server, server throws an exception as our server do not find required protocol to transfer the data. To resolve this, enable both internal and external CURLs at your server end.
-To check if curl is already enabled at your end, you can use below code in php 
+Make sure cURL is enable on your server and your server is allowing cURL to send request for external IPs. You to check if cURL is already enabled at your end, you can use below code
 
 ```php
 <?php phpinfo();?>
