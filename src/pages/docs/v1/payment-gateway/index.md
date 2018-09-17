@@ -1,5 +1,6 @@
 ---
 path:  "/docs/v1/payment-gateway/index.md"
+title: "Paytm Checkout: Accept Payments on your website"
 ---
 
 
@@ -678,9 +679,4 @@ Additionally to better manage payments on your platform, kindly though [Refund M
 
 In case of any issues, please search or post your query on our <a href="http://paywithpaytm.com/developer/discussion/" target="_blank">Developer Forum</a> or send your queries to devsupport@paytm.com
 
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm Checkout: Accept Payments on your website</title>
-</Helmet>
 

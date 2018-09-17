@@ -1,5 +1,6 @@
 ---
 path:  "/docs/late-notification/index.md"
+title: "Paytm for Developers: Understanding Late notification of transaction"
 ---
 
 
@@ -52,8 +53,3 @@ High value transaction - If the transaction value is large (e.g. school fees, in
 
 Based on your business need, you can build a process to handle delayed notifications. 
 
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm for Developers: Understanding Late notification of transaction</title>
-</Helmet>

@@ -43,7 +43,7 @@ export default class Layout extends Component {
           messages={this.state.msg}
         ><div className={`height100`}>
             <Helmet
-              title={data.site.siteMetadata.title}
+              title={ pageContext.frontmatter ? pageContext.frontmatter.title : data.site.siteMetadata.title}
               meta={[
                 { name: 'description', content: 'Sample' },
                 { name: 'keywords', content: 'sample, something' },

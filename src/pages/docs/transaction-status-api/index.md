@@ -1,5 +1,6 @@
 ---
 path:  "/docs/transaction-status-api/index.md"
+title: "API Reference - Transaction Status"
 ---
 
 
@@ -86,13 +87,3 @@ export default ({children,location, pageContext}) => (
 |**602**| Refund Failed
 |**810**| Order Is Closed
 
-
-
-
-
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>API Reference - Transaction Status</title>
-</Helmet>
