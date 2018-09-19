@@ -1,5 +1,6 @@
 ---
 path:  "/docs/refund-status-api/index.md"
+title: "API Reference - Refund Status"
 ---
 
 
@@ -99,9 +100,3 @@ export default ({children,location, pageContext}) => (
 
 
 ---
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>API Reference - Refund Status</title>
-</Helmet>

@@ -1,5 +1,6 @@
 ---
 path:  "/docs/refund-management/index.md"
+title: "Paytm for Developers: Understanding Refund Management"
 ---
 
 
@@ -83,9 +84,3 @@ Bank holidays are excluded from the timelines provided
 
 As a best practice we recommend to communicate an expected date by which customer will receive money. This communication should go out once we have accepted the refund and confirmed the status as successful
 
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm for Developers: Understanding Refund Management</title>
-</Helmet>

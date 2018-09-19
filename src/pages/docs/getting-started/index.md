@@ -1,4 +1,5 @@
 ---
+title: "Paytm for Developers: Getting Started"
 path:  "/docs/getting-started/index.md"
 ---
 
@@ -98,11 +99,6 @@ Sometimes there are use cases where you need to reverse payments for successful 
 
 import Link from 'gatsby-link';
 
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm for Developers: Getting Started</title>
-</Helmet>
 <div className='sdk-area grid-inline'>
     <Link to="/docs/v1/payment-gateway">
         <div className='grid vertical justify-center'>

@@ -1,5 +1,6 @@
 ---
 path:  "/docs/refund-api/index.md"
+title: "API Reference - Refund"
 ---    
 
 import TransactionWrapperLayoutRefund from '../../../components/txn_wrapper_layout_refund.js';
@@ -94,12 +95,3 @@ To initiate partial or complete refund to source account from which the transact
 |**619**| Invalid Refund Amount
 |**640**| Order Is Frozen
 |**800**| Refund In Retry Status
-
-
-
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>API Reference - Refund</title>
-</Helmet>
