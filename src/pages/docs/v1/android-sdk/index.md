@@ -10,7 +10,7 @@ import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
 
 Paytm has created Android SDK over our powerful APIs, allowing you to take payments in minutes. With our SDK, we shoulder the burden of PCI compliance by eliminating the need to send card data directly to your server.
  
-Our MavenCentral Based SDK is easy to integrate, featherlight & self updating. Hence If a bank launches a new series of cards or wallet, the same is provided to your customers without any new integration. Additionally our SDK auto reads the OTP sent by bank for account verification significantly improving the overall transaction success rates
+Our MavenCentral based SDK is easy to integrate, feather light & self-updating. Hence If a bank launches a new series of cards or new wallet is introduced in the market, the same is provided to your customers without any new integration. Additionally our SDK auto reads the OTP sent by bank for account verification significantly improving the overall transaction success rates
 
 
 ## Demo of Paytm checkout flow in your app - 
@@ -27,7 +27,7 @@ Our MavenCentral Based SDK is easy to integrate, featherlight & self updating. H
 3. Your server passes the payload and checksumhash back to the APP which hands over these details to Paytm SDK    
 4. SDK verifies payload and displays payment Paytm checkout page
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your APP via callback
-6. Verify checksumhash received in response on your server side. Utility for same is provided later 
+6. Verify checksumhash received in response on your server side.
 7. Lastly, verify transaction status with Transaction Status API via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
 
 Find the detailed interaction of each system component in the flow chart below
@@ -126,17 +126,17 @@ paramMap.put( "CHECKSUMHASH" , "w2QDRMgp1234567JEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmG
 
 | **Parameter Name**     |    **Description** |
 | ------------- | ----- | ----- |
-| **MID**  Alphanumeric(20)       | Available with your account details in dashboard. Different for staging and production
-|**ORDER_ID** Alphanumeric(50)      | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
-|**CUST_ID** Alphanumeric(64)   | Merchant’s unique reference ID for every customer Special characters e.g @, ! ,_ $ are allowed
-|**TXN_AMOUNT** Numeric(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
-|**CHANNEL_ID** Alphanumeric(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
-|**WEBSITE** Alphanumeric(50)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
-|**CHECKSUMHASH** Alphanumeric(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
-|**MOBILE_NO** Numeric (15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
-|**EMAIL** Email(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
-|**CALLBACK_URL** URL(255)  | URL on which response of transaction request will be posted
-| **MERC_UNQ_REF** Optional Alphanumeric (50) | An extra (optional) field that is passed by merchant in form POST, the values of this field passes through the system and returns to merchant along with other fields. This should be enabled by Paytm 
+| **MID**  String(20)       | Available with your account details in dashboard. Different for staging and production
+|**ORDER_ID** String(50)      | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
+|**CUST_ID** String(64)   | Merchant’s unique reference ID for every customer Special characters e.g @, ! ,_ $ are allowed
+|**TXN_AMOUNT** String(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
+|**CHANNEL_ID** String(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
+|**WEBSITE** String(50)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
+|**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
+|**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
+|**EMAIL** String(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
+|**CALLBACK_URL** String(255)  | URL on which response of transaction request will be posted
+| **MERC_UNQ_REF** Optional String(50) | An extra (optional) field that is passed by merchant in form POST, the values of this field passes through the system and returns to merchant along with other fields. This should be enabled by Paytm 
 
 #### Object: Certificate (Optional to create)
 
@@ -319,7 +319,6 @@ String Merchant_key=<span class="hljs-string">"IXXXXXXXXXXXXX4z"</span>;
 String MID=<span class="hljs-string">"TEXXXXXXXXXXXXXXXXX13"</span>;
 String Website=<span class="hljs-string">"WEBSTAGING"</span>;
 parameters.Add(<span class="hljs-string">"MID"</span>, MID);
-parameters.Add(<span class="hljs-string">"REQUEST_TYPE"</span>, <span class="hljs-string">"DEFAULT"</span>);
 parameters.Add(<span class="hljs-string">"CHANNEL_ID"</span>, <span class="hljs-string">"WEB"</span>);
 parameters.Add(<span class="hljs-string">"WEBSITE"</span>, Website);
 <span class="hljs-keyword">string</span> custId = <span class="hljs-string">"customer@gmail.com"</span>;
@@ -341,7 +340,6 @@ define(<span class="hljs-string">"PAYTM_MERCHANT_MID"</span>, <span class="hljs-
 define(<span class="hljs-string">"PAYTM_MERCHANT_KEY"</span>, <span class="hljs-string">""</span>);<br/>
 <span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
 $paramList = <span class="hljs-keyword">array</span>();
-$paramList[<span class="hljs-string">"REQUEST_TYPE"</span>] = <span class="hljs-string">"DEFAULT"</span>;
 $paramList[<span class="hljs-string">"MID"</span>] = PAYTM_MERCHANT_MID;
 $paramList[<span class="hljs-string">"ORDER_ID"</span>] = <span class="hljs-string">"ord1"</span>;
 $paramList[<span class="hljs-string">"CUST_ID"</span>] = <span class="hljs-string">"cust123"</span>;

@@ -25,8 +25,8 @@ Paytm Checkout provides a secure, PCI-compliant way to accept Debit/Credit card,
 
 Process of payments starts at the click of pay button on merchant order summary page. On this click, you have to:  
 
-1. Create an order payload to generate checksumhash at your server end
-2. Post the payload and checksumhash via HTML form post on Paytm's server. This redirects the customer to Paytm's payment page
+1. Create an order payload to generate checksumhash at your server end. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated with using merchant key which is only available on server side for security reasons
+2. Post the payload and checksumhash in an HTML form post on Paytm's server. This redirects the customer to Paytm's payment page
 3. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form post on your callback URL
 4. Verify checksumhash received in response to ensure that it has not been tampered
 5. Lastly, verify transaction status with [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api) via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
@@ -46,23 +46,22 @@ At the click of payment button by customer,create the required payload for check
 
 | Attributes    |     |
 | ------------- | ----- | ----- |
-| **MID**  Alphanumeric(20)   | Available with your account details in dashboard. Different for staging and production
-|**ORDER_ID** Alphanumeric(50)   | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
-|**CUST_ID** Alphanumeric(64)   | Merchant’s unique reference ID for every customer Special characters e.g @, ! ,_ $ are allowed
-|**TXN_AMOUNT** Numeric(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
-|**CHANNEL_ID** Alphanumeric(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
-|**WEBSITE** Alphanumeric(50)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
-|**CHECKSUMHASH** Alphanumeric(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
-|**MOBILE_NO** Numeric (15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
-|**EMAIL** Email(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
-|**CALLBACK_URL** URL(255)  | URL on which response of transaction request will be posted 
-|**PROMO_CAMP_ID** Alphanumeric(50)  | This parameter is required when merchant is running any promotional campaign and it is configured at dashboard <br/> **Use case:**  This filed was used to validate and apply bank releated promotional code at PG side. Like Promocode specific to ICICI bank or promo code specfic to a BIN NUmber
-| **PAYMENT_MODE_ONLY** Alpha(10)   | If merchant wants to allow payment mode selection on his website, the value to be passed is “Yes”
-| **AUTH_MODE** Alphanumeric(50)  | Required If PAYMENT_MODE_ONLY = Yes, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
-| **PAYMENT_TYPE_ID** Alpha(10)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> Saved Card - SC
-| **CARD_TYPE** Alphanumeric(50)   | Required If PAYMENT_MODE_ONLY = Yes & AUTH_MODE = 3D Possible values of this parameter depending upon the card type - VISA/MASTER/AMEX
-| **BANK_CODE** Alphanumeric(50)  | Required If PAYMENT_MODE_ONLY = Yes<br/>PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in PDF below
-| **MERC_UNQ_REF** Optional Alphanumeric (50) | An extra (optional) field that is passed by merchant in form POST, the values of this field passes through the system and returns to merchant along with other fields. This should be enabled by Paytm
+| **MID**  String(20)   | This is a unique identifier provided to every merchant. MID is part of your account credentials and is different on staging and production environment. Your MIDs are available here 
+|**ORDER_ID** String(50)   | Merchant’s unique reference ID for a transaction. Duplicate order ID will be rejected by Paytm. Special characters allowed in Order Id are: “@” “-” “_” “.”.
+|**CUST_ID** String(64)   | Merchant’s unique reference ID for every customer. Special characters e.g @, ! ,_ $ are allowed
+|**TXN_AMOUNT** String(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
+|**CHANNEL_ID** String(3)  | 1. For websites - WEB <br/>2. for Mobile websites/App - WAP
+|**WEBSITE** String(30)  | For staging environment: <br/>1. WEBSTAGING for websites <br/>2. APPSTAGING for Mobile websites/App <br/>For production environment: Will be provided with production credentials in dashboard
+|**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
+|**MOBILE_NO** String(15)  | Mobile number of customer. Passing this enables faster login for customer into his/her Paytm account
+|**EMAIL** String(50)  | Email ID of customer
+|**CALLBACK_URL** String(255)  | URL on which response of transaction request will be posted
+| **PAYMENT_MODE_ONLY** String(10)   | If merchant is getting paymode selected on their page, then the value to be passed is “Yes”
+| **AUTH_MODE** String(10)  | Required If PAYMENT_MODE_ONLY = Yes, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
+| **PAYMENT_TYPE_ID** String(10)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> Saved Card - SC
+| **CARD_TYPE** String(50)   | Required If PAYMENT_MODE_ONLY = Yes & AUTH_MODE = 3D Possible values of this parameter depending upon the card type - VISA/MASTER/AMEX
+| **BANK_CODE** String(50)  | Required If PAYMENT_MODE_ONLY = Yes<br/>PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in PDF below
+| **MERC_UNQ_REF** Optional String (50) | Parameter wherein merchant can pass any text for reference of the transaction. This field is also present  in merchant panel wherein it can be used to filter transactions
 
 
 <div className={`${style.commonMargin}`}></div>
@@ -83,10 +82,11 @@ Generate checksumhash using Paytm library with parameters in key value pairs. Us
 	<TabPanel tabId="java">
         <span dangerouslySetInnerHTML={{
             __html: `
-<pre><code class="hljs language-java">&lt;%@ page language=<span class="hljs-string">"java"</span> contentType=<span class="hljs-string">"text/html; charset=ISO-8859-1"</span> pageEncoding=<span class="hljs-string">"ISO-8859-1"</span>%&gt;
-&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">"java.util.*,com.paytm.merchant.CheckSumServiceHelper"</span>%&gt; &lt;%
+<pre><code class="hljs language-java">
+String MID = "<span class="hljs-string">rxazcv89315285244163</span>";
+String KEY = "<span class="hljs-string">gKpu7IKaLSbkchFS</span>";
 TreeMap&lt;String, String&gt; parameters = <span class="hljs-keyword">new</span> TreeMap();
-parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"TESXXXXXXXXXXXXXXX13"</span>);
+parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">MID</span>);
 parameters.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"ord1"</span>);
 parameters.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
 parameters.put(<span class="hljs-string">"CUST_ID"</span>,<span class="hljs-string">"cust123"</span>);
@@ -94,8 +94,8 @@ parameters.put(<span class="hljs-string">"TXN_AMOUNT"</span>,<span class="hljs-s
 parameters.put(<span class="hljs-string">"WEBSITE"</span>,<span class="hljs-string">"WEBSTAGING"</span>);
 parameters.put(<span class="hljs-string">"MOBILE_NO"</span>,<span class="hljs-string">"9999999999"</span>);
 parameters.put(<span class="hljs-string">"EMAIL"</span>,<span class="hljs-string">"customer@gmail.com"</span>);
-parameters.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>);
-String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"WaXXXXXXXXXXXXP@"</span>, parameters);
+parameters.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">&lt;Merchant Response Url&gt;</span>);
+String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">KEY</span>, parameters);
 StringBuilder outputHtml = <span class="hljs-keyword">new</span> StringBuilder();
 outputHtml.append(<span class="hljs-string">"&lt;!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;html&gt;"</span>);
@@ -126,7 +126,6 @@ String Merchant_key=<span class="hljs-string">"I%XXXXXXXXXXDyh4z"</span>;
 String MID=<span class="hljs-string">"TESXXXXXXXXXXXXXXX13"</span>;
 String Website=<span class="hljs-string">"WEBSTAGING"</span>;
 parameters.Add(<span class="hljs-string">"MID"</span>, MID);
-parameters.Add(<span class="hljs-string">"REQUEST_TYPE"</span>, <span class="hljs-string">"DEFAULT"</span>);
 parameters.Add(<span class="hljs-string">"CHANNEL_ID"</span>, <span class="hljs-string">"WEB"</span>);
 parameters.Add(<span class="hljs-string">"WEBSITE"</span>, Website);
 parameters.Add(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>);
@@ -170,7 +169,6 @@ define(<span class="hljs-string">"PAYTM_MERCHANT_MID"</span>, <span class="hljs-
 define(<span class="hljs-string">"PAYTM_MERCHANT_KEY"</span>, <span class="hljs-string">""</span>);<br/>
 <span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
 $paramList = <span class="hljs-keyword">array</span>();
-$paramList[<span class="hljs-string">"REQUEST_TYPE"</span>] = <span class="hljs-string">"DEFAULT"</span>;
 $paramList[<span class="hljs-string">"MID"</span>] = PAYTM_MERCHANT_MID;
 $paramList[<span class="hljs-string">"ORDER_ID"</span>] = <span class="hljs-string">"ord1"</span>;
 $paramList[<span class="hljs-string">"CUST_ID"</span>] = <span class="hljs-string">"cust123"</span>;
@@ -385,6 +383,26 @@ For further details and codes in multiple languages, click below links -
 ### Step 3:
 
 Customer fills the payment details and is redirected to bank page for authorization. Once the transaction is authorized, Paytm receives the response from the bank and returns a status to you. Sample HTML form post is provided below
+
+
+| Attributes    |     |
+| ------------- | ----- | ----- |
+| **MID** String(20) | Same as request
+| **TXNID** String(64) | This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction
+| **ORDERID** String(50) | Same as request
+| **CUST_ID** String(64) | Same as request
+| **BANKTXNID** String | The transaction Id sent by the bank (NULL or empty string if the transaction doesn’t reach the bank).
+| **TXNAMOUNT** String(10) | Same as request
+| **CURRENCY** String | Same as request
+| **STATUS** String(20) | This contains the transaction status and has only three values: TXN_SUCCESS,  TXN_FAILURE & PENDING
+| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. List in below PDF
+| **RESPMSG** String(500) | Description message attached with each respcode. List in below PDF
+| **TXNDATE** DateTime | Date and Time of transaction. Example: "2015-11- 02 11:40:46.0"
+| **GATEWAYNAME** String(15) | Gateway used by Paytm (ICICI/HDFC/SBI/WALLET etc)
+| **BANKNAME** String(500) | Bank name of the card issuing bank (ICICI/SBI/HDFC etc)
+| **PAYMENTMODE** String(15) | The payment mode used for transaction (CC/DC/NB/PPI etc)
+| **CHECKSUMHASH** String(108) | Checksumhash computed by Paytm with response parametersChecksum to be calculated based by the server-side utility, Only MID, and ORDERID to be included in checksum generation request.
+
 
 ```html
 <html>
@@ -660,7 +678,7 @@ For further details and codes in multiple languages, click below links -
 ### Step 5 :
 
 
-Validate transaction response via server side request using[Transaction Status API](https://developer.paytm.com/docs/transaction-status-api). This API requires checksumhash in request and its verification in response. The status should be treated as the final status of the transaction
+Validate transaction response via server side request using [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api). This API requires checksumhash in request and its verification in response. The status should be treated as the final status of the transaction
 
 ## On completion of your integration -
 
@@ -673,7 +691,7 @@ Post completion of integration on your staging environment, do a complete transa
 3. See the transaction details in “Test Data” mode on your <a href="https://dashboard.paytm.com/next/transactions" target="_blank">dashboard</a>
 
 
-Once the test transaction is complete, move your code to live environment with production account details. Note that production accounts details are available after you have <a href='https://dashboard.paytm.com/next/activate' target="_blank">activate your account </a> on the dashboard
+Once the test transaction is complete, move your code to live environment with production account details. Note that production accounts details are available after you have <a href='https://dashboard.paytm.com/next/activate' target="_blank">activated your account </a> on the dashboard
 
 Additionally to better manage payments on your platform, kindly though [Refund Management](https://developer.paytm.com/docs/refund-management) and [Late Notification](https://developer.paytm.com/docs/late-notification)
 

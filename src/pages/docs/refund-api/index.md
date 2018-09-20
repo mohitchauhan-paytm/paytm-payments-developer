@@ -31,14 +31,14 @@ To initiate partial or complete refund to source account from which the transact
 
 |    |    
 | ------------- | -----|
-| **MID**  Alphanumeric(20)       | This is a unique merchant Id provided to merchant by Paytm at the time of integration
-|**REFID** Alphanumeric(50)      | Merchant’s reference ID unique for every refund transaction. Duplicate order id will be rejected by the Paytm gateway     
-|**TXNID**  Alphanumeric(50) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked
-| **ORDERID**  Alphanumeric(50)   | This is the merchant’s reference transaction Id for which refund is being made.
-|**REFUNDAMOUNT** Amount(50)      | Amount value for which refund is supposed to be made.<br/>1. It can be equal to or lesser than the transaction amount <br/>2. It should be upto two decimal place<br/>3. Should not include any separator like (“,”)  
-|**TXNTYPE**  Alphanumeric(50) | REFUND
-| **CHECKSUM**  Alphanumeric(108)       | Checksum computed by Paytm provided utility with request parameters
-|**COMMENTS** Optional Alphanumeric(50)      | Any comments can be given here like why is this refund being made   
+| **MID** String(20) | This is a unique identifier provided to every merchant. MID is part of your account credentials and is different on staging and production environment. Your MIDs is available here 
+| **REFID** String(50) | Merchant’s reference ID unique for every refund transaction. Duplicate REFID will be rejected by the Paytm gateway
+| **TXNID** String(50) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked. TXNID is provided in response payload for every transaction
+| **ORDERID** String(50) | Order ID is merchant’s unique reference ID for a transaction passed in the transaction payload. This is Order ID for which refund needs to be initiated
+| **REFUNDAMOUNT** String(10) | Amount for which refund is supposed to be made. It can be equal to or lesser than the transaction amount. It should be upto two decimal place. Should not include any separator like (“,”)
+| **TXNTYPE** String | This has fixed value for refund transaction - "REFUND"
+| **CHECKSUM** String(108) | Encryption parameter generated on server side using our utility
+| **COMMENTS** String(50) | Comments can be given by merchant citing the reason for refund
 
 <div className={`${style.space10}`}></div>
 
@@ -46,24 +46,24 @@ To initiate partial or complete refund to source account from which the transact
 
 | |
 | --- | --- |
-| **MID**  Alphanumeric(20)       | Same as request
-|**TXNID** Numeric (64) | This is a unique Paytm transaction Id corresponding to order ID for which the refund is being made
-|**ORDERID** Alphanumeric (50) | Same as request
-|**REFUNDAMOUNT** Amount (50) | Same as request
-|**TXNAMOUNT** Numeric (10) | The amount of original transaction
-|**REFID** Alphanumeric (20) | Unique ID for every refund request sent by merchant to Paytm
-|**STATUS** Alphanumeric (50) | This contains following refund transaction status<br/>1. TXN_SUCCESS<br/>2. TXN_FAILURE<br/>3. PENDING
-|**RESPCODE** Alphanumeric (100) | This is a numeric transaction response code. All codes refer to a transaction failure or success with each code representing a different reason for failure. These are detailed later
-|**RESPMSG** Alphanumeric (500) | This contains a short description of the transaction status. In case of a failed transaction the message will describe the potential reason for the failure. These are detailed later
-|**TXNDATE** DateTime | Date of Refund - “2015-11-02 11:40:46.0”
-|**GATEWAYNAME** Alphanumeric | Gateway used by Paytm (ICICI/CITI/WALLET etc)
-|**CARD_ISSUER** Alphanumeric | Name of issuing bank by which transaction took place
-|**PAYMENTMODE** Alphanumeric | The payment mode used for transaction
-|**REFUNDDATE** DateTime | Date of REFUND. EX- “2015-11- 02 11:40:46.0”
-|**REFUNDTYPE** Alphanumeric | It will fixed value i.e., REFUND
-|**REFUNDID** Numeric (64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
-|**BANKTXNID** Alphanumeric (100) | The transaction Id sent by the bank (NULL or empty string if the transaction doesn’t reach the bank). In case of wallet, this value will be blank
-|**TOTALREFUNDAMT** Alphanumeric (50) | Total refunded amount
+| **MID** String(20) | Same as request
+| **TXNID** String(64) | Same as request
+| **ORDERID** String(50) | Same as request
+| **REFUNDAMOUNT** String(10) | Same as request
+| **TXNAMOUNT** String(10) | Total transaction amount of original transaction
+| **REFID** String(50) | Same as request
+| **STATUS** String(20) | This contains the status of refunds. It has following values: TXN_SUCCESS, TXN_FAILURE & PENDING
+| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
+| **RESPMSG** String(500) | Description message attached with each respcode. These are detailed in the list provided below
+| **TXNDATE** DateTime() | Date of Refund. Format - “2015-11-02 11:40:46.0”
+| **GATEWAYNAME** String(15) | Gateway used by Paytm for that transaction (ICICI/HDFC/SBI/WALLET etc)
+| **CARD_ISSUER** String(20) | Name of issuing bank by which transaction took place
+| **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
+| **REFUNDDATE** DateTime | Date of REFUND. EX- “2015-11- 02 11:40:46.0”
+| **REFUNDTYPE** String | Same as request
+| **REFUNDID** String(64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
+| **BANKTXNID** String(100) | The transaction Id sent by the bank. In case of wallet, this value will be NULL or empty
+| **TOTALREFUNDAMT** String(10) | Total refunded amount
 
 
 
