@@ -1,5 +1,6 @@
 ---
 path:  "/docs/getting-started/index.md"
+title: "Paytm for Developers: Getting Started"
 ---
 
 
@@ -21,7 +22,7 @@ import MdButton from './../../../components/md-button/index';
 
 * **MID (Merchant ID)** - Unique identifier issued to every account
 * **Merchant Key** - This is a unique secret key used for secure encryption of every request. This needs to be kept on server side and **should not be shared with anyone**
-* **Industry Type ID** - This is part of bank and paymode configuration done wrt to an account.
+* **Industry Type ID** - This is part of acquiring bank and paymode configuration done for an account/merchant 
 * **Website** - This parameter is used to support multiple callback URLs to post the transaction response. Each URL needs to be mapped to a website parameter. 
 
 
@@ -59,7 +60,7 @@ The Paytm <a href="https://dashboard.paytm.com/next" target="_blank">Dashboard</
 
 ##### Transaction Creation 
 
-When a transaction request is received at Paytm, there are multiple validations run on this transaction like valid source and structure of request, uniqueness check etc. Once these validations are passed, a transaction is created at Paytm.
+When a transaction request is received at Paytm's server, there are multiple validations carried out like valid source of request, structure of request, uniqueness of request etc. Once these validations are passed, a transaction is created.
 
 ---
 
@@ -98,11 +99,6 @@ Sometimes there are use cases where you need to reverse payments for successful 
 
 import Link from 'gatsby-link';
 
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm for Developers: Getting Started</title>
-</Helmet>
 <div className='sdk-area grid-inline'>
     <Link to="/docs/v1/payment-gateway">
         <div className='grid vertical justify-center'>

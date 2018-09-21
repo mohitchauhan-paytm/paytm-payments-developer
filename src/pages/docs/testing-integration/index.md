@@ -1,5 +1,6 @@
 ---
 path:  "/docs/testing-integration/index.md"
+title: "Paytm Pre-integrated Solutions: Accept Payments on your hosted website in Martjack, Kartrocket and more"
 ---
 
 
@@ -8,10 +9,6 @@ path:  "/docs/testing-integration/index.md"
 
 
 import TestInstrument from './../../../components/test-instruments/index';
-import { Helmet } from "react-helmet";
 
-<Helmet>
-    <title>Paytm Pre-integrated Solutions: Accept Payments on your hosted website in Martjack, Kartrocket and more</title>
-</Helmet>
 
 <TestInstrument></TestInstrument>

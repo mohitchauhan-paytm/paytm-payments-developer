@@ -1,14 +1,11 @@
 ---
 path:  "/docs/v1/ios-sdk/index.md"
+title: "Paytm iOS SDK: Accept payments in your iOS mobile app"
 ---
 
 import * as style from './ios-sdk.module.scss';
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
-import { Helmet } from "react-helmet";
 
-<Helmet>
-    <title>Paytm iOS SDK: Accept payments in your iOS mobile app</title>
-</Helmet>
 
 # Collect online payments with our iOS SDK
 

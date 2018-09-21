@@ -1,5 +1,6 @@
 ---
 path:  "/docs/v1/payment-gateway/index.md"
+title: "Paytm Checkout: Accept Payments on your website"
 ---
 
 
@@ -24,8 +25,8 @@ Paytm Checkout provides a secure, PCI-compliant way to accept Debit/Credit card,
 
 Process of payments starts at the click of pay button on merchant order summary page. On this click, you have to:  
 
-1. Create an order payload to generate checksumhash at your server end
-2. Post the payload and checksumhash via HTML form post on Paytm's server. This redirects the customer to Paytm's payment page
+1. Create an order payload to generate checksumhash at your server end. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated with using merchant key which is only available on server side for security reasons
+2. Post the payload and checksumhash in an HTML form post on Paytm's server. This redirects the customer to Paytm's payment page
 3. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form post on your callback URL
 4. Verify checksumhash received in response to ensure that it has not been tampered
 5. Lastly, verify transaction status with [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api) via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
@@ -378,6 +379,25 @@ For further details and codes in multiple languages, click below links -
 
 Customer fills the payment details and is redirected to bank page for authorization. Once the transaction is authorized, Paytm receives the response from the bank and returns a status to you. Sample HTML form post is provided below
 
+| Attributes    |     |
+| ------------- | ----- | ----- |
+| **MID** String(20) | Same as request
+| **TXNID** String(64) | This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction
+| **ORDERID** String(50) | Same as request
+| **CUST_ID** String(64) | Same as request
+| **BANKTXNID** String | The transaction Id sent by the bank (NULL or empty string if the transaction doesn’t reach the bank).
+| **TXNAMOUNT** String(10) | Same as request
+| **CURRENCY** String | Same as request
+| **STATUS** String(20) | This contains the transaction status and has only three values: TXN_SUCCESS,  TXN_FAILURE & PENDING
+| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. List in below PDF
+| **RESPMSG** String(500) | Description message attached with each respcode. List in below PDF
+| **TXNDATE** DateTime | Date and Time of transaction. Example: "2015-11- 02 11:40:46.0"
+| **GATEWAYNAME** String(15) | Gateway used by Paytm (ICICI/HDFC/SBI/WALLET etc)
+| **BANKNAME** String(500) | Bank name of the card issuing bank (ICICI/SBI/HDFC etc)
+| **PAYMENTMODE** String(15) | The payment mode used for transaction (CC/DC/NB/PPI etc)
+| **CHECKSUMHASH** String(108) | Checksumhash computed by Paytm with response parametersChecksum to be calculated based by the server-side utility, Only MID, and ORDERID to be included in checksum generation request.
+
+
 ```html
 <html>
    <head>
@@ -652,7 +672,7 @@ For further details and codes in multiple languages, click below links -
 ### Step 5 :
 
 
-Validate transaction response via server side request using[Transaction Status API](https://developer.paytm.com/docs/transaction-status-api). This API requires checksumhash in request and its verification in response. The status should be treated as the final status of the transaction
+Validate transaction response via server side request using [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api). This API requires checksumhash in request and its verification in response. The status should be treated as the final status of the transaction
 
 ## On completion of your integration -
 
@@ -665,15 +685,9 @@ Post completion of integration on your staging environment, do a complete transa
 3. See the transaction details in “Test Data” mode on your <a href="https://dashboard.paytm.com/next/transactions" target="_blank">dashboard</a>
 
 
-Once the test transaction is complete, move your code to live environment with production account details. Note that production accounts details are available after you have <a href='https://dashboard.paytm.com/next/activate' target="_blank">activate your account </a> on the dashboard
+Once the test transaction is complete, move your code to live environment with production account details. Note that production accounts details are available after you have <a href='https://dashboard.paytm.com/next/activate' target="_blank">activated your account </a> on the dashboard
 
 Additionally to better manage payments on your platform, kindly though [Refund Management](https://developer.paytm.com/docs/refund-management) and [Late Notification](https://developer.paytm.com/docs/late-notification)
 
 In case of any issues, please search or post your query on our <a href="http://paywithpaytm.com/developer/discussion/" target="_blank">Developer Forum</a> or send your queries to devsupport@paytm.com
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm Checkout: Accept Payments on your website</title>
-</Helmet>
 

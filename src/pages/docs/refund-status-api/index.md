@@ -1,5 +1,6 @@
 ---
 path:  "/docs/refund-status-api/index.md"
+title: "API Reference - Refund Status"
 ---
 
 
@@ -32,10 +33,10 @@ export default ({children,location, pageContext}) => (
 
 | | |
 | --- | --- |
-| **MID**  String(20)       | This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation.
-|**ORDERID** String(50)      | This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request.     
-|**REFID**  String(50) | This is reference ID shared while raising Refund. Each refund request will have unique REFID. Different Refunds for same order will also have differen REFID.
-|**CHECKSUM**  String(108) | URL encoded checksum computed by Paytm provided utility with request parameters
+| **MID** String(20) | This is a unique identifier provided to every merchant. MID is part of your account credentials and is different on staging and production environment. Your MIDs is available here 
+| **ORDERID** String(50) | Order ID is merchant’s unique reference ID for a transaction passed in the transaction payload. This is Order ID for which refund status is being inquired
+| **REFID** String(50) | Merchant’s reference ID unique for every refund transaction. This is REFID for which refund status is being inquired
+| **CHECKSUMHASH** String(108) | Encryption parameter generated on server side using our utility
 
 <div className={`${style.space10}`}></div>
 
@@ -43,23 +44,23 @@ export default ({children,location, pageContext}) => (
 
 | | |
 | --- | --- |
-| **TXNID**  String(64)   | This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction request received from the merchant.
-|**BANKTXNID**  String(100) | The transaction Id sent by the bank (NULL or empty string if the transaction doesn’t reaches to the bank).
-|**ORDERID**  String(50) | This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request.
-|**TXNAMOUNT**  String(10) | Amount of transaction.
-|**STATUS**  String(20) | This contains the transaction status and has only two values:<br/>1. TXN_SUCCESS <br/> 2. TXN_FAILURE<br/> 3.PENDING
-|**GATEWAY**  String(20) | The gateway used by Paytm (ICICI/CITI/WALLET etc).
-|**RESPCODE**  String(10) | This is a numeric transaction response code. All codes refer to a transaction failure or success with each code representing a different reason for failure. Refer to Annexure A for full list.
-|**RESPMSG**  String(500) | This contains a short description of the transaction status. In case of a failed transaction the message will describe the potential reason for the failure.
-|**MID**  String(20) | This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation.
-|**PAYMENTMODE**  String(15) | Possible value for the Mode of Payment:<br/>1.CC<br/>2.DC<br/>3.Wallet<br/>4.IMPS<br/>5.PPI
-|**REFUNDAMOUNT**  	String(10) | Refund amount as received in the request.
-|**TOTALREFUNDAMT**  String(10) | Total amount refunded till now if merchant has raised any requests.
-|**TXNDATE**  DateTime | Date of transaction.  <br/>Ex- "2015-11-02 11:40:46.0"
-|**REFUNDDATE**  DateTime | Date of refund.  <br/>Ex- "2015-11-02 11:40:46.0"
-|**REFUNDTYPE**  String(15) | This is depends on "GATEWAY"
-|**REFID**  String(50) | This is reference ID shared while raising Refund.
-|**REFUNDID**  String(64) | Unique refund id generated at Paytm end.
+| **TXNID** String(64) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked. TXNID is provided in response payload for every transaction
+| **BANKTXNID** String(100) | The transaction Id sent by the bank. In case of wallet, this value will be NULL or empty
+| **ORDERID** String(50) | Same as request
+| **TXNAMOUNT** String(10) | Total transaction amount of original transaction
+| **STATUS** String(20) | This contains the status of refunds. It has following values: TXN_SUCCESS, TXN_FAILURE & PENDING
+| **GATEWAY** String(20) | The gateway used by Paytm (ICICI/CITI/WALLET etc)
+| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
+| **RESPMSG** String(500) | Description message attached with each respcode. These are detailed in the list provided below
+| **MID** String(20) | Same as request
+| **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
+| **REFUNDAMOUNT** String(10) | Amount for which refund is supposed to be made. It can be equal to or lesser than the transaction amount. It should be upto two decimal place. Should not include any separator like (“,”)
+| **TOTALREFUNDAMT** String(10) | Total refunded amount
+| **TXNDATE** DateTime | Date of Refund. Format - “2015-11-02 11:40:46.0”
+| **REFUNDDATE** DateTime | Date of REFUND. EX- “2015-11- 02 11:40:46.0”
+| **REFUNDTYPE** String | This has fixed value for refund transaction - "REFUND"
+| **REFID** String(50) | Same as request
+| **REFUNDID** String(64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
 
 <div className={`${style.space10}`}></div>
 
@@ -99,9 +100,3 @@ export default ({children,location, pageContext}) => (
 
 
 ---
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>API Reference - Refund Status</title>
-</Helmet>

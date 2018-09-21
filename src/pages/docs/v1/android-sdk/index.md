@@ -1,5 +1,6 @@
 ---
 path:  "/docs/v1/android-sdk/index.md"
+title: "Paytm Android SDK: Accept payments in your Android mobile app"
 ---
 
 import * as style from './android-sdk.module.scss';
@@ -525,9 +526,4 @@ Additionally to better manage payments on your platform, kindly though [Refund M
 In case of any issues, please search or post your query on our <a href="http://paywithpaytm.com/developer/discussion/" target="_blank">Developer Forum</a> or send your queries to devsupport@paytm.com
 
 
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>Paytm Android SDK: Accept payments in your Android mobile app</title>
-</Helmet>
 
