@@ -21,19 +21,22 @@ class Home extends Component {
                     <title>Paytm for Developers: Docs Home</title>
                 </Helmet>
                 <div className='heading-box-area grid justify-between'>
-                    <div className='head-left'>
-                        <h3 className='big-head-txt'>Build for India with Paytm</h3>
-                        <h4 className='med-head-txt'>Add <b>Paytm Payment Gateway Platform</b> to your mobile app or website. Collect online payments from your customers using UPI, all major Debit/Credit Cards, 50+ Net-banking options and Paytm Wallet.</h4>
+                    <div className='head-left stage-detail'>
+                        <h1 className='big-head-txt'>Integrate Payments with Paytm</h1>
                         <p className='small-head-txt'>
-                            Paytm supports various integration solutions like Paytm Checkout for web/mobile-web, Mobile App SDKs and Plugins which are free to use, simple, powerful, secure, scalable and reliable. The only requirement to get started is -</p>
-                        <button className='btn btn-primary' onClick={this.handleChange}>Create account</button>
+                        Add <a href="https://business.paytm.com/payment-gateway" target="_blank">Paytm Payment Gateway</a> to your mobile app or website. Collect online payments from your customers using UPI, Debit/Credit Cards, 50+ NetBanking options and Paytm Wallet.<br/><br/> The only requirement to get started is -
+                        </p>
+                        <button className='btn btn-default small' onClick={this.handleChange}>Create account</button>
+                        
                     </div>
+
                     <div className='head-right'>
                         <img src='/assets/img-build-with-paytm.svg' alt='' />
                     </div>
-
                 </div>
-                <div className='box-container '>
+                
+                <div className='box-container'>
+                <label className='box-container-label'>Select a platform to start integrating Paytm Payment Gateway -</label>
                     <div className='grid justify-between'>
                         <div className='box-item grid vertical justify-between'>
                             <div className='box-bg'>
@@ -44,7 +47,7 @@ class Home extends Component {
                                 </div>
                             </div>
                             <div className='grid'>
-                                <Link to='/docs/v1/payment-gateway' className='btn arrow grid justify-center align-center'>Paytm Checkout</Link>
+                                <Link to='/docs/v1/payment-gateway' className='btn arrow btn-primary grid justify-center align-center'>Paytm Checkout</Link>
                             </div>
                         </div>
                         <div className='box-item grid vertical justify-between'>

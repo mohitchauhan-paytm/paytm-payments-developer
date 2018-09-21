@@ -30,15 +30,12 @@ export default class TransactionWrapperLayoutTxnStatus extends React.Component {
 <span class="hljs-keyword">import</span> java.net.HttpURLConnection;
 <span class="hljs-keyword">import</span> java.net.URL;
 <span class="hljs-keyword">import</span> java.util.TreeMap;
-
 <span class="hljs-keyword">import</span> org.json.JSONObject;
-
 <span class="hljs-keyword">import</span> com.paytm.pg.merchant.CheckSumServiceHelper;
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Get_txn_status</span> </span>{
     String mid;
     String orderid;
     String merchant_key;
-
     Get_txn_status(String mid1,String orderid1,String merchant_key) {
         <span class="hljs-keyword">this</span>.mid=mid1;
         <span class="hljs-keyword">this</span>.orderid=orderid1;
@@ -51,7 +48,6 @@ export default class TransactionWrapperLayoutTxnStatus extends React.Component {
     <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">checkstatus</span><span class="hljs-params">()</span></span>{
         HttpURLConnection connection = <span class="hljs-keyword">null</span>;
         TreeMap tmap= <span class="hljs-keyword">new</span> TreeMap();
-
         String checksum;	
         <span class="hljs-keyword">try</span>{	
             tmap.put(<span class="hljs-string">"MID"</span>, mid); 
@@ -60,28 +56,23 @@ export default class TransactionWrapperLayoutTxnStatus extends React.Component {
             System.out.print(e);
         }
         String line=<span class="hljs-string">""</span>;
-
         <span class="hljs-keyword">try</span> {	
             checksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(merchant_key,tmap);
             <span class="hljs-comment">//	please use your merchant key in above code line</span>
             tmap.put(<span class="hljs-string">"CHECKSUMHASH"</span>, checksum);
             JSONObject obj = <span class="hljs-keyword">new</span> JSONObject(tmap);
             String urlParameters=obj.toString();
-
             URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"https://securegw.paytm.in/merchant-status/getTxnStatus"</span>);
             connection = (HttpURLConnection)url.openConnection();	
             connection.setRequestMethod(<span class="hljs-string">"POST"</span>);
             connection.setRequestProperty(<span class="hljs-string">"contentType"</span>,<span class="hljs-string">"application/json"</span>);
-
             connection.setUseCaches(<span class="hljs-keyword">false</span>);
             connection.setDoOutput(<span class="hljs-keyword">true</span>);
             DataOutputStream wr = <span class="hljs-keyword">new</span> DataOutputStream (connection.getOutputStream());
             wr.writeBytes(<span class="hljs-string">"JsonData="</span>+urlParameters);	
             wr.close();
-
             InputStream is = connection.getInputStream();
             BufferedReader rd = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(is));
-
             <span class="hljs-keyword">while</span>((line = rd.readLine()) != <span class="hljs-keyword">null</span>) {
                 System.out.append(<span class="hljs-string">"Request : "</span>+<span class="hljs-string">"JsonData="</span>+urlParameters+<span class="hljs-string">"
                 "</span>);
@@ -102,11 +93,10 @@ export default class TransactionWrapperLayoutTxnStatus extends React.Component {
         return {
             __html: `
 <pre><code class="language-bash">curl -X
-POST https://securegw.paytm.in/merchant-status/getTxnStatus -H
-<span class="hljs-string">'cache-control: no-cache'</span> -H 
+POST https://securegw-stage.paytm.in/merchant-status/getTxnStatus -H
 <span class="hljs-string">'content-type: application/json'</span> -d 
-<span class="hljs-string">'JsonData={"MID":"XXXOPG01851465523919",
-"ORDERID":"5362906000",
+<span class="hljs-string">'JsonData={"MID":"rxazcv89315285244163",
+"ORDERID":"order1",
 "CHECKSUMHASH":"CsTeIGhOnegWColuGQaGphMizcsECToTPZ9x/oFPrNZk1TaiV2bFJZzfCwlU7/7ZDbDZIdIfCXfrNjNlFmoUjOMmg8tlR4/0gakLfFNIe2c="}'</span></code></pre>            
             `
         }
@@ -114,26 +104,19 @@ POST https://securegw.paytm.in/merchant-status/getTxnStatus -H
     getNetHTML = () => {
         return {
             __html: `
-<pre><code class="hljs language-cs">String <span class="hljs-keyword">value</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus?JsonData="</span>;
-
-String Merchant_key=<span class="hljs-string">"IXXXXXXXXXXXyh4z"</span>;
-String MID=<span class="hljs-string">"PaytXXXXXXXXXXXXXX44"</span>;
-String order_id=<span class="hljs-string">""</span>;
-
-Dictionary innerrequest = <span class="hljs-keyword">new</span> Dictionary();
-Dictionary outerrequest = <span class="hljs-keyword">new</span> Dictionary();
-innerrequest.Add(<span class="hljs-string">"MID"</span>, MID);
-innerrequest.Add(<span class="hljs-string">"ORDERID"</span>, order_id);
-String first_jason = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
+<pre><code class="hljs language-cs">String <span class="hljs-keyword">transactionURL</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus?JsonData="</span>;
+String KEY=<span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+String MID=<span class="hljs-string">"rxazcv89315285244163"</span>;
+String orderId=<span class="hljs-string">"order1"</span>;
+Dictionary &lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;string, string&gt;();
+paytmParams.Add(<span class="hljs-string">"MID"</span>, MID);
+paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
 <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">string</span> Check = paytm.CheckSum.generateCheckSum(Merchant_key, innerrequest);
+    <span class="hljs-keyword">string</span> Check = paytm.CheckSum.generateCheckSum(KEY, paytmParams);
     String correct_check = Check.Replace(<span class="hljs-string">"+"</span>, <span class="hljs-string">"%2b"</span>);
-    innerrequest.Add(<span class="hljs-string">"CHECKSUMHASH"</span>, correct_check);
-    String final = <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(innerrequest);
-    final = final.Replace(<span class="hljs-string">""</span>, <span class="hljs-string">""</span>).Replace(<span class="hljs-string">":"</span>{<span class="hljs-string">", "</span>:{<span class="hljs-string">").Replace("</span>}<span class="hljs-string">","</span>, <span class="hljs-string">"},"</span>);
-
-    String url = <span class="hljs-keyword">value</span> + final; 
-    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+    paytmParams.Add(<span class="hljs-string">"CHECKSUMHASH"</span>, correct_check);
+    String final = "JsonData="+ <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(paytmParams);
+    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(transactionURL);
     request.Headers.Add(<span class="hljs-string">"ContentType"</span>, <span class="hljs-string">"application/json"</span>);
     request.Method = <span class="hljs-string">"POST"</span>;
     <span class="hljs-keyword">using</span> (StreamWriter requestWriter2 = <span class="hljs-keyword">new</span> StreamWriter(request.GetRequestStream())) {
@@ -157,22 +140,16 @@ String first_jason = <span class="hljs-keyword">new</span> JavaScriptSerializer(
 <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
 <span class="hljs-comment">// following file need to be included</span>
 <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
-
-<span class="hljs-comment">// Order Id to check status for</span>
-$order_id = <span class="hljs-string">"ORDS51973186"</span>;
-
-$requestParamList = <span class="hljs-keyword">array</span>(<span class="hljs-string">"MID"</span> =&gt; <span class="hljs-string">"PAYTM_MERCHANT_MID_HERE"</span> , <span class="hljs-string">"ORDERID"</span> =&gt; $order_id); 
-
-$checkSum = getChecksumFromArray($requestParamList, <span class="hljs-string">"PAYTM_MERCHANT_KEY_HERE"</span>);
-$requestParamList[<span class="hljs-string">'CHECKSUMHASH'</span>] = urlencode($checkSum);
-
-$post_data = <span class="hljs-string">"JsonData="</span>.json_encode($requestParamList, JSON_UNESCAPED_SLASHES);
-
+$orderId = <span class="hljs-string">"order1"</span>;
+$MID = <span class="hljs-string">"rxazcv89315285244163"</span>;
+$KEY = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+$paytmParams = <span class="hljs-keyword">array</span>(<span class="hljs-string">"MID"</span> =&gt; $MID , <span class="hljs-string">"ORDERID"</span> =&gt; $orderId); 
+$checkSum = getChecksumFromArray($paytmParams, $KEY);
+$paytmParams[<span class="hljs-string">'CHECKSUMHASH'</span>] = urlencode($checkSum);
+$post_data = <span class="hljs-string">"JsonData="</span>.json_encode($paytmParams, JSON_UNESCAPED_SLASHES);
 $ch = curl_init(); <span class="hljs-comment">// initiate curl</span>
-
 <span class="hljs-comment">// $url = "https://securegw.paytm.in/merchant-status/getTxnStatus"; // for production</span>
 $url = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus"</span>;
-
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="hljs-number">0</span>);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="hljs-number">0</span>);
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -182,7 +159,6 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>)
 curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="hljs-keyword">array</span>(<span class="hljs-string">'Content-Type: application/json'</span>));
 $output = curl_exec($ch);
 $data = json_decode($output, <span class="hljs-keyword">true</span>);
-
 <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>; print_r($data); <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>;
 <span class="hljs-meta">?&gt;</span></code></pre>
             `
