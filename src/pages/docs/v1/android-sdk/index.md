@@ -295,9 +295,9 @@ Use the code below to generate
 	<TabPanel tabId="java">
         <span dangerouslySetInnerHTML={{
             __html: `
-<pre><code class="hljs language-java">TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap();
+<pre><code class="hljs language-java">TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
 String MID = "rxazcv89315285244163";
-String KEY = "gKpu7IKaLSbkchFS";
+String KEY = "gKpu7IKaLSbkchFS";    
 paytmParams.put(<span class="hljs-string">"MID"</span>,MID);
 paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"order1"</span>);
 paytmParams.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
@@ -312,7 +312,7 @@ String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckS
 	<TabPanel tabId="net">
         <span dangerouslySetInnerHTML={{
         __html:  ` 
-<pre><code class="hljs language-cs">Dictionary paytmParams = <span class="hljs-keyword">new</span> Dictionary();
+<pre><code class="hljs language-cs">Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
 String KEY=<span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String MID=<span class="hljs-string">"rxazcv89315285244163"</span>;
 paytmParams.Add(<span class="hljs-string">"MID"</span>, MID);
@@ -367,36 +367,21 @@ All responses sent by Paytm consists checksumhash. This checksumhash needs to be
 	<TabPanel tabId="java">
     <span dangerouslySetInnerHTML={{
         __html: `
-<pre><code class="hljs language-java">Package com.paytm.pg.checksumKit;
-<span class="hljs-keyword">import</span> com.paytm.pg.merchant.*;
-<span class="hljs-keyword">import</span> java.util.Map;
-<span class="hljs-keyword">import</span> java.util.TreeMap;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">checksumVerification</span> </span>{
-	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String KEY = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{
-		String paytmChecksum = <span class="hljs-string">""</span>;
-		Map&lt;String, String&gt; mapData = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-		TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-		<span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : mapData.entrySet()) {
-			<span class="hljs-keyword">if</span>(entry.getKey().equals(<span class="hljs-string">"CHECKSUMHASH"</span>)){
-				paytmChecksum = entry.getKey();
-			}<span class="hljs-keyword">else</span>{
-				paytmParams.put(entry.getKey(), entry.getValue());
-			}
-		}
-		<span class="hljs-keyword">boolean</span> isValideChecksum = <span class="hljs-keyword">false</span>;
-		<span class="hljs-keyword">try</span>{
-			isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(KEY, paytmParams, paytmChecksum); 
-			System.out.println(isValideChecksum);
-			
-			<span class="hljs-comment">// if checksum is validated Kindly verify the amount and status </span>
-			<span class="hljs-comment">// if transaction is successful // kindly call Paytm Transaction Status API and verify the transaction amount and status.</span>
-			<span class="hljs-comment">// If everything is fine then mark that transaction as successful into your DB.</span>
-		}<span class="hljs-keyword">catch</span>(Exception e){
-			e.printStackTrace();
-		}
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String KEY = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<span class="hljs-keyword">private</span> String paytmChecksum = <span class="hljs-keyword">null</span>;
+<span class="hljs-comment">// Create a tree map from the form post param</span>
+TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
+<span class="hljs-comment">// Request is HttpServletRequest</span>
+<span class="hljs-keyword">for</span> (Entry&lt;String, String[]&gt; requestParamsEntry : request.getParameterMap().entrySet()) {
+	<span class="hljs-keyword">if</span> (<span class="hljs-string">"CHECKSUMHASH"</span>.equalsIgnoreCase(requestParamsEntry.getKey())){
+		paytmChecksum = requestParamsEntry.getValue()[<span class="hljs-number">0</span>];
+	} <span class="hljs-keyword">else</span> {
+		paytmParams.put(requestParamsEntry.getKey(), requestParamsEntry.getValue()[<span class="hljs-number">0</span>]);
 	}
-}</code></pre>
+}
+<span class="hljs-comment">// Call the method for verification</span>
+<span class="hljs-keyword">boolean</span> isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(KEY, paytmParams, paytmChecksum);
+<span class="hljs-comment">// If isValideChecksum is false, then checksum is not valid</span></code></pre>
         `}}></span>
     </TabPanel>
 	<TabPanel tabId="net">

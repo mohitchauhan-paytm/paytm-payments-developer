@@ -33,7 +33,7 @@ To initiate partial or complete refund to source account from which the transact
 | ------------- | -----|
 | **MID** String(20) | This is a unique identifier provided to every merchant. MID is part of your account credentials and is different on staging and production environment. Your MIDs is available here 
 | **REFID** String(50) | Merchant’s reference ID unique for every refund transaction. Duplicate REFID will be rejected by the Paytm gateway
-| **TXNID** String(50) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked. TXNID is provided in response payload for every transaction
+| **TXNID** String(64) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked. TXNID is provided in response payload for every transaction
 | **ORDERID** String(50) | Order ID is merchant’s unique reference ID for a transaction passed in the transaction payload. This is Order ID for which refund needs to be initiated
 | **REFUNDAMOUNT** String(10) | Amount for which refund is supposed to be made. It can be equal to or lesser than the transaction amount. It should be upto two decimal place. Should not include any separator like (“,”)
 | **TXNTYPE** String | This has fixed value for refund transaction - "REFUND"
@@ -55,11 +55,11 @@ To initiate partial or complete refund to source account from which the transact
 | **STATUS** String(20) | This contains the status of refunds. It has following values: TXN_SUCCESS, TXN_FAILURE & PENDING
 | **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
 | **RESPMSG** String(500) | Description message attached with each respcode. These are detailed in the list provided below
-| **TXNDATE** DateTime() | Date of Refund. Format - “2015-11-02 11:40:46.0”
+| **TXNDATE** DateTime | Date of Refund.<br/> Format - “2015-11-02 11:40:46.0”
 | **GATEWAYNAME** String(15) | Gateway used by Paytm for that transaction (ICICI/HDFC/SBI/WALLET etc)
 | **CARD_ISSUER** String(20) | Name of issuing bank by which transaction took place
 | **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
-| **REFUNDDATE** DateTime | Date of REFUND. EX- “2015-11- 02 11:40:46.0”
+| **REFUNDDATE** DateTime | Date of REFUND.<br/> EX- “2015-11- 02 11:40:46.0”
 | **REFUNDTYPE** String | Same as request
 | **REFUNDID** String(64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
 | **BANKTXNID** String(100) | The transaction Id sent by the bank. In case of wallet, this value will be NULL or empty

@@ -56,9 +56,9 @@ export default ({children,location, pageContext}) => (
 | **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
 | **REFUNDAMOUNT** String(10) | Amount for which refund is supposed to be made. It can be equal to or lesser than the transaction amount. It should be upto two decimal place. Should not include any separator like (“,”)
 | **TOTALREFUNDAMT** String(10) | Total refunded amount
-| **TXNDATE** DateTime | Date of Refund. Format - “2015-11-02 11:40:46.0”
-| **REFUNDDATE** DateTime | Date of REFUND. EX- “2015-11- 02 11:40:46.0”
-| **REFUNDTYPE** String | This has fixed value for refund transaction - "REFUND"
+| **TXNDATE** DateTime | Date of Refund.<br/> Format - “2015-11-02 11:40:46.0”
+| **REFUNDDATE** DateTime | Date of REFUND.<br/> EX- “2015-11- 02 11:40:46.0”
+| **REFUNDTYPE** String | Type of Refund Issued
 | **REFID** String(50) | Same as request
 | **REFUNDID** String(64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
 

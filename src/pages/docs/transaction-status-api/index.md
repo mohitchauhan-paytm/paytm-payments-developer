@@ -58,7 +58,7 @@ export default ({children,location, pageContext}) => (
 | **STATUS** String(20) | This contains the transaction status and has only three values: TXN_SUCCESS, TXN_FAILURE & PENDING
 | **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
 | **RESPMSG** String(500) | Description message attached with each respcode. These are detailed in the list provided below
-| **TXNDATE** DateTime | Date and time of transaction
+| **TXNDATE** DateTime | Date and time of transaction <br/> EX- “2015-11- 02 11:40:46.0”
 | **GATEWAYNAME** String(15) | Gateway used by Paytm for that transaction (ICICI/HDFC/SBI/WALLET etc)
 | **BANKNAME** String(500) | Issuing bank of the card used by the customer in the transaction
 | **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
@@ -71,9 +71,12 @@ export default ({children,location, pageContext}) => (
 | | |
 | --- | --- |
 |**01**| TXN_SUCCESS
+|**10** | Refund Successfull
 |**227**| TXN_FAILURE
+|**334** | Invalid Order Id.
 |**400**| PENDING
 |**401**| TXN_FAILURE
 |**402**| PENDING
 |**810**| TXN_FAILURE
+
 
