@@ -81,19 +81,25 @@ Generate checksumhash using Paytm library with parameters in key value pairs. Us
     <TabPanel tabId="java">
         <span dangerouslySetInnerHTML={{
             __html: `
-<pre><code class="hljs language-java">
-String MID = "<span class="hljs-string">rxazcv89315285244163</span>";
-String KEY = "<span class="hljs-string">gKpu7IKaLSbkchFS</span>";
+<pre><code class="hljs language-java">String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
+String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+String orderId = <span class="hljs-string">"order1"</span>;
+String channelId = <span class="hljs-string">"WEB"</span>;
+String custId = <span class="hljs-string">"cust123"</span>;
+String txnAmount = <span class="hljs-string">"100.12"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
+String industryTypeId = <span class="hljs-string">"Retail"</span>;
+String callbackUrl = &lt;Merchant_Response_URL&gt;;
 TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
-paytmParams.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">MID</span>);
-paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"order1"</span>);
-paytmParams.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
-paytmParams.put(<span class="hljs-string">"CUST_ID"</span>,<span class="hljs-string">"cust123"</span>);
-paytmParams.put(<span class="hljs-string">"TXN_AMOUNT"</span>,<span class="hljs-string">"100.12"</span>);
-paytmParams.put(<span class="hljs-string">"WEBSITE"</span>,<span class="hljs-string">"WEBSTAGING"</span>);
-paytmParams.put(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>,<span class="hljs-string">"Retail"</span>);
-paytmParams.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">&lt;</span>Merchant_Response_URL<span class="hljs-string">&gt;</span>);
-String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(KEY, paytmParams);
+paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
+paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,orderId);
+paytmParams.put(<span class="hljs-string">"CHANNEL_ID"</span>,channelId);
+paytmParams.put(<span class="hljs-string">"CUST_ID"</span>,custId);
+paytmParams.put(<span class="hljs-string">"TXN_AMOUNT"</span>,txnAmount);
+paytmParams.put(<span class="hljs-string">"WEBSITE"</span>,website);
+paytmParams.put(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>,industryTypeId);
+paytmParams.put(<span class="hljs-string">"CALLBACK_URL"</span>, callbackUrl);
+String paytmChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(merchantKey, paytmParams);
 StringBuilder outputHtml = <span class="hljs-keyword">new</span> StringBuilder();
 outputHtml.append(<span class="hljs-string">"&lt;!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;html&gt;"</span>);
@@ -102,12 +108,13 @@ outputHtml.append(<span class="hljs-string">"&lt;title&gt;Merchant Checkout Page
 outputHtml.append(<span class="hljs-string">"&lt;/head&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;body&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>);
-<span class="hljs-comment">// use "https://securegw.paytm.in/theia/processTransaction" for production</span>
-outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='https://securegw-stage.paytm.in/theia/processTransaction' name='f1'&gt;"</span>);
+<span class="hljs-comment">// $transactionURL="https://securegw.paytm.in/theia/processTransaction";  // for production</span>
+$transactionURL=<span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;  	<span class="hljs-comment">// for staging</span>
+outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='"</span>+transactionURL+<span class="hljs-string">"' name='f1'&gt;"</span>);
 <span class="hljs-keyword">for</span>(Map.Entry&lt;String,String&gt; entry : paytmParams.entrySet()) {
     outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='"</span>+entry.getKey()+<span class="hljs-string">"' value='"</span>+entry.getValue()+<span class="hljs-string">"'&gt;"</span>);
 }
-outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span>+checkSum+<span class="hljs-string">"'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span>+paytmChecksum+<span class="hljs-string">"'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;/form&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;script type='text/javascript'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"document.f1.submit();"</span>);
@@ -120,33 +127,40 @@ outputHtml.append(<span class="hljs-string">"&lt;/html&gt;"</span>);</code></pre
         <span dangerouslySetInnerHTML={{
         __html:  ` 
 <pre><code class="hljs language-cs">Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
-String KEY=<span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
-String MID=<span class="hljs-string">"rxazcv89315285244163"</span>;
-paytmParams.Add(<span class="hljs-string">"MID"</span>, MID);
-paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, <span class="hljs-string">"WEB"</span>);
-paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
-paytmParams.Add(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">&lt;</span>Merchant_Response_URL<span class="hljs-string">&gt;</span>);
-paytmParams.Add(<span class="hljs-string">"CUST_ID"</span>, <span class="hljs-string">"cust123"</span>);
-paytmParams.Add(<span class="hljs-string">"ORDER_ID"</span>, <span class="hljs-string">"order1"</span>);
-paytmParams.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, <span class="hljs-string">"Retail"</span>);
-paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, <span class="hljs-string">"100.12"</span>);
+String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
+String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+String orderId = <span class="hljs-string">"order1"</span>;
+String channelId = <span class="hljs-string">"WEB"</span>;
+String custId = <span class="hljs-string">"cust123"</span>;
+String txnAmount = <span class="hljs-string">"100.12"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
+String industryTypeId = <span class="hljs-string">"Retail"</span>;
+String callbackUrl = &lt;Merchant_Response_URL&gt;;
+paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
+paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
+paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, website);
+paytmParams.Add(<span class="hljs-string">"CALLBACK_URL"</span>, callbackUrl);
+paytmParams.Add(<span class="hljs-string">"CUST_ID"</span>, custId);
+paytmParams.Add(<span class="hljs-string">"ORDER_ID"</span>, orderId);
+paytmParams.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, industryTypeId);
+paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
 <span class="hljs-comment">// for production </span>
-<span class="hljs-comment">// string paytmTxnURL = "https://securegw.paytm.in/theia/processTransaction"; </span>
+<span class="hljs-comment">// string transactionURL = "https://securegw.paytm.in/theia/processTransaction"; </span>
 <span class="hljs-comment">// for staging </span>
-<span class="hljs-keyword">string</span> paytmTxnURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+<span class="hljs-keyword">string</span> transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
 <span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">string</span> checksum = paytm.CheckSum.generateCheckSum(KEY, paytmParams);
+    <span class="hljs-keyword">string</span> paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams);
     <span class="hljs-keyword">string</span> outputHTML = <span class="hljs-string">"&lt;html&gt;"</span>;
     outputHTML += <span class="hljs-string">"&lt;head&gt;"</span>;
     outputHTML += <span class="hljs-string">"&lt;title&gt;Merchant Checkout Page&lt;/titl&gt;"</span>;
     outputHTML += <span class="hljs-string">"&lt;/head&gt;"</span>;
     outputHTML += <span class="hljs-string">"&lt;body&gt;"</span>;
     outputHTML += <span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/cente&gt;"</span>;
-    outputHTML += <span class="hljs-string">"&lt;form method='post' action='"</span> + paytmTxnURL + <span class="hljs-string">"' name='f1&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;form method='post' action='"</span> + transactionURL + <span class="hljs-string">"' name='f1&gt;"</span>;
     <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> paytmParams.Keys) {
         outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='"</span> + key + <span class="hljs-string">"' value='"</span> + paytmParams[key] + <span class="hljs-string">"'&gt;'"</span>;
     }
-    outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span> + checksum + <span class="hljs-string">"&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span> + paytmChecksum + <span class="hljs-string">"&gt;"</span>;
     outputHTML += <span class="hljs-string">"&lt;script type='text/javascript&gt;"</span>;
     outputHTML += <span class="hljs-string">"document.f1.submit();"</span>;
     outputHTML += <span class="hljs-string">"&lt;/script&gt;"</span>;
@@ -162,40 +176,47 @@ paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, <span class="hljs
     <span dangerouslySetInnerHTML={
         {__html: `
 <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
-<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
-define(<span class="hljs-string">"MID"</span>, <span class="hljs-string">"rxazcv89315285244163"</span>);
-define(<span class="hljs-string">"KEY"</span>, <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>);
-$paytmParams = <span class="hljs-keyword">array</span>();
-$paytmParams[<span class="hljs-string">"MID"</span>] = MID;
-$paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = <span class="hljs-string">"order1"</span>;
-$paytmParams[<span class="hljs-string">"CUST_ID"</span>] = <span class="hljs-string">"cust123"</span>;
-$paytmParams[<span class="hljs-string">"CHANNEL_ID"</span>] = <span class="hljs-string">"WEB"</span>;
-$paytmParams[<span class="hljs-string">"TXN_AMOUNT"</span>] = <span class="hljs-string">"100.12"</span>;
-$paytmParams[<span class="hljs-string">"WEBSITE"</span>] = <span class="hljs-string">"WEBSTAGING"</span>;
-$paytmParams[<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>] = <span class="hljs-string">"Retail"</span>;
-$paytmParams[<span class="hljs-string">"CALLBACK_URL"</span>] = <span class="hljs-string">&lt;</span>Merchant_Response_URL<span class="hljs-string">&gt;</span>;
-$checkSum = getChecksumFromArray($paytmParams, KEY);
-<span class="hljs-comment">// $paytmTxnURL = "https://securegw.paytm.in/theia/processTransaction"; // for production</span>
-$paytmTxnURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+    <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
+    define(<span class="hljs-string">"merchantMid"</span>, <span class="hljs-string">"rxazcv89315285244163"</span>);
+    define(<span class="hljs-string">"merchantKey"</span>, <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>);
+    define(<span class="hljs-string">"orderId"</span>, <span class="hljs-string">"order1"</span>);
+    define(<span class="hljs-string">"channelId"</span>, <span class="hljs-string">"WEB"</span>);
+    define(<span class="hljs-string">"custId"</span>, <span class="hljs-string">"cust123"</span>);
+    define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
+    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
+    define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
+    define(<span class="hljs-string">"callbackUrl"</span>, &lt;Merchant_Response_URL&gt);
+    $paytmParams = <span class="hljs-keyword">array</span>();
+    $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
+    $paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = orderId;
+    $paytmParams[<span class="hljs-string">"CUST_ID"</span>] = custId;
+    $paytmParams[<span class="hljs-string">"CHANNEL_ID"</span>] = channelId;
+    $paytmParams[<span class="hljs-string">"TXN_AMOUNT"</span>] = txnAmount;
+    $paytmParams[<span class="hljs-string">"WEBSITE"</span>] = website;
+    $paytmParams[<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>] = industryTypeId;
+    $paytmParams[<span class="hljs-string">"CALLBACK_URL"</span>] = callbackUrl;
+    $paytmChecksum = getChecksumFromArray($paytmParams, merchantKey);
+    <span class="hljs-comment">// $transactionURL = "https://securegw.paytm.in/theia/processTransaction"; // for production</span>
+    $transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
 <span class="hljs-meta">?&gt;</span>
 &lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Merchant Checkout Page&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;center&gt;&lt;h1&gt;Please <span class="hljs-keyword">do</span> not refresh this page...&lt;/h1&gt;&lt;/center&gt;
-&lt;form method=<span class="hljs-string">'post'</span> action=<span class="hljs-string">'&lt;?php echo $paytmTxnURL; ?&gt;'</span> name=<span class="hljs-string">'f1'</span>&gt;
-<span class="hljs-meta">&lt;?php</span>
-<span class="hljs-keyword">foreach</span>($paytmParams <span class="hljs-keyword">as</span> $name =&gt; $value) {
-    <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;input type="hidden" name="'</span> . $name .<span class="hljs-string">'" value="'</span> . $value . <span class="hljs-string">'"&gt;'</span>;
-}
-<span class="hljs-meta">?&gt;</span>
-&lt;input type=<span class="hljs-string">"hidden"</span> name=<span class="hljs-string">"CHECKSUMHASH"</span> value=<span class="hljs-string">"&lt;?php echo $checkSum ?&gt;"</span>&gt;
-&lt;/form&gt;
-&lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
-    document.f1.submit();
-&lt;/script&gt;
-&lt;/body&gt;
+    &lt;head&gt;
+        &lt;title&gt;Merchant Checkout Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;center&gt;&lt;h1&gt;Please <span class="hljs-keyword">do</span> not refresh this page...&lt;/h1&gt;&lt;/center&gt;
+        &lt;form method=<span class="hljs-string">'post'</span> action=<span class="hljs-string">'&lt;?php echo $transactionURL; ?&gt;'</span> name=<span class="hljs-string">'f1'</span>&gt;
+            <span class="hljs-meta">&lt;?php</span>
+                <span class="hljs-keyword">foreach</span>($paytmParams <span class="hljs-keyword">as</span> $name =&gt; $value) {
+                    <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;input type="hidden" name="'</span> . $name .<span class="hljs-string">'" value="'</span> . $value . <span class="hljs-string">'"&gt;'</span>;
+                }
+            <span class="hljs-meta">?&gt;</span>
+            &lt;input type=<span class="hljs-string">"hidden"</span> name=<span class="hljs-string">"CHECKSUMHASH"</span> value=<span class="hljs-string">"&lt;?php echo $paytmChecksum ?&gt;"</span>&gt;
+        &lt;/form&gt;
+        &lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
+            document.f1.submit();
+        &lt;/script&gt;
+    &lt;/body&gt;
 &lt;/html&gt;</code></pre>`}}></span>
 </TabPanel>
 </Tabs>
@@ -444,7 +465,6 @@ Customer fills the payment details and is redirected to bank page for authorizat
 
 Checksumhash received in response of transaction needs to verified using Paytm library with all the parameters in key value pairs. Code snippets for verification is provided below
 
-
 <div className={`${style.checkoutWrapper}`}>
 
 
@@ -457,28 +477,33 @@ Checksumhash received in response of transaction needs to verified using Paytm l
 	<TabPanel tabId="java">
     <span dangerouslySetInnerHTML={{
         __html: `
-<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String KEY = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 <span class="hljs-keyword">private</span> String paytmChecksum = <span class="hljs-keyword">null</span>;
 <span class="hljs-comment">// Create a tree map from the form post param</span>
 TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
 <span class="hljs-comment">// Request is HttpServletRequest</span>
 <span class="hljs-keyword">for</span> (Entry&lt;String, String[]&gt; requestParamsEntry : request.getParameterMap().entrySet()) {
-	<span class="hljs-keyword">if</span> (<span class="hljs-string">"CHECKSUMHASH"</span>.equalsIgnoreCase(requestParamsEntry.getKey())){
-		paytmChecksum = requestParamsEntry.getValue()[<span class="hljs-number">0</span>];
-	} <span class="hljs-keyword">else</span> {
-		paytmParams.put(requestParamsEntry.getKey(), requestParamsEntry.getValue()[<span class="hljs-number">0</span>]);
-	}
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">"CHECKSUMHASH"</span>.equalsIgnoreCase(requestParamsEntry.getKey())){
+        paytmChecksum = requestParamsEntry.getValue()[<span class="hljs-number">0</span>];
+    } <span class="hljs-keyword">else</span> {
+        paytmParams.put(requestParamsEntry.getKey(), requestParamsEntry.getValue()[<span class="hljs-number">0</span>]);
+    }
 }
 <span class="hljs-comment">// Call the method for verification</span>
-<span class="hljs-keyword">boolean</span> isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(KEY, paytmParams, paytmChecksum);
-<span class="hljs-comment">// If isValideChecksum is false, then checksum is not valid</span></code></pre>
+<span class="hljs-keyword">boolean</span> isValidChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(merchantKey, paytmParams, paytmChecksum);
+<span class="hljs-comment">// If isValidChecksum is false, then checksum is not valid</span>
+<span class="hljs-keyword">if</span>(isValidChecksum){
+	System.out.append(<span class="hljs-string">"Checksum Matched"</span>);
+}<span class="hljs-keyword">else</span>{
+	System.out.append(<span class="hljs-string">"Checksum MisMatch"</span>);
+}</code></pre>
         `}}></span>
     </TabPanel>
     <TabPanel tabId="net">
     <span dangerouslySetInnerHTML={
         {__html: `
-<pre><code class="hljs language-cs">String KEY = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span> ;
-Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt;();
+<pre><code class="hljs language-cs">String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span> ;
+Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
 <span class="hljs-keyword">string</span> paytmChecksum = <span class="hljs-string">""</span>;
 <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> Request.Form.Keys) {
     paytmParams.Add(key.Trim(), Request.Form[key].Trim());
@@ -487,7 +512,8 @@ Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keywor
     paytmChecksum = paytmParams[<span class="hljs-string">"CHECKSUMHASH"</span>];
     paytmParams.Remove(<span class="hljs-string">"CHECKSUMHASH"</span>);
 }
-<span class="hljs-keyword">if</span> (CheckSum.verifyCheckSum(KEY, paytmParams, paytmChecksum)) {
+<span class="hljs-keyword">bool</span> isValidChecksum=CheckSum.verifyCheckSum(merchantKey, paytmParams, paytmChecksum);
+<span class="hljs-keyword">if</span> (isValidChecksum) {
     Response.Write(<span class="hljs-string">"Checksum Matched"</span>);
 } <span class="hljs-keyword">else</span> {
     Response.Write(<span class="hljs-string">"Checksum MisMatch"</span>);
@@ -497,15 +523,15 @@ Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keywor
         <span dangerouslySetInnerHTML={
             {__html: `
 <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
-$paytmParams = $_POST;
-$KEY="gKpu7IKaLSbkchFS";
-$paytmChecksum = <span class="hljs-keyword">isset</span>($_POST[<span class="hljs-string">"CHECKSUMHASH"</span>]) ? $_POST[<span class="hljs-string">"CHECKSUMHASH"</span>] : <span class="hljs-string">""</span>;
-$isValidChecksum = verifychecksum_e($paytmParams, $KEY, $paytmChecksum);
-<span class="hljs-keyword">if</span>($isValidChecksum == <span class="hljs-string">"TRUE"</span>) {
-	<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum matched.&lt;/b&gt;"</span>;
-} <span class="hljs-keyword">else</span> {
-	<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum mismatched!!!&lt;/b&gt;"</span>;
-}
+    $paytmParams = $_POST;
+    $merchantKey=<span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+    $paytmChecksum = <span class="hljs-keyword">isset</span>($_POST[<span class="hljs-string">"CHECKSUMHASH"</span>]) ? $_POST[<span class="hljs-string">"CHECKSUMHASH"</span>] : <span class="hljs-string">""</span>;
+    $isValidChecksum = verifychecksum_e($paytmParams, $merchantKey, $paytmChecksum);
+    <span class="hljs-keyword">if</span>($isValidChecksum == <span class="hljs-string">"TRUE"</span>) {
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum Matched&lt;/b&gt;"</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum MisMatch&lt;/b&gt;"</span>;
+    }
 <span class="hljs-meta">?&gt;</span></code></pre>`}}></span>
     </TabPanel>
 </Tabs>

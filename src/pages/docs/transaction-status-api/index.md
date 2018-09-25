@@ -21,7 +21,6 @@ export default ({children,location, pageContext}) => (
 </div>
 
 
-
 ### This section consists of use cases of API, request & response attributes and list possible transaction response codes  
 
 ## Use Case
