@@ -89,7 +89,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
-String callbackUrl = &lt;Merchant_Response_URL&gt;;
+String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
 TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
 paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
 paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,orderId);
@@ -135,7 +135,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
-String callbackUrl = &lt;Merchant_Response_URL&gt;;
+String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
 paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
 paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
 paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, website);
@@ -185,7 +185,7 @@ paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
     define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
-    define(<span class="hljs-string">"callbackUrl"</span>, &lt;Merchant_Response_URL&gt);
+    define(<span class="hljs-string">"callbackUrl"</span>, <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>);
     $paytmParams = <span class="hljs-keyword">array</span>();
     $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
     $paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = orderId;
@@ -381,7 +381,7 @@ For further details and codes in multiple languages, click below links -
                     <input type="hidden" name="INDUSTRY_TYPE_ID" value="Retail">
                     <input type="hidden" name="CHANNEL_ID" value="WEB">
                     <input type="hidden" name="TXN_AMOUNT" value="100.12">
-                    <input type="hidden" name="CALLBACK_URL" value="<Merchant_Response_URL>">
+                    <input type="hidden" name="CALLBACK_URL" value="https://Merchant_Response_URL>">
                     <input type="hidden" name="CHECKSUMHASH" value="ZWdMJOr1yGiFh1nns2U8sDC9VzgUDHVnQpG
                     pVnHyrrPb6bthwro1Z8AREUKdUR/K46x3XvFs6Xv7EnoSOLZT29qbZJKXXvyEuEWQIJGkw=">
                 </tbody>
@@ -438,7 +438,7 @@ Customer fills the payment details and is redirected to bank page for authorizat
             <td>(Please do not press 'Refresh' or 'Back' button</td>
             </tr>
       </table>
-      <FORM NAME='TESTFORM' ACTION='<Merchant_Response_URL>' METHOD='POST'>
+      <FORM NAME='TESTFORM' ACTION='https://<Merchant_Response_URL>' METHOD='POST'>
             <input type='hidden' name='CURRENCY' value='INR'>
             <input type='hidden' name='CUST_ID' value='cust123'>
             <input type='hidden' name='GATEWAYNAME' value='WALLET'>

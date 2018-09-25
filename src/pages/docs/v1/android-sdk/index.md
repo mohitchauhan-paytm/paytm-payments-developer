@@ -115,7 +115,7 @@ paramMap.put( "CHANNEL_ID" , "WAP");
 paramMap.put( "TXN_AMOUNT" , "100.12");
 paramMap.put( "WEBSITE" , "WEBSTAGING");
 paramMap.put( "INDUSTRY_TYPE_ID" , "Retail");
-paramMap.put( "CALLBACK_URL", <Merchant_Response_URL>);
+paramMap.put( "CALLBACK_URL", "https://<Merchant_Response_URL>");
 paramMap.put( "CHECKSUMHASH" , "w2QDRMgp1234567JEAPCIOmNgQvsi+BhpqijfM9KvFfRiPmGSt3Ddzw+oTaGCLneJwxFFq5mqTMwJXdQE2EzK4px2xruDqKZjHupz9yXev4=")
 PaytmOrder Order = new PaytmOrder(paramMap);
 ```
@@ -303,7 +303,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
-String callbackUrl = &lt;Merchant_Response_URL&gt;;
+String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
 TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
 paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
 paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,orderId);
@@ -328,7 +328,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
-String callbackUrl = &lt;Merchant_Response_URL&gt;;
+String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
 paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
 paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
 paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, website);
@@ -353,7 +353,7 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
     define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
-    define(<span class="hljs-string">"callbackUrl"</span>, &lt;Merchant_Response_URL&gt);
+    define(<span class="hljs-string">"callbackUrl"</span>, <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>);
     $paytmParams = <span class="hljs-keyword">array</span>();
     $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
     $paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = orderId;
