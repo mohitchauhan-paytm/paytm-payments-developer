@@ -27,7 +27,7 @@ export default ({children,location, pageContext}) => (
 ---
 
 * To re-verify the status of transaction communicated over browser calls
-* To fetch status of transacion where real time communication did not take place
+* To fetch status of transacion where real time communication did not take place (Bank failures, API timeouts etc)
 * To fetch status of transacion where transaction status was communicated as pending 
 
 

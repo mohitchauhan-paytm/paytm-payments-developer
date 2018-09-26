@@ -44,14 +44,14 @@ Find the detailed interaction of each system component in the flow chart below
 At the click of payment button by customer,create the required payload for checksum generation. Parameters of payload are provided below - 
 
 
-| Attributes    |     |
+| Request Attributes    |     |
 | ------------- | ----- | ----- |
 | **MID**  String(20)   | Available with your account details in dashboard. Different for staging and production
 |**ORDER_ID** String(50)   | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
 |**CUST_ID** String(64)   | Merchant’s unique reference ID for every customer Special characters e.g @, ! ,_ $ are allowed
 |**TXN_AMOUNT** String(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
 |**CHANNEL_ID** String(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
-|**WEBSITE** String(30)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
+|**WEBSITE** String(30)  | For staging environment: <br/>1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App <br/>For production environment: Will be provided with production credentials in dashboard
 |**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
 |**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** String(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
@@ -228,10 +228,18 @@ For further details and codes in multiple languages, click below links -
 
 <div className={`${style.ecomPlatform} grid  justify-start`}>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Perl' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Java' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-perl.png' alt=''/>
-                        <label>Perl</label>
+                        <img src='/assets/java.png' alt=''/>
+                        <label>Java</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_dotNet' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-dotnet.png' alt=''/>
+                        <label>ASP.Net</label>
                     </span>
                 </a>
             </div>
@@ -252,18 +260,18 @@ For further details and codes in multiple languages, click below links -
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Java' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Ruby' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/java.png' alt=''/>
-                        <label>Java</label>
+                        <img src='/assets/logo-ruby-on-rails.png' alt=''/>
+                        <label>Ruby on rails</label>
                     </span>
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_dotNet' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Perl' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-dotnet.png' alt=''/>
-                        <label>ASP.Net</label>
+                        <img src='/assets/logo-perl.png' alt=''/>
+                        <label>Perl</label>
                     </span>
                 </a>
             </div>
@@ -272,14 +280,6 @@ For further details and codes in multiple languages, click below links -
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/logo-python.png' alt=''/>
                         <label>Python</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Ruby' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-ruby-on-rails.png' alt=''/>
-                        <label>Ruby on rails</label>
                     </span>
                 </a>
             </div>
@@ -305,22 +305,6 @@ For further details and codes in multiple languages, click below links -
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-php.png' alt=''/>
-                        <label>PHP</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-nodejs.png' alt=''/>
-                        <label>Node.js</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/java.png' alt=''/>
@@ -337,10 +321,18 @@ For further details and codes in multiple languages, click below links -
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-python.png' alt=''/>
-                        <label>Python</label>
+                        <img src='/assets/logo-php.png' alt=''/>
+                        <label>PHP</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-nodejs.png' alt=''/>
+                        <label>Node.js</label>
                     </span>
                 </a>
             </div>
@@ -349,6 +341,14 @@ For further details and codes in multiple languages, click below links -
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/logo-ruby-on-rails.png' alt=''/>
                         <label>Ruby on rails</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-python.png' alt=''/>
+                        <label>Python</label>
                     </span>
                 </a>
             </div>
@@ -398,9 +398,9 @@ For further details and codes in multiple languages, click below links -
 
 ### Step 3:
 
-Customer fills the payment details and is redirected to bank page for authorization. Once the transaction is authorized, Paytm receives the response from the bank and returns a status to you. Sample HTML form post is provided below
+Customer fills the payment details and is redirected to bank page for authorization. Once the transaction is authorized, Paytm receives the response from the bank and returns a status to you. Response attributes description abd sample HTML form post is provided below
 
-| Attributes    |     |
+| Response Attributes    |     |
 | ------------- | ----- | ----- |
 | **MID** String(20) | Same as request
 | **TXNID** String(64) | This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction

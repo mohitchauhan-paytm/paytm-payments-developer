@@ -264,7 +264,6 @@ public void onBackPressedCancelTransaction(){
 }
 ```
 
-`
 #### On transaction cancelled - 
 
 ```java
