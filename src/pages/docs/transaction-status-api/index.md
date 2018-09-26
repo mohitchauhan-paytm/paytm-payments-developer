@@ -60,8 +60,9 @@ export default ({children,location, pageContext}) => (
 | **TXNDATE** DateTime | Date and time of transaction <br/> EX- “2015-11- 02 11:40:46.0”
 | **GATEWAYNAME** String(15) | Gateway used by Paytm for that transaction (ICICI/HDFC/SBI/WALLET etc)
 | **BANKNAME** String(500) | Issuing bank of the card used by the customer in the transaction
-| **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
-| **CHECKSUMHASH** String(108) | Encryption parameter. This needs to verified on server side using our server side utility
+| **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI/PPI)
+| **TXNTYPE** String(5) | This could be "SALE" or empty string
+| **REFUNDAMT** String(10) | Total Refund amount against this transaction.
 
 <div className={`${style.space10}`}></div>
 

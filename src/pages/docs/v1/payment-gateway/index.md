@@ -55,7 +55,8 @@ At the click of payment button by customer,create the required payload for check
 |**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
 |**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** String(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
-|**CALLBACK_URL** String(255)  | URL on which response of transaction request will be posted side. Like Promocode specific to ICICI bank or promo code specfic to a BIN NUmber
+|**INDUSTRY_TYPE_ID** String(20)  | Staging Environment "Retail"
+|**CALLBACK_URL** String(255)  | URL on which Paytm(payment gateway) send the response of transaction request.
 | **PAYMENT_MODE_ONLY** String(3)   | If merchant wants to allow payment mode selection on his website, the value to be passed is “Yes”
 | **AUTH_MODE** String(10)  | Required If PAYMENT_MODE_ONLY = Yes, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
 | **PAYMENT_TYPE_ID** String(15)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> Saved Card - SC
@@ -63,12 +64,17 @@ At the click of payment button by customer,create the required payload for check
 | **BANK_CODE** String(5)  | Required If PAYMENT_MODE_ONLY = Yes<br/>PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in PDF below
 
 
-<div className={`${style.commonMargin}`}></div>
+<div  ></div>
 
 ### Step 2:
 
 Generate checksumhash using Paytm library with parameters in key value pairs. Using the payload and checksumhash make an HTML form post and redirect customer to Paytm server. Code snippets provided below
 
+<div className={`${style.dscrption}`}>
+    <h4>Note:</h4>
+    - Number of parameter used in checksum generation should be equal to number of request parameter. <br/>
+    - Parameter value should be same for checksum generation and parameter passed to payment gateway. 
+</div>
 
 <div className={`${style.checkoutWrapper}`}>
     
@@ -86,6 +92,8 @@ String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String orderId = <span class="hljs-string">"order1"</span>;
 String channelId = <span class="hljs-string">"WEB"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
@@ -95,6 +103,8 @@ paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
 paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,orderId);
 paytmParams.put(<span class="hljs-string">"CHANNEL_ID"</span>,channelId);
 paytmParams.put(<span class="hljs-string">"CUST_ID"</span>,custId);
+paytmParams.put(<span class="hljs-string">"MOBILE_NO"</span>,mobileNo);
+paytmParams.put(<span class="hljs-string">"EMAIL"</span>,email);
 paytmParams.put(<span class="hljs-string">"TXN_AMOUNT"</span>,txnAmount);
 paytmParams.put(<span class="hljs-string">"WEBSITE"</span>,website);
 paytmParams.put(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>,industryTypeId);
@@ -132,6 +142,8 @@ String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String orderId = <span class="hljs-string">"order1"</span>;
 String channelId = <span class="hljs-string">"WEB"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
@@ -141,6 +153,8 @@ paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
 paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, website);
 paytmParams.Add(<span class="hljs-string">"CALLBACK_URL"</span>, callbackUrl);
 paytmParams.Add(<span class="hljs-string">"CUST_ID"</span>, custId);
+paytmParams.Add(<span class="hljs-string">"MOBILE_NO"</span>, mobileNo);
+paytmParams.Add(<span class="hljs-string">"EMAIL"</span>, email);
 paytmParams.Add(<span class="hljs-string">"ORDER_ID"</span>, orderId);
 paytmParams.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, industryTypeId);
 paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
@@ -182,6 +196,8 @@ paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
     define(<span class="hljs-string">"orderId"</span>, <span class="hljs-string">"order1"</span>);
     define(<span class="hljs-string">"channelId"</span>, <span class="hljs-string">"WEB"</span>);
     define(<span class="hljs-string">"custId"</span>, <span class="hljs-string">"cust123"</span>);
+    define(<span class="hljs-string">"mobileNo"</span>, <span class="hljs-string">"7777777777"</span>);
+    define(<span class="hljs-string">"email"</span>, <span class="hljs-string">"username@emailprovider.com"</span>);
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
     define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
@@ -190,6 +206,8 @@ paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
     $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
     $paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = orderId;
     $paytmParams[<span class="hljs-string">"CUST_ID"</span>] = custId;
+    $paytmParams[<span class="hljs-string">"MOBILE_NO"</span>] = mobileNo;
+    $paytmParams[<span class="hljs-string">"EMAIL"</span>] = email;
     $paytmParams[<span class="hljs-string">"CHANNEL_ID"</span>] = channelId;
     $paytmParams[<span class="hljs-string">"TXN_AMOUNT"</span>] = txnAmount;
     $paytmParams[<span class="hljs-string">"WEBSITE"</span>] = website;
@@ -378,6 +396,8 @@ For further details and codes in multiple languages, click below links -
                     <input type="hidden" name="WEBSITE" value="WEBSTAGING">
                     <input type="hidden" name="ORDER_ID" value="order1">
                     <input type="hidden" name="CUST_ID" value="cust123">
+                    <input type="hidden" name="MOBILE_NO" value="7777777777">
+                    <input type="hidden" name="EMAIL" value="username@emailprovider.com">
                     <input type="hidden" name="INDUSTRY_TYPE_ID" value="Retail">
                     <input type="hidden" name="CHANNEL_ID" value="WEB">
                     <input type="hidden" name="TXN_AMOUNT" value="100.12">

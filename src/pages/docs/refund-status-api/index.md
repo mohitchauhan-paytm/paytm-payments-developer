@@ -46,7 +46,7 @@ export default ({children,location, pageContext}) => (
 | | |
 | --- | --- |
 | **TXNID** String(64) | This is a unique Paytm transaction Id corresponding to REFID for which status is being checked. TXNID is provided in response payload for every transaction
-| **BANKTXNID** String(100) | The transaction Id sent by the bank. In case of wallet, this value will be NULL or empty
+| **BANKTXNID** String(100) | The transaction Id sent by the bank.
 | **ORDERID** String(50) | Same as request
 | **TXNAMOUNT** String(10) | Total transaction amount of original transaction
 | **STATUS** String(20) | This contains the status of refunds. It has following values: TXN_SUCCESS, TXN_FAILURE & PENDING

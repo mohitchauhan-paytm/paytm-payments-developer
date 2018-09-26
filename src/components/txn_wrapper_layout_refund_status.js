@@ -148,16 +148,16 @@ paytmParams.Add(<span class="hljs-string">"REFID"</span>,refId);
 <span class="hljs-attr">"REFUND_LIST"</span>:[  
     {  
         <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180519111212800110168899425827575"</span>,
-        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"59702893551455758326"</span>,
-        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"1133.26"</span>,
+        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
+        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
         <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_FAILURE"</span>,
         <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"620"</span>,
         <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Refund Failed."</span>,
-        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"MIMOTE91371571602708"</span>,
+        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
         <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-05-20 01:04:40.0"</span>,
-        <span class="hljs-attr">"TOTALREFUNDAMT"</span>:<span class="hljs-string">"1133.26"</span>,
+        <span class="hljs-attr">"TOTALREFUNDAMT"</span>:<span class="hljs-string">"0.00"</span>,
         <span class="hljs-attr">"REFUNDDATE"</span>:<span class="hljs-string">"2018-05-20 02:00:02.0"</span>,
-        <span class="hljs-attr">"REFID"</span>:<span class="hljs-string">"09806644944000574835"</span>,
+        <span class="hljs-attr">"REFID"</span>:<span class="hljs-string">"reforder1"</span>,
         <span class="hljs-attr">"REFUNDID"</span>:<span class="hljs-string">"20180520111212801300168891302036144"</span>
     }
 ]
@@ -173,17 +173,18 @@ paytmParams.Add(<span class="hljs-string">"REFID"</span>,refId);
     <span class="hljs-attr">"REFUND_LIST"</span>:[
         {
         <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180823111212800110168340600018954"</span>,
-        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"gauravtestorder1298192"</span>,
-        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"12.00"</span>,
+        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
+        <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">""</span>,
+        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
         <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_SUCCESS"</span>,
         <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"10"</span>,
         <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Refund Successfull"</span>,
-        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"abcxyz08553956030227"</span>,
-        <span class="hljs-attr">"REFUNDAMOUNT"</span>:<span class="hljs-string">"12.00"</span>,
+        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
+        <span class="hljs-attr">"REFUNDAMOUNT"</span>:<span class="hljs-string">"10.12"</span>,
         <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-08-23 11:00:27.0"</span>,
-        <span class="hljs-attr">"TOTALREFUNDAMT"</span>:<span class="hljs-string">"12.00"</span>,
+        <span class="hljs-attr">"TOTALREFUNDAMT"</span>:<span class="hljs-string">"10.12"</span>,
         <span class="hljs-attr">"REFUNDDATE"</span>:<span class="hljs-string">"2018-08-23 11:01:57.0"</span>,
-        <span class="hljs-attr">"REFID"</span>:<span class="hljs-string">"gauravtestorder_refid23823"</span>,
+        <span class="hljs-attr">"REFID"</span>:<span class="hljs-string">"reforder1"</span>,
         <span class="hljs-attr">"GATEWAY"</span>:<span class="hljs-string">"WALLET"</span>,
         <span class="hljs-attr">"PAYMENTMODE"</span>:<span class="hljs-string">"PPI"</span>,
         <span class="hljs-attr">"REFUNDID"</span>:<span class="hljs-string">"20180823111212801300168306200014501"</span>,
