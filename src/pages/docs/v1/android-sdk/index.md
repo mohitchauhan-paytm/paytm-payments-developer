@@ -130,8 +130,8 @@ PaytmOrder Order = new PaytmOrder(paramMap);
 |**ORDER_ID** String(50)      | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
 |**CUST_ID** String(64)   | Merchant’s unique reference ID for every customer Special characters e.g @, ! ,_ $ are allowed
 |**TXN_AMOUNT** String(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
-|**CHANNEL_ID** String(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
-|**WEBSITE** String(30)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
+|**CHANNEL_ID** String(3)  | WAP
+|**WEBSITE** String(30)  | Staging Environment: APPSTAGING <br/> Production environment: Will be provided with production credentials in dashboard
 |**INDUSTRY_TYPE_ID** String(20)  | Staging Environment "Retail"
 |**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
 |**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account

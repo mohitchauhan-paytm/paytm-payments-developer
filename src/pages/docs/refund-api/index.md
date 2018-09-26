@@ -61,7 +61,7 @@ To initiate partial or complete refund to source account from which the transact
 | **REFUNDDATE** DateTime | Date of REFUND.<br/> EX- “2015-11- 02 11:40:46.0”
 | **REFUNDTYPE** String | Same as request
 | **REFUNDID** String(64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
-| **BANKTXNID** String(100) | The transaction Id sent by the bank.
+| **BANKTXNID** String(100) | Bank transaction Id sent by the bank.
 | **TOTALREFUNDAMT** String(10) | Total refunded amount
 
 

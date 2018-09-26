@@ -54,14 +54,10 @@ At the click of payment button by customer,create the required payload for check
 |**WEBSITE** String(30)  | For staging environment: <br/>1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App <br/>For production environment: Will be provided with production credentials in dashboard
 |**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
 |**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
-|**EMAIL** String(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
+|**EMAIL** String(50)  | Customer email Id.
 |**INDUSTRY_TYPE_ID** String(20)  | Staging Environment "Retail"
 |**CALLBACK_URL** String(255)  | URL on which Paytm(payment gateway) send the response of transaction request.
-| **PAYMENT_MODE_ONLY** String(3)   | If merchant wants to allow payment mode selection on his website, the value to be passed is “Yes”
-| **AUTH_MODE** String(10)  | Required If PAYMENT_MODE_ONLY = Yes, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
-| **PAYMENT_TYPE_ID** String(15)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> Saved Card - SC
-| **CARD_TYPE** String(20)   | Required If PAYMENT_MODE_ONLY = Yes & AUTH_MODE = 3D Possible values of this parameter depending upon the card type - VISA/MASTER/AMEX
-| **BANK_CODE** String(5)  | Required If PAYMENT_MODE_ONLY = Yes<br/>PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in PDF below
+
 
 
 <div  ></div>

@@ -52,7 +52,7 @@ export default ({children,location, pageContext}) => (
 | **MID** String(20) | Same as request
 | **TXNID** String(64) | This is a unique Paytm transaction Id corresponding to OrderID for which status is being checked
 | **ORDERID** String(50) | Same as request
-| **BANKTXNID** String(50) | The transaction Id sent by the bank. In case of wallet, this value will be NULL or empty
+| **BANKTXNID** String(50) | Bank transaction Id sent by the bank.
 | **TXNAMOUNT** String(10) | Order value of the transaction in INR
 | **STATUS** String(20) | This contains the transaction status and has only three values: TXN_SUCCESS, TXN_FAILURE & PENDING
 | **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
