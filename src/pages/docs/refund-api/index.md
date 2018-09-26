@@ -56,13 +56,12 @@ To initiate partial or complete refund to source account from which the transact
 | **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
 | **RESPMSG** String(500) | Description message attached with each respcode. These are detailed in the list provided below
 | **TXNDATE** DateTime | Date of Refund.<br/> Format - “2015-11-02 11:40:46.0”
-| **GATEWAYNAME** String(15) | Gateway used by Paytm for that transaction (ICICI/HDFC/SBI/WALLET etc)
 | **CARD_ISSUER** String(20) | Name of issuing bank by which transaction took place
 | **PAYMENTMODE** String(15) | Payment mode used for transaction (CC/DC/NB/UPI)
 | **REFUNDDATE** DateTime | Date of REFUND.<br/> EX- “2015-11- 02 11:40:46.0”
 | **REFUNDTYPE** String | Same as request
 | **REFUNDID** String(64) | This is a unique Paytm refund Id that is issued by Paytm for each valid refund request
-| **BANKTXNID** String(100) | The transaction Id sent by the bank. In case of wallet, this value will be NULL or empty
+| **BANKTXNID** String(100) | The transaction Id sent by the bank.
 | **TOTALREFUNDAMT** String(10) | Total refunded amount
 
 
