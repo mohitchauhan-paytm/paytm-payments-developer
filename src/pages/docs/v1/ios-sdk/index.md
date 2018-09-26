@@ -97,14 +97,17 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 	serv = serv.createProductionEnvironment()
 	<span class="hljs-keyword">let</span> type :<span class="hljs-type">ServerType</span> = .eServerTypeProduction
 	<span class="hljs-keyword">let</span> order = <span class="hljs-type">PGOrder</span>(orderID: <span class="hljs-string">""</span>, customerID: <span class="hljs-string">""</span>, amount: <span class="hljs-string">""</span>, eMail: <span class="hljs-string">""</span>, mobile: <span class="hljs-string">""</span>)
-	order.params = [<span class="hljs-string">"MID"</span>: <span class="hljs-string">"TESTRZ75000326065913"</span>,
-		<span class="hljs-string">"ORDER_ID"</span>: <span class="hljs-string">"ord1"</span>,
+	order.params = [<span class="hljs-string">"MID"</span>: <span class="hljs-string">"rxazcv89315285244163"</span>,
+		<span class="hljs-string">"ORDER_ID"</span>: <span class="hljs-string">"order1"</span>,
 		<span class="hljs-string">"CUST_ID"</span>: <span class="hljs-string">"cust123"</span>,
+		<span class="hljs-string">"MOBILE_NO"</span>: <span class="hljs-string">"7777777777"</span>,
+		<span class="hljs-string">"EMAIL"</span>: <span class="hljs-string">"username@emailprovider.com"</span>,
 		<span class="hljs-string">"CHANNEL_ID"</span>: <span class="hljs-string">"WAP"</span>,
-		<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"TECHweb"</span>,
+		<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"APPSTAGING"</span>,
 		<span class="hljs-string">"TXN_AMOUNT"</span>: <span class="hljs-string">"100.12"</span>,
+		<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>: <span class="hljs-string">"Retail"</span>,
 		<span class="hljs-string">"CHECKSUMHASH"</span>: <span class="hljs-string">"oCDBVF+hvVb68JvzbKI40TOtcxlNjMdixi9FnRSh80Ub7XfjvgNr9NrfrOCPLmt65UhStCkrDnlYkclz1qE0uBMOrmuKLGlybuErulbLYSQ="</span>,
-		<span class="hljs-string">"CALLBACK_URL"</span>: <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>]
+		<span class="hljs-string">"CALLBACK_URL"</span>: <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>]
 	<span class="hljs-keyword">self</span>.txnController =  <span class="hljs-keyword">self</span>.txnController.initTransaction(<span class="hljs-keyword">for</span>: order) <span class="hljs-keyword">as</span>?<span class="hljs-type">PGTransactionViewController</span>
 	<span class="hljs-keyword">self</span>.txnController.title = <span class="hljs-string">"Paytm Payments"</span>
 	<span class="hljs-keyword">self</span>.txnController.setLoggingEnabled(<span class="hljs-literal">true</span>)
@@ -127,14 +130,17 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 		amount:<span class="hljs-string">@""</span>
 		customerMail:<span class="hljs-string">@""</span>
 		customerMobile:<span class="hljs-string">@""</span>];
-	order.params =   @{<span class="hljs-string">@"MID"</span> : <span class="hljs-string">@"TESTRZ75000326065913"</span>,
-		<span class="hljs-string">@"ORDER_ID"</span>: <span class="hljs-string">@"ord1"</span>,
+	order.params =   @{<span class="hljs-string">@"MID"</span> : <span class="hljs-string">@"rxazcv89315285244163"</span>,
+		<span class="hljs-string">@"ORDER_ID"</span>: <span class="hljs-string">@"order1"</span>,
 		<span class="hljs-string">@"CUST_ID"</span> : <span class="hljs-string">@"cust123"</span>,
+		<span class="hljs-string">@"MOBILE_NO"</span> : <span class="hljs-string">@"7777777777"</span>,
+		<span class="hljs-string">@"EMAIL"</span> : <span class="hljs-string">@"username@emailprovider.com"</span>,
 		<span class="hljs-string">@"CHANNEL_ID"</span>: <span class="hljs-string">@"WAP"</span>,
-		<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"TECHweb"</span>,
+		<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"APPSTAGING"</span>,
 		<span class="hljs-string">@"TXN_AMOUNT"</span>: <span class="hljs-string">@"100.12"</span>,
+		<span class="hljs-string">@"INDUSTRY_TYPE_ID"</span>: <span class="hljs-string">@"Retail"</span>,
 		<span class="hljs-string">@"CHECKSUMHASH"</span>:<span class="hljs-string">@"Bzk47IMatCI7T3b21iB403MsRBNhJ9DWHeK79iD+dli6GUg5w+JKDk6gk6roSjuKrtFzDiXwuUsfgVz30Xa2+W+kgwnNQaZXJTSfKPy6gU4="</span>,
-		<span class="hljs-string">@"CALLBACK_URL"</span>:<span class="hljs-string">@"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>
+		<span class="hljs-string">@"CALLBACK_URL"</span>:<span class="hljs-string">@"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>
 	}
 	PGTransactionViewController *txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
 	txnController.loggingEnabled = <span class="hljs-literal">YES</span>;
@@ -162,10 +168,11 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 |**TXN_AMOUNT** String(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
 |**CHANNEL_ID** String(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
 |**WEBSITE** String(30)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
+|**INDUSTRY_TYPE_ID** String(20)  | Staging Environment "Retail"
 |**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
 |**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** String(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
-|**CALLBACK_URL** String(255)  | URL on which response of transaction request will be posted
+|**CALLBACK_URL** String(255)  | Staging Environment: <br/> "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>" <br/> Production Environment: <br/> "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>"
  
 
 ---
@@ -265,7 +272,11 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
 All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. All the parameters which are being sent in the request need to be sent to the server. Server will use our server side utility code to generate checksum. 
 Use the code below to generate 
 
-
+<div className={`${style.dscrption}`}>
+    <h4>Note:</h4>
+    - Number of parameter used in checksum generation should be equal to number of request parameter. <br/>
+    - Parameter value should be same for checksum generation and parameter passed to payment gateway. 
+</div>
 
 <div className={`${style.checkoutWrapper}`}>
     
@@ -281,17 +292,21 @@ Use the code below to generate
 <pre><code class="hljs language-java">String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
 String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String orderId = <span class="hljs-string">"order1"</span>;
-String channelId = <span class="hljs-string">"WEB"</span>;
+String channelId = <span class="hljs-string">"WAP"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
-String website = <span class="hljs-string">"WEBSTAGING"</span>;
+String website = <span class="hljs-string">"APPSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
-String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
+String callbackUrl = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>;
 TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
 paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
 paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,orderId);
 paytmParams.put(<span class="hljs-string">"CHANNEL_ID"</span>,channelId);
 paytmParams.put(<span class="hljs-string">"CUST_ID"</span>,custId);
+paytmParams.put(<span class="hljs-string">"MOBILE_NO"</span>,mobileNo);
+paytmParams.put(<span class="hljs-string">"EMAIL"</span>,email);
 paytmParams.put(<span class="hljs-string">"TXN_AMOUNT"</span>,txnAmount);
 paytmParams.put(<span class="hljs-string">"WEBSITE"</span>,website);
 paytmParams.put(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>,industryTypeId);
@@ -306,17 +321,21 @@ String paytmChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateC
 String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
 String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String orderId = <span class="hljs-string">"order1"</span>;
-String channelId = <span class="hljs-string">"WEB"</span>;
+String channelId = <span class="hljs-string">"WAP"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"9999999999"</span>;
+String email = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
-String website = <span class="hljs-string">"WEBSTAGING"</span>;
+String website = <span class="hljs-string">"APPSTAGING"</span>;
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
-String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
+String callbackUrl = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>;
 paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
 paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
 paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, website);
 paytmParams.Add(<span class="hljs-string">"CALLBACK_URL"</span>, callbackUrl);
 paytmParams.Add(<span class="hljs-string">"CUST_ID"</span>, custId);
+paytmParams.Add(<span class="hljs-string">"MOBILE_NO"</span>, mobileNo);
+paytmParams.Add(<span class="hljs-string">"EMAIL"</span>, email);
 paytmParams.Add(<span class="hljs-string">"ORDER_ID"</span>, orderId);
 paytmParams.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, industryTypeId);
 paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
@@ -331,16 +350,20 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
     define(<span class="hljs-string">"merchantMid"</span>, <span class="hljs-string">"rxazcv89315285244163"</span>);
     define(<span class="hljs-string">"merchantKey"</span>, <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>);
     define(<span class="hljs-string">"orderId"</span>, <span class="hljs-string">"order1"</span>);
-    define(<span class="hljs-string">"channelId"</span>, <span class="hljs-string">"WEB"</span>);
+    define(<span class="hljs-string">"channelId"</span>, <span class="hljs-string">"WAP"</span>);
     define(<span class="hljs-string">"custId"</span>, <span class="hljs-string">"cust123"</span>);
+    define(<span class="hljs-string">"mobileNo"</span>, <span class="hljs-string">"7777777777"</span>);
+    define(<span class="hljs-string">"email"</span>, <span class="hljs-string">"username@emailprovider.com"</span>);
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
-    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
+    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"APPSTAGING"</span>);
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
-    define(<span class="hljs-string">"callbackUrl"</span>, <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>);
+    define(<span class="hljs-string">"callbackUrl"</span>, <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>);
     $paytmParams = <span class="hljs-keyword">array</span>();
     $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
     $paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = orderId;
     $paytmParams[<span class="hljs-string">"CUST_ID"</span>] = custId;
+    $paytmParams[<span class="hljs-string">"MOBILE_NO"</span>] = mobileNo;
+    $paytmParams[<span class="hljs-string">"EMAIL"</span>] = email;
     $paytmParams[<span class="hljs-string">"CHANNEL_ID"</span>] = channelId;
     $paytmParams[<span class="hljs-string">"TXN_AMOUNT"</span>] = txnAmount;
     $paytmParams[<span class="hljs-string">"WEBSITE"</span>] = website;

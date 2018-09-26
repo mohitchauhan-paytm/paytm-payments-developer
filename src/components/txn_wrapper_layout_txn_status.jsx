@@ -183,20 +183,20 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
         return {
             __html: `
 <pre><code class="hljs language-json">{
-    <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180404111212800110168881700011032"</span>,
-    <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">""</span>,
-    <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"ORDS51973186"</span>,
-    <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"1000.00"</span>,
+    <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180926111212800110168766100018551"</span>,
+    <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">"5583250"</span>,
+    <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
+    <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
     <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_SUCCESS"</span>,
     <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
     <span class="hljs-attr">"GATEWAYNAME"</span>:<span class="hljs-string">"WALLET"</span>,
     <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"01"</span>,
-    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Successful."</span>,
+    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Success"</span>,
     <span class="hljs-attr">"BANKNAME"</span>:<span class="hljs-string">"WALLET"</span>,
-    <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"PaytmS01829682567544"</span>,
+    <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
     <span class="hljs-attr">"PAYMENTMODE"</span>:<span class="hljs-string">"PPI"</span>,
-    <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"5.11"</span>,
-    <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-04-04 13:50:31.0"</span>
+    <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.00"</span>,
+    <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-26 13:50:57.0"</span>
 } </code></pre>
             
             `
