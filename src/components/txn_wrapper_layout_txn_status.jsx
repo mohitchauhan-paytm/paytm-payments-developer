@@ -139,42 +139,19 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
     getErrorHTML = () => {
         return {
             __html: `
-<pre><code class="hljs language-json">{  
-    <span class="hljs-attr">"txnId"</span>: <span class="hljs-string">"20180830111212800100168588734686502"</span>,
-    <span class="hljs-attr">"bankTxnId"</span>: <span class="hljs-string">""</span>,
-    <span class="hljs-attr">"orderId"</span>: <span class="hljs-string">"myteam11-mt11_828495_1541317094-1"</span>,
-    <span class="hljs-attr">"txnAmount"</span>: <span class="hljs-number">1.00</span>,
-    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"TXN_FAILURE"</span>,
-    <span class="hljs-attr">"txnType"</span>: <span class="hljs-string">"SALE"</span>,
-    <span class="hljs-attr">"gatewayName"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"respCode"</span>: <span class="hljs-string">"810"</span>,
-    <span class="hljs-attr">"respMsg"</span>: <span class="hljs-string">"Closed."</span>,
-    <span class="hljs-attr">"bankName"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"mid"</span>: <span class="hljs-string">"Myteam59159135078839"</span>,
-    <span class="hljs-attr">"paymentMode"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"refundAmt"</span>: <span class="hljs-number">0.0</span>,
-    <span class="hljs-attr">"txnDate"</span>: <span class="hljs-string">"2018-08-30 12:44:41.0"</span>,
-    <span class="hljs-attr">"refundId"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"refId"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"childTransaction"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"subsId"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"merchantUniqueReference"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"blockedAmount"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"preAuthId"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"maskedCustomerMobileNumber"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"posId"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"uniqueReferenceLabel"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"uniqueReferenceValue"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"pccCode"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"prn"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"pccCode"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"udf1"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"udf2"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"udf3"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"comments"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"currentTxnCount"</span>: <span class="hljs-literal">null</span>,
-    <span class="hljs-attr">"loyaltyPoints"</span>: <span class="hljs-literal">null</span>
-}  </span></code></pre>
+<pre><code class="hljs language-json">{   
+    <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180927111212800110168666800020875"</span>,
+    <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">""</span>,
+    <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
+    <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
+    <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"PENDING"</span>,
+    <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
+    <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"402"</span>,
+    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Abondoned Transaction."</span>,
+    <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
+    <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.0"</span>,
+    <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-27 10:07:15.0"</span>
+}</code></pre>
             `
         }
     }

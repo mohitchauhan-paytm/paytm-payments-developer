@@ -124,7 +124,7 @@ PaytmOrder Order = new PaytmOrder(paramMap);
 
 #### Description of Parameters used in hashmap objects:
 
-| **Parameter Name**     |    **Description** |
+| Parameter Name    |    Description |
 | ------------- | ----- | ----- |
 | **MID**  String(20)       | Available with your account details in dashboard. Different for staging and production
 |**ORDER_ID** String(50)      | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
