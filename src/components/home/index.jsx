@@ -54,7 +54,7 @@ class Home extends Component {
                             <div className='box-bg'>
                                 <img className='' src='/assets/dev-app.svg' alt='' />
                                 <div>
-                                    <h6 className='bold-heading'>Payment Gateway for Mobile App</h6>
+                                    <h6 className='bold-heading'>Payment SDK for Mobile Apps</h6>
                                     <p className='small-head-txt'>Collect payments seamlessly in your Android or iOS apps</p>
                                 </div>
                             </div>

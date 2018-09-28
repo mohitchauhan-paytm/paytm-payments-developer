@@ -106,16 +106,9 @@ class Header extends Component {
           {
             this.props.state.loggedIn ? 
           
-            <div className={`${style.userImageBlockDesk} grid align-center justify-end`}>
-              <div className={`${style.userImageDesk} grid-inline justify-center align-center`}>
-                <span>{this.props.state.userText}</span>
-              </div>
-              <div className={`${style.userFullName} grid-inline`}>
-                <span>{this.props.state.user.uname}</span>
-              </div>
-              <div>
-              </div>
-						</div> : null 
+          <div className={`grid-inline`}>
+            <a  className={`${style.whiteBtn} btn btn-primary small grid align-center`}  href="https://dashboard.paytm.com/next/" target="_blank">My Dashboard</a>
+          </div> : null 
           }
           </nav>
         </div>

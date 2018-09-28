@@ -28,6 +28,12 @@
 .white-btn {
 	margin-left: 30px;
 	color: $primary;
+	&:hover{
+		color:#ffffff;
+	}
+	&:focus{
+		color:#ffffff;
+	}
 }
 
 .header-main-search {
