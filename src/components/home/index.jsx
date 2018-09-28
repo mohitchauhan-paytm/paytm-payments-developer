@@ -42,7 +42,7 @@ class Home extends Component {
                             <div className='box-bg'>
                                 <img className='' src='/assets/dev-web.svg' alt='' />
                                 <div>
-                                    <h6 className='bold-heading'>I have a Website</h6>
+                                    <h6 className='bold-heading'>Payment Gateway for Website</h6>
                                     <p className='small-head-txt'>Paytm Checkout HTML/API integration for your existing website</p>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@ class Home extends Component {
                             <div className='box-bg'>
                                 <img className='' src='/assets/dev-app.svg' alt='' />
                                 <div>
-                                    <h6 className='bold-heading'>I have a Mobile App</h6>
+                                    <h6 className='bold-heading'>Payment Gateway for Mobile App</h6>
                                     <p className='small-head-txt'>Collect payments seamlessly in your Android or iOS apps</p>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@ class Home extends Component {
                             <div className='box-bg'>
                                 <img className='' src='/assets/dev-developer.svg' alt='' />
                                 <div>
-                                    <h6 className='bold-heading'>I’m not a Developer</h6>
+                                    <h6 className='bold-heading'>Plugins for E-commerce Websites</h6>
                                     <p className='small-head-txt'> Use pre-built plugins for Wordpress, Magento etc. or try one of our integrated e-commerce solutions</p>
                                 </div>
                             </div>

@@ -181,7 +181,6 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 To handle success/errors on completion of payment, implement `didFinishedResponse`, `didCancelTrasaction`, `errorMisssingParameter` methods of the `PGTransactionDelegate`. Code snippet provided below
 
 
-
 <div className={`${style.iosCodeWrapper}`}>
 
 <Tabs defaultTab="swift">
@@ -227,36 +226,23 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
 <TabPanel tabId="c">
 <span dangerouslySetInnerHTML={{
         __html: `
-<pre><code class="hljs language-swift"><span class="hljs-comment">//this function triggers when transaction gets finished</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didFinishedResponse</span><span class="hljs-params">(<span class="hljs-number">_</span> controller: PGTransactionViewController, response responseString: String)</span></span> {
-	<span class="hljs-keyword">let</span> msg : <span class="hljs-type">String</span> = responseString
-	<span class="hljs-keyword">var</span> titlemsg : <span class="hljs-type">String</span> = <span class="hljs-string">""</span>
-	<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> data = responseString.data(using: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8) {
-		<span class="hljs-keyword">do</span> {
-			<span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> jsonresponse = <span class="hljs-keyword">try</span> <span class="hljs-type">JSONSerialization</span>.jsonObject(with: data, options: .mutableContainers) <span class="hljs-keyword">as</span>? [<span class="hljs-type">String</span>:<span class="hljs-type">Any</span>] , jsonresponse.<span class="hljs-built_in">count</span> &gt; <span class="hljs-number">0</span>{
-				titlemsg = jsonresponse[<span class="hljs-string">"STATUS"</span>] <span class="hljs-keyword">as</span>? <span class="hljs-type">String</span> ?? <span class="hljs-string">""</span>
-			}
-		} <span class="hljs-keyword">catch</span> {
-			<span class="hljs-built_in">print</span>(<span class="hljs-string">"Something went wrong"</span>)
-		}
-	}
-	<span class="hljs-keyword">let</span> actionSheetController: <span class="hljs-type">UIAlertController</span> = <span class="hljs-type">UIAlertController</span>(title: titlemsg , message: msg, preferredStyle: .alert)
-	<span class="hljs-keyword">let</span> cancelAction : <span class="hljs-type">UIAlertAction</span> = <span class="hljs-type">UIAlertAction</span>(title: <span class="hljs-string">"OK"</span>, style: .cancel) { 
-		action -&gt; <span class="hljs-type">Void</span> <span class="hljs-keyword">in</span>
-		controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
-	}
-	actionSheetController.addAction(cancelAction)
-	<span class="hljs-keyword">self</span>.present(actionSheetController, animated: <span class="hljs-literal">true</span>, completion: <span class="hljs-literal">nil</span>)
-}  
+<pre><code class="hljs language-objectivec"><span class="hljs-comment">//this function triggers when transaction gets finished</span>
+-(<span class="hljs-keyword">void</span>)didFinishedResponse:(PGTransactionViewController *)controller response:(<span class="hljs-built_in">NSString</span> *)responseString {
+    [controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
+}
 
 <span class="hljs-comment">//this function triggers when transaction gets cancelled</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">didCancelTrasaction</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController)</span></span> {
-	controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+-(<span class="hljs-keyword">void</span>)didCancelTrasaction:(PGTransactionViewController *)controller {
+    [_statusTimer invalidate];
+    <span class="hljs-built_in">NSString</span> *msg = [<span class="hljs-built_in">NSString</span> stringWithFormat:<span class="hljs-string">@"UnSuccessful"</span>];
+    
+    [[[<span class="hljs-built_in">UIAlertView</span> alloc] initWithTitle:<span class="hljs-string">@"Transaction Cancel"</span> message:msg delegate:<span class="hljs-literal">nil</span> cancelButtonTitle:<span class="hljs-string">@"OK"</span> otherButtonTitles:<span class="hljs-literal">nil</span>] show];
+    [controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
 }
 
 <span class="hljs-comment">//Called when a required parameter is missing.</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">errorMisssingParameter</span><span class="hljs-params">(<span class="hljs-number">_</span> controller : PGTransactionViewController, error : NSError?)</span></span> {
-	controller.navigationController?.popViewController(animated: <span class="hljs-literal">true</span>)
+-(<span class="hljs-keyword">void</span>)errorMisssingParameter:(PGTransactionViewController *)controller error:(<span class="hljs-built_in">NSError</span> *) error {
+    [controller.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
 }</code></pre>`}}></span>
 </TabPanel>
 </Tabs>
@@ -461,22 +447,6 @@ For further details & codes in multiple languages, click below links -
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-php.png' alt=''/>
-                        <label>PHP</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-nodejs.png' alt=''/>
-                        <label>Node.js</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/java.png' alt=''/>
@@ -493,10 +463,18 @@ For further details & codes in multiple languages, click below links -
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-python.png' alt=''/>
-                        <label>Python</label>
+                        <img src='/assets/logo-php.png' alt=''/>
+                        <label>PHP</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-nodejs.png' alt=''/>
+                        <label>Node.js</label>
                     </span>
                 </a>
             </div>
@@ -505,6 +483,14 @@ For further details & codes in multiple languages, click below links -
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/logo-ruby-on-rails.png' alt=''/>
                         <label>Ruby on rails</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-python.png' alt=''/>
+                        <label>Python</label>
                     </span>
                 </a>
             </div>

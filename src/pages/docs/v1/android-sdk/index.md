@@ -474,22 +474,6 @@ For further details & codes in multiple languages, click below links -
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-php.png' alt=''/>
-                        <label>PHP</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-nodejs.png' alt=''/>
-                        <label>Node.js</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/java.png' alt=''/>
@@ -506,10 +490,18 @@ For further details & codes in multiple languages, click below links -
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-python.png' alt=''/>
-                        <label>Python</label>
+                        <img src='/assets/logo-php.png' alt=''/>
+                        <label>PHP</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-nodejs.png' alt=''/>
+                        <label>Node.js</label>
                     </span>
                 </a>
             </div>
@@ -518,6 +510,14 @@ For further details & codes in multiple languages, click below links -
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/logo-ruby-on-rails.png' alt=''/>
                         <label>Ruby on rails</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-python.png' alt=''/>
+                        <label>Python</label>
                     </span>
                 </a>
             </div>
