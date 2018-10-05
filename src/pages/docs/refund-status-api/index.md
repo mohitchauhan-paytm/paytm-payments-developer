@@ -18,7 +18,7 @@ export default ({children,location, pageContext}) => (
 
 <div>
     <h1 className={`${style.statusHeading}`}>
-        <span><img src='/assets/tag-get.svg'/></span> Refund Status</h1>
+        <span><img src='/assets/tag-post.svg'/></span> Refund Status</h1>
 </div>
 
 

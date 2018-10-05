@@ -285,11 +285,6 @@ public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
 All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. All the parameters which are being sent in the request need to be sent to the server. Server will use our server side utility code to generate checkssum. 
 Use the code below to generate 
 
-<div className={`${style.dscrption}`}>
-    <h4>Note:</h4>
-    - Number of parameter used in checksum generation should be equal to number of request parameter. <br/>
-    - Parameter value should be same for checksum generation and parameter passed to payment gateway. 
-</div>
 
 <div className={`${style.checkoutWrapper}`}>
     
@@ -386,6 +381,12 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
 <span class="hljs-meta">?&gt;</span></code></pre>`}}></span>
 </TabPanel>
 </Tabs>
+</div>
+
+<div className={`${style.dscrption}`}>
+Definition: <br/>
+Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
+Production: https://securegw.paytm.in/theia/processTransaction
 </div>
 
 #### Checksumhash Verification-

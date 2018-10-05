@@ -17,7 +17,7 @@ export default ({children,location, pageContext}) => (
 )
 
 <div>
-    <h1 className={`${style.statusHeading}`}><span><img src='/assets/tag-get.svg'/></span> Transaction Status</h1>
+    <h1 className={`${style.statusHeading}`}><span><img src='/assets/tag-post.svg'/></span> Transaction Status</h1>
 </div>
 
 

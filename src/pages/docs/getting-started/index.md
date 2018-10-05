@@ -9,7 +9,7 @@ import MdButton from './../../../components/md-button/index';
 
 
 <div className={`${style.grid} ${style.justifyBetween}`}>
-    <div className={`${style.headLeft}`}><h1>Start Building with Paytm</h1><h3>Paytm provides a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers</h3><ul><li><MdButton text={`Create account`}></MdButton> or <MdButton text={`login`}></MdButton> using your existing Paytm account</li><li>Generate your <a href='https://dashboard.paytm.com/next/developers/apikeys' target="_blank">staging account credentials</a> from the dashboard. These are required 
+    <div className={`${style.headLeft}`}><h1>Start Building with Paytm</h1><h3>Paytm Payment Gateway provides a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers</h3><ul><li><MdButton text={`Create account`}></MdButton> or <MdButton text={`login`}></MdButton> using your existing Paytm account</li><li>Generate your <a href='https://dashboard.paytm.com/next/developers/apikeys' target="_blank">staging account credentials</a> from the dashboard. These are required 
  to explore Paytm's integration solutions.</li><li>When you are ready to go live, <a href='https://dashboard.paytm.com/next/activate' target="_blank">activate your account </a>in the dashboard to get production account credentials</li></ul></div>
     <div className={`${style.headRight}`}><img src='./../../assets/img-start-building-with-paytm.svg' alt='' /></div>
 </div>
@@ -18,10 +18,10 @@ import MdButton from './../../../components/md-button/index';
 ## Understanding account credentials
 ---
 
-<a href="https://dashboard.paytm.com/next/developers/apikeys" target="_blank">Account credentials</a> are available in your dashboard for both staging and production environment. These credentials consists of -
+<a href="https://dashboard.paytm.com/next/developers/apikeys" target="_blank">Account credentials</a> are available in your dashboard for both staging and production environment. These credentials consist of -
 
-* **MID (Merchant ID)** - Unique identifier issued to every account
-* **Merchant Key** - This is a unique secret key used for secure encryption of every request. This needs to be kept on server side and **should not be shared with anyone**
+* **MID (Merchant ID)** - Unique identifier issued to every account by Paytm. Note that without activating your account you will use a default MID for staging. The unique production MID is generated after account activation.
+* **Merchant Key** - This is a unique secret key used for secure encryption of every request. This needs to be kept on server side and <u>should not be shared with anyone</u>
 * **Industry Type ID** - This is part of acquiring bank and paymode configuration done for an account/merchant 
 * **Website** - This parameter is used to support multiple callback URLs to post the transaction response. Each URL needs to be mapped to a website parameter. 
 
@@ -36,7 +36,7 @@ The Paytm <a href="https://dashboard.paytm.com/next" target="_blank">Dashboard</
 * Generate your staging and production account credentials
 * Switch views between staging and production transaction data
 * Check payments received from your customers
-* Check bank settlements made to your account
+* Check bank transfers Paytm makes into your account
 * Initiate refunds if you need to
 * Download all kinds of transaction reports
 * Get help 
@@ -48,9 +48,9 @@ The Paytm <a href="https://dashboard.paytm.com/next" target="_blank">Dashboard</
 * Your customer clicks on a pay button in your web/mobile application
 * Customer is shown a checkout form where she fills her payment details and authorises the payment
 * After completion of transaction, Paytm posts the response (success or failed) on a Callback URL defined by you
-* As a recommended security measure, you validate each transaction response via a server-to-server (S2S) API call. Transaction revalidation protects from request/response tampering possible in browser calls. This S2S call is not required for Paytm plugins and hosted e-commerce website integration solutions
+* As a <u>recommended</u> security measure, you validate each transaction response via a server-to-server (S2S) API call. Transaction revalidation protects from request/response tampering possible in browser calls. This S2S call is not required for Paytm plugins and hosted e-commerce website integration solutions
 * Based on the response received, you display order status to customer
-* See a real-time summary of payments received and other insights in your <a href="https://dashboard.paytm.com/next/settlements" target="_blank">dashboard</a>
+* See a real-time summary of payments received and other insights in your <a href="https://dashboard.paytm.com/next" target="_blank">dashboard</a>
 * Receive payments collected from customers in your bank account on next business day
 
 
@@ -78,7 +78,7 @@ If the customer drops out from the payment process or in the event of payment au
 
 ##### Pending Transaction
 
-Sometimes we do not receive real-time transaction status from the bank. This can due to many reasons such as network issues, technical errors at customer's/bank's end etc. This is marked as pending transaction. Refer     <Link to="/docs/late-notification">this</Link> for detailed handling of pending transaction.
+Sometimes Paytm doesn't receive real-time transaction status from the bank. This can due to many reasons such as network issues, technical errors at customer's/bank's end etc. This is marked as pending transaction. Refer     <Link to="/docs/late-notification">this</Link> for detailed handling of pending transaction.
 
 ---
 
@@ -90,7 +90,7 @@ Payments received against successful transactions are credited into your bank ac
 
 ##### Refund Transaction 
 
-Sometimes there are use cases where you need to reverse payments for successful or settled transactions. The reversal transaction of a successful or settled payment is called refund transaction. Refer Refunds for more details.
+Sometimes there are use cases where you need to reverse payments for successful or settled transactions. The reversal transaction of a successful or settled payment is called refund transaction. Refer <Link to="/docs/refund-management">Refunds</Link> for more details.
 
 
 ---

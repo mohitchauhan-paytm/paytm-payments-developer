@@ -8,9 +8,9 @@ import * as style from './payment-gateway.module.scss';
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
 
 
-# Collect online payments with pre-built Paytm Checkout
+# Collect online payments with Paytm Payment Gateway
 
-Paytm Checkout provides a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers.
+ Paytm Checkout for your website provides a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers.
 
 ## Demo for Paytm checkout
 
@@ -23,15 +23,15 @@ Paytm Checkout provides a secure, PCI-compliant way to accept Debit/Credit card,
 ## Overview of payment processing via Paytm checkout
 ---
 
-Process of payments starts at the click of pay button on merchant order summary page. On this click, you have to:  
+The payment process starts at the click of pay button on merchant order summary page. On this click, you need to:  
 
-1. Create an order payload to generate checksumhash at your server end. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated with using merchant key which is only available on server side for security reasons
-2. Post the payload and checksumhash in an HTML form post on Paytm's server. This redirects the customer to Paytm's payment page
-3. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form post on your callback URL
+1. Create an order payload to generate checksumhash at your server end. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated using Merchant Key which is only available on server side for security reasons
+2. Post the payload and checksumhash in an HTML form POST on Paytm's server. This redirects the customer to Paytm's payment page
+3. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form POST on your callback URL
 4. Verify checksumhash received in response to ensure that it has not been tampered
 5. Lastly, verify transaction status with [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api) via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
 
-Find the detailed interaction of each system component in the flow chart below
+Find the detailed interaction of each system component in the flow chart below:
 <br/>
 
 <img src='/assets/img-flow-paytm-checkout.png' alt='' />
@@ -41,7 +41,7 @@ Find the detailed interaction of each system component in the flow chart below
 ---
 ### Step 1 :
 
-At the click of payment button by customer,create the required payload for checksum generation. Parameters of payload are provided below - 
+At the click of payment button by customer, create the required payload for checksum generation. Parameters of payload are provided below -  
 
 
 | Request Attributes    |     |
@@ -69,12 +69,6 @@ At the click of payment button by customer,create the required payload for check
 ### Step 2:
 
 Generate checksumhash using Paytm library with parameters in key value pairs. Using the payload and checksumhash make an HTML form post and redirect customer to Paytm server. Code snippets provided below
-
-<div className={`${style.dscrption}`}>
-    <h4>Note:</h4>
-    - Number of parameter used in checksum generation should be equal to number of request parameter. <br/>
-    - Parameter value should be same for checksum generation and parameter passed to payment gateway. 
-</div>
 
 <div className={`${style.checkoutWrapper}`}>
     
@@ -118,8 +112,8 @@ outputHtml.append(<span class="hljs-string">"&lt;title&gt;Merchant Checkout Page
 outputHtml.append(<span class="hljs-string">"&lt;/head&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;body&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>);
-<span class="hljs-comment">// $transactionURL="https://securegw.paytm.in/theia/processTransaction";  // for production</span>
 $transactionURL=<span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;  	<span class="hljs-comment">// for staging</span>
+<span class="hljs-comment">// $transactionURL="https://securegw.paytm.in/theia/processTransaction";  // for production</span>
 outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='"</span>+transactionURL+<span class="hljs-string">"' name='f1'&gt;"</span>);
 <span class="hljs-keyword">for</span>(Map.Entry&lt;String,String&gt; entry : paytmParams.entrySet()) {
     outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='"</span>+entry.getKey()+<span class="hljs-string">"' value='"</span>+entry.getValue()+<span class="hljs-string">"'&gt;"</span>);
@@ -158,10 +152,10 @@ paytmParams.Add(<span class="hljs-string">"EMAIL"</span>, email);
 paytmParams.Add(<span class="hljs-string">"ORDER_ID"</span>, orderId);
 paytmParams.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, industryTypeId);
 paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
-<span class="hljs-comment">// for production </span>
-<span class="hljs-comment">// string transactionURL = "https://securegw.paytm.in/theia/processTransaction"; </span>
 <span class="hljs-comment">// for staging </span>
 <span class="hljs-keyword">string</span> transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+<span class="hljs-comment">// for production </span>
+<span class="hljs-comment">// string transactionURL = "https://securegw.paytm.in/theia/processTransaction"; </span>
 <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">string</span> paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams);
     <span class="hljs-keyword">string</span> outputHTML = <span class="hljs-string">"&lt;html&gt;"</span>;
@@ -214,8 +208,8 @@ paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
     $paytmParams[<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>] = industryTypeId;
     $paytmParams[<span class="hljs-string">"CALLBACK_URL"</span>] = callbackUrl;
     $paytmChecksum = getChecksumFromArray($paytmParams, merchantKey);
-    <span class="hljs-comment">// $transactionURL = "https://securegw.paytm.in/theia/processTransaction"; // for production</span>
     $transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+    <span class="hljs-comment">// $transactionURL = "https://securegw.paytm.in/theia/processTransaction"; // for production</span>
 <span class="hljs-meta">?&gt;</span>
 &lt;html&gt;
     &lt;head&gt;
@@ -239,6 +233,13 @@ paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
 </TabPanel>
 </Tabs>
 </div>
+
+<div className={`${style.dscrption}`}>
+Definition: <br/>
+Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
+Production: https://securegw.paytm.in/theia/processTransaction
+</div>
+
 
 For further details and codes in multiple languages, click below links - 
 
@@ -430,8 +431,8 @@ Customer fills the payment details and is redirected to bank page for authorizat
 | **TXNAMOUNT** String(10) | Same as request
 | **CURRENCY** String(3) | Same as request
 | **STATUS** String(20) | This contains the transaction status and has only three values: TXN_SUCCESS,  TXN_FAILURE & PENDING
-| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. List in below PDF
-| **RESPMSG** String(500) | Description message attached with each respcode. List in below PDF
+| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. List in this <a href="/assets/Transaction response codes and messages.pdf" download>PDF</a>
+| **RESPMSG** String(500) | Description message attached with each respcode. List in this <a>PDF</a>
 | **TXNDATE** DateTime | Date and Time of transaction.<br/> Example: "2015-11- 02 11:40:46.0"
 | **GATEWAYNAME** String(15) | Gateway used by Paytm (ICICI/HDFC/SBI/WALLET etc)
 | **BANKNAME** String(500) | Bank name of the card issuing bank (ICICI/SBI/HDFC etc)

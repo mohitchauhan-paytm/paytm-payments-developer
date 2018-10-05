@@ -26,27 +26,12 @@ export default class PricingLayout extends Component {
   render() {
     const root = this.state.locale === 'en' ? '' : this.state.locale;
     const { children, pageContext = {} } = this.props;
-    return <StaticQuery
-      query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-      render={data => (
-        <IntlProvider
+    return (<IntlProvider
           locale={this.state.locale}
           messages={this.state.msg}
         ><div className={`height100`}>
             <Helmet
-              title={ pageContext.frontmatter ? pageContext.frontmatter.title : data.site.siteMetadata.title}
-              meta={[
-                { name: 'description', content: 'Sample' },
-                { name: 'keywords', content: 'sample, something' },
-              ]}
+              title={ pageContext.frontmatter ? pageContext.frontmatter.title : 'Paytm for Developers: Pricing'}
             >
               <html lang="en" />
             </Helmet>
@@ -88,9 +73,5 @@ export default class PricingLayout extends Component {
               MIT License | <a href="https://twitter.com/apuravchauhan">@apuravchauhan</a>
             </div> */}
           </div>
-        </IntlProvider>
-      )}
-    />
-
-  }
+        </IntlProvider>)}
 }
