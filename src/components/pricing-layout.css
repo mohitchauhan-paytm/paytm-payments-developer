@@ -1,0 +1,10 @@
+.pricingWrap{
+    width:100%;
+}
+.price-main header{
+    background:transparent;
+    border-bottom:none;
+}
+.price-main footer >div>div.grid{
+    display:none;
+}
