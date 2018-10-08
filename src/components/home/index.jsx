@@ -106,7 +106,7 @@ class Home extends Component {
                                 <p className='stage'>STEP 3</p>
                                 <p>Get staging account credentials from your dashboard.</p>
                                 <div className='grid stage-detail'>
-                                    <button className='btn btn-default small' onClick={() => window.open("https://dashboard.paytm.com/next/developers/apikeys", "_blank")}>Go to developer dashboard</button>
+                                    <button className='btn btn-default small' onClick={() => window.open("https://dashboard.paytm.com/next/apikeys", "_blank")}>Go to developer dashboard</button>
                                 </div>
                             </li>
                             <li>
