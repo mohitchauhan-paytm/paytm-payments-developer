@@ -217,7 +217,7 @@ paytmParams.Add(<span class="hljs-string">"REFID"</span>, refId);
             <div className={`${style.apiMain} grid`}>
                 <div className={`${style.apiWrapper}`}> {this.props.children} </div>
                 <div className={`${style.editorWrapper}`}>
-                        <h2>Definition</h2>
+                        <h2>Endpoints</h2>
                         <p className={` grid justify-between`}><span>Staging:</span> <span>https://securegw-stage.paytm.in/refund/HANDLER_INTERNAL/REFUND</span></p>
                         <p className={` grid justify-between`}><span>Production:</span> <span>https://securegw.paytm.in/refund/HANDLER_INTERNAL/REFUND </span></p>
                         <h6 className={` grid justify-center align-center`}><span>Request Code</span>

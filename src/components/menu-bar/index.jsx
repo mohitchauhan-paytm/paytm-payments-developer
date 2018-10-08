@@ -33,7 +33,7 @@ class Menubar extends Component {
                     </Link>
                         <ul className={`${style.menuLeftList}`}>
                             <li >
-                                <Link to="/docs/v1/payment-gateway" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/ic-business-web-api.svg' alt='' />Paytm Checkout</Link>
+                                <Link to="/docs/v1/payment-gateway"  className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/ic-business-web-api.svg' alt='' />Paytm Checkout</Link>
                             </li>
                             <li>
                                 <Link to="/docs/v1/plugins" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/ic-business-web-plugin.svg' alt='' />Plugins</Link>

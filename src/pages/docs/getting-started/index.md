@@ -18,12 +18,10 @@ import MdButton from './../../../components/md-button/index';
 ## Understanding account credentials
 ---
 
-<a href="https://dashboard.paytm.com/next/developers/apikeys" target="_blank">Account credentials</a> are available in your dashboard for both staging and production environment. These credentials consist of -
+<a href="https://dashboard.paytm.com/next/apikeys" target="_blank">Account credentials</a> are available in your dashboard for both staging and production environment. These credentials consist of -
 
-* **MID (Merchant ID)** - Unique identifier issued to every account by Paytm. Note that without activating your account you will use a default MID for staging. The unique production MID is generated after account activation.
+* **MID (Merchant ID)** - This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MID is available <a href="https://dashboard.paytm.com/next/apikeys" target="_blank">here</a> and production MID will be available once your onboaring is complete 
 * **Merchant Key** - This is a unique secret key used for secure encryption of every request. This needs to be kept on server side and <u>should not be shared with anyone</u>
-* **Industry Type ID** - This is part of acquiring bank and paymode configuration done for an account/merchant 
-* **Website** - This parameter is used to support multiple callback URLs to post the transaction response. Each URL needs to be mapped to a website parameter. 
 
 
 ## Dashboard 

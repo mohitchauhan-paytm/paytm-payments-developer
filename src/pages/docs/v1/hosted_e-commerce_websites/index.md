@@ -7,7 +7,7 @@ title: "Paytm Pre-integrated Solutions: Accept Payments on your hosted website i
 
 # Paytm Checkout Flow - Hosted E-Commerce Platform
 
-Paytm comes pre-integrated for some e-commerce platforms. The website admin only needs to input the credentials provided by Paytm to go live.
+Paytm comes pre-integrated with below e-commerce platforms. The website admin only needs to input the production account credentials provided to start collecting payments
 
 
 import HostedEcomWeb from './../../../../components/hosted-ecom-website/index';
