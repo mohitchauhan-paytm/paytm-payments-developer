@@ -31,7 +31,7 @@ If your key is compromised, we can change the key at our end. Just write to us a
  
 **Can I keep merchant key on client side?**
  
-Merchant key must be placed on server side only. Placing key on client side is a security threat for you
+Merchant key must be placed on server side only
  
 <div className={`${style.space10}`}></div>
 

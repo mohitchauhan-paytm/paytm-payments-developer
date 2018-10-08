@@ -85,7 +85,7 @@ To initialize the Paytm SDK, use below classes:
 
 #### Object: Service
 
-Service object is used to access PG services to initiate or cancel transaction. This is different for staging and production and created with following snippet:
+Service object is used to used to access PG services like initiating transaction, getting transaction callbacks etc. This is different for staging and production and created with following snippet:
 
 **For Staging environment:**
 
@@ -154,7 +154,7 @@ Note:
 
 #### Initialize Service 
 
-Parameters required to invoke [initialize method]() are Order and Certificate Objects:
+Parameters required to invoke initialize method are Order and Certificate Objects:
 ```java
 Service.initialize(Order, Certificate);
 ```
@@ -183,7 +183,7 @@ Call start transaction method using service object:
 
 Parameters used in `startPaymentTransaction` in order are -
 
-* [contextofyourActivity]() is the activity context in where this method is called
+* contextofyourActivity is the activity context in where this method is called
 * **A boolean variable (true/false)** to hide or show header bar.
 * **A boolean variable (true/false)** to determine whether to send all checksum response parameters to PG server or not
 * [inPaymentTransactionCallback]() is a [PaytmPaymentTransactionCallback]() instance to send callback messages back to your application. Details and description provided in next section
@@ -193,7 +193,7 @@ Parameters used in `startPaymentTransaction` in order are -
 ### Step 4: Handling callback from Paytm
 
 
-You need to implement callback methods to handle payment response (success or fail). Transaction callbacks can be listened via overriding methods of **PaytmPaymentTransactionCallback**
+You need to implement callback methods to handle payment response. This will provide the payment status and reason for transaction failures. Based on the reasons for failures, hadnling can be built at your end. Transaction callbacks can be listened via overriding methods of **PaytmPaymentTransactionCallback**
 
 
 #### After transaction is complete:
@@ -208,7 +208,7 @@ public void onTransactionResponse(Bundle inResponse) {
 
 
 #### UI Error: User interface error
-This may be due to initialization of views in payment gateway activity or initialization of webview
+This is caused when SDK is unable to load the payment page in webview. This might happen in case SDK is not able to parse the transaction payload received from the app
 
 ```java
 public void someUIErrorOccurred(String inErrorMessage) {
@@ -247,6 +247,8 @@ public void clientAuthenticationFailed(String inErrorMessage)  {
 
 #### Error in loading web page 
 
+This is caused when SDK is unable to load the payment page in webview. This might happen due to server unavailability at Paytm's end or due to handshaking error with Paytm gateway
+
 ```java
 public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl)  {
 	/*Display the message as below */
@@ -256,6 +258,8 @@ public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, Strin
 
 #### On press of back button
 
+This is caused when user presses a back button on the payment page. Followed by pressing the back button, there is a reconfirmation taken from the customer to leave the payment page
+
 ```java
 public void onBackPressedCancelTransaction(){
 	/*Display the message as below */
@@ -264,6 +268,8 @@ public void onBackPressedCancelTransaction(){
 ```
 
 #### On transaction cancelled - 
+
+This is caused when a transaction gets cancelled. In case user presses a back or cancel button and confirms to leave the page, this callback is triggered
 
 ```java
 public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
@@ -278,8 +284,7 @@ public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
 
 #### Checksumhash Generation 
 
-All requests sent to Paytm via SDK needs to have a checksumhash. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. All the parameters which are being sent in the request need to be sent to the server. Server will use our server side utility code to generate checkssum. 
-Use the code below to generate 
+All requests sent to Paytm via SDK needs to have a checksumhash. Checksumhash is signature used by Paytm to ensure that request has not been tampered. All the request parameters needs to be sent to the server where merchant key is available. Server will use our server side utility and merchant key to generate checksumhash. Code snippet and Checksum library for its generation and verification are provided below
 
 
 <div className={`${style.checkoutWrapper}`}>
@@ -387,7 +392,7 @@ Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
 Production: https://securegw.paytm.in/theia/processTransaction
 </div>
 
-**For App:**
+
 
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
@@ -449,10 +454,10 @@ Production: https://securegw.paytm.in/theia/processTransaction
             </div>
 </div>
 
-#### Checksumhash Verification-
+#### Checksumhash Verification
 
 
-All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server by server side utility. Code snippets and github link provided below
+All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server side utility. Code snippets and Github links for the utility in your language of choice are provided below.
 
 
 <div className={`${style.checkoutWrapper}`}>
@@ -531,7 +536,7 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 
 Get the sample code for a language of your choice - 
 
-**For App:**
+
 
 
 

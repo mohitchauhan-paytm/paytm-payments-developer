@@ -7,7 +7,7 @@ import * as style from './ios-sdk.module.scss';
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
 
 
-# Collect online payments with our iOS SDK
+# Add payments to your iOS app with Paytm SDK
 
 Paytm has created iOS SDK over our powerful APIs, allowing you to take payments in minutes. With our SDK, we shoulder the burden of PCI compliance by eliminating the need to send card data directly to your server.
  
@@ -25,7 +25,6 @@ Our iOS SDK is easy to integrate, featherlight & self updating. Hence If a bank 
 
 ## Overview of payment processing via Paytm checkout
 ---
-
 1. At click of the pay button by customer, order related payload is passed to your server by the app 
 2. This order payload is used to generate checksumhash by our server side utility and merchant key on your server (explain merchant key on your server better). Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. Utility to generate checksumhash is available <a href="/docs/v1/ios-sdk#code">here</a>
 3. Your server passes the payload and checksumhash back to the app which hands over these details to Paytm SDK    
@@ -33,6 +32,7 @@ Our iOS SDK is easy to integrate, featherlight & self updating. Hence If a bank 
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your app via callback
 6. Verify checksumhash received in response on your server side. Utility to verify checksumhash is available <a href="/docs/v1/ios-sdk#codes">here</a>
 7. Lastly, verify transaction status with Transaction Status API via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
+
 
 Find the detailed interaction of each system component in the flow chart below
 
@@ -47,36 +47,36 @@ Find the detailed interaction of each system component in the flow chart below
 
 ### Step 1:  Importing the library
 
-Follow the below steps to download import the library in your project
+Follow these steps to download and import the library (explain which library) in your project
 
 
-#### For Swift:
+#### For Swift
 * Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
 * Open your project in XCode and from File menu, select Add files to "yourproject" 
 * Select Paytm.framework in the directory you just unzipped
 * Make sure 'Copy items if needed' is checked and Click 'Add'
 * Under "Link Binary With Libraries" in the "Build Phases" tab of your project settings, add SystemConfiguration.framework
-* Check PaytmSDK.framework is added in both “Link Binary With Libraries” and “Embedded Binaries”. If not add by clicking on plus icon
+* Check if PaytmSDK.framework is added in both “Link Binary With Libraries” and “Embedded Binaries”. If not, add by clicking on the plus icon
 
 ---
 
-#### For Objective C:
+#### For Objective C
 * Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
-* Open the existing project in XCode 
+* Open your project in XCode 
 * Go to the Build Phases tab, expand the Link Binary With Libraries section, click the "+" button
-* In the newly appeared “Choose items to add” window, click the “Add Other..” button. and specify the path to libPaymentsSDK.a library file and click the Open button
-* In the Link Frameworks and Libraries section, click the "+" button again, find the  SystemConfiguration.framework. in the list, and click the Add button.
+* In the newly appeared “Choose items to add” window, click the “Add Other..” button, and specify the path to libPaymentsSDK.a library file and click the Open button
+* In the Link Frameworks and Libraries section, click the "+" button again, find the SystemConfiguration.framework in the list, and click the Add button.
 
 ---
 
 ### Step 2: Initiate Payment
 
-Begin the transaction by calling the below method.
+Start a payment transaction by following these steps -
 
-1. Choose the PG server based on the environment you need to connect with. <br/>
+1. Choose the Paytm server based on your environment - <br/>
 For staging - Create an instance of the `PGServerEnvironment` and set the `serverType` to `eServerTypeStaging` <br/>
 For Production - Create an instance of the `PGServerEnvironment` and set the `serverType` to `eServerTypeProduction` 
-2. Create an `PGOrder` instance with the mandatory parameters as given below in the code snippet. In addition to this, you may add other optional parameters as needed. Parameters with their detailed meaning is provided after the code snippet
+2. Create a `PGOrder` instance with the mandatory parameters as given below in the code snippet. In addition to this, you may add other optional parameters as needed. Parameters with their detailed meaning is provided after the code snippet
 
 3. Create an instance of `PGTransactionViewController` by calling `initTransactionForOrder` and pass the `PGOrder` instance as parameter. 
 
@@ -256,8 +256,7 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
 
 #### Checksumhash Generation -
 
-All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. All the parameters which are being sent in the request need to be sent to the server. Server will use our server side utility code to generate checksum. 
-Use the code below to generate 
+All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumhash is signature used by Paytm to ensure that request has not been tampered. All the request parameters needs to be sent to the server where merchant key is available. Server will use our server side utility and merchant key to generate checksumhash. Code snippet and Checksum library for its generation and verification are provided below 
 
 
 
@@ -366,7 +365,6 @@ Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
 Production: https://securegw.paytm.in/theia/processTransaction
 </div>
 
-**For App:**
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
@@ -509,7 +507,6 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 
 Get the sample code for a language of your choice - 
 
-**For App:**
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
@@ -586,3 +583,4 @@ Once the test transaction is complete, move your code to live environment with p
 Lastly, it's recommended that you read about <a  href="/docs/refund-management">Managing Refunds</a> and <a href="/docs/late-notification"> late payment notifications</a>
 
 In case of any issues, please search or post your query on our <a href="http://paywithpaytm.com/developer/discussion/" target="_blank">Developer Forum</a> or send your queries to devsupport@paytm.com
+
