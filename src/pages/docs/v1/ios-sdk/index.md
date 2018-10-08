@@ -272,7 +272,9 @@ All requests sent to Paytm via SDK and APIs need to have checksumhash. Checksumh
         <span dangerouslySetInnerHTML={{
             __html: `
 <pre><code class="hljs language-java">String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
+<span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
 String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
 String orderId = <span class="hljs-string">"order1"</span>;
 String channelId = <span class="hljs-string">"WAP"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
@@ -280,7 +282,9 @@ String mobileNo = <span class="hljs-string">"7777777777"</span>;
 String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"APPSTAGING"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String callbackUrl = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>;
 TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
 paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
@@ -301,7 +305,9 @@ String paytmChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateC
         __html:  ` 
 <pre><code class="hljs language-cs">Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
 String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
+<span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
 String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
 String orderId = <span class="hljs-string">"order1"</span>;
 String channelId = <span class="hljs-string">"WAP"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
@@ -309,7 +315,9 @@ String mobileNo = <span class="hljs-string">"9999999999"</span>;
 String email = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"APPSTAGING"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String callbackUrl = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>;
 paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
 paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
@@ -330,7 +338,9 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
 <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
     <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
     define(<span class="hljs-string">"merchantMid"</span>, <span class="hljs-string">"rxazcv89315285244163"</span>);
+    <span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
     define(<span class="hljs-string">"merchantKey"</span>, <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>);
+    <span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
     define(<span class="hljs-string">"orderId"</span>, <span class="hljs-string">"order1"</span>);
     define(<span class="hljs-string">"channelId"</span>, <span class="hljs-string">"WAP"</span>);
     define(<span class="hljs-string">"custId"</span>, <span class="hljs-string">"cust123"</span>);
@@ -338,7 +348,9 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
     define(<span class="hljs-string">"email"</span>, <span class="hljs-string">"username@emailprovider.com"</span>);
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
     define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"APPSTAGING"</span>);
+    <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
+    <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
     define(<span class="hljs-string">"callbackUrl"</span>, <span class="hljs-string">"https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=order1"</span>);
     $paytmParams = <span class="hljs-keyword">array</span>();
     $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
