@@ -53,7 +53,7 @@ Deep integration on HTML website is not possible, you can use our Email/SMS invo
 ## Callback URL
 ---
 
-**Why do I need to configure callback in Paytm checkout not for Andriod or iOS SDK?**
+**Why do I need to configure callback in Paytm checkout not for Android or iOS SDK?**
  
 In Android or iOS SDK, static callback URL is used to send response to Paytm SDK which internally communicates to merchant APP
  

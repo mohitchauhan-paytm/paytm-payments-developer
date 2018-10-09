@@ -309,6 +309,20 @@ $dark4:#536e92;
             border-radius: 4px;
         }
     }
+    li{
+        
+            &>code{
+                padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            color: #b58900;
+            margin: 0;
+            font-size:1.6rem;
+            background-color: #fafcfc;
+            border: 1px solid #f0f4f7;
+            border-radius: 4px;
+            }
+        
+    }
     
     
     

@@ -9,7 +9,7 @@ title: "Paytm for Developers: Understanding Late notification of transaction"
 
 During the payment process, customer is redirected to bank page to complete two-factor authentication. Once the authentication is complete, Paytm gets a response from the bank with the status of the transaction. On some occasions the status is not received immediately after completion of transaction. This may happen due to network issues, technical errors at customer's/bank's end, <span>manual intervention</span> or other reasons
 
-Paytm polls the transaction status from bank for next 72 hours. In case we do not receive the status of transaction after 72 hours, the transaction is marked as failed. 
+Paytm polls the transaction status from bank for next 72 hours. In case we do not receive the status of transaction after 72 hours, the transaction is marked as failed. To get updated transaction status, refer to the below section 
 
 ## Fetching the transaction status: 
 ---
@@ -18,7 +18,18 @@ In case we receive a delayed/no response from the bank, posting transaction resp
 
 * Via Webhook - Paytm sends a server to server (S2S) response in key value pair on the configured URL. S2S response is sent only when transaction has reached a terminal state (success/fail). To configure the URL, kindly connect with our integration/helpdesk team
 
-* Via Polling - setup a polling process after regular intervals using <a href="/docs/transaction-status-api/">Transaction status API</a>. The polling time period should be 72 hours (same as between the bank and Paytm)
+* Via Polling - setup a polling process after regular intervals using <a href="/docs/transaction-status-api/">Transaction status API</a>. To get best results out of status query, you should check the status 8 times in 72 hours by the schedule below 
+
+| Status Query| Status query interval <br/>(From the time transaction was sent to Paytm)|
+| --- | --- | 
+| 1st | 15 Minutes
+| 2nd | 30 minutes
+| 3rd | 1 hour
+| 4th | 6 hours
+| 5th | 12 hours
+| 6th | 24 hours
+| 7th | 48 hours
+| 8th | 72 hours
 
 ## Transaction notification requirement by business needs - 
 ---
@@ -31,7 +42,7 @@ There are business where transaction status is required on real-time basis like 
 * Limited inventory - Movie/Flight 
 * Immediate delivery model - Food Delivery
 
-In case of delayed notifications, real-time time transaction status can be achived by merchant in following two ways -
+Merchant can manage delayed notification in following ways
 
 * Quick failure - A time limit is set by you beyond which transaction will be considered failed. The counter starts from the point when transaction reaches Paytm. In case the bank confirms the status as successful beyond this period, we will initiate an auto-refund against this transaction. Minimum time limit that can be set is 5 minutes. To set this up, kindly connect with our integration/helpdesk team
 

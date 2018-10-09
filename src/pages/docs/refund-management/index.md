@@ -7,7 +7,7 @@ title: "Paytm for Developers: Understanding Refund Management"
 
 # Refunds
 
-Refund are reversal transactions wherein complete or partial money is moved back to customer’s source account (account from which actual payment was made). Refund can only be created for a succesful or settled transaction. Use case for refund arise in following scenarios -
+Refund are reversal transactions wherein complete or partial money is moved back to customer’s source account (account from which actual payment was made). Refund can only be created for a successful or settled transaction. Use case for refund arise in following scenarios -
 
 
 * Customer initiated refund (returns/cancellation) - Customer has changed his mind about consumption of product pre/post order delivery
@@ -17,7 +17,7 @@ Refund are reversal transactions wherein complete or partial money is moved back
     * Mismatch in transaction reconciliation between Paytm transaction status  & merchant’s transaction status. To do reconciliation, you can use dashboard as a data source for our status
 
 
-You can initiate partial or complete refunds to your customer’s source account . A refund request usually takes 7-14 business days to reflect in customer’s account. 
+You can initiate partial or complete refunds to your customer’s source account. A refund request usually takes 7-14 business days to reflect in customer’s account. 
 
 
 ## Ways to initiate refunds

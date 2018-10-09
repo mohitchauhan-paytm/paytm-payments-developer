@@ -424,5 +424,8 @@ p{
     }
  }
 
-
+ @media all and (max-width: 1280px) { 
+     nav.left-menu, header { position: absolute !important; } 
+     header,footer, #app { min-width: 1280px; } 
+    }
  

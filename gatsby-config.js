@@ -33,8 +33,8 @@ module.exports = {
         name: 'Paytm Developer Network',
         short_name: 'Paytm',
         start_url: 'docs',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#fff',
+        theme_color: '#223e99',
         display: 'minimal-ui',
         icon: 'static/assets/favicon.png', // This path is relative to the root of the site.
       },
