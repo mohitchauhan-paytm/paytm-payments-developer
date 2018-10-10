@@ -26,7 +26,7 @@ Paytm Checkout for your website provides a secure, PCI-compliant way to accept D
 
 The payment process starts at the click of pay button on merchant order summary page. On this click, you need to:  
 
-1. Create an order payload to generate checksumhash at your server end. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated using Merchant Key which is only available on server side for security reasons
+1. Create an order in your order system and then generate checksumhash at your server end for payment request. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated using merchant Key which should be kept only on server side for security reasons
 2. Post the payload and checksumhash in an HTML form POST on Paytm's server. This redirects the customer to Paytm's payment page
 3. Customer fills payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form POST on your website's callback URL
 4. Verify checksumhash received in response to ensure that it has not been tampered
@@ -42,7 +42,7 @@ Find the detailed interaction of each system component in the flow chart below:
 ---
 ### Step 1 :
 
-At the click of payment button by customer, create the required payload for checksum generation. Parameters of payload are provided below -  
+At the click of payment button by customer on your website, create an order in your system and generate the required payload for payment request. Parameters of payload are provided below  
 
 
 | Request Attributes    |     |  |
@@ -461,7 +461,6 @@ Customer fills the payment details and is redirected to bank page for authorizat
 <html>
    <head>
      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
      <title>Paytm Secure Online Payment Gateway</title>
    </head>
    <body>
@@ -501,7 +500,7 @@ Customer fills the payment details and is redirected to bank page for authorizat
 
 ### Step 4:
 
-Checksumhash received in response of transaction needs to verified using Paytm library with all the parameters in key value pairs. Code snippets and Github links for the checksum utility are provided below.
+Checksumhash received in response of transaction needs to verified on merchant server using Paytm library with all the parameters in key value pairs. Code snippets and Github links for the checksum utility are provided below
 
 <div className={`${style.checkoutWrapper}`}>
 

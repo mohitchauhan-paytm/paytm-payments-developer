@@ -9,9 +9,7 @@ import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
 
 # Add payments to your iOS app with Paytm SDK
 
-Paytm has created iOS SDK over our powerful APIs, allowing you to take payments in minutes. With our SDK, we shoulder the burden of PCI compliance by eliminating the need to send card data directly to your server.
- 
-Our iOS SDK is easy to integrate, featherlight & self updating. Hence If a bank launches a new series of cards or wallet, the same is provided to your customers without any new integration.
+Paytm iOS SDK is a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers in your iOS app.
 
 
 ## Demo of Paytm checkout flow in your app -  
@@ -26,7 +24,7 @@ Our iOS SDK is easy to integrate, featherlight & self updating. Hence If a bank 
 ## Overview of payment processing via Paytm checkout
 ---
 1. At click of the pay button by customer, order related payload is passed to your server by the app 
-2. This order payload is used to generate checksumhash by our server side utility and merchant key on your server (explain merchant key on your server better). Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. Utility to generate checksumhash is available <a href="/docs/v1/ios-sdk#code">here</a>
+2. This order payload is used to generate checksumhash by our server side utility and merchant key on your server. Checksumhash is a signature used by Paytm to ensure that request has not been tampered. Utility to generate checksumhash is available <a href="/docs/v1/ios-sdk#code">here</a>
 3. Your server passes the payload and checksumhash back to the app which hands over these details to Paytm SDK    
 4. SDK verifies payload and displays payment Paytm checkout page
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your app via callback
@@ -169,7 +167,7 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 |**CHANNEL_ID** String(3) Mandatory  | This parameter is used to control the theme of the payment page. Based on the channel passed, Paytm will render the layout suitable for that specific platform<br/>For App, the value is WAP
 |**WEBSITE** String(30) Mandatory | For staging environment: <br/>APPSTAGING for App <br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your onboarding is complete
 |**INDUSTRY_TYPE_ID** String(20) Mandatory | For staging environment: "Retail"<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your onboarding is complete
-|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm.  Utilities to generate checksumhash is available <a href="/docs/v1/android-sdk#codes">here</a>
+|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm. Merchant has to ensure that this always gets generated on server.  Utilities to generate checksumhash is available <a href="/docs/v1/android-sdk#codes">here</a>
 |**MOBILE_NO** Optional String(15)  Mandatory| Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** Optional String(50) Mandatory | Customer's email ID. Passing this enables faster login for customer into his/her mobile wallet.
 |**CALLBACK_URL** String(255) Mandatory | Staging Environment: <br/> "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>" <br/> Production Environment: <br/> "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>"

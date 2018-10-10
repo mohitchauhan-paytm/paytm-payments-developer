@@ -3,19 +3,19 @@
     .nav-desk {
         position: fixed;
         left: 0;
-        height: calc( 100% - 80px);
+        height: calc( 100% - 64px);
         max-width: 300px;
         min-width: 56px;
         top: 64px;
         width: 100%;
         z-index: 1; // background: blue;
-        padding-bottom: 72px;
         border-right: 1px solid #e6ebf3;
         overflow:hidden;
         section{
             height:100%;
             overflow:scroll;
             overflow-x:hidden;
+            padding-bottom: 72px;
         }
 
     }

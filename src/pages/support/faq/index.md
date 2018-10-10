@@ -31,7 +31,7 @@ If your key is compromised, we can change the key at our end. Just write to us a
  
 **Can I keep merchant key on client side?**
  
-Merchant key must be placed on server side only
+Merchant key must be placed on server side only. Merchant has to ensure that it does not get leaked by any mean. In case it does, please connect with Paytm team
  
 <div className={`${style.space10}`}></div>
 
@@ -45,7 +45,7 @@ No, we do not have SDK for hybrid Apps. However we support Paytm Checkout integr
  
 **I have static/HTML website, how can I integrate Paytm?**
 
-Deep integration on HTML website is not possible, you can use our Email/SMS invoicing or Payment Link feature
+Deep integration on HTML website is not possible, you can use our Email/SMS invoicing or <a href="https://business.paytm.com/payment-link">Payment Link feature</a>
 
 <div className={`${style.space10}`}></div>
 
@@ -63,11 +63,11 @@ Different callback URL can be passed in every transaction request itself. We do 
  
 **Can I bypass passing callback URL in transaction payload in Paytm checkout?**
  
-Static Callback URL can be configured at Paytm’s end. However, it is advisable to pass callback URL in the transaction payload to have complete control in an event of change
+Static Callback URL cannot be configured at Paytm’s end
  
 **Can different callback URL be configured for Success and Failed transaction?**
 
-No, We do not facilitate this.
+No, We do not facilitate this. This is not required because response sent in callback URL contains the transaction status which can be used to identify whether transaction is success or failed
  
 <div className={`${style.space10}`}></div>
 
@@ -87,9 +87,9 @@ While generating checksum, please take care of below points:-
  
 **Can I generate checksumhash over client side?**
 
-No, Checksumhash cannot be generated on client side.
+No, Checksumhash should not be generated on client side because it can lead to fraud transaction. Merchant always has to ensure that checksum gets generated or validated on server only.
  
-**Can checksumhash consists of spaces?**
+**No, Checksumhas cannot consists of spaces**
 
 No
 

@@ -21,7 +21,7 @@ Paytm Android SDK is a secure, PCI-compliant way to accept Debit/Credit card, Ne
 ---
 
 1. At click of the pay button by customer, order related payload is passed to your server by the app 
-2. This order payload is used to generate checksumhash by our server side utility and merchant key on your server (explain merchant key on your server better). Checksumhash is an encrypted payload used by Paytm to ensure that request has not been tampered. Utility to generate checksumhash is available <a href="/docs/v1/android-sdk#code">here</a>
+2. This order payload is used to generate checksumhash by our server side utility and merchant key on your server. Checksumhash is a signature used by Paytm to ensure that request has not been tampered. Utility to generate checksumhash is available <a href="/docs/v1/android-sdk#code">here</a>
 3. Your server passes the payload and checksumhash back to the app which hands over these details to Paytm SDK    
 4. SDK verifies payload and displays payment Paytm checkout page
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your app via callback
@@ -131,7 +131,7 @@ PaytmOrder Order = new PaytmOrder(paramMap);
 |**CHANNEL_ID** String(3) Mandatory  | This parameter is used to control the theme of the payment page. Based on the channel passed, Paytm will render the layout suitable for that specific platform<br/>For App, the value is WAP
 |**WEBSITE** String(30) Mandatory | For staging environment: <br/>APPSTAGING for App <br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your onboarding is complete
 |**INDUSTRY_TYPE_ID** String(20) Mandatory | For staging environment: "Retail"<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your onboarding is complete
-|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm.  Utilities to generate checksumhash is available <a href="/docs/v1/android-sdk#codes">here</a>
+|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm. Merchant has to ensure that this always gets generated on server.  Utilities to generate checksumhash is available <a href="/docs/v1/android-sdk#codes">here</a>
 |**MOBILE_NO** Optional String(15)  Mandatory| Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** Optional String(50) Mandatory | Customer's email ID. Passing this enables faster login for customer into his/her mobile wallet.
 |**CALLBACK_URL** String(255) Mandatory | Staging Environment: <br/> "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>" <br/> Production Environment: <br/> "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>"
@@ -236,7 +236,7 @@ public void networkNotAvailable() {
 This can happen due to multiple reason -
 
 1. Paytm services are not available due to a downtime
-2. Server unable to generate checksum or checksum response is not in proper format (which server?)
+2. Server unable to generate checksum or checksum response is not in proper format
 3. Server failed to authenticate the client. That is value of payt_STATUS is 2. //  payt_STATUS hasn't been defined anywhere
 
 
