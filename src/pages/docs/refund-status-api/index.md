@@ -32,7 +32,7 @@ export default ({children,location, pageContext}) => (
 
 | | |
 | --- | --- |
-| **MID** String(20) Mandatory| This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MIDs is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> & production MID will be available once your onboaring is complete
+| **MID** String(20) Mandatory| This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MIDs is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> & production MID will be available once your activation is complete
 | **ORDERID** String(50) Mandatory| Order ID is merchant’s unique reference ID for a transaction passed in the transaction payload. This is Order ID for which refund status is being inquired
 | **REFID** String(50) Mandatory| Merchant’s reference ID unique for every refund transaction. This is REFID for which refund status is being inquired
 | **CHECKSUMHASH** String(108) Mandatory| Signature to avoid tampering. Generated using server side checksum utility available  <a href="#code">here</a>

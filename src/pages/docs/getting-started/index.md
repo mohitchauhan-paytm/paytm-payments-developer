@@ -20,7 +20,7 @@ import MdButton from './../../../components/md-button/index';
 
 <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">Account credentials</a> are available in your dashboard for both staging and production environment. These credentials consist of -
 
-* **MID (Merchant ID)** - This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MID is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> and production MID will be available once your onboarding is complete 
+* **MID (Merchant ID)** - This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MID is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> and production MID will be available once your activation is complete 
 * **Merchant Key** - This is a unique secret key used for secure encryption of every request. This needs to be kept on server side and <u>should not be shared with anyone</u>
 
 
