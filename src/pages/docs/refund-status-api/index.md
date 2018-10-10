@@ -26,7 +26,7 @@ export default ({children,location, pageContext}) => (
 ## Use Case
 ---
 * To fetch status of refund transaction where real time response was not received of refund request
-* To fetch status of refund transaction where transaction status was communicated as pending 
+* To fetch status of refund transaction where refund transaction status was communicated as pending 
 
 ## Request Attributes:
 
@@ -49,13 +49,13 @@ export default ({children,location, pageContext}) => (
 | **TXNAMOUNT** String(10) | Order value of the transaction in INR
 | **STATUS** String(20) | This contains the status of refunds. It has following values: TXN_SUCCESS, TXN_FAILURE & PENDING
 | **GATEWAY** String(20) | Gateway used by Paytm to process the transactions. By payment mode, gateways are provided below  <br/>Credit, debit cards  UPI - Gateway used to process the transaction. For example, if HDFC gateway has been used to process SBI credit card transactions, the value will be HDFC<br/>Net banking - Issuing Bank <br/>Paytm Wallet - Wallet
-| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. These are detailed in the list provided below
+| **RESPCODE** String(10) | Codes refer to a particular reason of refund failure. These are detailed in the list provided below
 | **RESPMSG** String(500) | Description message attached with each respcode. These are detailed in the list provided below
 | **MID** String(20) | This is a unique identifier provided to every merchant by Paytm
 | **PAYMENTMODE** String(15) | The payment mode used by customer for transaction <br/>Credit card  – CC <br/>Debit card  - DC <br/>Net banking  - NB<br/>UPI - UPI <br/>Paytm wallet – PPI 
 | **REFUNDAMOUNT** String(10) | Amount for which refund is supposed to be made. It can be equal to or lesser than the transaction amount. It should be upto two decimal place. Should not include any separator like (“,”)
 | **TOTALREFUNDAMT** String(10) | Total cummulative refund amount against this transaction. For example for a transaction with order value as INR 100, there has been two refunds of INR 20  & INR 30 historically, then TOTALREFUNDAMT will be INR 50
-| **TXNDATE** DateTime | Date of transaction in the format  "yyyy-MM-dd HH:mm:ss.S"<br/>Format - “2015-11-02 11:40:46.0”
+| **TXNDATE** DateTime | Date of payment transaction in the format "yyyy-MM-dd HH:mm:ss.S" <br/>Format - “2015-11-02 11:40:46.0”
 | **REFUNDDATE** DateTime | Date of REFUND in the format  "yyyy-MM-dd HH:mm:ss.S"<br/>EX- “2015-11- 02 11:40:46.0”
 | **REFID** String(50) | Merchant’s reference ID unique for every refund transaction. This is REFID for which refund status is being inquired
 | **REFUNDID** String(64) | This is a unique Paytm refund identifier that is issued by Paytm for each valid refund request

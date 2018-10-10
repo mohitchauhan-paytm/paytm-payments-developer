@@ -15,7 +15,7 @@ class Menubar extends Component {
         let visibleMenu = style.visibleMenu;
         return (
 
-            <nav className={`max-wrap ${style.navDesk} ${style.navMob} `} >
+            <nav className={`max-wrap  left-nav ${style.navDesk} ${style.navMob} `} >
                 <section className={`${style.menuLeft} grid vertical`}>
                     <div className={`${style.menuLeftBlock}`}>
                         <ul className={`${style.menuLeftList}`}>

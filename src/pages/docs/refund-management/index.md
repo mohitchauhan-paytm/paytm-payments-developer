@@ -7,17 +7,17 @@ title: "Paytm for Developers: Understanding Refund Management"
 
 # Refunds
 
-Refund are reversal transactions wherein complete or partial money is moved back to customer’s source account (account from which actual payment was made). Refund can only be created for a succesful or settled transaction. Use case for refund arise in following scenarios -
+Refund are reversal transactions wherein complete or partial money is moved back to customer’s source account (account from which actual payment was made). Refund can only be created for a successful or settled transaction. Use case for refund arise in following scenarios -
 
 
 * Customer initiated refund (returns/cancellation) - Customer has changed his mind about consumption of product pre/post order delivery
 *  Merchant initiated refund - Refund can be initiated by merchant in following scenarios
     * Product/service is out of stock   
     * Merchant works on prepaid model wherein initial amount was higher than final billed amount (prepaid service model)
-    * Mismatch in transaction reconciliation between Paytm transaction status  & merchant’s transaction status. To do reconciliation, you can use dashboard as a data source for our status
+    * Mismatch in transaction status between Paytm and merchant wherein transaction is failed state at merchant's end but is successful at Paytm's end.
 
 
-You can initiate partial or complete refunds to your customer’s source account . A refund request usually takes 7-14 business days to reflect in customer’s account. 
+You can initiate partial or complete refunds to your customer’s source account . A refund request usually takes 7-14 business days to reflect in customer’s account depending on the bank used for payment. 
 
 
 ## Ways to initiate refunds
@@ -43,7 +43,7 @@ Bulk refund - Multiple transactions can be refunded at once. To do this, follow 
   
 ### Refund via APIs 
 
-You can also initiate a refund via the Refund API. Identifier of transaction against which refund has to be made is order ID (unique parameter for an order in your system) and transaction ID (unique parameter for your order with Paytm passed in transaction response)
+You can also initiate a refund via the <a href="/docs/refund-api/">Refund API</a>. Identifier of transaction against which refund has to be made is order ID (unique parameter for an order in your system) and transaction ID (unique parameter for your order with Paytm passed in transaction response)
 
 ## Constraints on refunds
 ---
@@ -59,7 +59,7 @@ You can also initiate a refund via the Refund API. Identifier of transaction aga
 ## Time taken to process refunds
 
 
-Refund process involves a lot of handshakes hence it usually takes 14 days for the refund amount to be credited in customer’s account. Typical window of refund credit per transaction mode is provided below:
+Refund process involves multiple handshakes between acquirer banks, card schemes and issuer banks. Hence it usually takes up to 14 days for the refund amount to be credited in customer’s account. Typical window of refund credit per transaction mode is provided below:
 
 Max time taken to settle into customers account
 

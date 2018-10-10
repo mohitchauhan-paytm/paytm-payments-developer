@@ -146,8 +146,8 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
     <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
     <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"PENDING"</span>,
     <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
-    <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"402"</span>,
-    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Abondoned Transaction."</span>,
+    <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"810"</span>,
+    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Failed"</span>,
     <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
     <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.0"</span>,
     <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-27 10:07:15.0"</span>

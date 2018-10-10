@@ -20,7 +20,7 @@ import MdButton from './../../../components/md-button/index';
 
 <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">Account credentials</a> are available in your dashboard for both staging and production environment. These credentials consist of -
 
-* **MID (Merchant ID)** - This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MID is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> and production MID will be available once your onboaring is complete 
+* **MID (Merchant ID)** - This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MID is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> and production MID will be available once your onboarding is complete 
 * **Merchant Key** - This is a unique secret key used for secure encryption of every request. This needs to be kept on server side and <u>should not be shared with anyone</u>
 
 
@@ -44,7 +44,7 @@ The Paytm <a href="https://dashboard.paytm.com/next" target="_blank">Dashboard</
 ---
 
 * Your customer clicks on a pay button in your web/mobile application
-* Customer is shown a checkout form where she fills her payment details and authorises the payment
+* Customer is shown a checkout form where she fills her payment details and authorizes the payment
 * After completion of transaction, Paytm posts the response (success or failed) on a Callback URL defined by you
 * As a <u>recommended</u> security measure, you validate each transaction response via a server-to-server (S2S) API call. Transaction revalidation protects from request/response tampering possible in browser calls. This S2S call is not required for Paytm plugins and hosted e-commerce website integration solutions
 * Based on the response received, you display order status to customer
