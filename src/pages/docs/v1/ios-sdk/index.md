@@ -101,7 +101,7 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 		<span class="hljs-string">"MOBILE_NO"</span>: <span class="hljs-string">"7777777777"</span>,
 		<span class="hljs-string">"EMAIL"</span>: <span class="hljs-string">"username@emailprovider.com"</span>,
 		<span class="hljs-string">"CHANNEL_ID"</span>: <span class="hljs-string">"WAP"</span>,
-		<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"APPSTAGING"</span>,
+		<span class="hljs-string">"WEBSITE"</span>: <span class="hljs-string">"WEBSTAGING"</span>,
 		<span class="hljs-string">"TXN_AMOUNT"</span>: <span class="hljs-string">"100.12"</span>,
 		<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>: <span class="hljs-string">"Retail"</span>,
 		<span class="hljs-string">"CHECKSUMHASH"</span>: <span class="hljs-string">"oCDBVF+hvVb68JvzbKI40TOtcxlNjMdixi9FnRSh80Ub7XfjvgNr9NrfrOCPLmt65UhStCkrDnlYkclz1qE0uBMOrmuKLGlybuErulbLYSQ="</span>,
@@ -134,7 +134,7 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 		<span class="hljs-string">@"MOBILE_NO"</span> : <span class="hljs-string">@"7777777777"</span>,
 		<span class="hljs-string">@"EMAIL"</span> : <span class="hljs-string">@"username@emailprovider.com"</span>,
 		<span class="hljs-string">@"CHANNEL_ID"</span>: <span class="hljs-string">@"WAP"</span>,
-		<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"APPSTAGING"</span>,
+		<span class="hljs-string">@"WEBSITE"</span>: <span class="hljs-string">@"WEBSTAGING"</span>,
 		<span class="hljs-string">@"TXN_AMOUNT"</span>: <span class="hljs-string">@"100.12"</span>,
 		<span class="hljs-string">@"INDUSTRY_TYPE_ID"</span>: <span class="hljs-string">@"Retail"</span>,
 		<span class="hljs-string">@"CHECKSUMHASH"</span>:<span class="hljs-string">@"Bzk47IMatCI7T3b21iB403MsRBNhJ9DWHeK79iD+dli6GUg5w+JKDk6gk6roSjuKrtFzDiXwuUsfgVz30Xa2+W+kgwnNQaZXJTSfKPy6gU4="</span>,
@@ -279,7 +279,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String mobileNo = <span class="hljs-string">"7777777777"</span>;
 String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
-String website = <span class="hljs-string">"APPSTAGING"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
@@ -312,7 +312,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String mobileNo = <span class="hljs-string">"9999999999"</span>;
 String email = <span class="hljs-string">"cust123"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
-String website = <span class="hljs-string">"APPSTAGING"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
@@ -345,7 +345,7 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
     define(<span class="hljs-string">"mobileNo"</span>, <span class="hljs-string">"7777777777"</span>);
     define(<span class="hljs-string">"email"</span>, <span class="hljs-string">"username@emailprovider.com"</span>);
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
-    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"APPSTAGING"</span>);
+    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
     <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
     <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
