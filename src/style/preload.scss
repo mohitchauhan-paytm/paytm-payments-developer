@@ -5,6 +5,7 @@
 @import './common/grid';
 @import './common/popup';
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,800');
+#app{min-width:1279px;}
 .btn {
     font-size: 1.4rem;
     padding: 6px 15px;
