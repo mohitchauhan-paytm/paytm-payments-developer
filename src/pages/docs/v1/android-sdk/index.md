@@ -111,7 +111,7 @@ paramMap.put( "MOBILE_NO" , "7777777777");
 paramMap.put( "EMAIL" , "username@emailprovider.com");
 paramMap.put( "CHANNEL_ID" , "WAP");
 paramMap.put( "TXN_AMOUNT" , "100.12");
-paramMap.put( "WEBSITE" , "APPSTAGING");
+paramMap.put( "WEBSITE" , "WEBSTAGING");
 // This is the staging value. Production value is available in your dashboard
 paramMap.put( "INDUSTRY_TYPE_ID" , "Retail");
 // This is the staging value. Production value is available in your dashboard
@@ -311,7 +311,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String mobileNo = <span class="hljs-string">"7777777777"</span>;
 String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
-String website = <span class="hljs-string">"APPSTAGING"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
@@ -344,7 +344,7 @@ String custId = <span class="hljs-string">"cust123"</span>;
 String mobileNo = <span class="hljs-string">"7777777777"</span>;
 String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
-String website = <span class="hljs-string">"APPSTAGING"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
 String industryTypeId = <span class="hljs-string">"Retail"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
@@ -377,7 +377,7 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
     define(<span class="hljs-string">"mobileNo"</span>, <span class="hljs-string">"7777777777"</span>);
     define(<span class="hljs-string">"email"</span>, <span class="hljs-string">"username@emailprovider.com"</span>);
     define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
-    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"APPSTAGING"</span>);
+    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
     <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
     define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
     <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
