@@ -19,7 +19,7 @@ export default ({children,location, pageContext}) => (
 <h1 className={`${style.statusHeading}`}><span><img src='/assets/tag-post.svg'/></span> Refund</h1>
 </div>
 
-
+To use this API on production environment, send a request to devsupport@paytm.com with your production MID. Whitelisting is required to use this API due to security reasons
 
 ## Use Case
 ---
