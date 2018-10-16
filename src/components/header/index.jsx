@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Logodeveloper } from "../svgsprite";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as style from './style.module.scss';
 
 class Header extends Component {
@@ -15,6 +15,10 @@ class Header extends Component {
   }
 
   handleChange = () => {
+    if(!this.props.state.showMainLogIn) {
+      this.props.toggleMainShowLogin(true);
+      this.props.toggleShowLogin(true);
+   }
     this.props.toggleShowLogin(true);
   }
 
@@ -25,20 +29,21 @@ class Header extends Component {
   componentDidMount() {
     window.addEventListener("message", this.handleFrameTasks);
   }
-    
+
   componentWillUnmount() {
     window.removeEventListener("message", this.handleFrameTasks);
   }
-    
+
   handleFrameTasks = (e) => {
-      if (e.data.result == 'success') {
-        this.props.setLoginData(
-          false,
-          true,
-          e.data.user,
-          e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase()
-        ); 
-      }
+    if (e.data.result == 'success') {
+      this.props.toggleMainShowLogin(false);
+      this.props.setLoginData(
+        false,
+        true,
+        e.data.user,
+        e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase()
+      );
+    }
   }
 
   render() {
@@ -59,80 +64,73 @@ class Header extends Component {
           <nav className={`grid align-center ${style.headerNavDesk}`}>
             <ul className={`grid-inline justify-start justify-between ${style.headerMenuDesk}`}>
               <li className={`${style.navlistDesk}`}>
-              {/* <a href='javascript:void(0);'>Products</a> */}
-              <a href='#' className={` ${style.navlistdroparrow} p-rel`}>Products</a>
-              <ul className={`${style.headDropDown}`}>
+                {/* <a href='javascript:void(0);'>Products</a> */}
+                <a href='#' className={` ${style.navlistdroparrow} p-rel`}>Products</a>
+                <ul className={`${style.headDropDown}`}>
                   <li>
-                      <a target="_blank" href="https://business.paytm.com/payment-gateway" className={`${style.headDropDownLink} grid-inline align-center`}>
-                          <img src="/assets/head-on-app.svg" alt=" " />
-                          <div className={`${style.headDropDownContent}`}>
-                              <label>On App/Website</label>
-                              <p>Deep integration on your platform</p>
-                          </div>
-                      </a>
+                    <a target="_blank" href="https://business.paytm.com/payment-gateway" className={`${style.headDropDownLink} grid-inline align-center`}>
+                      <img src="/assets/head-on-app.svg" alt=" " />
+                      <div className={`${style.headDropDownContent}`}>
+                        <label>On App/Website</label>
+                        <p>Deep integration on your platform</p>
+                      </div>
+                    </a>
                   </li>
                   <li>
-                      <a target="_blank" href="https://business.paytm.com/retail" className={`${style.headDropDownLink} grid-inline align-center`}>
-                          <img src="/assets/head-mobile-pay.svg" alt=" " />
-                          <div className={`${style.headDropDownContent}`}>
-                              <label>In your Store</label>
-                              <p>QR code payments</p>
-                          </div>
-                      </a>
+                    <a target="_blank" href="https://business.paytm.com/retail" className={`${style.headDropDownLink} grid-inline align-center`}>
+                      <img src="/assets/head-mobile-pay.svg" alt=" " />
+                      <div className={`${style.headDropDownContent}`}>
+                        <label>In your Store</label>
+                        <p>QR code payments</p>
+                      </div>
+                    </a>
                   </li>
                   <li>
-                      <a target="_blank" href="https://business.paytm.com/payment-link" className={`${style.headDropDownLink} grid-inline align-center`}>
-                         
-                          <img src="/assets/head-pay-link.svg" alt=" " />
-                          <div className={`${style.headDropDownContent}`}>
-                              <label>Payment Link</label>
-                              <p>On SMS/Chat/Email</p>
-                          </div>
-                      </a>
+                    <a target="_blank" href="https://business.paytm.com/payment-link" className={`${style.headDropDownLink} grid-inline align-center`}>
+
+                      <img src="/assets/head-pay-link.svg" alt=" " />
+                      <div className={`${style.headDropDownContent}`}>
+                        <label>Payment Link</label>
+                        <p>On SMS/Chat/Email</p>
+                      </div>
+                    </a>
                   </li>
-              </ul>
-              
+                </ul>
+
               </li>
               <li className={`${style.navlistDesk}`}><a target="_blank" href='https://business.paytm.com/pricing'>Pricing</a></li>
               <li className={`${style.navlistDesk}`}><a target="_blank" href='https://business.paytm.com/support'>Support</a></li>
             </ul>
             {
-              !this.props.state.loggedIn ? 
-            
-           <div className={`grid-inline`}>
-            <button id="signInButton" className={`${style.whiteBtn} btn btn-primary small grid align-center`}  onClick={this.handleChange}>Login or Create Account</button>
-          </div> : null 
-          }
-          {
-            this.props.state.loggedIn ? 
-          
-            <div className={`${style.userImageBlockDesk} grid align-center justify-end`}>
-              <div className={`${style.userImageDesk} grid-inline justify-center align-center`}>
-                <span>{this.props.state.userText}</span>
-              </div>
-              <div className={`${style.userFullName} grid-inline`}>
-                <span>{this.props.state.user.uname}</span>
-              </div>
-              <div>
-              </div>
-						</div> : null 
-          }
+              !this.props.state.loggedIn ?
+
+                <div className={`grid-inline`}>
+                  <button id="signInButton" className={`${style.whiteBtn} btn btn-primary small grid align-center`} onClick={this.handleChange}>Login or Create Account</button>
+                </div> : null
+            }
+            {
+              this.props.state.loggedIn ?
+
+                <div className={`grid-inline`}>
+                  <a className={`${style.whiteBtn} btn btn-primary small grid align-center`} href="https://dashboard.paytm.com/next/" target="_blank">My Dashboard</a>
+                </div> : null
+            }
           </nav>
         </div>
         {
-          this.props.state.showLogin ?
-          <div className="popupWrapper fadeIn">
-            <div className="popup pos-abs iframeOpen">
-              <div className="popup-wrapper pos-rel">
-                <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg"/></span>
-                <div className="popup-content">
-                  <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
-                </div>
+          this.props.state.showMainLogIn ? 
+        <div className={`popupWrapper  ${(this.props.state.showLogin ? ' fadeIn' : '')}`}>
+          <div className="popup pos-abs iframeOpen">
+            <div className="popup-wrapper pos-rel">
+              <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
+              <div className="popup-content">
+                <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
               </div>
             </div>
-            </div>
-            : null
-          }
+          </div>
+        </div>: null
+        }
+
 
         {/* <Overlay show={expandMenu} showDropdownMethod={this.showDropdownMethod} /> */}
         {/* <PopupTypeFirst show={activeOverlay === 'filter'}>
@@ -166,15 +164,16 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-return {
-  state: state
-}
+  return {
+    state: state
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-return {
-  toggleShowLogin: (showLogin) => dispatch({type: 'TOGGLE_SHOW_LOGIN', showLogin}),
-  setLoginData: (showLogin,loggedIn,user,userText) => dispatch({type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText})
-}
+  return {
+    toggleShowLogin: (showLogin) => dispatch({ type: 'TOGGLE_SHOW_LOGIN', showLogin }),
+    setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn }),
+    toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

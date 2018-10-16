@@ -1,12 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="110" height="82" viewBox="0 0 110 82">
     <defs>
-        <linearGradient id="a" x1="47.929%" x2="53.9%" y1="19.029%" y2="108.5%">
-            <stop offset="0%" stop-color="#01B9F5"/>
-            <stop offset="100%" stop-color="#368CF5"/>
-        </linearGradient>
+        <path id="a" d="M0 .072h33.509V24.21H-.001z"/>
     </defs>
-    <g fill="none" fill-rule="nonzero">
-        <rect width="64" height="64" fill="#F6F8FC" rx="2"/>
-        <path fill="url(#a)" d="M39.464 15H25.256A3.256 3.256 0 0 0 22 18.256v27.752a3.256 3.256 0 0 0 3.256 3.256h14.208a3.256 3.256 0 0 0 3.256-3.256v-27.76A3.256 3.256 0 0 0 39.464 15zm.728 27.744H24.264V18.048h15.928v24.696zm-6.232 3.2a1.6 1.6 0 1 1 0-.016v.016z"/>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFF" d="M46.956 77h-29.96a6.02 6.02 0 0 1-6.02-6.02V7.02A6.02 6.02 0 0 1 16.996 1h29.96a6.02 6.02 0 0 1 6.02 6.02v63.96a6.02 6.02 0 0 1-6.02 6.02"/>
+        <path stroke="#012B72" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M46.956 77h-29.96a6.02 6.02 0 0 1-6.02-6.02V7.02A6.02 6.02 0 0 1 16.996 1h29.96a6.02 6.02 0 0 1 6.02 6.02V70.98A6.02 6.02 0 0 1 46.956 77z"/>
+        <path fill="#012B72" d="M34.906 69.613c0 1.657-1.312 3-2.93 3-1.619 0-2.93-1.343-2.93-3s1.311-3 2.93-3c1.618 0 2.93 1.343 2.93 3"/>
+        <path stroke="#002E6E" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 77h62"/>
+        <path fill="#FFF" d="M36.4 8h-8.212"/>
+        <path stroke="#012B72" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M36.4 8h-8.212"/>
+        <g transform="translate(36 24)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <path fill="#FFF" d="M30.633 24.21H2.877C1.287 24.21 0 23.1 0 21.73V2.552C0 1.182 1.288.072 2.877.072h27.756c1.589 0 2.877 1.11 2.877 2.48V21.73c0 1.37-1.288 2.48-2.877 2.48" mask="url(#b)"/>
+        </g>
+        <g>
+            <path stroke="#00BDF2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M63.001 45H40.999A1.999 1.999 0 0 1 39 43.001V30.999c0-1.104.895-1.999 1.999-1.999h22.002c1.104 0 1.999.895 1.999 1.999v12.002A1.999 1.999 0 0 1 63.001 45z"/>
+            <path fill="#00BDF2" d="M38.898 36.487h26.78v-3.571h-26.78z"/>
+        </g>
     </g>
 </svg>

@@ -15,7 +15,7 @@ class Menubar extends Component {
         let visibleMenu = style.visibleMenu;
         return (
 
-            <nav className={`max-wrap ${style.navDesk} ${style.navMob} `} >
+            <nav className={`max-wrap  left-nav ${style.navDesk} ${style.navMob} `} >
                 <section className={`${style.menuLeft} grid vertical`}>
                     <div className={`${style.menuLeftBlock}`}>
                         <ul className={`${style.menuLeftList}`}>
@@ -33,7 +33,7 @@ class Menubar extends Component {
                     </Link>
                         <ul className={`${style.menuLeftList}`}>
                             <li >
-                                <Link to="/docs/v1/payment-gateway" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/ic-business-web-api.svg' alt='' />Paytm Checkout</Link>
+                                <Link to="/docs/v1/payment-gateway"  className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/ic-business-web-api.svg' alt='' />Paytm Checkout</Link>
                             </li>
                             <li>
                                 <Link to="/docs/v1/plugins" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/ic-business-web-plugin.svg' alt='' />Plugins</Link>
@@ -61,9 +61,9 @@ class Menubar extends Component {
                             <li>
                                 <div onClick={this.showMenu} className={`${style.leftLink} ${style.leftNoLink} grid align-center`}><img className='' src='/assets/ic-business-web-api-reference.svg' alt='' />API Reference</div>
                                 <ul className={`${style.menuSubList} ${this.props.state.showApiMenu ? visibleMenu : ''} `}>
-                                    <li><Link to="/docs/transaction-status-api" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`} ><img src='/assets/tag-get.svg' alt='' /> Transaction Status</Link></li>
+                                    <li><Link to="/docs/transaction-status-api" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`} ><img src='/assets/tag-post.svg' alt='' /> Transaction Status</Link></li>
                                     <li><Link to="/docs/refund-api" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/tag-post.svg' alt='' /> Refund </Link></li>
-                                    <li><Link to="/docs/refund-status-api" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/tag-get.svg' alt='' /> Refund Status</Link></li>
+                                    <li><Link to="/docs/refund-status-api" className={`${style.leftLink} grid align-center`} activeClassName={`${style.activeLink}`}><img src='/assets/tag-post.svg' alt='' /> Refund Status</Link></li>
                                 </ul>
                             </li>
                             <li>

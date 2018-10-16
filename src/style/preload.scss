@@ -5,6 +5,7 @@
 @import './common/grid';
 @import './common/popup';
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,800');
+#app{min-width:1279px;}
 .btn {
     font-size: 1.4rem;
     padding: 6px 15px;
@@ -127,9 +128,8 @@
 
 .btn.arrow{
     
-    background:$white;
-    border:1px solid $line;
-    color:$primary;
+    background: $primary;
+    color:$white;
     padding: 8px 10px;
     font-size:1.4rem;
     margin:1%;
@@ -141,7 +141,6 @@
     &:hover{
         color:$white;
         background: $btnHover;
-        border:1px solid $btnHover;
     }
    
 
@@ -179,12 +178,13 @@ p{
         margin:12px 0;
     }
     .small-head-txt{
+        font-size: 1.6rem;
         color:$dark4;
     }
     
 }
 .small-head-txt{
-    font-size:1.4rem;
+    font-size:1.6rem;
     color:$dark4;
     line-height:1.43;
     margin-bottom:16px;
@@ -201,6 +201,9 @@ p{
         margin:15px 0 4px 0;
         font-size:1.6rem;
     }
+}
+.box-container-label{
+
 }
 .bold-heading{
    
@@ -422,5 +425,16 @@ p{
     }
  }
 
-
+//  @media all and (max-width: 1280px) { 
+//      nav.left-nav, header { position: absolute !important;  } 
+//      header,footer, #app { min-width: 1280px;} 
+//      .wrapper{
+//         // margin-top: 0;
+//         margin-top: 56px;
+//      }
+//      .left-nav,
+//      .wrapper-content{
+//         top: 0;
+//      }
+//     }
  

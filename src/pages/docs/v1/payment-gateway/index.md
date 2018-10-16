@@ -6,11 +6,12 @@ title: "Paytm Checkout: Accept Payments on your website"
 
 import * as style from './payment-gateway.module.scss';
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
+import Link from 'gatsby-link';
 
 
-# Collect online payments with pre-built Paytm Checkout
+# Collect online payments with Paytm Payment Gateway
 
-Paytm Checkout provides a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers.
+Paytm Checkout for your website provides a secure, PCI-compliant way to accept Debit/Credit card, Net-Banking, UPI and Paytm wallet payments from your customers.
 
 ## Demo for Paytm checkout
 
@@ -23,15 +24,15 @@ Paytm Checkout provides a secure, PCI-compliant way to accept Debit/Credit card,
 ## Overview of payment processing via Paytm checkout
 ---
 
-Process of payments starts at the click of pay button on merchant order summary page. On this click, you have to:  
+The payment process starts at the click of pay button on merchant order summary page. On this click, you need to:  
 
-1. Create an order payload to generate checksumhash at your server end
-2. Post the payload and checksumhash via HTML form post on Paytm's server. This redirects the customer to Paytm's payment page
-3. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form post on your callback URL
+1. Create an order in your order system and then generate checksumhash at your server end for payment request. Checksumhash is used for detecting errors or tampering introduced during its transmission of request. Checksum is generated using merchant Key which should be kept only on server side for security reasons
+2. Post the payload and checksumhash in an HTML form POST on Paytm's server. This redirects the customer to Paytm's payment page
+3. Customer fills payment details and completes the payment authentication. Once the payment is complete, response is posted in HTML form POST on your website's callback URL
 4. Verify checksumhash received in response to ensure that it has not been tampered
 5. Lastly, verify transaction status with [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api) via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
 
-Find the detailed interaction of each system component in the flow chart below
+Find the detailed interaction of each system component in the flow chart below:
 <br/>
 
 <img src='/assets/img-flow-paytm-checkout.png' alt='' />
@@ -41,36 +42,32 @@ Find the detailed interaction of each system component in the flow chart below
 ---
 ### Step 1 :
 
-At the click of payment button by customer,create the required payload for checksum generation. Parameters of payload are provided below - 
+At the click of payment button by customer on your website, create an order in your system and generate the required payload for payment request. Parameters of payload are provided below  
 
 
-| Attributes    |     |
-| ------------- | ----- | ----- |
-| **MID**  String(20)   | Available with your account details in dashboard. Different for staging and production
-|**ORDER_ID** String(50)   | Merchant’s unique reference ID for a transaction   Special characters allowed in Order Id are: “@” “-” “_”  “.”.
-|**CUST_ID** String(64)   | Merchant’s unique reference ID for every customer Special characters e.g @, ! ,_ $ are allowed
-|**TXN_AMOUNT** String(10)      | Amount in INR payable by customer. Should contain digits up to two decimal points. The amount should not include any separator like (“,”)
-|**CHANNEL_ID** String(3)  | 1. WEB – for websites <br/> 2. WAP - for Mobile websites/App
-|**WEBSITE** String(30)  | Staging Environment: <br/> 1. WEBSTAGING for websites <br/>2.APPSTAGING for Mobile websites/App Production environment: Will be provided with production credentials in dashboard
-|**CHECKSUMHASH** String(108)  | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm
-|**MOBILE_NO** String(15)  | Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
-|**EMAIL** String(50)  | Customer email Id. Passing this enables faster login for customer into his/her mobile wallet.
-|**CALLBACK_URL** String(255)  | URL on which response of transaction request will be posted side. Like Promocode specific to ICICI bank or promo code specfic to a BIN NUmber
-| **PAYMENT_MODE_ONLY** String(10)   | If merchant wants to allow payment mode selection on his website, the value to be passed is “Yes”
-| **AUTH_MODE** String(10)  | Required If PAYMENT_MODE_ONLY = Yes, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
-| **PAYMENT_TYPE_ID** String(10)   | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> Saved Card - SC
-| **CARD_TYPE** String(50)   | Required If PAYMENT_MODE_ONLY = Yes & AUTH_MODE = 3D Possible values of this parameter depending upon the card type - VISA/MASTER/AMEX
-| **BANK_CODE** String(50)  | Required If PAYMENT_MODE_ONLY = Yes<br/>PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in PDF below
-| **MERC_UNQ_REF** Optional String (50) | An extra (optional) field that is passed by merchant in form POST, the values of this field passes through the system and returns to merchant along with other fields. This should be enabled by Paytm
+| Request Attributes    |     |  |
+| ------------- | ----- | ----- | ---- |
+| **MID**  String(20)   Mandatory| This is a unique identifier provided to every merchant by Paytm. MID is part of your account credentials and is different on staging and production environment. Your staging MID is available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> and production MID will be available once your activation is complete 
+|**ORDER_ID** String(50)  Mandatory | Unique reference ID for a transaction which is generated by merchant Special characters allowed in Order ID are: @, -, \_, . 
+|**CUST_ID** String(64)  Mandatory | Unique reference ID for every customer which is generated by merchant Special characters allowed in Cust\_ID are @, ! ,_ ,$, .
+|**TXN_AMOUNT** String(10)    Mandatory  | Amount in INR payable by customer. Should contain digits up to two decimal points. Only special character allowed is (“.”) 
+|**CHANNEL_ID** String(3)  Mandatory| This parameter is used to control the theme of the payment page. Based on the channel passed, Paytm will render the layout suitable for that specific platform <br/>For websites, the value is WEB  <br/>For Mobile websites/App, the value is WAP
+|**WEBSITE** String(30)  Mandatory| For staging environment: For staging environment: WEBSTAGING <br/> For production environment: Will be available  <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your activation is complete 
+|**CHECKSUMHASH** String(108)  Mandatory| Signature to avoid tampering. Generated using server side checksum utility available  <a href="/docs/v1/payment-gateway#code">here</a> 
+|**MOBILE_NO** String(15)  Optional| Customer's mobile number. Passing this enables faster login for customer into his/her Paytm account. When the customer clicks on login, the mobile number comes pre-filled on our payment page  
+|**EMAIL** String(50) Optional  | Customer's email ID
+|**INDUSTRY_TYPE_ID** String(20)  Mandatory| For staging environment: "Retail"<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your activation is complete 
+|**CALLBACK_URL** String(255) Mandatory | On completion of transaction, Paytm payment gateway will send the response on this URL.. Sample URL is - https://merchant.com/callback/
+| **PAYMENT_MODE_ONLY** String(3)  Optional | If merchant wants to allow payment mode selection on his website or restrict the payment to a particular paymode, then value to be passed is “YES”. <br/>For example, with this parameter merchant can ensure that customer only sees credit card as a paymode when he lands on Paytm's cashier page.
+| **AUTH_MODE** String(10) Conditional | Required If PAYMENT_MODE_ONLY = YES, then <br/>For Credit/Debit card - 3D <br/>For Wallet, Net Banking – USRPWD
+| **PAYMENT_TYPE_ID** String(15) Conditional  | Required If PAYMENT_MODE_ONLY = Yes, then<br/>Credit card payment mode – CC <br/> Debit card payment mode - DC <br/> Net banking payment mode - NB <br/> Paytm wallet – PPI <br/> EMI - EMI <br/>UPI - UPI
+| **BANK_CODE** String(5) Conditional | Required If PAYMENT_MODE_ONLY = Yes PAYMENT_TYPE_ID = NB <br/>List of Bank Codes provided in this <a href="/assets/Bank Message & Bank codes.pdf" download>PDF</a> 
 
 
-<div className={`${style.commonMargin}`}></div>
 
 ### Step 2:
 
-Generate checksumhash using Paytm library with parameters in key value pairs. Using the payload and checksumhash make an HTML form post and redirect customer to Paytm server. Code snippets provided below
-
-
+Generate checksumhash using Paytm library with parameters in key value pairs. Using the payload and checksumhash make an HTML form post and redirect customer to Paytm server. Code snippets and Github links for the checksum utility and HTML form post are provided below.
 <div className={`${style.checkoutWrapper}`}>
     
 <Tabs defaultTab="java">
@@ -82,20 +79,33 @@ Generate checksumhash using Paytm library with parameters in key value pairs. Us
     <TabPanel tabId="java">
         <span dangerouslySetInnerHTML={{
             __html: `
-<pre><code class="hljs language-java">
-String MID = "<span class="hljs-string">rxazcv89315285244163</span>";
-String KEY = "<span class="hljs-string">gKpu7IKaLSbkchFS</span>";
-TreeMap&lt;String, String&gt; parameters = <span class="hljs-keyword">new</span> TreeMap();
-parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">MID</span>);
-parameters.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"ord1"</span>);
-parameters.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
-parameters.put(<span class="hljs-string">"CUST_ID"</span>,<span class="hljs-string">"cust123"</span>);
-parameters.put(<span class="hljs-string">"TXN_AMOUNT"</span>,<span class="hljs-string">"100.12"</span>);
-parameters.put(<span class="hljs-string">"WEBSITE"</span>,<span class="hljs-string">"WEBSTAGING"</span>);
-parameters.put(<span class="hljs-string">"MOBILE_NO"</span>,<span class="hljs-string">"9999999999"</span>);
-parameters.put(<span class="hljs-string">"EMAIL"</span>,<span class="hljs-string">"customer@gmail.com"</span>);
-parameters.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">&lt;Merchant Response Url&gt;</span>);
-String checkSum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">KEY</span>, parameters);
+<pre><code class="hljs language-java">String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
+<span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
+String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<span class="hljs-comment">// Key in your staging and production merchant key available in your dashboard</span>
+String orderId = <span class="hljs-string">"order1"</span>;
+String channelId = <span class="hljs-string">"WEB"</span>;
+String custId = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
+String txnAmount = <span class="hljs-string">"100.12"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
+String industryTypeId = <span class="hljs-string">"Retail"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
+String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
+TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
+paytmParams.put(<span class="hljs-string">"MID"</span>,merchantMid);
+paytmParams.put(<span class="hljs-string">"ORDER_ID"</span>,orderId);
+paytmParams.put(<span class="hljs-string">"CHANNEL_ID"</span>,channelId);
+paytmParams.put(<span class="hljs-string">"CUST_ID"</span>,custId);
+paytmParams.put(<span class="hljs-string">"MOBILE_NO"</span>,mobileNo);
+paytmParams.put(<span class="hljs-string">"EMAIL"</span>,email);
+paytmParams.put(<span class="hljs-string">"TXN_AMOUNT"</span>,txnAmount);
+paytmParams.put(<span class="hljs-string">"WEBSITE"</span>,website);
+paytmParams.put(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>,industryTypeId);
+paytmParams.put(<span class="hljs-string">"CALLBACK_URL"</span>, callbackUrl);
+String paytmChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(merchantKey, paytmParams);
 StringBuilder outputHtml = <span class="hljs-keyword">new</span> StringBuilder();
 outputHtml.append(<span class="hljs-string">"&lt;!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;html&gt;"</span>);
@@ -104,12 +114,13 @@ outputHtml.append(<span class="hljs-string">"&lt;title&gt;Merchant Checkout Page
 outputHtml.append(<span class="hljs-string">"&lt;/head&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;body&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>);
-<span class="hljs-comment">// use "https://securegw.paytm.in/theia/processTransaction" for production</span>
-outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='https://securegw-stage.paytm.in/theia/processTransaction' name='f1'&gt;"</span>);
-<span class="hljs-keyword">for</span>(Map.Entry&lt;String,String&gt; entry : parameters.entrySet()) {
+$transactionURL=<span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;  	<span class="hljs-comment">// for staging</span>
+<span class="hljs-comment">// $transactionURL="https://securegw.paytm.in/theia/processTransaction";  // for production</span>
+outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='"</span>+transactionURL+<span class="hljs-string">"' name='f1'&gt;"</span>);
+<span class="hljs-keyword">for</span>(Map.Entry&lt;String,String&gt; entry : paytmParams.entrySet()) {
     outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='"</span>+entry.getKey()+<span class="hljs-string">"' value='"</span>+entry.getValue()+<span class="hljs-string">"'&gt;"</span>);
 }
-outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span>+checkSum+<span class="hljs-string">"'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span>+paytmChecksum+<span class="hljs-string">"'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;/form&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;script type='text/javascript'&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"document.f1.submit();"</span>);
@@ -118,104 +129,150 @@ outputHtml.append(<span class="hljs-string">"&lt;/body&gt;"</span>);
 outputHtml.append(<span class="hljs-string">"&lt;/html&gt;"</span>);</code></pre>
             `}}></span>
     </TabPanel>
-	<TabPanel tabId="net">
+    <TabPanel tabId="net">
         <span dangerouslySetInnerHTML={{
         __html:  ` 
-<pre><code class="hljs language-cs">Dictionary parameters = <span class="hljs-keyword">new</span> Dictionary();
-String Merchant_key=<span class="hljs-string">"I%XXXXXXXXXXDyh4z"</span>;
-String MID=<span class="hljs-string">"TESXXXXXXXXXXXXXXX13"</span>;
-String Website=<span class="hljs-string">"WEBSTAGING"</span>;
-parameters.Add(<span class="hljs-string">"MID"</span>, MID);
-parameters.Add(<span class="hljs-string">"CHANNEL_ID"</span>, <span class="hljs-string">"WEB"</span>);
-parameters.Add(<span class="hljs-string">"WEBSITE"</span>, Website);
-parameters.Add(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>);
-parameters.Add(<span class="hljs-string">"CUST_ID"</span>, <span class="hljs-string">"cust123"</span>);
-parameters.Add(<span class="hljs-string">"ORDER_ID"</span>, <span class="hljs-string">"ord1"</span>);
-parameters.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, <span class="hljs-string">"100.12"</span>);
-<span class="hljs-comment">// string paytmTxnURL = "https://securegw.paytm.in/theia/processTransaction"; </span>
+<pre><code class="hljs language-cs">Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
+String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
+<span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
+String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<span class="hljs-comment">// Key in your staging and production merchant key available in your dashboard</span>
+String orderId = <span class="hljs-string">"order1"</span>;
+String channelId = <span class="hljs-string">"WEB"</span>;
+String custId = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
+String txnAmount = <span class="hljs-string">"100.12"</span>;
+String website = <span class="hljs-string">"WEBSTAGING"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
+String industryTypeId = <span class="hljs-string">"Retail"</span>;
+<span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
+String callbackUrl = <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>;
+paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
+paytmParams.Add(<span class="hljs-string">"CHANNEL_ID"</span>, channelId);
+paytmParams.Add(<span class="hljs-string">"WEBSITE"</span>, website);
+paytmParams.Add(<span class="hljs-string">"CALLBACK_URL"</span>, callbackUrl);
+paytmParams.Add(<span class="hljs-string">"CUST_ID"</span>, custId);
+paytmParams.Add(<span class="hljs-string">"MOBILE_NO"</span>, mobileNo);
+paytmParams.Add(<span class="hljs-string">"EMAIL"</span>, email);
+paytmParams.Add(<span class="hljs-string">"ORDER_ID"</span>, orderId);
+paytmParams.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, industryTypeId);
+paytmParams.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, txnAmount);
+<span class="hljs-comment">// for staging </span>
+<span class="hljs-keyword">string</span> transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
 <span class="hljs-comment">// for production </span>
-<span class="hljs-keyword">string</span> paytmTxnURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+<span class="hljs-comment">// string transactionURL = "https://securegw.paytm.in/theia/processTransaction"; </span>
 <span class="hljs-keyword">try</span> {
-	<span class="hljs-keyword">string</span> checksum = paytm.CheckSum.generateCheckSum(Merchant_key, parameters);
-	<span class="hljs-keyword">string</span> outputHTML = <span class="hljs-string">"&lt;html&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;head&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;title&gt;Merchant Checkout Page&lt;/titl&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;/head&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;body&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/cente&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;form method='post' action='"</span> + paytmTxnURL + <span class="hljs-string">"' name='f1&gt;"</span>;
-	<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> parameters.Keys) {
-		outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='"</span> + key + <span class="hljs-string">"' value='"</span> + parameters[key] + <span class="hljs-string">"'&gt;'"</span>;
-	}
-	outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span> + checksum + <span class="hljs-string">"&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;script type='text/javascript&gt;"</span>;
-	outputHTML += <span class="hljs-string">"document.f1.submit();"</span>;
-	outputHTML += <span class="hljs-string">"&lt;/script&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;/form&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;/body&gt;"</span>;
-	outputHTML += <span class="hljs-string">"&lt;/html&gt;"</span>;
-	Response.Write(outputHTML);
+    <span class="hljs-keyword">string</span> paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams);
+    <span class="hljs-keyword">string</span> outputHTML = <span class="hljs-string">"&lt;html&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;head&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;title&gt;Merchant Checkout Page&lt;/titl&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;/head&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;body&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/cente&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;form method='post' action='"</span> + transactionURL + <span class="hljs-string">"' name='f1&gt;"</span>;
+    <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> paytmParams.Keys) {
+        outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='"</span> + key + <span class="hljs-string">"' value='"</span> + paytmParams[key] + <span class="hljs-string">"'&gt;'"</span>;
+    }
+    outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span> + paytmChecksum + <span class="hljs-string">"&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;script type='text/javascript&gt;"</span>;
+    outputHTML += <span class="hljs-string">"document.f1.submit();"</span>;
+    outputHTML += <span class="hljs-string">"&lt;/script&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;/form&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;/body&gt;"</span>;
+    outputHTML += <span class="hljs-string">"&lt;/html&gt;"</span>;
+    Response.Write(outputHTML);
 } <span class="hljs-keyword">catch</span> (Exception ex) {
-	Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString());
+    Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString());
 }</code></pre>`}}></span>
     </TabPanel>
     <TabPanel tabId="php">
     <span dangerouslySetInnerHTML={
         {__html: `
 <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
-<span class="hljs-comment">// following files need to be included</span>
-<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);<br/>
-define(<span class="hljs-string">"PAYTM_MERCHANT_MID"</span>, <span class="hljs-string">""</span>);
-define(<span class="hljs-string">"PAYTM_MERCHANT_KEY"</span>, <span class="hljs-string">""</span>);<br/>
-<span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
-$paramList = <span class="hljs-keyword">array</span>();
-$paramList[<span class="hljs-string">"MID"</span>] = PAYTM_MERCHANT_MID;
-$paramList[<span class="hljs-string">"ORDER_ID"</span>] = <span class="hljs-string">"ord1"</span>;
-$paramList[<span class="hljs-string">"CUST_ID"</span>] = <span class="hljs-string">"cust123"</span>;
-$paramList[<span class="hljs-string">"CHANNEL_ID"</span>] = <span class="hljs-string">"WEB"</span>;
-$paramList[<span class="hljs-string">"TXN_AMOUNT"</span>] = <span class="hljs-string">"100.12"</span>;
-$paramList[<span class="hljs-string">"WEBSITE"</span>] = <span class="hljs-string">"Website"</span>;
-$paramList[<span class="hljs-string">"CALLBACK_URL"</span>] = <span class="hljs-string">"https://pg-staging.paytm.in/MerchantSite/bankResponse"</span>;
-$paramList[<span class="hljs-string">"MOBILE_NO"</span>] = <span class="hljs-string">'9999999999'</span>;
-$paramList[<span class="hljs-string">"EMAIL"</span>] = <span class="hljs-string">'customer@gmail.com'</span>;
-<span class="hljs-comment">// here checksum string will return by getChecksumFromArray() function</span>
-$checkSum = getChecksumFromArray($paramList, PAYTM_MERCHANT_KEY);
-<span class="hljs-comment">// $paytmTxnURL = "https://securegw.paytm.in/theia/processTransaction"; // for production</span>
-$paytmTxnURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+    <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
+    define(<span class="hljs-string">"merchantMid"</span>, <span class="hljs-string">"rxazcv89315285244163"</span>);
+    <span class="hljs-comment">// Key in your staging and production MID available in your dashboard</span>
+    define(<span class="hljs-string">"merchantKey"</span>, <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>);
+    <span class="hljs-comment">// Key in your staging and production merchant key available in your dashboard</span>
+    define(<span class="hljs-string">"orderId"</span>, <span class="hljs-string">"order1"</span>);
+    define(<span class="hljs-string">"channelId"</span>, <span class="hljs-string">"WEB"</span>);
+    define(<span class="hljs-string">"custId"</span>, <span class="hljs-string">"cust123"</span>);
+    define(<span class="hljs-string">"mobileNo"</span>, <span class="hljs-string">"7777777777"</span>);
+    define(<span class="hljs-string">"email"</span>, <span class="hljs-string">"username@emailprovider.com"</span>);
+    define(<span class="hljs-string">"txnAmount"</span>, <span class="hljs-string">"100.12"</span>);
+    define(<span class="hljs-string">"website"</span>, <span class="hljs-string">"WEBSTAGING"</span>);
+    <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
+    define(<span class="hljs-string">"industryTypeId"</span>, <span class="hljs-string">"Retail"</span>);
+    <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
+    define(<span class="hljs-string">"callbackUrl"</span>, <span class="hljs-string">"https://&lt;Merchant_Response_URL&gt;"</span>);
+    $paytmParams = <span class="hljs-keyword">array</span>();
+    $paytmParams[<span class="hljs-string">"MID"</span>] = merchantMid;
+    $paytmParams[<span class="hljs-string">"ORDER_ID"</span>] = orderId;
+    $paytmParams[<span class="hljs-string">"CUST_ID"</span>] = custId;
+    $paytmParams[<span class="hljs-string">"MOBILE_NO"</span>] = mobileNo;
+    $paytmParams[<span class="hljs-string">"EMAIL"</span>] = email;
+    $paytmParams[<span class="hljs-string">"CHANNEL_ID"</span>] = channelId;
+    $paytmParams[<span class="hljs-string">"TXN_AMOUNT"</span>] = txnAmount;
+    $paytmParams[<span class="hljs-string">"WEBSITE"</span>] = website;
+    $paytmParams[<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>] = industryTypeId;
+    $paytmParams[<span class="hljs-string">"CALLBACK_URL"</span>] = callbackUrl;
+    $paytmChecksum = getChecksumFromArray($paytmParams, merchantKey);
+    $transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+    <span class="hljs-comment">// $transactionURL = "https://securegw.paytm.in/theia/processTransaction"; // for production</span>
 <span class="hljs-meta">?&gt;</span>
 &lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;Merchant Checkout Page&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;center&gt;&lt;h1&gt;Please <span class="hljs-keyword">do</span> not refresh this page...&lt;/h1&gt;&lt;/center&gt;
-&lt;form method=<span class="hljs-string">'post'</span> action=<span class="hljs-string">'&lt;?php echo $paytmTxnURL; ?&gt;'</span> name=<span class="hljs-string">'f1'</span>&gt;
-<span class="hljs-meta">&lt;?php</span>
-<span class="hljs-keyword">foreach</span>($paramList <span class="hljs-keyword">as</span> $name =&gt; $value) {
-	<span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;input type="hidden" name="'</span> . $name .<span class="hljs-string">'" value="'</span> . $value . <span class="hljs-string">'"&gt;'</span>;
-}
-<span class="hljs-meta">?&gt;</span>
-&lt;input type=<span class="hljs-string">"hidden"</span> name=<span class="hljs-string">"CHECKSUMHASH"</span> value=<span class="hljs-string">"&lt;?php echo $checkSum ?&gt;"</span>&gt;
-&lt;/form&gt;
-&lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
-document.f1.submit();
-&lt;/script&gt;
-&lt;/body&gt;
+    &lt;head&gt;
+        &lt;title&gt;Merchant Checkout Page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;center&gt;&lt;h1&gt;Please <span class="hljs-keyword">do</span> not refresh this page...&lt;/h1&gt;&lt;/center&gt;
+        &lt;form method=<span class="hljs-string">'post'</span> action=<span class="hljs-string">'&lt;?php echo $transactionURL; ?&gt;'</span> name=<span class="hljs-string">'f1'</span>&gt;
+            <span class="hljs-meta">&lt;?php</span>
+                <span class="hljs-keyword">foreach</span>($paytmParams <span class="hljs-keyword">as</span> $name =&gt; $value) {
+                    <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;input type="hidden" name="'</span> . $name .<span class="hljs-string">'" value="'</span> . $value . <span class="hljs-string">'"&gt;'</span>;
+                }
+            <span class="hljs-meta">?&gt;</span>
+            &lt;input type=<span class="hljs-string">"hidden"</span> name=<span class="hljs-string">"CHECKSUMHASH"</span> value=<span class="hljs-string">"&lt;?php echo $paytmChecksum ?&gt;"</span>&gt;
+        &lt;/form&gt;
+        &lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
+            document.f1.submit();
+        &lt;/script&gt;
+    &lt;/body&gt;
 &lt;/html&gt;</code></pre>`}}></span>
 </TabPanel>
 </Tabs>
 </div>
 
-For further details and codes in multiple languages, click below links - 
+<a name="code"></a>
+
+
+<div className={`${style.dscrption}`}>
+Endpoints: <br/>
+Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
+Production: https://securegw.paytm.in/theia/processTransaction
+</div>
+
+Get the sample code for a language of your choice - 
+
+
 
 **For Web:**
 
 <div className={`${style.ecomPlatform} grid  justify-start`}>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Perl' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Java' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-perl.png' alt=''/>
-                        <label>Perl</label>
+                        <img src='/assets/java.png' alt=''/>
+                        <label>Java</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_dotNet' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-dotnet.png' alt=''/>
+                        <label>ASP.Net</label>
                     </span>
                 </a>
             </div>
@@ -236,18 +293,18 @@ For further details and codes in multiple languages, click below links -
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Java' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Ruby' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/java.png' alt=''/>
-                        <label>Java</label>
+                        <img src='/assets/logo-ruby-on-rails.png' alt=''/>
+                        <label>Ruby on rails</label>
                     </span>
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_dotNet' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Perl' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-dotnet.png' alt=''/>
-                        <label>ASP.Net</label>
+                        <img src='/assets/logo-perl.png' alt=''/>
+                        <label>Perl</label>
                     </span>
                 </a>
             </div>
@@ -256,14 +313,6 @@ For further details and codes in multiple languages, click below links -
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/logo-python.png' alt=''/>
                         <label>Python</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Ruby' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-ruby-on-rails.png' alt=''/>
-                        <label>Ruby on rails</label>
                     </span>
                 </a>
             </div>
@@ -289,22 +338,6 @@ For further details and codes in multiple languages, click below links -
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-php.png' alt=''/>
-                        <label>PHP</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
-                    <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-nodejs.png' alt=''/>
-                        <label>Node.js</label>
-                    </span>
-                </a>
-            </div>
-            <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/java.png' alt=''/>
@@ -321,10 +354,18 @@ For further details and codes in multiple languages, click below links -
                 </a>
             </div>
             <div className={`${style.ecomCard}`}>
-                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
-                        <img src='/assets/logo-python.png' alt=''/>
-                        <label>Python</label>
+                        <img src='/assets/logo-php.png' alt=''/>
+                        <label>PHP</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-nodejs.png' alt=''/>
+                        <label>Node.js</label>
                     </span>
                 </a>
             </div>
@@ -333,6 +374,14 @@ For further details and codes in multiple languages, click below links -
                     <span className={`grid vertical justify-between align-center`}>
                         <img src='/assets/logo-ruby-on-rails.png' alt=''/>
                         <label>Ruby on rails</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-python.png' alt=''/>
+                        <label>Python</label>
                     </span>
                 </a>
             </div>
@@ -355,26 +404,28 @@ For further details and codes in multiple languages, click below links -
     </head>
     <body>
         <center><h1>Please do not refresh this page...</h1></center>
-        <form method="post" action="https://securegw-stage.paytm.in/theia/processTransaction?ORDER_ID=RHL69679_20180821151119" name="f1">
+        <form method="post" action="https://securegw-stage.paytm.in/theia/processTransaction?ORDER_ID=order1" name="f1">
             <table border="1">
                 <tbody>
-                    <input type="hidden" name="MID" value="TIMESI54326042593468">
-                    <input type="hidden" name="WEBSITE" value="dineoutWEB">
-                    <input type="hidden" name="ORDER_ID" value="RHL69679_20180821151119">
-                    <input type="hidden" name="CUST_ID" value="CUST001">
+                    <input type="hidden" name="MID" value="rxazcv89315285244163">
+                    <input type="hidden" name="WEBSITE" value="WEBSTAGING">
+                    <input type="hidden" name="ORDER_ID" value="order1">
+                    <input type="hidden" name="CUST_ID" value="cust123">
+                    <input type="hidden" name="MOBILE_NO" value="7777777777">
+                    <input type="hidden" name="EMAIL" value="username@emailprovider.com">
+                    <input type="hidden" name="INDUSTRY_TYPE_ID" value="Retail">
                     <input type="hidden" name="CHANNEL_ID" value="WEB">
-                    <input type="hidden" name="TXN_AMOUNT" value="1">
-                    <input type="hidden" name="CALLBACK_URL" value="http://localhost/paytmkit/pgResponse.php">
+                    <input type="hidden" name="TXN_AMOUNT" value="100.12">
+                    <input type="hidden" name="CALLBACK_URL" value="https://Merchant_Response_URL>">
                     <input type="hidden" name="CHECKSUMHASH" value="ZWdMJOr1yGiFh1nns2U8sDC9VzgUDHVnQpG
                     pVnHyrrPb6bthwro1Z8AREUKdUR/K46x3XvFs6Xv7EnoSOLZT29qbZJKXXvyEuEWQIJGkw=">
                 </tbody>
             </table>
         <script type="text/javascript">
-         document.f1.submit();
+            document.f1.submit();
         </script>
         </form>
     </body>
-
 </html>
 
 ```
@@ -382,17 +433,38 @@ For further details and codes in multiple languages, click below links -
 
 ### Step 3:
 
-Customer fills the payment details and is redirected to bank page for authorization. Once the transaction is authorized, Paytm receives the response from the bank and returns a status to you. Sample HTML form post is provided below
+Customer fills the payment details and is redirected to bank page for authorization. Once the transaction is authorized, Paytm receives the response from the bank and returns a status to your website via your callback URL. Response attributes description and sample HTML form post is provided below
+
+| Response Attributes    |     |
+| ------------- | ----- | ----- |
+| **MID** String(20) | This is a unique identifier provided to every merchant by Paytm
+| **TXNID** String(64) | This is a unique Paytm transaction ID that is issued by Paytm for each transaction
+| **ORDERID** String(50) | Unique reference ID for a transaction which is generated by merchant and sent in the request
+| **CUST_ID** String(64) | Unique reference ID for every customer which is generated by merchant and sent in request
+| **BANKTXNID** String | The transaction ID sent by the bank. In case of Paytm proprietary instruments too, there is unique reference number generated by Paytm's system. In case the transaction does not reach the bank, this will be NULL or empty string. Primary reason for this is user dropping out of the payment flow before the transaction reaches to bank to servers
+| **TXNAMOUNT** String(10) | Amount paid by customer in INR
+| **CURRENCY** String(3) | Currency in which the transaction has taken place. Currently only "INR" is the supported currency of transaction
+| **STATUS** String(20) | This contains the transaction status and has only three values: TXN_SUCCESS, TXN_FAILURE and PENDING
+| **RESPCODE** String(10) | Codes refer to a particular reason of payment failure. List in this <a href="/assets/Transaction response codes and messages.pdf" download>PDF</a>
+| **RESPMSG** String(500) | Description message is linked with each respcode. List in this <a href="/assets/Transaction response codes and messages.pdf" download>PDF</a>
+| **TXNDATE** DateTime | Date and Time of transaction in the format  "yyyy-MM-dd HH:mm:ss.S"Example: "2015-11- 02 11:40:46.0"
+| **GATEWAYNAME** String(15) | Gateway used by Paytm to process the transactions. By paymodes, the details are provided below <br/>Credit, debit cards  UPI - Gateway used to process the transaction. For example, if HDFC gateway has been used to process SBI credit card transactions, the value will be HDFC <br/>Net banking - Netbanking transactions are not routed via gateway. Hence issuing bank name is passed in this field  <br/> Paytm Wallet - Wallet
+| **BANKNAME** String(500) | Name of issuing bank of the payment instrument used by customer. By paymodes, the details are provided below <br/>Credit, debit cards, net banking - Name of the issuing bank. Example in case customer uses SBI's credit card, the value will be "SBI"<br/>Paytm Wallet - Wallet<br/>Note that in case of UPI - This parameter will be not be present in the response
+| **PAYMENTMODE** String(15) | The payment mode used by customer for transaction <br/>Credit card  – CC <br/>Debit card  - DC <br/>Net banking  - NB<br/>UPI - UPI <br/>Paytm wallet – PPI 
+| **CHECKSUMHASH** String(108) | Security parameter to avoid tampering. Verified using server side checksum utility provided by Paytm.  Utilities to generate checksumhash is available <a href="/docs/v1/payment-gateway#codes">here</a>
+| **BIN_NUMBER** String(6) | Starting 6 digit of Credit Card/Debit Card which used in transaction.<br/>For other modes, this field not provided in response
+| **CARD_LAST_NUMS** String(4) | Last 4 digit of Credit Card/Debit Card which used in transaction.<br/>For other modes, this field not provided in response
+
+
 
 ```html
 <html>
    <head>
-	 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	 <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <title>Paytm Secure Online Payment Gateway</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+     <title>Paytm Secure Online Payment Gateway</title>
    </head>
    <body>
-	  <table align='center'>
+      <table align='center'>
             <tr>
             <td><STRONG>Transaction is being processed,</STRONG></td>
             </tr>
@@ -402,24 +474,24 @@ Customer fills the payment details and is redirected to bank page for authorizat
             <tr>
             <td>(Please do not press 'Refresh' or 'Back' button</td>
             </tr>
-	  </table>
-	  <FORM NAME='TESTFORM' ACTION='http://localhost/paytmkit/pgResponse.php' METHOD='POST'>
+      </table>
+      <FORM NAME='TESTFORM' ACTION='https://<Merchant_Response_URL>' METHOD='POST'>
             <input type='hidden' name='CURRENCY' value='INR'>
-            <input type='hidden' name='CUST_ID' value='CUST001'>
+            <input type='hidden' name='CUST_ID' value='cust123'>
             <input type='hidden' name='GATEWAYNAME' value='WALLET'>
             <input type='hidden' name='RESPMSG' value='Txn Success'>
             <input type='hidden' name='BANKNAME' value='WALLET'>
             <input type='hidden' name='PAYMENTMODE' value='PPI'>
-            <input type='hidden' name='MID' value='TIMESI54326042593468'>
+            <input type='hidden' name='MID' value='rxazcv89315285244163'>
             <input type='hidden' name='RESPCODE' value='01'>
             <input type='hidden' name='TXNID' value='20180821111212800110168085600021958'>
-            <input type='hidden' name='TXNAMOUNT' value='1.00'>
-            <input type='hidden' name='ORDERID' value='RHL14037_20180821151537'>
+            <input type='hidden' name='TXNAMOUNT' value='100.12'>
+            <input type='hidden' name='ORDERID' value='order1'>
             <input type='hidden' name='STATUS' value='TXN_SUCCESS'>
             <input type='hidden' name='BANKTXNID' value='5357590'>
             <input type='hidden' name='TXNDATE' value='2018-08-21 15:16:11.0'>
             <input type='hidden' name='CHECKSUMHASH'   value='YjtlLUVs6gQhR8RuUltwOsGnGXBg7gpdMRAKYU/ qiTZCeJZmwbciUFmwtT6RmwBmpwVswSiknJK7iEBch27q627uzTXKxJ0vzoMs68AE9A='>
-	  </FORM>
+      </FORM>
    </body>
  <script type="text/javascript">  document.forms[0].submit();</script>    
 </html> 
@@ -428,8 +500,7 @@ Customer fills the payment details and is redirected to bank page for authorizat
 
 ### Step 4:
 
-Checksumhash received in response of transaction needs to verified using Paytm library with all the parameters in key value pairs. Code snippets for verification is provided below
-
+Checksumhash received in response of transaction needs to verified on merchant server using Paytm library with all the parameters in key value pairs. Code snippets and Github links for the checksum utility are provided below
 
 <div className={`${style.checkoutWrapper}`}>
 
@@ -443,51 +514,43 @@ Checksumhash received in response of transaction needs to verified using Paytm l
 	<TabPanel tabId="java">
     <span dangerouslySetInnerHTML={{
         __html: `
-<pre><code class="hljs language-java">Package com.paytm.pg.checksumKit;
-<span class="hljs-keyword">import</span> com.paytm.pg.merchant.*;
-<span class="hljs-keyword">import</span> java.util.Map;
-<span class="hljs-keyword">import</span> java.util.TreeMap;
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">checksumVerification</span> </span>{
-	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String MercahntKey = <span class="hljs-string">"XXXXXXXXXXX"</span>;
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] a)</span></span>{
-		String paytmChecksum = <span class="hljs-string">""</span>;
-		Map&lt;String, String&gt; mapData = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-		TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span>  TreeMap&lt;String,String&gt;();
-		<span class="hljs-keyword">for</span> (Map.Entry&lt;String, String&gt; entry : mapData.entrySet()) {
-			<span class="hljs-keyword">if</span>(entry.getKey().equals(<span class="hljs-string">"CHECKSUMHASH"</span>)){
-				paytmChecksum = entry.getKey();
-			}<span class="hljs-keyword">else</span>{
-				paytmParams.put(entry.getKey(), entry.getValue());
-			}
-		}
-		<span class="hljs-keyword">boolean</span> isValideChecksum = <span class="hljs-keyword">false</span>;
-		<span class="hljs-keyword">try</span>{
-			isValideChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().
-			verifycheckSum(MercahntKey, paytmParams, paytmChecksum);	
-			System.out.println(isValideChecksum);
-			<span class="hljs-comment">// if checksum is validated Kindly verify the amount and status // if transaction is successful // kindly call Paytm Transaction Status API and verify the transaction amount and status.// If everything is fine then mark that transaction as successful into your DB.</span>
-		}<span class="hljs-keyword">catch</span>(Exception e){
-			e.printStackTrace();
-		}
-	}
+<pre><code class="hljs language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+<span class="hljs-keyword">private</span> String paytmChecksum = <span class="hljs-keyword">null</span>;
+<span class="hljs-comment">// Create a tree map from the form post param</span>
+TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
+<span class="hljs-comment">// Request is HttpServletRequest</span>
+<span class="hljs-keyword">for</span> (Entry&lt;String, String[]&gt; requestParamsEntry : request.getParameterMap().entrySet()) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-string">"CHECKSUMHASH"</span>.equalsIgnoreCase(requestParamsEntry.getKey())){
+        paytmChecksum = requestParamsEntry.getValue()[<span class="hljs-number">0</span>];
+    } <span class="hljs-keyword">else</span> {
+        paytmParams.put(requestParamsEntry.getKey(), requestParamsEntry.getValue()[<span class="hljs-number">0</span>]);
+    }
+}
+<span class="hljs-comment">// Call the method for verification</span>
+<span class="hljs-keyword">boolean</span> isValidChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(merchantKey, paytmParams, paytmChecksum);
+<span class="hljs-comment">// If isValidChecksum is false, then checksum is not valid</span>
+<span class="hljs-keyword">if</span>(isValidChecksum){
+	System.out.append(<span class="hljs-string">"Checksum Matched"</span>);
+}<span class="hljs-keyword">else</span>{
+	System.out.append(<span class="hljs-string">"Checksum MisMatch"</span>);
 }</code></pre>
         `}}></span>
     </TabPanel>
-	<TabPanel tabId="net">
+    <TabPanel tabId="net">
     <span dangerouslySetInnerHTML={
         {__html: `
-<pre><code class="hljs language-cs">String merchantKey = <span class="hljs-string">"merchantKey value"</span> ;
-<span class="hljs-comment">// Replace the with the Merchant Key provided by Paytm at the time of registration.</span>
-Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt; parameters = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt;();
+<pre><code class="hljs language-cs">String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span> ;
+Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
 <span class="hljs-keyword">string</span> paytmChecksum = <span class="hljs-string">""</span>;
 <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> Request.Form.Keys) {
-    parameters.Add(key.Trim(), Request.Form[key].Trim());
+    paytmParams.Add(key.Trim(), Request.Form[key].Trim());
 }
-<span class="hljs-keyword">if</span> (parameters.ContainsKey(<span class="hljs-string">"CHECKSUMHASH"</span>)) {
-    paytmChecksum = parameters[<span class="hljs-string">"CHECKSUMHASH"</span>];
-    parameters.Remove(<span class="hljs-string">"CHECKSUMHASH"</span>);
+<span class="hljs-keyword">if</span> (paytmParams.ContainsKey(<span class="hljs-string">"CHECKSUMHASH"</span>)) {
+    paytmChecksum = paytmParams[<span class="hljs-string">"CHECKSUMHASH"</span>];
+    paytmParams.Remove(<span class="hljs-string">"CHECKSUMHASH"</span>);
 }
-<span class="hljs-keyword">if</span> (CheckSum.verifyCheckSum(merchantKey, parameters, paytmChecksum)) {
+<span class="hljs-keyword">bool</span> isValidChecksum=CheckSum.verifyCheckSum(merchantKey, paytmParams, paytmChecksum);
+<span class="hljs-keyword">if</span> (isValidChecksum) {
     Response.Write(<span class="hljs-string">"Checksum Matched"</span>);
 } <span class="hljs-keyword">else</span> {
     Response.Write(<span class="hljs-string">"Checksum MisMatch"</span>);
@@ -497,21 +560,23 @@ Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keywor
         <span dangerouslySetInnerHTML={
             {__html: `
 <pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
-$paramList = $_POST;
-$paytmChecksum = <span class="hljs-keyword">isset</span>($_POST[<span class="hljs-string">"CHECKSUMHASH"</span>]) ? $_POST[<span class="hljs-string">"CHECKSUMHASH"</span>] : <span class="hljs-string">""</span>;
-$isValidChecksum = verifychecksum_e($paramList, <span class="hljs-string">"PAYTM_MERCHANT_KEY_HERE"</span>, $paytmChecksum);
-<span class="hljs-keyword">if</span>($isValidChecksum == <span class="hljs-string">"TRUE"</span>) {
-	<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum matched.&lt;/b&gt;"</span>;
-} <span class="hljs-keyword">else</span> {
-	<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum mismatched!!!&lt;/b&gt;"</span>;
-}
+    $paytmParams = $_POST;
+    $merchantKey=<span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
+    $paytmChecksum = <span class="hljs-keyword">isset</span>($_POST[<span class="hljs-string">"CHECKSUMHASH"</span>]) ? $_POST[<span class="hljs-string">"CHECKSUMHASH"</span>] : <span class="hljs-string">""</span>;
+    $isValidChecksum = verifychecksum_e($paytmParams, $merchantKey, $paytmChecksum);
+    <span class="hljs-keyword">if</span>($isValidChecksum == <span class="hljs-string">"TRUE"</span>) {
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum Matched&lt;/b&gt;"</span>;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;b&gt;Checksum MisMatch&lt;/b&gt;"</span>;
+    }
 <span class="hljs-meta">?&gt;</span></code></pre>`}}></span>
     </TabPanel>
 </Tabs>
 </div>
 
+<a name="codes"></a>
 
-For further details and codes in multiple languages, click below links - 
+Get the sample code for a language of your choice - 
 
 **For Web:**
 
@@ -658,23 +723,22 @@ For further details and codes in multiple languages, click below links -
 ### Step 5 :
 
 
-Validate transaction response via server side request using[Transaction Status API](https://developer.paytm.com/docs/transaction-status-api). This API requires checksumhash in request and its verification in response. The status should be treated as the final status of the transaction
+Validate transaction response via server side request using [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api). This API requires checksumhash in request and its verification in response. The status should be treated as the final status of the transaction
 
 ## On completion of your integration -
 
 ---
 
-Post completion of integration on your staging environment, do a complete transaction from order summary page/cart on your website/APP 
+Post completion of integration on your staging environment, do a complete transaction from order summary page   on your website or mobile app 
 
-1. Attempt a test transaction using <a href="https://developer.paytm.com/docs/testing-integration" >test paymodes credentials</a>
+1. Attempt a test transaction using <a href="/docs/testing-integration" >test paymodes credentials</a>
 2. Ensure you re-verify transaction response with [Transaction Status API](https://developer.paytm.com/docs/transaction-status-api) via server to server call in payment flow and not separately as a one time activity    
 3. See the transaction details in “Test Data” mode on your <a href="https://dashboard.paytm.com/next/transactions" target="_blank">dashboard</a>
 
 
-Once the test transaction is complete, move your code to live environment with production account details. Note that production accounts details are available after you have <a href='https://dashboard.paytm.com/next/activate' target="_blank">activate your account </a> on the dashboard
+Once the test transaction is complete, move your code to live environment with production account details. Note that production accounts details are available after you have <a href='https://dashboard.paytm.com/next/activate?src=dev' target="_blank">activated your account </a> on the dashboard
 
-Additionally to better manage payments on your platform, kindly though [Refund Management](https://developer.paytm.com/docs/refund-management) and [Late Notification](https://developer.paytm.com/docs/late-notification)
+Lastly, it's recommended that you read about <a  href="/docs/refund-management">Managing Refunds</a> and <a href="/docs/late-notification"> late payment notifications</a>
 
 In case of any issues, please search or post your query on our <a href="http://paywithpaytm.com/developer/discussion/" target="_blank">Developer Forum</a> or send your queries to devsupport@paytm.com
-
 

@@ -6,7 +6,7 @@ import Layout from '../../components/layout'
 export default class Docs extends Component {
     constructor(props){
         super(props);
-    }
+      }
 
 
     render() 

@@ -9,9 +9,16 @@
         top: 64px;
         width: 100%;
         z-index: 1; // background: blue;
-        padding-bottom: 72px;
         border-right: 1px solid #e6ebf3;
-        overflow:auto;
+        overflow:hidden;
+        background:#ffffff;
+        section{
+            height:100%;
+            overflow:scroll;
+            overflow-x:hidden;
+            padding-bottom: 72px;
+        }
+
     }
     
     .menu-left-block {
