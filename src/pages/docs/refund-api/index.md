@@ -231,12 +231,3 @@ To initiate partial or complete refund to source account from which the transact
                 </a>
             </div>
 </div>
-
-
-
-
-import { Helmet } from "react-helmet";
-
-<Helmet>
-    <title>API Reference - Refund</title>
-</Helmet>
