@@ -17,8 +17,14 @@ const reducer = (state, action) => {
         loggedIn: action.loggedIn,
         user: action.user,
         userText: action.userText,
-        showLogin: action.showLogin
+        showLogin: action.showLogin,
+        showMainLogIn: action.showMainLogIn
       });
+
+    case 'TOGGLE_MAIN_SHOW_LOGIN': 
+    return Object.assign({}, state, {
+      showMainLogIn: action.showMainLogIn
+    });
 
     default:
       return state;
@@ -31,7 +37,8 @@ const initialState = {
   userText: '',
   showLogin: false,
   loggedIn: false,
-  showApiMenu: false
+  showApiMenu: false,
+  showMainLogIn: true
 }
 const createStore = () => reduxCreateStore(reducer, initialState);
 

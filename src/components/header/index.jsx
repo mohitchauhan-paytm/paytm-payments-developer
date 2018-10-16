@@ -15,6 +15,10 @@ class Header extends Component {
   }
 
   handleChange = () => {
+    if(!this.props.state.showMainLogIn) {
+      this.props.toggleMainShowLogin(true);
+      this.props.toggleShowLogin(true);
+   }
     this.props.toggleShowLogin(true);
   }
 
@@ -32,6 +36,7 @@ class Header extends Component {
 
   handleFrameTasks = (e) => {
     if (e.data.result == 'success') {
+      this.props.toggleMainShowLogin(false);
       this.props.setLoginData(
         false,
         true,
@@ -112,7 +117,8 @@ class Header extends Component {
             }
           </nav>
         </div>
-
+        {
+          this.props.state.showMainLogIn ? 
         <div className={`popupWrapper  ${(this.props.state.showLogin ? ' fadeIn' : '')}`}>
           <div className="popup pos-abs iframeOpen">
             <div className="popup-wrapper pos-rel">
@@ -122,7 +128,8 @@ class Header extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </div>: null
+        }
 
 
         {/* <Overlay show={expandMenu} showDropdownMethod={this.showDropdownMethod} /> */}
@@ -165,7 +172,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleShowLogin: (showLogin) => dispatch({ type: 'TOGGLE_SHOW_LOGIN', showLogin }),
-    setLoginData: (showLogin, loggedIn, user, userText) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText })
+    setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn }),
+    toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

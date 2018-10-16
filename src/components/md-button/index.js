@@ -8,6 +8,10 @@ class MdButton extends Component {
     }
 
     handleChange = () =>  {
+        if(!this.props.state.showMainLogIn) {
+            this.props.toggleMainShowLogin(true);
+            this.props.toggleShowLogin(true);
+        }
         this.props.toggleShowLogin(true);
     }
 
@@ -19,6 +23,7 @@ class MdButton extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
       toggleShowLogin: (showLogin) => dispatch({type: 'TOGGLE_SHOW_LOGIN', showLogin}),
+      toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
     }
 }
 
