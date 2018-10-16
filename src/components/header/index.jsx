@@ -112,7 +112,7 @@ class Header extends Component {
               this.props.state.loggedIn ?
 
                 <div className={`grid-inline`}>
-                  <a className={`${style.whiteBtn} btn btn-primary small grid align-center`} href="https://dashboard.paytm.com/next/" target="_blank">My Dashboard</a>
+                  <a className={`${style.whiteBtn} btn btn-primary small grid align-center`} href="https://dashboard.paytm.com" target="_blank">My Dashboard</a>
                 </div> : null
             }
           </nav>
