@@ -104,13 +104,16 @@ class Home extends Component {
                             </li>
                             <li>
                                 <p className='stage'>STEP 2</p>
-                                <p>Activate your account by submitting your bank details so we can transfer funds you collect using Paytm.</p>
-                            </li>
-                            <li>
-                                <p className='stage'>STEP 3</p>
                                 <p>Get staging account credentials from your dashboard.</p>
                                 <div className='grid stage-detail'>
                                     <button className='btn btn-default small' onClick={() => window.open("https://dashboard.paytm.com/next/apikeys?src=dev", "_blank")}>Go to developer dashboard</button>
+                                </div>
+                            </li>
+                            <li>
+                                <p className='stage'>STEP 3</p>
+                                <p>After completing your testing, activate your account to get your production keys so you can start accepting payments.</p>
+                                <div className='grid stage-detail'>
+                                    <button className='btn btn-default small' onClick={() => window.open("https://dashboard.paytm.com/next/activate", "_blank")}>Activate account</button>
                                 </div>
                             </li>
                             <li>
