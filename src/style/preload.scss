@@ -288,12 +288,16 @@ p{
 .stage-detail{
     button{
         margin-top:8px;
+        &:hover{
+            color:#ffffff;
+            background-color: #27B7EA;
+            border-color: #27B7EA;
+        }
     }
     .btn-default {
         background-color: $white;
         color: $dark4;
         border: 1px solid $line;
-        transition: all 0.3s ease;
         
     }
     button:first-child
