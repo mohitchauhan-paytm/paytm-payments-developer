@@ -27,7 +27,7 @@ import MdButton from './../../../components/md-button/index';
 ## Dashboard 
 --- 
 
-The Paytm <a href="https://dashboard.paytm.com/next" target="_blank">Dashboard</a> is a single window to manage your account -
+The Paytm <a href="https://dashboard.paytm.com" target="_blank">Dashboard</a> is a single window to manage your account -
 
 
 * Activate account to start accepting payments
@@ -48,7 +48,7 @@ The Paytm <a href="https://dashboard.paytm.com/next" target="_blank">Dashboard</
 * After completion of transaction, Paytm posts the response (success or failed) on a Callback URL defined by you
 * As a <u>recommended</u> security measure, you validate each transaction response via a server-to-server (S2S) API call. Transaction revalidation protects from request/response tampering possible in browser calls. This S2S call is not required for Paytm plugins and hosted e-commerce website integration solutions
 * Based on the response received, you display order status to customer
-* See a real-time summary of payments received and other insights in your <a href="https://dashboard.paytm.com/next" target="_blank">dashboard</a>
+* See a real-time summary of payments received and other insights in your <a href="https://dashboard.paytm.com" target="_blank">dashboard</a>
 * Receive payments collected from customers in your bank account on next business day
 
 
