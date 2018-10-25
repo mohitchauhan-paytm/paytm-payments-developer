@@ -135,7 +135,7 @@ class Header extends Component {
                 <div className="popup-wrapper pos-rel">
                   <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
                   <div className="popup-content">
-                    <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard-preprod.paytm.com/developer-login" title="oAuth"></iframe>
+                    <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
                   </div>
                 </div>
               </div>
