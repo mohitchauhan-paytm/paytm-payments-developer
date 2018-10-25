@@ -419,6 +419,11 @@ p{
 .full-container {
     margin:0 -12.35%;
 }
+.has-modal{
+    overflow:hidden!important;
+    max-height:100%;
+}
+
 @media screen and (max-width: 1368px) {
     .box-item{
         padding:30px 20px;

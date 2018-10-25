@@ -8,12 +8,18 @@ class MdButton extends Component {
     }
 
     handleChange = () =>  {
+        this.addHasModalClass();
         if(!this.props.state.showMainLogIn) {
             this.props.toggleMainShowLogin(true);
             this.props.toggleShowLogin(true);
         }
         this.props.toggleShowLogin(true);
     }
+
+    addHasModalClass() {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+    }
+    
 
     render() {
         return(<a href="javascript:void(0)" onClick={this.handleChange}>{this.props.text}</a>);

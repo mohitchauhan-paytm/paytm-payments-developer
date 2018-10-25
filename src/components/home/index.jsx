@@ -11,6 +11,7 @@ class Home extends Component {
     }
 
     handleChange = () =>  {
+        this.addHasModalClass();
         if(!this.props.state.showMainLogIn) {
             this.props.toggleMainShowLogin(true);
             this.props.toggleShowLogin(true);
@@ -18,11 +19,16 @@ class Home extends Component {
         this.props.toggleShowLogin(true);
     }
 
+    addHasModalClass() {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+    }
+    
+
     render() {
         return (
             <div>
                 <Helmet>
-                    <title>Paytm for Developers: Docs Home</title>
+                    <title>Paytm for Developers: Documentation</title>
                 </Helmet>
                 <div className='heading-box-area grid justify-between'>
                     <div className='head-left stage-detail'>
