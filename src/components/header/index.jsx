@@ -15,14 +15,16 @@ class Header extends Component {
   }
 
   handleChange = () => {
-    if(!this.props.state.showMainLogIn) {
+    this.addHasModalClass();
+    if (!this.props.state.showMainLogIn) {
       this.props.toggleMainShowLogin(true);
       this.props.toggleShowLogin(true);
-   }
+    }
     this.props.toggleShowLogin(true);
   }
 
   hideLogin = () => {
+    this.removeHasModalClass();
     this.props.toggleShowLogin(false);
   }
 
@@ -36,6 +38,7 @@ class Header extends Component {
 
   handleFrameTasks = (e) => {
     if (e.data.result == 'success') {
+      this.removeHasModalClass();
       this.props.toggleMainShowLogin(false);
       this.props.setLoginData(
         false,
@@ -44,6 +47,14 @@ class Header extends Component {
         e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase()
       );
     }
+  }
+
+  addHasModalClass() {
+    document.getElementsByTagName('body')[0].classList.add('has-modal');
+  }
+
+  removeHasModalClass() {
+    document.getElementsByTagName('body')[0].classList.remove('has-modal');
   }
 
   render() {
@@ -118,17 +129,17 @@ class Header extends Component {
           </nav>
         </div>
         {
-          this.props.state.showMainLogIn ? 
-        <div className={`popupWrapper  ${(this.props.state.showLogin ? ' fadeIn' : '')}`}>
-          <div className="popup pos-abs iframeOpen">
-            <div className="popup-wrapper pos-rel">
-              <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
-              <div className="popup-content">
-                <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
+          this.props.state.showMainLogIn ?
+            <div className={`popupWrapper  ${(this.props.state.showLogin ? ' fadeIn' : '')}`}>
+              <div className="popup pos-abs iframeOpen">
+                <div className="popup-wrapper pos-rel">
+                  <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
+                  <div className="popup-content">
+                    <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>: null
+            </div> : null
         }
 
 
@@ -173,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     toggleShowLogin: (showLogin) => dispatch({ type: 'TOGGLE_SHOW_LOGIN', showLogin }),
     setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn }),
-    toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
+    toggleMainShowLogin: (showMainLogIn) => dispatch({ type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn })
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

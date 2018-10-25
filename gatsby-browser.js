@@ -9,14 +9,6 @@
 import wrapWithProvider from "./wrap-with-provider"
 export const wrapRootElement = wrapWithProvider
 
-export const onServiceWorkerInstalled = () => {
-  if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-    window.navigator.serviceWorker.getRegistrations().then(registrations => {
-      registrations.forEach(r => r.unregister())
-    })
-  }
-} 
-
 
 export const onRouteUpdate = () => {
     if (typeof window !== `undefined`) { window.scrollTo(0, 0)}
