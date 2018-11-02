@@ -423,7 +423,13 @@ p{
     overflow:hidden!important;
     max-height:100%;
 }
-
+.checksum{
+position:relative;
+a{
+    position: absolute;
+    top:-70px;
+}
+}
 @media screen and (max-width: 1368px) {
     .box-item{
         padding:30px 20px;
