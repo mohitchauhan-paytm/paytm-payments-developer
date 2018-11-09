@@ -631,4 +631,449 @@ export default ({children,location, pageContext}) => (
 </table>
 </div>
 
+# Transaction Status API
+
+<div>
+    <table className={`${style.apiTable}`}>
+    <thead>
+        <tr>
+            <th>Parameter Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Mandatory</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>MID</td>
+            <td>This is a unique merchant ID provided to merchant by Paytm at the time of merchant creation. MID is used while making the transaction, same should be used here</td>
+            <td>Alphanumeric(50)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>ORDERID</td>
+            <td>This is the application transaction ID that was sent by merchant to Paytm at the time of transaction request</td>
+            <td>Alphanumeric(50)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>CHECKSUMHASH</td>
+            <td>URL encoded checksum which is calculated based on a predefined logic as given below in “Generating Checksum” section</td>
+            <td>Alphanumeric(500)</td>
+            <td>Yes </td>
+        </tr>
+    </tbody>
+</table>
+<h2>Response Parameters</h2>
+<table className={`${style.apiTable}`}>
+        <thead>
+        <tr>
+            <th>Parameter Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Mandatory</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>MID</td>
+            <td>This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation. Paytm will post in the response the same MID passed in transaction request</td>
+            <td>Alphanumeric(50)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>SUBS_ID</td>
+            <td>Unique  subscription  id  generated  by Paytm for identifying a subscription Mandatory if REQUEST_TYPE=RENEW_SUBSCRIPTION</td>
+            <td>Numeric</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>TXNID</td>
+            <td>This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction request</td>
+            <td>Alphanumeric (length: upto 64 digits, datatype: long)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>ORDERID</td>
+            <td>This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request. Paytm will post in the response the same ORDERID passed in transaction request</td>
+            <td>Alphanumeric(50)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>BANKTXNID</td>
+            <td>The transaction Id sent by the bank/wallet (NULL or empty string if the transaction doesn’t reach the bank)</td>
+            <td>Alphanumeric(100)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>TXNAMOUNT</td>
+            <td>The amount of the transaction. Paytm will post in the response the same TXNAMOUNT passed in transaction request</td>
+            <td>Numeric(50)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>CURRENCY</td>
+            <td>Currency used for transaction. (INR, USD)</td>
+            <td>Alpha(3)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>STATUS</td>
+            <td>This contains the transaction status and has only four values: <br/>TXN_SUCCESS <br/>TXN_FAILURE <br/>PENDING <br/>OPEN</td>
+            <td>Alphanumeric(50)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>RESPCODE</td>
+            <td>This is alphanumeric transaction response code. All codes refer to a transaction failure or success with each code representing a different reason for failure</td>
+            <td>Alphanumeric(100)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>RESPMSG</td>
+            <td>This contains a short description of the transaction status. In case of a failed transaction the message will describe the potential reason for the failure</td>
+            <td>Alphanumeric(500)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>TXNDATE</td>
+            <td>Date and Time of transaction <br/>Example: “2015-11-02 11:40:46.0”</td>
+            <td>DateTime</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>GATEWAYNAME</td>
+            <td>Gateway used by Paytm (ICICI/CITI/WALLET etc)</td>
+            <td>Alphanumeric</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>BANKNAME</td>
+            <td>Name of the card issuing bank.(ICICI/SBI/HDFC etc.)</td>
+            <td>Alpha(100)</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>PAYMENTMODE</td>
+            <td>The payment mode used for transaction.(CC/DC/NB/PPI etc.)</td>
+            <td>Alpha</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>CHECKSUMHASH</td>
+            <td>Checksum calculated based on pre-defined logic</td>
+            <td>Alphanumeric(500)</td>
+            <td>Yes</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+
+# Refund API
+
+<div>
+    <h2>Request Parameters</h2>
+    <table className={`${style.apiTable}`}>
+        <thead>
+            <tr>
+                <th>Parameter Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Mandatory</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr>
+                <td>MID</td>
+                <td>This is a unique merchant Id provided to merchant by Paytm at the time of integration</td>
+                <td>Alphanumeric (50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>REFID</td>
+                <td>This is the reference ID shared while raising Refund. Each refund request will have unique REFID. Different Refunds for same order will have different REFID </td>
+                <td>Alphanumeric (20)</td>
+                <td>Yes </td>
+            </tr>
+            <tr>
+                <td>TXNID</td>
+                <td>This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction request received from the merchant</td>
+                <td>Alphanumeric (50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>ORDERID</td>
+                <td>This is the merchant’s reference transaction Id that was sent by merchant to Paytm at the time of transaction request</td>
+                <td>Alphanumeric (50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>REFUNDAMOUNT</td>
+                <td>Can be equal to or less than the txn amount, amount should be upto two decimal place and should not contain any special character other than "."</td>
+                <td>Amount(50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>TXNTYPE</td>
+                <td>There can only be one value for this parameter i.e., REFUND</td>
+                <td>Alphanumeric (50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CHECKSUM</td>
+                <td>URL encoded checksum which is calculated based on a pre-defined logic. This is used to verify the integrity of the transaction</td>
+                <td>Alphanumeric (500)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>COMMENTS</td>
+                <td>Any comments can be added here</td>
+                <td>Alphanumeric (50)</td>
+                <td>No</td>
+            </tr>
+            </tbody>
+    </table> 
+    <h2>Response Parameters</h2>
+    <table className={`${style.apiTable}`}>
+        <thead>
+            <tr>
+                <th>Parameter Name</th>
+                <th>Description</th>
+                <th>Type</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr>
+                <td>MID</td>
+                <td>This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>TXNID</td>
+                <td>This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction request</td>
+                <td>Numeric (length: upto 64 digits, datatype: long)</td>
+            </tr>
+            <tr>
+                <td>ORDERID</td>
+                <td>This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>REFUNDAMOUNT</td>
+                <td>Can be equal to or less than the txn amount</td>
+                <td>Amount(50)</td>
+            </tr>
+            <tr>
+                <td>TXNAMOUNT</td>
+                <td>The amount of the transaction</td>
+                <td>Amount(50)</td>
+            </tr>
+            <tr>
+                <td>REFID</td>
+                <td>Unique ID for every refund request sent by merchant to Paytm</td>
+                <td>Alphanumeric (20)</td>
+            </tr>
+            <tr>
+                <td>STATUS</td>
+                <td>This contains the transaction status and has only four values: <br/>TXN_SUCCESS<br/>TXN_FAILURE<br/>PENDING</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>RESPCODE</td>
+                <td>This is a numeric transaction response code. All codes refer to a transaction failure or success with each code representing a different reason for failure</td>
+                <td>Alphanumeric(100)</td>
+            </tr>
+            <tr>
+                <td>RESPMSG</td>
+                <td>This contains a short description of the transaction status. In case of a failed transaction the message will describe the potential reason for the failure</td>
+                <td>Alphanumeric(500)</td>
+            </tr>
+            <tr>
+                <td>TXNDATE</td>
+                <td>Date of transaction<br/>EX- “2015-11-02 11:40:46.0”</td>
+                <td>DateTime</td>
+            </tr>
+            <tr>
+                <td>GATEWAY</td>
+                <td>Gateway used by Paytm (ICICI/CITI/WALLET etc.)</td>
+                <td>Alphanumeric</td>
+            </tr>
+            <tr>
+                <td>CARD_ISSUER</td>
+                <td>Name of the card issuing bank</td>
+                <td>Alphanumeric</td>
+            </tr>
+            <tr>
+                <td>PAYMENTMODE</td>
+                <td>Payment mode used for transaction</td>
+                <td>Alphanumeric</td>
+            </tr>
+            <tr>
+                <td>REFUNDDATE</td>
+                <td>Date of REFUND<br/>EX- “2015-11-02 11:40:46.0”</td>
+                <td>DateTime</td>
+            </tr>
+            <tr>
+                <td>REFUNDTYPE</td>
+                <td>It will be fixed value i.e., REFUND</td>
+                <td>Alphanumeric</td>
+            </tr>
+            <tr>
+                <td>REFUNDID</td>
+                <td>This is a unique Paytm refund Id that is issued by Paytm for each valid refund request</td>
+                <td>Numeric (64)</td>
+            </tr>
+            <tr>
+                <td>BANKTXNID</td>
+                <td>The transaction Id sent by the bank/wallet (NULL or empty string if the transaction doesn’t reach the bank)</td>
+                <td>Alphanumeric (100)</td>
+            </tr>
+            <tr>
+                <td>TOTALREFUNDAMT</td>
+                <td>Total refunded amount</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+        </tbody>
+    </table> 
+</div>
+
+# Refund Status API
+
+<div>
+    <h2>Request Parameters</h2>
+    <table className={`${style.apiTable}`}>
+        <thead>
+            <tr>
+                <th>Parameter Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Mandatory</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr>
+                <td>MID</td>
+                <td>This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation</td>
+                <td>Alphanumeric(50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>ORDERID</td>
+                <td>This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request</td>
+                <td>Alphanumeric (50)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>REFID</td>
+                <td>This is reference ID and this is shared while raising Refund. Each refund request will have unique REFID. Different Refunds for same order will have different REFID</td>
+                <td>Alphanumeric (20)</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CHECKSUMHASH</td>
+                <td>URL encoded checksum which is calculated based on a pre-defined logic</td>
+                <td>Alphanumeric (500)</td>
+                <td>Yes</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Response Parameters</h2>
+    <table className={`${style.apiTable}`}>
+        <thead>
+            <tr>
+                <th>Parameter Name</th>
+                <th>Description</th>
+                <th>Type</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr>
+                <td>TXNID</td>
+                <td>This is a unique Paytm transaction Id that is issued by Paytm for each valid transaction request received from the merchant</td>
+                <td>Numeric (64)</td>
+            </tr>
+            <tr>
+                <td>BANKTXNID</td>
+                <td>The transaction Id sent by the bank (NULL or empty string if the transaction doesn’t reach the bank)</td>
+                <td>Alphanumeric(100)</td>
+            </tr>
+            <tr>
+                <td>ORDERID</td>
+                <td>This is the application transaction Id that was sent by merchant to Paytm at the time of transaction request</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>TXNAMOUNT</td>
+                <td>Amount of transaction</td>
+                <td>Amount(50)</td>
+            </tr>
+            <tr>
+                <td>STATUS</td>
+                <td>This contains the transaction status and has only two values:<br/>TXN_SUCCESS<br/>TXN_FAILURE<br/>PENDING<br/>
+NOT_FOUND</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>GATEWAY</td>
+                <td>The gateway used by Paytm (ICICI/CITI/WALLET etc.)</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>RESPCODE</td>
+                <td>This is a numeric transaction response code. All codes refer to a transaction failure or success with each code representing a different reason for failure. Refer to Annexure A for full list</td>
+                <td>Alphanumeric(100)</td>
+            </tr>
+            <tr>
+                <td>RESPMSG</td>
+                <td>This contains a short description of the transaction status. In case of a failed transaction the message will describe the potential reason for the failure</td>
+                <td>Alphanumeric(500)</td>
+            </tr>
+            <tr>
+                <td>MID</td>
+                <td>This is a unique merchant Id provided to merchant by Paytm at the time of merchant creation</td>
+                <td>Alphanumeric(50)</td>
+            </tr>
+            <tr>
+                <td>PAYMENTMODE</td>
+                <td>Possible value for the Mode of Payment:<br/>a. CC<br/>b. DC<br/>c. Wallet<br/>d. IMPS<br/>d. PPI</td>
+                <td>Alphanumeric</td>
+            </tr>
+            <tr>
+                <td>REFUNDAMOUNT</td>
+                <td>Refund amount as received in the request</td>
+                <td>Amount(50)</td>
+            </tr>
+            <tr>
+                <td>TOTALREFUNDAMT</td>
+                <td>Total amount refunded till now if merchant has raised any requests</td>
+                <td>Amount(50)</td>
+            </tr>
+            <tr>
+                <td>TXNDATE</td>
+                <td>Date of transaction</td>
+                <td>DateTime</td>
+            </tr>
+            <tr>
+                <td>REFUNDDATE</td>
+                <td>Date of refund</td>
+                <td>DateTime</td>
+            </tr>
+            <tr>
+                <td>REFUNDTYPE</td>
+                <td>Type of Refund Issued, this will by default be REFUND</td>
+                <td>Alphanumeric</td>
+            </tr>
+            <tr>
+                <td>REFID</td>
+                <td>This is the reference ID and this is shared while raising Refund</td>
+                <td>Alphanumeric(20)</td>
+            </tr>
+            <tr>
+                <td>REFUNDID</td>
+                <td>Unique refund id generated at Paytm’s end</td>
+                <td>Alphanumeric(64)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
