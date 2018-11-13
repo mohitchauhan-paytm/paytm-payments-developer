@@ -430,6 +430,36 @@ a{
     top:-70px;
 }
 }
+.logged-entry{
+    padding: 12px 20px;
+    color: #ffffff;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: -60px;
+    text-align: center;
+    background: #00c673;
+    width: 390px;
+    font-size: 1.4rem;
+    transition:all ease 500ms;
+    animation:slidein;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-duration: 500ms; 
+    animation-delay: 200ms;
+    span{
+        margin-left:70px;
+    }
+    a{
+        float:right;
+    }
+}
+@keyframes slidein{
+    0%{top:-60px;}
+    100%{top:10px;}
+}
 @media screen and (max-width: 1368px) {
     .box-item{
         padding:30px 20px;
