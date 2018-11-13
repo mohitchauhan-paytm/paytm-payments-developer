@@ -77,11 +77,14 @@ export default ({children,location, pageContext}) => (
 
 <br/>
 
-## Checksum Generation Utility
+<h2 class="checksum">Checksum Generation Utility
+    <a name="code"></a>
+</h2>
+
 
 **For Web:**
 
-<div className={`${style.ecomPlatform} grid  justify-start`} id="code">
+<div className={`${style.ecomPlatform} grid  justify-start`}>
             <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_Web_Sample_Kit_Java' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>

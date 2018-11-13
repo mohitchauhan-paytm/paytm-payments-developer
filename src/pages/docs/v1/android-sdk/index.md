@@ -274,6 +274,7 @@ public void onBackPressedCancelTransaction(){
 
 This is caused when a transaction gets cancelled. In case user presses a back or cancel button and confirms to leave the page, this callback is triggered
 
+
 ```java
 public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
 	/*Display the message as below */
@@ -283,7 +284,10 @@ public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
 
 ---
 
-### Step 5: Checksum Generation and Verification
+<h3 class="checksum">Step 5: Checksum Generation and Verification
+    <a name="codes"></a>
+</h3>
+
 
 #### Checksumhash Generation 
 
@@ -547,7 +551,7 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 </Tabs>
 </div>
 
-<a name="codes"></a>
+
 
 Get the sample code for a language of your choice - 
 

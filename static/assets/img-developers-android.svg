@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#A4C639">
+            <g stroke="#FFF" stroke-width="1.525" transform="translate(14.455 8.753)">
+                <ellipse cx="9.545" cy="8.894" rx="9.545" ry="8.894"/>
+                <rect width="19.091" height="19.271" y="6.671" rx="2.329"/>
+            </g>
+            <g stroke="#FFF" stroke-width=".762" transform="matrix(-1 0 0 1 39 6)">
+                <path d="M21.254.394c.33.185.45.6.268.932l-3.716 6.767a.678.678 0 0 1-.925.265.688.688 0 0 1-.268-.932L20.33.66a.678.678 0 0 1 .925-.265z"/>
+                <rect width="5.035" height="14.082" y="11.647" rx="2.517"/>
+                <rect width="5.035" height="14.082" rx="2.517" transform="translate(8.916 21.918)"/>
+            </g>
+            <g stroke="#FFF" stroke-width=".762" transform="translate(9 6)">
+                <path d="M21.254.394c.33.185.45.6.268.932l-3.716 6.767a.678.678 0 0 1-.925.265.688.688 0 0 1-.268-.932L20.33.66a.678.678 0 0 1 .925-.265z"/>
+                <rect width="5.035" height="14.082" y="11.647" rx="2.517"/>
+                <rect width="5.035" height="14.082" rx="2.517" transform="translate(8.916 21.918)"/>
+            </g>
+            <g transform="translate(14.455 8.753)">
+                <ellipse cx="9.545" cy="8.894" rx="9.545" ry="8.894"/>
+                <rect width="19.091" height="19.271" y="6.671" rx="2.329"/>
+            </g>
+        </g>
+        <g fill="#FFF" stroke="#FFF" stroke-width=".762" transform="translate(14.035 12.882)">
+            <path d="M0 5.135h19.93"/>
+            <ellipse cx="5.559" cy=".424" rx="1" ry="1"/>
+            <ellipse cx="14.371" cy=".424" rx="1" ry="1"/>
+        </g>
+    </g>
+</svg>

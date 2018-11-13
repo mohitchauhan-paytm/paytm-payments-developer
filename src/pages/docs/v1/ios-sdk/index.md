@@ -167,7 +167,7 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 |**CHANNEL_ID** String(3) Mandatory  | This parameter is used to control the theme of the payment page. Based on the channel passed, Paytm will render the layout suitable for that specific platform<br/>For App, the value is WAP
 |**WEBSITE** String(30) Mandatory | For staging environment: WEBSTAGING<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your activation is complete
 |**INDUSTRY_TYPE_ID** String(20) Mandatory | For staging environment: "Retail"<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your activation is complete
-|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm. Merchant has to ensure that this always gets generated on server.  Utilities to generate checksumhash is available <a href="/docs/v1/android-sdk#codes">here</a>
+|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm. Merchant has to ensure that this always gets generated on server.  Utilities to generate checksumhash is available <a href="/docs/v1/ios-sdk#codes">here</a>
 |**MOBILE_NO** Optional String(15)  Mandatory| Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** Optional String(50) Mandatory | Customer's email ID. Passing this enables faster login for customer into his/her mobile wallet.
 |**CALLBACK_URL** String(255) Mandatory | Staging Environment: <br/> "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>" <br/> Production Environment: <br/> "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>"
@@ -248,9 +248,12 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
 
 </div>
 
+
 ---
 
-### Step 4: Checksum generation & verification
+<h3 class="checksum">Step 5: Checksum Generation and Verification
+    <a name="codes"></a>
+</h3>
 
 #### Checksumhash Generation -
 
@@ -513,7 +516,7 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 </Tabs>
 </div>
 
-<a name="codes"></a>
+
 
 Get the sample code for a language of your choice - 
 

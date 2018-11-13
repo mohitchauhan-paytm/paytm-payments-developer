@@ -10,9 +10,11 @@ import Menubar from './menu-bar/index';
 import './../style/preload.scss';
 import * as style from './markdown.module.scss';
 import Git from './githublink';
+import {connect} from 'react-redux';
+
 /* eslint-disable */
 
-export default class Layout extends Component {
+class Layout extends Component {
   constructor(props) {
     super(props);
     const currLocale = LangUtils.currentLocale;
@@ -52,6 +54,8 @@ export default class Layout extends Component {
               <html lang="en" />
             </Helmet>
           <div id='app' className = "grid justify-between activeOverlayClass" >
+          {this.props.loggedIn && this.props.showMainLogIn ?           <div className="grid align-center justify-between logged-entry"><span>You have already logged in. </span><a className="close"><img src="/assets/ic-clear-white.svg"/></a></div>
+ : null}
               <Header />
                 <div className='wrapper grid'>
                     < Menubar />
@@ -95,3 +99,16 @@ export default class Layout extends Component {
 
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
