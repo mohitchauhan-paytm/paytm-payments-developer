@@ -15,7 +15,9 @@ class Header extends Component {
   }
 
   handleChange = () => {
-    this.addHasModalClass();
+    if (!this.props.state.loggedIn) {
+      this.addHasModalClass();
+    }
     if (!this.props.state.showMainLogIn) {
       this.props.toggleMainShowLogin(true);
       this.props.toggleShowLogin(true);
@@ -39,13 +41,14 @@ class Header extends Component {
   handleFrameTasks = (e) => {
     if (e.data.result == 'success') {
       this.removeHasModalClass();
-      this.props.toggleMainShowLogin(false);
       this.props.setLoginData(
         false,
         true,
         e.data.user,
-        e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase()
+        e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase(),
+        false
       );
+      this.props.toggleMainShowLogin(false);
     }
   }
 
@@ -130,7 +133,7 @@ class Header extends Component {
         </div>
         {
           this.props.state.showMainLogIn ?
-            <div className={`popupWrapper  ${(this.props.state.showLogin ? ' fadeIn' : '')}`}>
+            <div className={`popupWrapper  ${(this.props.state.showLogin && !this.props.state.loggedIn  ? ' fadeIn' : '')}`}>
               <div className="popup pos-abs iframeOpen">
                 <div className="popup-wrapper pos-rel">
                   <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
@@ -183,7 +186,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleShowLogin: (showLogin) => dispatch({ type: 'TOGGLE_SHOW_LOGIN', showLogin }),
-    setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn }),
+    setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn, showLoggedIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn, showLoggedIn }),
     toggleMainShowLogin: (showMainLogIn) => dispatch({ type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn })
   }
 }

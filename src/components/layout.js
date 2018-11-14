@@ -23,6 +23,11 @@ class Layout extends Component {
       msg: langMap[currLocale].data,
       locale: currLocale,
     }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.props.toggleShowLoggedInPopup(false)
   }
 
 
@@ -54,7 +59,7 @@ class Layout extends Component {
               <html lang="en" />
             </Helmet>
           <div id='app' className = "grid justify-between activeOverlayClass" >
-          {this.props.loggedIn && this.props.showMainLogIn ?           <div className="grid align-center justify-between logged-entry"><span>You have already logged in. </span><a className="close"><img src="/assets/ic-clear-white.svg"/></a></div>
+          {this.props.state.loggedIn && this.props.state.showLoggedIn ? <div className="grid align-center justify-between logged-entry"><span>You have already logged in. </span><a onClick={this.handleChange} className="close"><img src="/assets/ic-clear-white.svg"/></a></div>
  : null}
               <Header />
                 <div className='wrapper grid'>
@@ -102,6 +107,7 @@ class Layout extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    toggleShowLoggedInPopup: (showLoggedIn) => dispatch({type: 'TOGGLE_SHOW_LOGGEDIN_POPUP', showLoggedIn})
   }
 }
 
