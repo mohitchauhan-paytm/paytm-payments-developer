@@ -45,11 +45,11 @@ Find the detailed interaction of each system component in the flow chart below
 
 ### Step 1:  Importing the library
 
-Follow these steps to download and import the library (explain which library) in your project
+Follow these steps to download and import the library in your project
 
 
 #### For Swift
-* Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
+* Download the sdk from <a href="https://github.com/Paytm-Payments/Paytm_iOS_App_Kit/tree/master/Swift" target="_blank">here</a>. You have an option to download bitcode enabled and disabled SDK 
 * Open your project in XCode and from File menu, select Add files to "yourproject" 
 * Select Paytm.framework in the directory you just unzipped
 * Make sure 'Copy items if needed' is checked and Click 'Add'
@@ -59,7 +59,7 @@ Follow these steps to download and import the library (explain which library) in
 ---
 
 #### For Objective C
-* Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
+* Download the sdk from <a href="https://github.com/Paytm-Payments/Paytm_iOS_App_Kit/tree/master/ObjC" target="_blank">here</a>. You have an option to download bitcode enabled and disabled SDK 
 * Open your project in XCode 
 * Go to the Build Phases tab, expand the Link Binary With Libraries section, click the "+" button
 * In the newly appeared “Choose items to add” window, click the “Add Other..” button, and specify the path to libPaymentsSDK.a library file and click the Open button
