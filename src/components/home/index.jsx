@@ -11,12 +11,19 @@ class Home extends Component {
     }
 
     handleChange = () =>  {
-        this.addHasModalClass();
-        if(!this.props.state.showMainLogIn) {
-            this.props.toggleMainShowLogin(true);
+        if (!this.props.state.loggedIn) {
+            this.addHasModalClass();
+            if(!this.props.state.showMainLogIn) {
+                this.props.toggleMainShowLogin(true);
+                this.props.toggleShowLogin(true);
+            }
             this.props.toggleShowLogin(true);
+        } else {
+          this.props.toggleShowLoggedInPopup(true);
+          setTimeout(() => {
+              this.props.toggleShowLoggedInPopup(false)
+          }, 3000);
         }
-        this.props.toggleShowLogin(true);
     }
 
     addHasModalClass() {
@@ -117,13 +124,6 @@ class Home extends Component {
                             </li>
                             <li>
                                 <p className='stage'>STEP 3</p>
-                                <p>After completing your testing, activate your account to get your production keys so you can start accepting payments.</p>
-                                <div className='grid stage-detail'>
-                                    <button className='btn btn-default small' onClick={() => window.open("https://dashboard.paytm.com/next/activate", "_blank")}>Activate account</button>
-                                </div>
-                            </li>
-                            <li>
-                                <p className='stage'>STEP 4</p>
                                 <p>Start building using our available integrations for your platform.</p>
                                 <div className='sdk-area grid-inline'>
                                     <Link to="/docs/v1/payment-gateway">
@@ -136,7 +136,7 @@ class Home extends Component {
 
                                     <Link to="/docs/v1/android-sdk">
                                         <div className='grid vertical justify-center'>
-                                            <img src='/assets/art-android.png' alt='' />
+                                            <img src='/assets/img-developers-android.svg' alt='' />
                                             <p>Android SDK</p>
                                         </div>
                                     </Link>
@@ -150,6 +150,13 @@ class Home extends Component {
                                     </Link>
 
 
+                                </div>
+                            </li>
+                            <li>
+                                <p className='stage'>STEP 4</p>
+                                <p>After completing your testing, activate your account to get your production keys so you can start accepting payments.</p>
+                                <div className='grid stage-detail'>
+                                    <button className='btn btn-default small' onClick={() => window.open("https://dashboard.paytm.com/next/activate", "_blank")}>Activate account</button>
                                 </div>
                             </li>
                             <li>
@@ -177,7 +184,8 @@ class Home extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
       toggleShowLogin: (showLogin) => dispatch({type: 'TOGGLE_SHOW_LOGIN', showLogin}),
-      toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
+      toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn}),
+      toggleShowLoggedInPopup: (showLoggedIn) => dispatch({type: 'TOGGLE_SHOW_LOGGEDIN_POPUP', showLoggedIn})
     }
 }
 
