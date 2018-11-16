@@ -28,7 +28,7 @@ Paytm iOS SDK is a secure, PCI-compliant way to accept Debit/Credit card, Net-Ba
 3. Your server passes the payload and checksumhash back to the app which hands over these details to Paytm SDK    
 4. SDK verifies payload and displays payment Paytm checkout page
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your app via callback
-6. Verify checksumhash received in response on your server side. Utility to verify checksumhash is available <a href="/docs/v1/ios-sdk#codes">here</a>
+6. Verify checksumhash received in response on your server side. Utility to verify checksumhash is available <a href="/docs/v1/ios-sdk#codep">here</a>
 7. Lastly, verify transaction status with Transaction Status API via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
 
 
@@ -252,8 +252,9 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
 ---
 
 <h3 class="checksum">Step 5: Checksum Generation and Verification
-    <a name="codes"></a>
+<a name="code"></a>
 </h3>
+
 
 #### Checksumhash Generation -
 
@@ -312,8 +313,8 @@ String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String orderId = <span class="hljs-string">"order1"</span>;
 String channelId = <span class="hljs-string">"WAP"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
-String mobileNo = <span class="hljs-string">"9999999999"</span>;
-String email = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
@@ -370,13 +371,12 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
 </Tabs>
 </div>
 
-<a name="code"></a>
-
-<div className={`${style.dscrption}`}>
-Endpoints: <br/>
+<div>
+Endpoints :- <br/>
 Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
 Production: https://securegw.paytm.in/theia/processTransaction
 </div>
+
 
 
 <div className={`${style.ecomPlatform} grid justify-start`}>
@@ -438,15 +438,17 @@ Production: https://securegw.paytm.in/theia/processTransaction
             </div>
 </div>
 
-#### Checksumhash Verification-
+<div class="checksum">
+<a name="codep"></a>
+</div>
 
-All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server by server side utility. Code snippets and Checksum generation library are provided below
+#### Checksumhash Verification
 
+
+All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server side utility. Code snippets and Github links for the utility in your language of choice are provided below.
 
 
 <div className={`${style.checkoutWrapper}`}>
-
-
 <Tabs defaultTab="java">
 	<TabList>
             <Tab tabFor="java">JAVA</Tab>
@@ -472,9 +474,9 @@ TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span
 <span class="hljs-keyword">boolean</span> isValidChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(merchantKey, paytmParams, paytmChecksum);
 <span class="hljs-comment">// If isValidChecksum is false, then checksum is not valid</span>
 <span class="hljs-keyword">if</span>(isValidChecksum){
-	System.out.append(<span class="hljs-string">"Checksum Matched"</span>);
+    System.out.append(<span class="hljs-string">"Checksum Matched"</span>);
 }<span class="hljs-keyword">else</span>{
-	System.out.append(<span class="hljs-string">"Checksum MisMatch"</span>);
+    System.out.append(<span class="hljs-string">"Checksum MisMatch"</span>);
 }</code></pre>
         `}}></span>
     </TabPanel>
@@ -518,10 +520,11 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 
 
 
-Get the sample code for a language of your choice - 
+#### Get the sample code for a language of your choice - 
 
 
-<div className={`${style.ecomPlatform} grid justify-start`}>
+<div>
+<div className={`grid justify-start ${style.ecomPlatform}`}>
             <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
@@ -578,6 +581,7 @@ Get the sample code for a language of your choice -
                     </span>
                 </a>
             </div>
+</div>
 </div>
 
 ## On completion of your integration -
