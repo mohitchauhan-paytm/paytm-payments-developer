@@ -64,10 +64,10 @@ Refund process involves multiple handshakes between acquirer banks, card schemes
 Max time taken to settle into customers account
 
 
-| Instrument |	Paytm Wallet |	Paytm Payments Bank | 	CC/DC | 	UPI - PPBL | 	UPI | 	Netbanking |
-| --- | --- | --- | --- | --- | --- | --- |
-| Private Banks	| 1 day |	5 days |	10 days |	5 days	 | 14 days	| 7 days |
-| Nationalized Banks |	-	 | -	| 14 days |	- |	14 days |	7 days |
+| Instrument |	Paytm Wallet |	Paytm Payments Bank | 	CC/DC | 	UPI  | 	Netbanking 
+| --- | --- | --- | --- | --- | --- |
+| Private Banks	| 1 day |	5 days |	10 days |	5 days	 |  7 days |
+| Nationalized Banks |	-	 | -	| 14 days |	- |	7 days |
 
 
 Bank holidays are excluded from the timelines provided
