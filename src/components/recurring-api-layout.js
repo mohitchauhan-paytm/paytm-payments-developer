@@ -20,164 +20,617 @@ export default class RecurringApi extends React.Component {
             checked: event.target.checked
         });
     }
-    getJavaHTML = () => {
+    getJavaHTML = (apiName) => {
+        if(apiName == 'subscription') {
         return {
             __html: `
-<pre><code class="hljs language-java">String transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus"</span>;
-String merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
-String orderId = <span class="hljs-string">"order1"</span>;
-String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
-TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> TreeMap&lt;String, String&gt;();
-paytmParams.put(<span class="hljs-string">"MID"</span>, merchantMid);
-paytmParams.put(<span class="hljs-string">"ORDERID"</span>, orderId);
-<span class="hljs-keyword">try</span> {
-    String paytmChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(merchantKey, paytmParams);
-    paytmParams.put(<span class="hljs-string">"CHECKSUMHASH"</span>, paytmChecksum);
-    JSONObject obj = <span class="hljs-keyword">new</span> JSONObject(paytmParams);
-    String postData = <span class="hljs-string">"JsonData="</span> + obj.toString();
+<pre><code class="hljs language-java" metastring="">&lt;%@ page language=<span class="hljs-string">"java"</span> contentType=<span class="hljs-string">"text/html; charset=ISO-8859-1"</span>
+pageEncoding=<span class="hljs-string">"ISO-8859-1"</span>%&gt;
+&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">"java.util.*,com.paytm.merchant.CheckSumServiceHelper"</span>%&gt;    
+&lt;%
+TreeMap&lt;String,String&gt; parameters = <span class="hljs-keyword">new</span> TreeMap&lt;String,String&gt;();
 
-    HttpURLConnection connection = (HttpURLConnection) transactionURL.openConnection();
-    connection.setRequestMethod(<span class="hljs-string">"POST"</span>);
-    connection.setRequestProperty(<span class="hljs-string">"contentType"</span>, <span class="hljs-string">"application/json"</span>);
-    connection.setUseCaches(<span class="hljs-keyword">false</span>);
-    connection.setDoOutput(<span class="hljs-keyword">true</span>);
+parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"xxxxmS01829682567544"</span>);
+parameters.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"ORDER12rty34567"</span>);
+parameters.put(<span class="hljs-string">"CUST_ID"</span>,<span class="hljs-string">"CUST123455"</span>);
+parameters.put(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>,<span class="hljs-string">"Retail"</span>);
+parameters.put(<span class="hljs-string">"CHANNEL_ID"</span>,<span class="hljs-string">"WEB"</span>);
+parameters.put(<span class="hljs-string">"TXN_AMOUNT"</span>,<span class="hljs-string">"1"</span>);
+parameters.put(<span class="hljs-string">"WEBSITE"</span>,<span class="hljs-string">"WEBSTAGING"</span>);
+parameters.put(<span class="hljs-string">"REQUEST_TYPE"</span>,<span class="hljs-string">"SUBSCRIBE"</span>);
+parameters.put(<span class="hljs-string">"SUBS_SERVICE_ID"</span>,<span class="hljs-string">"10981771"</span>);
+parameters.put(<span class="hljs-string">"SUBS_AMOUNT_TYPE"</span>,<span class="hljs-string">"FIX"</span>);
+parameters.put(<span class="hljs-string">"SUBS_FREQUENCY"</span>,<span class="hljs-string">"1"</span>);
+parameters.put(<span class="hljs-string">"SUBS_FREQUENCY_UNIT"</span>,<span class="hljs-string">"MONTH"</span>);
+parameters.put(<span class="hljs-string">"SUBS_ENABLE_RETRY"</span>,<span class="hljs-string">"0"</span>);
+parameters.put(<span class="hljs-string">"SUBS_EXPIRY_DATE"</span>,<span class="hljs-string">"2019-01-17"</span>);
+parameters.put(<span class="hljs-string">"SUBS_PPI_ONLY"</span>,<span class="hljs-string">"Y"</span>);
+parameters.put(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"http://localhost:8080/paytm_java/pgResponse.jsp"</span>);
 
-    DataOutputStream requestWriter = <span class="hljs-keyword">new</span> DataOutputStream(connection.getOutputStream());
-    requestWriter.writeBytes( postData);
-    requestWriter.close();
-    String responseData = <span class="hljs-string">""</span>;
-    InputStream is = connection.getInputStream();
-    BufferedReader responseReader = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(is));
-    <span class="hljs-keyword">if</span>((responseData = responseReader.readLine()) != <span class="hljs-keyword">null</span>) {
-        System.out.append(<span class="hljs-string">"Response Json = "</span> + responseData);
-    }
-    System.out.append(<span class="hljs-string">"Requested Json = "</span> + postData + <span class="hljs-string">" "</span>);
-    responseReader.close();
-    <span class="hljs-keyword">return</span> responseData;
-} <span class="hljs-keyword">catch</span> (Exception exception) {
-    exception.printStackTrace();
-}</code></pre>`}
-    }
+String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"I%VyKUMWdwEDyh4z"</span>, parameters);
 
-    getCurlHTML = () => {
+StringBuilder outputHtml = <span class="hljs-keyword">new</span> StringBuilder();
+outputHtml.append(<span class="hljs-string">"&lt;!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;html&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;head&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;title&gt;Merchant Check Out Page&lt;/title&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/head&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;body&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='https://securegw-stage.paytm.in/theia/processTransaction' name='f1'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;table border='1'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;tbody&gt;"</span>);
+
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='MID' value='xxxxmS01829682567544'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='ORDER_ID' value='ORDER12rty34567'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CUST_ID' value='CUST123455'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='INDUSTRY_TYPE_ID' value='Retail'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHANNEL_ID' value='WEB'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='TXN_AMOUNT' value='1'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='WEBSITE' value='WEBSTAGING'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='REQUEST_TYPE' value='SUBSCRIBE'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_SERVICE_ID' value='10981771'&gt;"</span>);	
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_AMOUNT_TYPE' value='FIX'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_FREQUENCY' value='1'&gt;"</span>);	
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_FREQUENCY_UNIT' value='MONTH'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_ENABLE_RETRY' value='0'&gt;"</span>);	
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_EXPIRY_DATE' value='2019-01-17'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_PPI_ONLY' value='Y'&gt;"</span>);	
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CALLBACK_URL' value='http://localhost:8080/paytm_java/pgResponse.jsp'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span>+checkSum+<span class="hljs-string">"'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/tbody&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/table&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;script type='text/javascript'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"document.f1.submit();"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/script&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/form&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/body&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/html&gt;"</span>);
+out.println(outputHtml);
+%&gt;</code></pre>`}
+    } else if (apiName == 'renew') {
         return {
             __html: `
-<pre><code class="language-bash">curl -X
-POST https://securegw-stage.paytm.in/merchant-status/getTxnStatus -H
-<span class="hljs-string">'content-type: application/json'</span> -d 
-<span class="hljs-string">'JsonData={"MID":"rxazcv89315285244163",
-"ORDERID":"order1",
-"CHECKSUMHASH":"CsTeIGhOnegWColuGQaGphMizcsECToTPZ9x/oFPrNZk1TaiV2bFJZzfCwlU7/7ZDbDZIdIfCXfrNjNlFmoUjOMmg8tlR4/0gakLfFNIe2c="}'</span></code></pre>            
+    <pre><code class="hljs language-java" metastring="">]&lt;%@ page language=<span class="hljs-string">"java"</span> contentType=<span class="hljs-string">"text/html; charset=ISO-8859-1"</span>
+pageEncoding=<span class="hljs-string">"ISO-8859-1"</span>%&gt;
+&lt;!DOCTYPE html PUBLIC <span class="hljs-string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span> <span class="hljs-string">"http://www.w3.org/TR/html4/loose.dtd"</span>&gt;
+&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">"java.util.*,com.paytm.merchant.*"</span>%&gt;    
+&lt;%
+TreeMap&lt;String,String&gt; parameters = <span class="hljs-keyword">new</span> TreeMap&lt;String,String&gt;();
+
+parameters.put(<span class="hljs-string">"MID"</span>,<span class="hljs-string">"xxxxPG01851465523919"</span>);
+parameters.put(<span class="hljs-string">"ORDER_ID"</span>,<span class="hljs-string">"OrderRenewTest00000000001"</span>);
+parameters.put(<span class="hljs-string">"SUBS_ID"</span>,<span class="hljs-string">"1002410"</span>);
+parameters.put(<span class="hljs-string">"TXN_AMOUNT"</span>,<span class="hljs-string">"40"</span>);
+parameters.put(<span class="hljs-string">"REQUEST_TYPE"</span>,<span class="hljs-string">"RENEW_SUBSCRIPTION"</span>);
+
+String checkSum =  CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"I%VyxxxxWdwEDyh4z"</span>, parameters);
+StringBuilder outputHtml = <span class="hljs-keyword">new</span> StringBuilder();
+outputHtml.append(<span class="hljs-string">"&lt;!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;html&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;head&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;title&gt;Merchant Check Out Page&lt;/title&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/head&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;body&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;form method='post' action='https://securegw-stage.paytm.in/theia/processTransaction' name='f1'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;table border='1'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;tbody&gt;"</span>);
+
+
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='REQUEST_TYPE' value='RENEW_SUBSCRIPTION'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='MID' value='xxxxPG01851465523919'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='ORDER_ID' value='OrderRenewTest00000000001'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='SUBS_ID' value='1002410'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='TXN_AMOUNT' value='40'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span>+checkSum+<span class="hljs-string">"'&gt;"</span>);
+
+outputHtml.append(<span class="hljs-string">"&lt;/tbody&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/table&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;script type='text/javascript'&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"document.f1.submit();"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/script&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/form&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/body&gt;"</span>);
+outputHtml.append(<span class="hljs-string">"&lt;/html&gt;"</span>);
+out.println(outputHtml);
+%&gt;</code></pre>
             `
         }
-    }
-    getNetHTML = () => {
-        return {
-            __html: `
-<pre><code class="hljs language-cs">String transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus"</span>;
-String merchantKey=<span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
-String merchantMid=<span class="hljs-string">"rxazcv89315285244163"</span>;
-String orderId=<span class="hljs-string">"order1"</span>;
-Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span> Dictionary&lt;String, String&gt;();
-paytmParams.Add(<span class="hljs-string">"MID"</span>, merchantMid);
-paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
-<span class="hljs-keyword">try</span> {
-    <span class="hljs-keyword">string</span> paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams);
-    paytmParams.Add(<span class="hljs-string">"CHECKSUMHASH"</span>, paytmChecksum);
-    String postData = <span class="hljs-string">"JsonData="</span>+ <span class="hljs-keyword">new</span> JavaScriptSerializer().Serialize(paytmParams);
-    HttpWebRequest connection = (HttpWebRequest)WebRequest.Create(transactionURL);
-    connection.Headers.Add(<span class="hljs-string">"ContentType"</span>, <span class="hljs-string">"application/json"</span>);
-    connection.Method = <span class="hljs-string">"POST"</span>;
-    <span class="hljs-keyword">using</span> (StreamWriter requestWriter = <span class="hljs-keyword">new</span> StreamWriter(connection.GetRequestStream())) {
-        requestWriter.Write(postData);
-    }
-    <span class="hljs-keyword">string</span> responseData = <span class="hljs-keyword">string</span>.Empty;
-    <span class="hljs-keyword">using</span> (StreamReader responseReader = <span class="hljs-keyword">new</span> StreamReader(connection.GetResponse().GetResponseStream())) {
-        responseData = responseReader.ReadToEnd();
-        Response.Write(responseData);
-        Response.Write(<span class="hljs-string">"Requested Json= "</span> + postData);
-    }
-} <span class="hljs-keyword">catch</span> (Exception ex) {
-    Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString());
-}</code></pre>         `
-        }
+
+} else if(apiName == 'txnStatus') {
+    return {
+        __html: `
+<pre><code class="hljs language-java" metastring=""><span class="hljs-keyword">import</span> java.io.BufferedReader; 
+<span class="hljs-keyword">import</span> java.io.DataOutputStream; 
+<span class="hljs-keyword">import</span> java.io.InputStream; 
+<span class="hljs-keyword">import</span> java.io.InputStreamReader; 
+<span class="hljs-keyword">import</span> java.net.HttpURLConnection; 
+<span class="hljs-keyword">import</span> java.net.URL; 
+<span class="hljs-keyword">import</span> java.util.TreeMap; 
+<span class="hljs-keyword">import</span> org.json.JSONObject; 
+<span class="hljs-keyword">import</span> java.net.URLEncoder; 
+importcom.paytm.pg.merchant.CheckSumServiceHelper; <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">status</span> </span>{ <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] arg)</span> </span>{ String checksum; HttpURLConnection connection = <span class="hljs-keyword">null</span>; TreeMap tmap= <span class="hljs-keyword">new</span> TreeMap(); <span class="hljs-keyword">try</span>{ tmap.put(<span class="hljs-string">"MID"</span>, <span class="hljs-string">"PaytmS01829682567544"</span>); tmap.put(<span class="hljs-string">"ORDERID"</span>, <span class="hljs-string">"ORDS51973186"</span>); checksum = CheckSumServiceHelper.getCheckSumServiceHelper().genrateCheckSum(<span class="hljs-string">"p%2jIonG_jDOO4Se"</span>,tmap); tmap.put(<span class="hljs-string">"CHECKSUMHASH"</span>, checksum); JSONObject obj = <span class="hljs-keyword">new</span> JSONObject(tmap); String urlParameters=obj.toString(); urlParameters=URLEncoder.encode(urlParameters); URL url = newURL(<span class="hljs-string">"https://pguat.paytm.com/oltp/HANDLER_INTERNAL/getTxnStatus?"</span>); connection = (HttpURLConnection)url.openConnection(); connection = (HttpURLConnection)url.openConnection(); connection.setRequestMethod(<span class="hljs-string">"POST"</span>); connection.setRequestProperty(<span class="hljs-string">"contentType"</span>,<span class="hljs-string">"application/json"</span>); connection.setUseCaches(<span class="hljs-keyword">false</span>); connection.setDoOutput(<span class="hljs-keyword">true</span>); DataOutputStream wr = <span class="hljs-keyword">new</span> DataOutputStream (connection.getOutputStream()); wr.writeBytes(<span class="hljs-string">"JsonData="</span>); wr.writeBytes(urlParameters); wr.close(); InputStream is = connection.getInputStream(); BufferedReader rd = <span class="hljs-keyword">new</span> BufferedReader(newInputStreamReader(is)); String line=<span class="hljs-string">""</span>; <span class="hljs-keyword">while</span>((line = rd.readLine()) != <span class="hljs-keyword">null</span>) { System.out.append(line); System.out.append(<span class="hljs-string">'
+'</span>); } rd.close();} <span class="hljs-keyword">catch</span> (Exception e) { e.printStackTrace(); } } } response.</code></pre>
+        `
     }
 
-    getPHPHTML = () => {
+} else if (apiName == 'refund') {
+    return {
+        __html: `
+        
+        `
+    }
+
+} else if (apiName == 'refundStatus') {
+    return {
+        __html: `
+        
+        `
+    }
+
+}
+    }
+
+    getCurlHTML = (apiName) => {
+
+        if(apiName == 'subscription') {
+            return {
+                __html: `
+<pre><code class="hljs language-bash" metastring="">https://securegw-stage.paytm.in/theia/processTransaction?MID=xxxxmS01829682567544&amp;ORDER_ID=ORDER12rty34567&amp;CUST_ID=CUST123455&amp;INDUSTRY_TYPE_ID=Retail&amp;CHANNEL_ID=WEB&amp;TXN_AMOUNT=1&amp;WEBSITE=WEBSTAGING&amp;SUBS_EXPIRY_DATE=2019-01-17&amp;SUBS_ENABLE_RETRY=0&amp;SUBS_PPI_ONLY=Y&amp;SUBS_FREQUENCY_UNIT=MONTH&amp;SUBS_AMOUNT_TYPE=FIX&amp;SUBS_SERVICE_ID=10981771&amp;SUBS_FREQUENCY=1&amp;REQUEST_TYPE=SUBSCRIBE&amp;CHECKSUMHASH=LIfFFxLBIuwZ954C0Lun8rT%2BB8oI%2B3mVAItWwlpIudyFSSrzUVnOCVh9EYkxFPCr%2BdNhBPzSkq9xhYZpX87i9%2BZR1WnsLIBYrdPCnGBSZxQ%3D</code></pre>           
+                `
+            }
+        } else if (apiName == 'renew') {
+            return {
+                __html: `
+<pre><code class="hljs language-bash" metastring="">curl -X 
+POST https://securegw-stage.paytm.in/theia/processTransaction&nbsp;-H 
+<span class="hljs-string">'cache-control: no-cache'</span> -H 
+<span class="hljs-string">'content-type: application/x-www-form-urlencoded'</span> -d 
+<span class="hljs-string">'REQUEST_TYPE=RENEW_SUBSCRIPTION&amp;MID=xxxxPG01851465523919&amp;ORDER_ID=OrderRenewTest00000000001&amp;TXN_AMOUNT=40&amp;CHECKSUMHASH=gf+dH5bINiwcVF8ZH8Nbmo4pcrC2lroHSl+h2n+2h7fo3nCAatHqKo2++30UFE0QD4uUuqHWMVrrcdqCKTP"WluqsB+4SlufcSJ1C1QxdQc=&amp;SUBS_ID=1002410'</span></code></pre>
+                `
+            }
+    
+    } else if(apiName == 'txnStatus') {
         return {
             __html: `
-<pre><code class="hljs language-php"><span class="hljs-meta">&lt;?php</span>
-    <span class="hljs-comment">// following file need to be included</span>
-    <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"encdec_paytm.php"</span>);
-    $orderId = <span class="hljs-string">"order1"</span>;
-    $merchantMid = <span class="hljs-string">"rxazcv89315285244163"</span>;
-    $merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
-    $paytmParams[<span class="hljs-string">"MID"</span>] = $merchantMid;
-    $paytmParams[<span class="hljs-string">"ORDERID"</span>] = $orderId; 
-    $paytmChecksum = getChecksumFromArray($paytmParams, $merchantKey);
-    $paytmParams[<span class="hljs-string">'CHECKSUMHASH'</span>] = urlencode($paytmChecksum);
-    $postData = <span class="hljs-string">"JsonData="</span>.json_encode($paytmParams, JSON_UNESCAPED_SLASHES);
-    $connection = curl_init(); <span class="hljs-comment">// initiate curl</span>
-    <span class="hljs-comment">// $transactionURL = "https://securegw.paytm.in/merchant-status/getTxnStatus"; // for production</span>
-    $transactionURL = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus"</span>;
-    curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, <span class="hljs-number">0</span>);
-    curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, <span class="hljs-number">0</span>);
-    curl_setopt($connection, CURLOPT_URL, $transactionURL);
-    curl_setopt($connection, CURLOPT_POST, <span class="hljs-keyword">true</span>);
-    curl_setopt($connection, CURLOPT_POSTFIELDS, $postData);
-    curl_setopt($connection, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>);
-    curl_setopt($connection, CURLOPT_HTTPHEADER, <span class="hljs-keyword">array</span>(<span class="hljs-string">'Content-Type: application/json'</span>));
-    $responseReader = curl_exec($connection);
-    $responseData = json_decode($responseReader, <span class="hljs-keyword">true</span>);
-    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;pre&gt;"</span>; print_r($responseData); <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/pre&gt;"</span>;
-<span class="hljs-meta">?&gt;</span></code></pre>
+<pre><code class="hljs language-bash" metastring="">curl -X POST  https://securegw.paytm.in/merchant-status/getTxnStatus  -H 
+<span class="hljs-string">'cache-control: no-cache'</span>  -H 
+<span class="hljs-string">'content-type: application/json'</span>  -d 
+<span class="hljs-string">'{"MID":"XXXOPG01851465523919","ORDERID":"5362906000","CHECKSUMHASH":"CsTeIGhOnegWColuGQaGphMizcsECToTPZ9x%2FoFPrNZk1TaiV2bFJZzfCwlU7%2F7ZDbDZIdIfCXfrNjNlFmoUjOMmg8tlR4%2F0gakLfFNIe2c%3D"}'</span></code></pre>
             `
         }
-    }
-
-
-    getErrorHTML = () => {
+    
+    } else if (apiName == 'refund') {
         return {
             __html: `
-<pre><code class="hljs language-json">{   
-    <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180927111212800110168666800020875"</span>,
-    <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">""</span>,
-    <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
-    <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
-    <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"PENDING"</span>,
-    <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
-    <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"810"</span>,
-    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Failed"</span>,
-    <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
-    <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.0"</span>,
-    <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-27 10:07:15.0"</span>
-}</code></pre>
-            `
-        }
-    }
-
-    gteSuccessHTML = () => {
-        return {
-            __html: `
-<pre><code class="hljs language-json">{
-    <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180926111212800110168766100018551"</span>,
-    <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">"5583250"</span>,
-    <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
-    <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
-    <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_SUCCESS"</span>,
-    <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
-    <span class="hljs-attr">"GATEWAYNAME"</span>:<span class="hljs-string">"WALLET"</span>,
-    <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"01"</span>,
-    <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Success"</span>,
-    <span class="hljs-attr">"BANKNAME"</span>:<span class="hljs-string">"WALLET"</span>,
-    <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
-    <span class="hljs-attr">"PAYMENTMODE"</span>:<span class="hljs-string">"PPI"</span>,
-    <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.00"</span>,
-    <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-26 13:50:57.0"</span>
-} </code></pre>
             
             `
         }
+    
+    } else if (apiName == 'refundStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+        
+    }
+    }
+    getNetHTML = (apiName) => {
+        if(apiName == 'subscription') {
+            return {
+                __html: `
+<pre><code class="hljs language-cs" metastring=""><span class="hljs-keyword">string</span> MID = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> MERCHANT_KEY = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> INDUSTRY_TYPE_ID = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> CHANNEL_ID = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> WEBSITE = <span class="hljs-string">""</span>;
+
+<span class="hljs-keyword">string</span> <span class="hljs-keyword">value</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+
+<span class="hljs-keyword">if</span> (Request.Form.AllKeys.Length &gt; <span class="hljs-number">0</span>)
+{
+    Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt; parameters = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt;();
+    parameters.Add(<span class="hljs-string">"MID"</span>, MID);
+    parameters.Add(<span class="hljs-string">"CHANNEL_ID"</span>, CHANNEL_ID);
+    parameters.Add(<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>, INDUSTRY_TYPE_ID);
+    parameters.Add(<span class="hljs-string">"WEBSITE"</span>, WEBSITE);
+    parameters.Add(<span class="hljs-string">"SUBS_SERVICE_ID"</span>, <span class="hljs-string">"10981771"</span>);
+    parameters.Add(<span class="hljs-string">"SUBS_AMOUNT_TYPE"</span>, <span class="hljs-string">"FIX"</span>);
+    parameters.Add(<span class="hljs-string">"SUBS_FREQUENCY"</span>, <span class="hljs-string">"1"</span>);
+    parameters.Add(<span class="hljs-string">"SUBS_FREQUENCY_UNIT"</span>, <span class="hljs-string">"MONTH"</span>);
+    parameters.Add(<span class="hljs-string">"REQUEST_TYPE"</span>, <span class="hljs-string">"SUBSCRIBE"</span>);
+    parameters.Add(<span class="hljs-string">"SUBS_ENABLE_RETRY"</span>, <span class="hljs-string">"1"</span>);
+    parameters.Add(<span class="hljs-string">"SUBS_START_DATE"</span>, <span class="hljs-string">"2018-02-17"</span>);
+    parameters.Add(<span class="hljs-string">"SUBS_EXPIRY_DATE"</span>, <span class="hljs-string">"2019-01-17"</span>);
+    parameters.Add(<span class="hljs-string">"CALLBACK_URL"</span>, <span class="hljs-string">"http://localhost:63191/totp/reciever.aspx"</span>);           
+    parameters.Add(<span class="hljs-string">"ORDER_ID"</span>, <span class="hljs-string">"ORDER12rty34567"</span>);
+    <span class="hljs-keyword">string</span> custId = <span class="hljs-string">"CUST123455"</span>;
+    <span class="hljs-keyword">string</span> paytmURL = <span class="hljs-keyword">value</span>;
+    parameters.Add(<span class="hljs-string">"CUST_ID"</span>, custId);           
+    parameters.Add(<span class="hljs-string">"SUBS_PAYMENT_MODE"</span>, <span class="hljs-string">"PPI"</span>);           
+    parameters.Add(<span class="hljs-string">"SUBS_PPI_ONLY"</span>, <span class="hljs-string">"Y"</span>);            
+    parameters.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, <span class="hljs-string">"1"</span>);
+
+    <span class="hljs-keyword">try</span>
+    {
+        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+        <span class="hljs-keyword">string</span> checksum =  paytm.CheckSum.generateCheckSum(MERCHANT_KEY, parameters);
+        <span class="hljs-keyword">string</span> outputHTML = <span class="hljs-string">"&lt;html&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;head&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;title&gt;Merchant Check Out Page&lt;/title&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/head&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;body&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;form method='post' action='"</span> + paytmURL + <span class="hljs-string">"' name='f1'&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;table border='1'&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;tbody&gt;"</span>;
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> parameters.Keys)
+        {
+            outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='"</span> + key + <span class="hljs-string">"' value='"</span> + parameters[key] + <span class="hljs-string">"'&gt;'"</span>;
+        }
+        outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span> + checksum + <span class="hljs-string">"'&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/tbody&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/table&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;script type='text/javascript'&gt;"</span>;
+        outputHTML += <span class="hljs-string">"document.f1.submit();"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/script&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/form&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/body&gt;"</span>;
+        outputHTML += <span class="hljs-string">"&lt;/html&gt;"</span>;
+        Response.Write(outputHTML);
+    }
+        <span class="hljs-keyword">catch</span> (WebException ex)
+{
+Response.Write(<span class="hljs-string">"Response of expection= "</span> + ex.Message.ToString());
+}
+    
+}</code></pre> `
+            }
+        } else if (apiName == 'renew') {
+            return {
+                __html: `
+<pre><code class="hljs language-cs" metastring="">Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt; parameters = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-keyword">string</span>, <span class="hljs-keyword">string</span>&gt;();
+
+<span class="hljs-keyword">string</span> MID = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> MERCHANT_KEY = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> subsid = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> req_type = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> Order_id = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> Amount=<span class="hljs-string">""</span>;
+<span class="hljs-keyword">string</span> custId = <span class="hljs-string">""</span>;	
+<span class="hljs-keyword">string</span> paytmURL = <span class="hljs-string">"https://securegw-stage.paytm.in/theia/processTransaction"</span>;
+
+parameters.Add(<span class="hljs-string">"MID"</span>, MID);
+parameters.Add(<span class="hljs-string">"SUBS_ID"</span>, subsid);
+parameters.Add(<span class="hljs-string">"REQUEST_TYPE"</span>, req_type);                                                        
+parameters.Add(<span class="hljs-string">"CUST_ID"</span>, custId);               
+parameters.Add(<span class="hljs-string">"ORDER_ID"</span>, Order_id);               
+parameters.Add(<span class="hljs-string">"TXN_AMOUNT"</span>, Amount);
+
+<span class="hljs-keyword">try</span>{				
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+<span class="hljs-keyword">string</span> checksum = CheckSum.generateCheckSum(MERCHANT_KEY, parameters);
+
+<span class="hljs-keyword">string</span> outputHTML = <span class="hljs-string">"&lt;html&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;head&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;title&gt;Merchant Check Out Page&lt;/title&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;/head&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;body&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;center&gt;&lt;h1&gt;Please do not refresh this page...&lt;/h1&gt;&lt;/center&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;form method='post' action='"</span> + paytmURL + <span class="hljs-string">"' name='f1'&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;table border='1'&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;tbody&gt;"</span>;
+
+<span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">string</span> key <span class="hljs-keyword">in</span> parameters.Keys)
+{
+    outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='"</span> + key + <span class="hljs-string">"' value='"</span> + parameters[key] + <span class="hljs-string">"'&gt;'"</span>;
+}
+outputHTML += <span class="hljs-string">"&lt;input type='hidden' name='CHECKSUMHASH' value='"</span> + checksum + <span class="hljs-string">"'&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;/tbody&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;/table&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;script type='text/javascript'&gt;"</span>;
+outputHTML += <span class="hljs-string">"document.f1.submit();"</span>;
+outputHTML += <span class="hljs-string">"&lt;/script&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;/form&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;/body&gt;"</span>;
+outputHTML += <span class="hljs-string">"&lt;/html&gt;"</span>;
+
+Response.Write(outputHTML);
+}
+<span class="hljs-keyword">catch</span> (UriFormatException uri_expec)
+{
+
+    txtMessage.Text = <span class="hljs-string">"Please Enter Valid URL"</span>;
+
+}
+<span class="hljs-keyword">catch</span> (paytm.exception.CryptoException keyexcep)
+{
+
+    txtMessage.Text = <span class="hljs-string">"Please pass the merchant key for the same request"</span>;
+}</code></pre>
+                `
+            }
+    
+    } else if(apiName == 'txnStatus') {
+        return {
+            __html: `
+<pre><code class="hljs language-cs" metastring="">String <span class="hljs-keyword">value</span> = <span class="hljs-string">"https://securegw-stage.paytm.in/merchant-status/getTxnStatus?JsonData="</span>; String Merchant_key=<span class="hljs-string">"I%VyKUMWdwEDyh4z"</span>; String MID=<span class="hljs-string">"PaytmS01829682567544"</span>; String order_id=<span class="hljs-string">""</span>; Dictionary innerrequest = <span class="hljs-keyword">new</span> Dictionary(); Dictionary outerrequest = <span class="hljs-keyword">new</span> Dictionary(); innerrequest.Add(<span class="hljs-string">"MID"</span>, MID); innerrequest.Add(<span class="hljs-string">"ORDERID"</span>, order_id); String first_jason = newJavaScriptSerializer().Serialize(innerrequest); <span class="hljs-keyword">try</span> { <span class="hljs-keyword">string</span> Check = paytm.CheckSum.generateCheckSum(Merchant_key, innerrequest); String correct_check = Check.Replace(<span class="hljs-string">"+"</span>, <span class="hljs-string">"%2b"</span>); innerrequest.Add(<span class="hljs-string">"CHECKSUMHASH"</span>, correct_check); String final = newJavaScriptSerializer().Serialize(innerrequest); final = final.Replace(<span class="hljs-string">"\"</span>, <span class="hljs-string">""</span>).Replace(<span class="hljs-string">":"{"</span>, <span class="hljs-string">":{"</span>).Replace(<span class="hljs-string">"}","</span>, <span class="hljs-string">"},"</span>); String url = <span class="hljs-keyword">value</span> + final; HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url); request.Headers.Add(<span class="hljs-string">"ContentType"</span>, <span class="hljs-string">"application/json"</span>); request.Method = <span class="hljs-string">"POST"</span>; <span class="hljs-keyword">using</span> (StreamWriter requestWriter2 = newStreamWriter(request.GetRequestStream())) { requestWriter2.Write(final); } <span class="hljs-keyword">string</span> responseData = <span class="hljs-keyword">string</span>.Empty; <span class="hljs-keyword">using</span> (StreamReader responseReader = newStreamReader(request.GetResponse().GetResponseStream())) { responseData = responseReader.ReadToEnd(); Response.Write(responseData); Response.Write(<span class="hljs-string">"Requested Json= "</span> + final); } } <span class="hljs-keyword">catch</span> (Exception ex) { Response.Write(<span class="hljs-string">"Exception message: "</span> + ex.Message.ToString()); }</code></pre>
+            `
+        }
+    
+    } else if (apiName == 'refund') {
+        return {
+            __html: `
+            
+            `
+        }
+    
+    } else if (apiName == 'refundStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+        
+    }
+    }
+
+    getPHPHTML = (apiName) => {
+
+        if(apiName == 'subscription') {
+            return {
+                __html: `
+<pre><code class="hljs language-php" metastring=""><span class="hljs-meta">&lt;?php</span>
+header(<span class="hljs-string">"Pragma: no-cache"</span>);
+header(<span class="hljs-string">"Cache-Control: no-cache"</span>);
+header(<span class="hljs-string">"Expires: 0"</span>);
+
+<span class="hljs-comment">// following files need to be included</span>
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"/lib/config_paytm.php"</span>);
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"/lib/encdec_paytm.php"</span>);
+
+$checkSum = <span class="hljs-string">""</span>;
+$paramList = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
+$paramList[<span class="hljs-string">"MID"</span>] = <span class="hljs-string">'xxxtmS01829682567544'</span>;
+$paramList[<span class="hljs-string">"ORDER_ID"</span>] = ‘ORDER12rty34567’;
+$paramList[<span class="hljs-string">"CUST_ID"</span>] = <span class="hljs-string">'CUST123455'</span>;
+$paramList[<span class="hljs-string">"INDUSTRY_TYPE_ID"</span>] = <span class="hljs-string">'Retail'</span>;
+$paramList[<span class="hljs-string">"CHANNEL_ID"</span>] = <span class="hljs-string">'WEB'</span>;
+$paramList[<span class="hljs-string">"TXN_AMOUNT"</span>] = <span class="hljs-string">'1'</span>; <span class="hljs-comment">//IF SUBS_AMOUNT_TYPE is VARIABLE then we can transact with amount '0' . Incase FIX it will not work.</span>
+$paramList[<span class="hljs-string">"WEBSITE"</span>] = <span class="hljs-string">'WEBSTAGING'</span>;	
+$paramList[<span class="hljs-string">"REQUEST_TYPE"</span>] = <span class="hljs-string">'SUBSCRIBE'</span>;
+$paramList[<span class="hljs-string">"SUBS_SERVICE_ID"</span>] = <span class="hljs-string">'10981771'</span>;
+$paramList[<span class="hljs-string">"SUBS_FREQUENCY_UNIT"</span>] = <span class="hljs-string">'DAY'</span>; <span class="hljs-comment">//DAY,MONTH,YEAR</span>
+$paramList[<span class="hljs-string">"SUBS_FREQUENCY"</span>] = <span class="hljs-string">'1'</span>; <span class="hljs-comment">//if frequency is 1 DAY then SUBS_EXPIRY_DATE should be the day after tomorrow. (Ex-2018-06-27 ------ 2018-06-29 )</span>
+$paramList[<span class="hljs-string">"SUBS_ENABLE_RETRY"</span>] = <span class="hljs-string">'0'</span>;  <span class="hljs-comment">// Number of retry for subscription</span>
+$paramList[<span class="hljs-string">"SUBS_EXPIRY_DATE"</span>] = <span class="hljs-string">'2019-01-17'</span>; <span class="hljs-comment">//yy-mm-dd</span>
+$paramList[<span class="hljs-string">"SUBS_PPI_ONLY"</span>] = <span class="hljs-string">'Y'</span>;
+$paramList[<span class="hljs-string">"CALLBACK_URL"</span>]=<span class="hljs-string">"http://localhost/Projects/suscription_PGP/pgResponse.php"</span>;
+$paramList[<span class="hljs-string">"SUBS_AMOUNT_TYPE"</span>] = <span class="hljs-string">'FIX'</span>; <span class="hljs-comment">//Variable OR FIX</span>
+
+
+$checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
+
+<span class="hljs-meta">?&gt;</span>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Merchant Check Out Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;center&gt;&lt;h1&gt;Please <span class="hljs-keyword">do</span> not refresh this page...&lt;/h1&gt;&lt;/center&gt;
+                &lt;form method=<span class="hljs-string">"post"</span> action=<span class="hljs-string">"&lt;?php echo PAYTM_TXN_URL ?&gt;"</span> name=<span class="hljs-string">"f1"</span>&gt;
+        &lt;table border=<span class="hljs-string">"1"</span>&gt;
+            &lt;tbody&gt;
+            <span class="hljs-meta">&lt;?php</span>
+            <span class="hljs-keyword">foreach</span>($paramList <span class="hljs-keyword">as</span> $name =&gt; $value) {
+                <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;input type="hidden" name="'</span> . $name .<span class="hljs-string">'" value="'</span> . $value . <span class="hljs-string">'"&gt;'</span>;
+            }
+            <span class="hljs-meta">?&gt;</span>
+            &lt;input type=<span class="hljs-string">"hidden"</span> name=<span class="hljs-string">"CHECKSUMHASH"</span> value=<span class="hljs-string">"&lt;?= $checkSum?&gt;"</span>&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
+            document.f1.submit();
+        &lt;/script&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                `
+            }
+        } else if (apiName == 'renew') {
+            return {
+                __html: `
+<pre><code class="hljs language-php" metastring=""><span class="hljs-meta">&lt;?php</span>
+header(<span class="hljs-string">"Pragma: no-cache"</span>);
+header(<span class="hljs-string">"Cache-Control: no-cache"</span>);
+header(<span class="hljs-string">"Expires: 0"</span>);
+
+<span class="hljs-comment">// following files need to be included</span>
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/config_paytm.php"</span>);
+<span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/encdec_paytm.php"</span>);
+
+$checkSum = <span class="hljs-string">""</span>;
+$paramList = <span class="hljs-keyword">array</span>();
+
+<span class="hljs-comment">// Create an array having all required parameters for creating checksum.</span>
+$paramList[<span class="hljs-string">"MID"</span>] = <span class="hljs-string">'xxxxPG01851465523919'</span>;
+$paramList[<span class="hljs-string">"ORDER_ID"</span>] = <span class="hljs-string">'OrderRenewTest00000000001'</span>;
+$paramList[<span class="hljs-string">"TXN_AMOUNT"</span>] = <span class="hljs-string">'40'</span>;
+$paramList[<span class="hljs-string">"SUBS_ID"</span>] = <span class="hljs-string">'1002410'</span>;
+$paramList[<span class="hljs-string">"REQUEST_TYPE"</span>] = <span class="hljs-string">'RENEW_SUBSCRIPTION'</span>;
+
+$checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWdwEDyh4z'</span>);
+
+<span class="hljs-meta">?&gt;</span>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Merchant Check Out Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;center&gt;&lt;h1&gt;Please <span class="hljs-keyword">do</span> not refresh this page...&lt;/h1&gt;&lt;/center&gt;
+        &lt;form method=<span class="hljs-string">"post"</span> action=<span class="hljs-string">"&lt;?php echo PAYTM_TXN_URL ?&gt;"</span> name=<span class="hljs-string">"f1"</span>&gt;
+        &lt;table border=<span class="hljs-string">"1"</span>&gt;
+            &lt;tbody&gt;
+            <span class="hljs-meta">&lt;?php</span>
+            <span class="hljs-keyword">foreach</span>($paramList <span class="hljs-keyword">as</span> $name =&gt; $value) {
+                <span class="hljs-keyword">echo</span> <span class="hljs-string">'&lt;input type="hidden" name="'</span> . $name .<span class="hljs-string">'" value="'</span> . $value . <span class="hljs-string">'"&gt;'</span>;
+            }
+            <span class="hljs-meta">?&gt;</span>
+            &lt;input type=<span class="hljs-string">"hidden"</span> name=<span class="hljs-string">"CHECKSUMHASH"</span> value=<span class="hljs-string">"&lt;?= $checkSum?&gt;"</span>&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
+            document.f1.submit();
+        &lt;/script&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                `
+            }
+    
+    } else if(apiName == 'txnStatus') {
+        return {
+            __html: `
+    <pre><code class="hljs language-php" metastring=""><span class="hljs-meta">&lt;?php</span> header(<span class="hljs-string">"Pragma: no-cache"</span>); header(<span class="hljs-string">"Cache-Control: no-cache"</span>); header(<span class="hljs-string">"Expires: 0"</span>); <span class="hljs-comment">// following files need to be included </span>
+    <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/config_paytm.php"</span>); <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./lib/encdec_paytm.php"</span>); $ORDER_ID = <span class="hljs-string">""</span>; $requestParamList = <span class="hljs-keyword">array</span>(); $responseParamList = <span class="hljs-keyword">array</span>(); $requestParamList = <span class="hljs-keyword">array</span>(<span class="hljs-string">"MID"</span> =&gt; PAYTM_MERCHANT_MID , <span class="hljs-string">"ORDERID"</span> =&gt; <span class="hljs-string">"ORDS51973186"</span>); $checkSum = getChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY); $requestParamList[<span class="hljs-string">'CHECKSUMHASH'</span>] = urlencode($checkSum); $data_string = <span class="hljs-string">"JsonData="</span>.json_encode($requestParamList); <span class="hljs-keyword">echo</span> $data_string; $ch = curl_init(); <span class="hljs-comment">// initiate curl </span>
+    $url = PAYTM_STATUS_QUERY_URL; <span class="hljs-comment">//Paytm server where you want to post data </span>
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="hljs-number">0</span>); curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="hljs-number">0</span>); curl_setopt($ch, CURLOPT_URL,$url); curl_setopt($ch, CURLOPT_POST, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// tell curl you want to post something </span>
+    curl_setopt($ch, CURLOPT_POSTFIELDS,$data_string); <span class="hljs-comment">// define what you want to post </span>
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="hljs-keyword">true</span>); <span class="hljs-comment">// return the output in string format </span>
+    $headers = <span class="hljs-keyword">array</span>(); $headers[] = <span class="hljs-string">'Content-Type: application/json'</span>; 
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); 
+    $output = curl_exec($ch); <span class="hljs-comment">// execute $info = curl_getinfo($ch);</span></code></pre>
+            `
+        }
+    
+    } else if (apiName == 'refund') {
+        return {
+            __html: `
+            
+            `
+        }
+    
+    } else if (apiName == 'refundStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+        
+    }
+    }
+
+
+    getErrorHTML = (apiName) => {
+
+
+        if(apiName == 'subscription') {
+            return {
+                __html: `
+    <pre><code class="hljs language-json">{   
+        <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180927111212800110168666800020875"</span>,
+        <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">""</span>,
+        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
+        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
+        <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"PENDING"</span>,
+        <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
+        <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"810"</span>,
+        <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Failed"</span>,
+        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
+        <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.0"</span>,
+        <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-27 10:07:15.0"</span>
+    }</code></pre>
+                `
+            }
+        } else if (apiName == 'renew') {
+            return {
+                __html: `
+                
+                `
+            }
+    
+    } else if(apiName == 'txnStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+    
+    } else if (apiName == 'refund') {
+        return {
+            __html: `
+            
+            `
+        }
+    
+    } else if (apiName == 'refundStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+        
+    }
+    }
+
+    gteSuccessHTML = (apiName) => {
+
+
+        if(apiName == 'subscription') {
+            return {
+                __html: `
+    <pre><code class="hljs language-json">{
+        <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180926111212800110168766100018551"</span>,
+        <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">"5583250"</span>,
+        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
+        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
+        <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_SUCCESS"</span>,
+        <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
+        <span class="hljs-attr">"GATEWAYNAME"</span>:<span class="hljs-string">"WALLET"</span>,
+        <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"01"</span>,
+        <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Success"</span>,
+        <span class="hljs-attr">"BANKNAME"</span>:<span class="hljs-string">"WALLET"</span>,
+        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
+        <span class="hljs-attr">"PAYMENTMODE"</span>:<span class="hljs-string">"PPI"</span>,
+        <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.00"</span>,
+        <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-26 13:50:57.0"</span>
+    } </code></pre>
+                
+                `
+            }
+        } else if (apiName == 'renew') {
+            return {
+                __html: `
+                
+                `
+            }
+    
+    } else if(apiName == 'txnStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+    
+    } else if (apiName == 'refund') {
+        return {
+            __html: `
+            
+            `
+        }
+    
+    } else if (apiName == 'refundStatus') {
+        return {
+            __html: `
+            
+            `
+        }
+        
+    }
     }
     render() {
         return (
@@ -631,16 +1084,16 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                                 <Tab tabFor="four">PHP</Tab>
                             </TabList>
                             <TabPanel tabId="one">
-                                <span dangerouslySetInnerHTML={this.getCurlHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getCurlHTML('subscription')}></span>
                             </TabPanel>
                             <TabPanel tabId="two">
-                                <span dangerouslySetInnerHTML={this.getJavaHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getJavaHTML('subscription')}></span>
                             </TabPanel>
                             <TabPanel tabId="three">
-                                <span dangerouslySetInnerHTML={this.getNetHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getNetHTML('subscription')}></span>
                             </TabPanel>
                             <TabPanel tabId="four">
-                                <span dangerouslySetInnerHTML={this.getPHPHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getPHPHTML('subscription')}></span>
                             </TabPanel>
                         </TabProvider> : null}
                     {
@@ -648,9 +1101,9 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
-                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML()}></span>
+                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML('subscription')}></span>
                                 </TabPanel> <TabPanel tabId="error" >
-                                  <span dangerouslySetInnerHTML={this.getErrorHTML()}></span>
+                                  <span dangerouslySetInnerHTML={this.getErrorHTML('subscription')}></span>
                                 </TabPanel>
                             </TabProvider> : null
                     }
@@ -873,16 +1326,16 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                                 <Tab tabFor="four">PHP</Tab>
                             </TabList>
                             <TabPanel tabId="one">
-                                <span dangerouslySetInnerHTML={this.getCurlHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getCurlHTML('renew')}></span>
                             </TabPanel>
                             <TabPanel tabId="two">
-                                <span dangerouslySetInnerHTML={this.getJavaHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getJavaHTML('renew')}></span>
                             </TabPanel>
                             <TabPanel tabId="three">
-                                <span dangerouslySetInnerHTML={this.getNetHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getNetHTML('renew')}></span>
                             </TabPanel>
                             <TabPanel tabId="four">
-                                <span dangerouslySetInnerHTML={this.getPHPHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getPHPHTML('renew')}></span>
                             </TabPanel>
                         </TabProvider> : null}
                     {
@@ -890,9 +1343,9 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
-                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML()}></span>
+                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML('renew')}></span>
                                 </TabPanel> <TabPanel tabId="error" >
-                                  <span dangerouslySetInnerHTML={this.getErrorHTML()}></span>
+                                  <span dangerouslySetInnerHTML={this.getErrorHTML('renew')}></span>
                                 </TabPanel>
                             </TabProvider> : null
                     }
@@ -1064,16 +1517,16 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                                 <Tab tabFor="four">PHP</Tab>
                             </TabList>
                             <TabPanel tabId="one">
-                                <span dangerouslySetInnerHTML={this.getCurlHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getCurlHTML('txnStatus')}></span>
                             </TabPanel>
                             <TabPanel tabId="two">
-                                <span dangerouslySetInnerHTML={this.getJavaHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getJavaHTML('txnStatus')}></span>
                             </TabPanel>
                             <TabPanel tabId="three">
-                                <span dangerouslySetInnerHTML={this.getNetHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getNetHTML('txnStatus')}></span>
                             </TabPanel>
                             <TabPanel tabId="four">
-                                <span dangerouslySetInnerHTML={this.getPHPHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getPHPHTML('txnStatus')}></span>
                             </TabPanel>
                         </TabProvider> : null}
                     {
@@ -1081,9 +1534,9 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
-                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML()}></span>
+                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML('txnStatus')}></span>
                                 </TabPanel> <TabPanel tabId="error" >
-                                  <span dangerouslySetInnerHTML={this.getErrorHTML()}></span>
+                                  <span dangerouslySetInnerHTML={this.getErrorHTML('txnStatus')}></span>
                                 </TabPanel>
                             </TabProvider> : null
                     }
@@ -1285,16 +1738,16 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                                 <Tab tabFor="four">PHP</Tab>
                             </TabList>
                             <TabPanel tabId="one">
-                                <span dangerouslySetInnerHTML={this.getCurlHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getCurlHTML('refund')}></span>
                             </TabPanel>
                             <TabPanel tabId="two">
-                                <span dangerouslySetInnerHTML={this.getJavaHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getJavaHTML('refund')}></span>
                             </TabPanel>
                             <TabPanel tabId="three">
-                                <span dangerouslySetInnerHTML={this.getNetHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getNetHTML('refund')}></span>
                             </TabPanel>
                             <TabPanel tabId="four">
-                                <span dangerouslySetInnerHTML={this.getPHPHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getPHPHTML('refund')}></span>
                             </TabPanel>
                         </TabProvider> : null}
                     {
@@ -1302,9 +1755,9 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
-                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML()}></span>
+                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML('refund')}></span>
                                 </TabPanel> <TabPanel tabId="error" >
-                                  <span dangerouslySetInnerHTML={this.getErrorHTML()}></span>
+                                  <span dangerouslySetInnerHTML={this.getErrorHTML('refund')}></span>
                                 </TabPanel>
                             </TabProvider> : null
                     }
@@ -1478,16 +1931,16 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                                 <Tab tabFor="four">PHP</Tab>
                             </TabList>
                             <TabPanel tabId="one">
-                                <span dangerouslySetInnerHTML={this.getCurlHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getCurlHTML('refundStatus')}></span>
                             </TabPanel>
                             <TabPanel tabId="two">
-                                <span dangerouslySetInnerHTML={this.getJavaHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getJavaHTML('refundStatus')}></span>
                             </TabPanel>
                             <TabPanel tabId="three">
-                                <span dangerouslySetInnerHTML={this.getNetHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getNetHTML('refundStatus')}></span>
                             </TabPanel>
                             <TabPanel tabId="four">
-                                <span dangerouslySetInnerHTML={this.getPHPHTML()}></span>
+                                <span dangerouslySetInnerHTML={this.getPHPHTML('refundStatus')}></span>
                             </TabPanel>
                         </TabProvider> : null}
                     {
@@ -1495,9 +1948,9 @@ paytmParams.Add(<span class="hljs-string">"ORDERID"</span>, orderId);
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
-                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML()}></span>
+                                      <span dangerouslySetInnerHTML= {this.gteSuccessHTML('refundStatus')}></span>
                                 </TabPanel> <TabPanel tabId="error" >
-                                  <span dangerouslySetInnerHTML={this.getErrorHTML()}></span>
+                                  <span dangerouslySetInnerHTML={this.getErrorHTML('refundStatus')}></span>
                                 </TabPanel>
                             </TabProvider> : null
                     }
