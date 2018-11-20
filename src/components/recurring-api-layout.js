@@ -583,36 +583,59 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
         if(apiName == 'subscription') {
             return {
                 __html: `
-    <pre><code class="hljs language-json">{
-        <span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180926111212800110168766100018551"</span>,
-        <span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">"5583250"</span>,
-        <span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"order1"</span>,
-        <span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"100.12"</span>,
-        <span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_SUCCESS"</span>,
-        <span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>,
-        <span class="hljs-attr">"GATEWAYNAME"</span>:<span class="hljs-string">"WALLET"</span>,
-        <span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"01"</span>,
-        <span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Success"</span>,
-        <span class="hljs-attr">"BANKNAME"</span>:<span class="hljs-string">"WALLET"</span>,
-        <span class="hljs-attr">"MID"</span>:<span class="hljs-string">"rxazcv89315285244163"</span>,
-        <span class="hljs-attr">"PAYMENTMODE"</span>:<span class="hljs-string">"PPI"</span>,
-        <span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"0.00"</span>,
-        <span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-09-26 13:50:57.0"</span>
-    } </code></pre>
+<pre><code class="hljs language-josn" metastring=""><span class="hljs-attr">ORDERID</span> = ORDER12rty34567
+<span class="hljs-attr">MID</span> = xxxxmS01829682567544
+<span class="hljs-attr">TXNID</span> = <span class="hljs-number">20180720111212800110168645500018472</span>
+<span class="hljs-attr">TXNAMOUNT</span> = <span class="hljs-number">1</span>
+<span class="hljs-attr">PAYMENTMODE</span> = PPI
+<span class="hljs-attr">CURRENCY</span> = INR
+<span class="hljs-attr">TXNDATE</span> = <span class="hljs-number">2018</span>-<span class="hljs-number">07</span>-<span class="hljs-number">20</span> <span class="hljs-number">12</span>:<span class="hljs-number">18</span>:<span class="hljs-number">30.0</span>
+<span class="hljs-attr">STATUS</span> = TXN_SUCCESS
+<span class="hljs-attr">RESPCODE</span> = <span class="hljs-number">01</span>
+<span class="hljs-attr">RESPMSG</span> = Txn Success
+<span class="hljs-attr">GATEWAYNAME</span> = WALLET
+<span class="hljs-attr">BANKTXNID</span> =&nbsp;
+<span class="hljs-attr">SUBS_ID</span> = <span class="hljs-number">2971</span>
+<span class="hljs-attr">BANKNAME</span> = WALLET
+<span class="hljs-attr">CHECKSUMHASH</span> = QSgQPpSJkL+QRNfCeUziHTkU3ugCgxjburuSogO2ggjG6K8bnG4a/dnXAY+ZyB2KRBteHhll6R3LiVLQQ2ysY4+b5/UF6+yZqVQvl1VP1E=&nbsp;</code></pre>
                 
                 `
             }
         } else if (apiName == 'renew') {
             return {
                 __html: `
-                
+<pre><code class="hljs language-josn" metastring="">{&nbsp;
+<span class="hljs-attr">"TXNID"</span>:<span class="hljs-number">70000965271</span>,
+<span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"OrderRenewTest00000000001"</span>,
+<span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"40"</span>,
+<span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_ACCEPTED"</span>,
+<span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"900"</span>,
+<span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Subscription&nbsp;Txn&nbsp;accepted."</span>,
+<span class="hljs-attr">"MID"</span>:<span class="hljs-string">"xxxxPG01851465523919"</span>,
+<span class="hljs-attr">"SUBS_ID"</span>:”<span class="hljs-number">1002410</span>”
+}</code></pre>
                 `
             }
     
     } else if(apiName == 'txnStatus') {
         return {
             __html: `
-            
+<pre><code class="hljs language-josn" metastring="">{ 
+<span class="hljs-attr">"TXNID"</span>:<span class="hljs-string">"20180404111212800110168881700011032"</span>, 
+<span class="hljs-attr">"BANKTXNID"</span>:<span class="hljs-string">""</span>, 
+<span class="hljs-attr">"ORDERID"</span>:<span class="hljs-string">"ORDS51973186"</span>, 
+<span class="hljs-attr">"TXNAMOUNT"</span>:<span class="hljs-string">"1000.00"</span>, 
+<span class="hljs-attr">"STATUS"</span>:<span class="hljs-string">"TXN_SUCCESS"</span>, 
+<span class="hljs-attr">"TXNTYPE"</span>:<span class="hljs-string">"SALE"</span>, 
+<span class="hljs-attr">"GATEWAYNAME"</span>:<span class="hljs-string">"WALLET"</span>, 
+<span class="hljs-attr">"RESPCODE"</span>:<span class="hljs-string">"01"</span>, 
+<span class="hljs-attr">"RESPMSG"</span>:<span class="hljs-string">"Txn Successful."</span>, 
+<span class="hljs-attr">"BANKNAME"</span>:<span class="hljs-string">"WALLET"</span>, 
+<span class="hljs-attr">"MID"</span>:<span class="hljs-string">"PaytmS01829682567544"</span>, 
+<span class="hljs-attr">"PAYMENTMODE"</span>:<span class="hljs-string">"PPI"</span>, 
+<span class="hljs-attr">"REFUNDAMT"</span>:<span class="hljs-string">"5.11"</span>, 
+<span class="hljs-attr">"TXNDATE"</span>:<span class="hljs-string">"2018-04-04 13:50:31.0"</span>,
+<span class="hljs-attr">"SUBS_ID"</span>:<span class="hljs-string">"2971"</span>}</code></pre>
             `
         }
     
@@ -641,14 +664,15 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <h2 className={`${style.apiHeading}`}>Subscription api</h2>
                         <div>
                         <table className={`${style.apiTable}`}>
-                            <thead></thead>
+                            <thead>
+                            <tr>
+                                <th>Parameter </th>
+                                <th>Description</th>
+                                <th>Type & Length</th>
+                                <th>Mandatory</th>
+                            </tr>
+                            </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
                                 <tr>
                                     <td>REQUEST_TYPE</td>
                                     <td>Type of transaction,<strong>SUBSCRIBE</strong> for subscription transacti</td>
@@ -924,7 +948,14 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         </table>
                         <h2>Response Structure</h2>
                         <table className={`${style.apiTable}`}>
-                            <thead></thead>
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Description</th>
+                                    <th>Type & Length</th>
+                                    <th>Mandatory</th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 <tr>
                                     <td>SUBS_ID</td>
@@ -1118,7 +1149,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <table className={`${style.apiTable}`}>
                             <thead>
                                     <tr>
-                                        <th>Parameter Name</th>
+                                        <th>Parameter</th>
                                         <th>Description</th>
                                         <th>Type & Length</th>
                                         <th>Mandatory</th>
@@ -1360,7 +1391,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <table className={`${style.apiTable}`}>
                         <thead>
                             <tr>
-                                <th>Parameter Name</th>
+                                <th>Parameter </th>
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Mandatory</th>
@@ -1391,7 +1422,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                     <table className={`${style.apiTable}`}>
                             <thead>
                             <tr>
-                                <th>Parameter Name</th>
+                                <th>Parameter </th>
                                 <th>Description</th>
                                 <th>Type</th>
                                 <th>Mandatory</th>
@@ -1552,7 +1583,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <table className={`${style.apiTable}`}>
                             <thead>
                                 <tr>
-                                    <th>Parameter Name</th>
+                                    <th>Parameter</th>
                                     <th>Description</th>
                                     <th>Type</th>
                                     <th>Mandatory</th>
@@ -1613,7 +1644,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <table className={`${style.apiTable}`}>
                             <thead>
                                 <tr>
-                                    <th>Parameter Name</th>
+                                    <th>Parameter </th>
                                     <th>Description</th>
                                     <th>Type</th>
                                 </tr>
@@ -1773,7 +1804,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <table className={`${style.apiTable}`}>
                             <thead>
                                 <tr>
-                                    <th>Parameter Name</th>
+                                    <th>Parameter </th>
                                     <th>Description</th>
                                     <th>Type</th>
                                     <th>Mandatory</th>
@@ -1810,7 +1841,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <table className={`${style.apiTable}`}>
                             <thead>
                                 <tr>
-                                    <th>Parameter Name</th>
+                                    <th>Parameter</th>
                                     <th>Description</th>
                                     <th>Type</th>
                                 </tr>
