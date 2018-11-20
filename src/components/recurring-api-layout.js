@@ -11,14 +11,27 @@ export default class RecurringApi extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            checked: this.props.checked
+            subscription: {
+                checked: false
+            },
+            renew: {
+                checked: false
+            },
+            txnStatus: {
+                checked: false
+            },
+            refund: {
+                checked: false
+            },
+            refundStatus: {
+                checked: false
+            }
+            
         };
         this.handleChange = this.handleChange.bind(this);
     }
-    handleChange(event) {
-        this.setState({
-            checked: event.target.checked
-        });
+    handleChange(inputChecked, apiName) {
+        this.setState((state,props) => ({ [apiName]: {checked: inputChecked}}));
     }
     getJavaHTML = (apiName) => {
         if(apiName == 'subscription') {
@@ -1098,15 +1111,13 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                         <label className={`${style.switch}`}>
                             < input type="checkbox"
                                 id="checkbox"
-                                onChange={
-                                    this.handleChange
-                                }
-                            />
+                                onChange={(e) => this.handleChange(e.target.checked, 'subscription')
+                                    }/>
                             <div className={`${style.slider} ${style.round}`}></div>
                         </label>
                         <span>Response JSON</span>
                     </h6>
-                    {!this.state.checked ?
+                    {!this.state.subscription.checked ?
                         <TabProvider defaultTab="one">
                             <TabList>
                                 <Tab tabFor="one">CURL</Tab>
@@ -1128,7 +1139,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             </TabPanel>
                         </TabProvider> : null}
                     {
-                        this.state.checked ?
+                        this.state.subscription.checked ?
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
@@ -1341,14 +1352,14 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             < input type="checkbox"
                                 id="checkbox"
                                 onChange={
-                                    this.handleChange
+                                    (e) => this.handleChange(e.target.checked, 'renew')
                                 }
                             />
                             <div className={`${style.slider} ${style.round}`}></div>
                         </label>
                         <span>Response JSON</span>
                     </h6>
-                    {!this.state.checked ?
+                    {!this.state.renew.checked ?
                         <TabProvider defaultTab="one">
                             <TabList>
                                 <Tab tabFor="one">CURL</Tab>
@@ -1370,7 +1381,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             </TabPanel>
                         </TabProvider> : null}
                     {
-                        this.state.checked ?
+                        this.state.renew.checked ?
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
@@ -1532,14 +1543,14 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             < input type="checkbox"
                                 id="checkbox"
                                 onChange={
-                                    this.handleChange
+                                    (e) => this.handleChange(e.target.checked, 'txnStatus')
                                 }
                             />
                             <div className={`${style.slider} ${style.round}`}></div>
                         </label>
                         <span>Response JSON</span>
                     </h6>
-                    {!this.state.checked ?
+                    {!this.state.txnStatus.checked ?
                         <TabProvider defaultTab="one">
                             <TabList>
                                 <Tab tabFor="one">CURL</Tab>
@@ -1561,7 +1572,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             </TabPanel>
                         </TabProvider> : null}
                     {
-                        this.state.checked ?
+                        this.state.txnStatus.checked ?
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
@@ -1753,14 +1764,14 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             < input type="checkbox"
                                 id="checkbox"
                                 onChange={
-                                    this.handleChange
+                                    (e) => this.handleChange(e.target.checked, 'refund')
                                 }
                             />
                             <div className={`${style.slider} ${style.round}`}></div>
                         </label>
                         <span>Response JSON</span>
                     </h6>
-                    {!this.state.checked ?
+                    {!this.state.refund.checked ?
                         <TabProvider defaultTab="one">
                             <TabList>
                                 <Tab tabFor="one">CURL</Tab>
@@ -1782,7 +1793,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             </TabPanel>
                         </TabProvider> : null}
                     {
-                        this.state.checked ?
+                        this.state.refund.checked ?
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
@@ -1946,14 +1957,14 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             < input type="checkbox"
                                 id="checkbox"
                                 onChange={
-                                    this.handleChange
+                                    (e) => this.handleChange(e.target.checked, 'refundStatus')
                                 }
                             />
                             <div className={`${style.slider} ${style.round}`}></div>
                         </label>
                         <span>Response JSON</span>
                     </h6>
-                    {!this.state.checked ?
+                    {!this.state.refundStatus.checked ?
                         <TabProvider defaultTab="one">
                             <TabList>
                                 <Tab tabFor="one">CURL</Tab>
@@ -1975,7 +1986,7 @@ $checkSum = getChecksumFromArray($paramList,<span class="hljs-string">'I%VyKUMWd
                             </TabPanel>
                         </TabProvider> : null}
                     {
-                        this.state.checked ?
+                        this.state.refundStatus.checked ?
                             <TabProvider defaultTab="success" >
                                 <TabList >
                                     <Tab tabFor="success" > Success </Tab> <Tab tabFor="error" > Error </Tab > </TabList> <TabPanel tabId="success" >
