@@ -29,7 +29,9 @@ class Layout extends Component {
   handleChange() {
     this.props.toggleShowLoggedInPopup(false)
   }
-
+  hideMaintinanceMsg = () => {
+   this.props.toggleShowMaintainanceMsg(false)
+  }
 
   render() {
     const root = this.state.locale === 'en' ? '' : this.state.locale;
@@ -58,9 +60,22 @@ class Layout extends Component {
             >
               <html lang="en" />
             </Helmet>
-          <div id='app' className = "grid justify-between activeOverlayClass" >
+          <div id='app' className = { `grid justify-between activeOverlayClass ${ this.props.state.showMaintainanceMsg ? ' hasMantinanceMsg' : ''}`} >
           {this.props.state.loggedIn && this.props.state.showLoggedIn ? <div className="grid align-center justify-between logged-entry"><span>You have already logged in. </span><a onClick={this.handleChange} className="close"><img src="/assets/ic-clear-white.svg"/></a></div>
  : null}
+            <div className="maintainanceMsg">
+              <div class="msg-wrap">
+                <div>
+                  <img src="/assets/ic-warning.svg" alt=""/>
+                  <span class="m-text"><strong>Please note:</strong>
+                  Paytm Payment Gateway staging will be unavailable for testing due to scheduled maintenance between 23-Nov-2018 to 25-Nov-2018.</span>
+                </div>
+                <span class="msgCloseBtn" onClick={this.hideMaintinanceMsg}>
+                  <img src="/assets/ic-close.svg" alt=""/>
+                </span>
+              </div>
+            </div>
+          
               <Header />
                 <div className='wrapper grid'>
                     < Menubar />
@@ -105,9 +120,11 @@ class Layout extends Component {
   }
 }
 
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleShowLoggedInPopup: (showLoggedIn) => dispatch({type: 'TOGGLE_SHOW_LOGGEDIN_POPUP', showLoggedIn})
+    toggleShowLoggedInPopup: (showLoggedIn) => dispatch({type: 'TOGGLE_SHOW_LOGGEDIN_POPUP', showLoggedIn}),
+    toggleShowMaintainanceMsg: (showMaintainanceMsg) => dispatch({type: 'TOGGLE_SHOW_MAINTAINANCE_POPUP', showMaintainanceMsg})
   }
 }
 
