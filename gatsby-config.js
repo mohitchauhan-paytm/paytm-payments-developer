@@ -1,17 +1,30 @@
-const remarkHighlight = require('remark-highlight.js')
+const remarkHighlight = require('remark-highlight.js');
+const fs = require('fs');
+
+fs.readFile(`${__dirname}/googledd4b1c937794cbdf.html`, function (err, data) {
+  if (err) {
+    throw err;
+  }
+  fs.writeFile(`${__dirname}/public/googledd4b1c937794cbdf.html`, data, function (err) {
+    if (err) {
+      return console.log(err);
+    }
+
+    console.log("The file was saved!");
+  });
+})
 
 
 module.exports = {
   siteMetadata: {
     title: 'Paytm Developer Network',
-    githubProject:'https://github.com/Paytm-Payments/paytm-payments-developer/tree/master/src/pages'
+    githubProject: 'https://github.com/Paytm-Payments/paytm-payments-developer/tree/master/src/pages'
   },
-  plugins: [
-    {
+  plugins: [{
       resolve: `gatsby-mdx`,
       options: {
         extensions: [".mdx", ".md"],
-        mdPlugins: [remarkHighlight] ,
+        mdPlugins: [remarkHighlight],
         defaultLayouts: {
           default: require.resolve("./src/components/layout.js")
         }
@@ -47,6 +60,6 @@ module.exports = {
         head: true
       },
     }
-    
+
   ],
 }
