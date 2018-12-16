@@ -1,18 +1,6 @@
 const remarkHighlight = require('remark-highlight.js');
 const fs = require('fs');
 
-fs.readFile(`${__dirname}/googledd4b1c937794cbdf.html`, function (err, data) {
-  if (err) {
-    throw err;
-  }
-  fs.writeFile(`${__dirname}/public/googledd4b1c937794cbdf.html`, data, function (err) {
-    if (err) {
-      return console.log(err);
-    }
-
-    console.log("The file was saved!");
-  });
-})
 
 
 module.exports = {
@@ -63,3 +51,17 @@ module.exports = {
 
   ],
 }
+
+
+fs.readFile(`${__dirname}/googledd4b1c937794cbdf.html`, function (err, data) {
+  if (err) {
+    throw err;
+  }
+  fs.writeFile(`${__dirname}/public/googledd4b1c937794cbdf.html`, data, function (err) {
+    if (err) {
+      return console.log(err);
+  }
+
+    console.log("The file was saved!");
+  });
+})

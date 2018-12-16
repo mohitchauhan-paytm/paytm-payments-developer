@@ -58,19 +58,8 @@ class Layout extends Component {
               <html lang="en" />
             </Helmet>
           <div id='app' className = { `grid justify-between activeOverlayClass`} >
-            <div className="maintainanceMsg">
-              <div className="msg-wrap">
-                <div>
-                  <img src="/assets/ic-warning.svg" alt=""/>
-                  <span className="m-text"><strong>Please note:</strong>
-                  Paytm Payment Gateway staging will be unavailable for testing due to scheduled maintenance between 23-Nov-2018 to 25-Nov-2018.</span>
-                </div>
-                <span className="msgCloseBtn" onClick={this.hideMaintinanceMsg}>
-                  <img src="/assets/ic-close.svg" alt=""/>
-                </span>
-              </div>
-            </div>
-          
+          {this.props.state.loggedIn && this.props.state.showLoggedIn ? <div className="grid align-center justify-between logged-entry"><span>You have already logged in. </span><a onClick={this.handleChange} className="close"><img src="/assets/ic-clear-white.svg"/></a></div>
+ : null}  
               <Header />
                 <div className='wrapper grid'>
                     < Menubar />
@@ -102,7 +91,6 @@ class Layout extends Component {
                 maxWidth: 960,
                 padding: '2.0875rem 1.0875rem 1.45rem',
               }}>
-
               {children}
               <hr style={{ margin: 10, height: 2, background: '#f0f0f0' }} />
               MIT License | <a href="https://twitter.com/apuravchauhan">@apuravchauhan</a>
