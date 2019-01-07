@@ -31,11 +31,6 @@ const reducer = (state, action) => {
       showLoggedIn: action.showLoggedIn
     });
 
-    case 'TOGGLE_SHOW_MAINTAINANCE_POPUP':
-    return Object.assign({},state, {
-      showMaintainanceMsg: action.showMaintainanceMsg
-    });
-
     default:
       return state;
    
@@ -50,7 +45,6 @@ const initialState = {
   showApiMenu: false,
   showMainLogIn: true,
   showLoggedIn: false,
-  showMaintainanceMsg: true
 }
 const createStore = () => reduxCreateStore(reducer, initialState);
 

@@ -13,6 +13,7 @@ class TestInstrument extends Component {
                     <TabList>
                             <Tab tabFor="card">Test Card Details</Tab>
                             <Tab tabFor="wallet">Test Wallet Details</Tab>
+                            <Tab tabFor="net">Net Banking</Tab>
                     </TabList>
                 </div>
                 <div className={`${style.tabPanelBox}`}>
@@ -62,6 +63,28 @@ class TestInstrument extends Component {
                                         <p>Doesn’t require 2nd factor authentication</p>
                                     </td>
                                     <td>489871</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </TabPanel>
+                <TabPanel tabId="net">
+                    <div className={`${style.cardWalletBox}`}>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Bank Name</td>
+                                    <td>Andhra Bank</td>
+                                </tr>
+                                <tr>
+                                    <td>User ID</td>
+                                    <td>test</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Password
+                                    </td>
+                                    <td>Test</td>
                                 </tr>
                             </tbody>
                         </table>

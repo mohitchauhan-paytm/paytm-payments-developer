@@ -31,7 +31,7 @@ const Footer = () => (
 				</li>
 			</ul>
 			<div className={`${style.copyright}`}>
-				© 2018, One97 Communications Pvt. Ltd
+				© 2019, One97 Communications Pvt. Ltd
 			</div>
 		</div>
 	</footer>
