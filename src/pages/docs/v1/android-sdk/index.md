@@ -274,7 +274,6 @@ public void onBackPressedCancelTransaction(){
 
 This is caused when a transaction gets cancelled. In case user presses a back or cancel button and confirms to leave the page, this callback is triggered
 
-
 ```java
 public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
 	/*Display the message as below */
