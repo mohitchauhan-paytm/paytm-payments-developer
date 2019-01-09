@@ -15,14 +15,18 @@ class Header extends Component {
   }
 
   handleChange = () => {
-    if(!this.props.state.showMainLogIn) {
+    if (!this.props.state.loggedIn) {
+      this.addHasModalClass();
+    }
+    if (!this.props.state.showMainLogIn) {
       this.props.toggleMainShowLogin(true);
       this.props.toggleShowLogin(true);
-   }
+    }
     this.props.toggleShowLogin(true);
   }
 
   hideLogin = () => {
+    this.removeHasModalClass();
     this.props.toggleShowLogin(false);
   }
 
@@ -36,14 +40,24 @@ class Header extends Component {
 
   handleFrameTasks = (e) => {
     if (e.data.result == 'success') {
-      this.props.toggleMainShowLogin(false);
+      this.removeHasModalClass();
       this.props.setLoginData(
         false,
         true,
         e.data.user,
-        e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase()
+        e.data.user.fname ? e.data.user.fname.split('')[0] + e.data.user.lname.split('')[0] : e.data.user.uname.split('')[0].toUpperCase(),
+        false
       );
+      this.props.toggleMainShowLogin(false);
     }
+  }
+
+  addHasModalClass() {
+    document.getElementsByTagName('body')[0].classList.add('has-modal');
+  }
+
+  removeHasModalClass() {
+    document.getElementsByTagName('body')[0].classList.remove('has-modal');
   }
 
   render() {
@@ -51,7 +65,7 @@ class Header extends Component {
     return (
       <header className={`${style.header}`}>
         <div className={`max-wrap grid justify-between align-center h100 desktop`}>
-          <div className={`grid-inline`}>
+       <div className={`grid-inline`}>
             <a className={`${style.logoDesk} grid justify-center align-center`} href='/docs'>
               <Logodeveloper /> <span>DEVELOPERS</span>
             </a>
@@ -112,23 +126,23 @@ class Header extends Component {
               this.props.state.loggedIn ?
 
                 <div className={`grid-inline`}>
-                  <a className={`${style.whiteBtn} btn btn-primary small grid align-center`} href="https://dashboard.paytm.com/next/" target="_blank">My Dashboard</a>
+                  <a className={`${style.whiteBtn} btn btn-primary small grid align-center`} href="https://dashboard.paytm.com" target="_blank">My Dashboard</a>
                 </div> : null
             }
           </nav>
         </div>
         {
-          this.props.state.showMainLogIn ? 
-        <div className={`popupWrapper  ${(this.props.state.showLogin ? ' fadeIn' : '')}`}>
-          <div className="popup pos-abs iframeOpen">
-            <div className="popup-wrapper pos-rel">
-              <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
-              <div className="popup-content">
-                <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
+          this.props.state.showMainLogIn ?
+            <div className={`popupWrapper  ${(this.props.state.showLogin && !this.props.state.loggedIn  ? ' fadeIn' : '')}`}>
+              <div className="popup pos-abs iframeOpen">
+                <div className="popup-wrapper pos-rel">
+                  <span className="closePopup" onClick={this.hideLogin}><img src="/assets/ic-clear.svg" /></span>
+                  <div className="popup-content">
+                    <iframe id="oAuth" className="popup-iframe hidden" src="https://dashboard.paytm.com/developer-login" title="oAuth"></iframe>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>: null
+            </div> : null
         }
 
 
@@ -172,8 +186,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleShowLogin: (showLogin) => dispatch({ type: 'TOGGLE_SHOW_LOGIN', showLogin }),
-    setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn }),
-    toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
+    setLoginData: (showLogin, loggedIn, user, userText, showMainLogIn, showLoggedIn) => dispatch({ type: 'SET_LOGIN_DATA', showLogin, loggedIn, user, userText, showMainLogIn, showLoggedIn }),
+    toggleMainShowLogin: (showMainLogIn) => dispatch({ type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn })
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

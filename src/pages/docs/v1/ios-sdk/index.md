@@ -28,7 +28,7 @@ Paytm iOS SDK is a secure, PCI-compliant way to accept Debit/Credit card, Net-Ba
 3. Your server passes the payload and checksumhash back to the app which hands over these details to Paytm SDK    
 4. SDK verifies payload and displays payment Paytm checkout page
 5. Customer fills the payment details and completes the payment authentication. Once the payment is complete, response is posted back to your app via callback
-6. Verify checksumhash received in response on your server side. Utility to verify checksumhash is available <a href="/docs/v1/ios-sdk#codes">here</a>
+6. Verify checksumhash received in response on your server side. Utility to verify checksumhash is available <a href="/docs/v1/ios-sdk#codep">here</a>
 7. Lastly, verify transaction status with Transaction Status API via server to server call. This protects you from scenarios where your account credentials are compromised or request/response has been tampered 
 
 
@@ -45,11 +45,11 @@ Find the detailed interaction of each system component in the flow chart below
 
 ### Step 1:  Importing the library
 
-Follow these steps to download and import the library (explain which library) in your project
+Follow these steps to download and import the library in your project
 
 
 #### For Swift
-* Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
+* Download the sdk from <a href="https://github.com/Paytm-Payments/Paytm_iOS_App_Kit/tree/master/Swift" target="_blank">here</a>. You have an option to download bitcode enabled and disabled SDK 
 * Open your project in XCode and from File menu, select Add files to "yourproject" 
 * Select Paytm.framework in the directory you just unzipped
 * Make sure 'Copy items if needed' is checked and Click 'Add'
@@ -59,7 +59,7 @@ Follow these steps to download and import the library (explain which library) in
 ---
 
 #### For Objective C
-* Download the sdk from here. You have an option to download bitcode enabled and disabled SDK 
+* Download the sdk from <a href="https://github.com/Paytm-Payments/Paytm_iOS_App_Kit/tree/master/ObjC" target="_blank">here</a>. You have an option to download bitcode enabled and disabled SDK 
 * Open your project in XCode 
 * Go to the Build Phases tab, expand the Link Binary With Libraries section, click the "+" button
 * In the newly appeared “Choose items to add” window, click the “Add Other..” button, and specify the path to libPaymentsSDK.a library file and click the Open button
@@ -167,7 +167,7 @@ For Production - Create an instance of the `PGServerEnvironment` and set the `se
 |**CHANNEL_ID** String(3) Mandatory  | This parameter is used to control the theme of the payment page. Based on the channel passed, Paytm will render the layout suitable for that specific platform<br/>For App, the value is WAP
 |**WEBSITE** String(30) Mandatory | For staging environment: WEBSTAGING<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your activation is complete
 |**INDUSTRY_TYPE_ID** String(20) Mandatory | For staging environment: "Retail"<br/>For production environment: Will be available <a href="https://dashboard.paytm.com/next/apikeys?src=dev" target="_blank">here</a> once your activation is complete
-|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm. Merchant has to ensure that this always gets generated on server.  Utilities to generate checksumhash is available <a href="/docs/v1/android-sdk#codes">here</a>
+|**CHECKSUMHASH** String(108) Mandatory | Security parameter to avoid tampering. Generated using server side checksum utility provided by Paytm. Merchant has to ensure that this always gets generated on server.  Utilities to generate checksumhash is available <a href="/docs/v1/ios-sdk#code">here</a>
 |**MOBILE_NO** Optional String(15)  Mandatory| Customer mobile number. Passing this enables faster login for customer into his/her Paytm account
 |**EMAIL** Optional String(50) Mandatory | Customer's email ID. Passing this enables faster login for customer into his/her mobile wallet.
 |**CALLBACK_URL** String(255) Mandatory | Staging Environment: <br/> "https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>" <br/> Production Environment: <br/> "https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=<order_id>"
@@ -248,9 +248,13 @@ To handle success/errors on completion of payment, implement `didFinishedRespons
 
 </div>
 
+
 ---
 
-### Step 4: Checksum generation & verification
+<h3 class="checksum">Step 5: Checksum Generation and Verification
+<a name="code"></a>
+</h3>
+
 
 #### Checksumhash Generation -
 
@@ -309,8 +313,8 @@ String merchantKey = <span class="hljs-string">"gKpu7IKaLSbkchFS"</span>;
 String orderId = <span class="hljs-string">"order1"</span>;
 String channelId = <span class="hljs-string">"WAP"</span>;
 String custId = <span class="hljs-string">"cust123"</span>;
-String mobileNo = <span class="hljs-string">"9999999999"</span>;
-String email = <span class="hljs-string">"cust123"</span>;
+String mobileNo = <span class="hljs-string">"7777777777"</span>;
+String email = <span class="hljs-string">"username@emailprovider.com"</span>;
 String txnAmount = <span class="hljs-string">"100.12"</span>;
 String website = <span class="hljs-string">"WEBSTAGING"</span>;
 <span class="hljs-comment">// This is the staging value. Production value is available in your dashboard</span>
@@ -367,12 +371,69 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
 </Tabs>
 </div>
 
-<a name="code"></a>
-
-<div className={`${style.dscrption}`}>
-Endpoints: <br/>
+<div>
+Endpoints :- <br/>
 Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
 Production: https://securegw.paytm.in/theia/processTransaction
+</div>
+
+<div className={`${style.ecomPlatform} grid justify-start`}>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/java.png' alt=''/>
+                        <label>Java</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_DotNet' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-dotnet.png' alt=''/>
+                        <label>ASP.Net</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_PHP' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-php.png' alt=''/>
+                        <label>PHP</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_NodeJs' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-nodejs.png' alt=''/>
+                        <label>Node.js</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Ruby' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-ruby-on-rails.png' alt=''/>
+                        <label>Ruby on rails</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_Python' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-python.png' alt=''/>
+                        <label>Python</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='https://github.com/Paytm-Payments/Paytm_Google_App_Engine_Kit' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
+                    <span className={`grid vertical justify-between align-center`}>
+                        <img src='/assets/logo-google-app-engine.png' alt=''/>
+                        <label>Google App Engine</label>
+                    </span>
+                </a>
+            </div>
 </div>
 
 
@@ -435,15 +496,17 @@ Production: https://securegw.paytm.in/theia/processTransaction
             </div>
 </div>
 
-#### Checksumhash Verification-
+<div class="checksum">
+<a name="codep"></a>
+</div>
 
-All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server by server side utility. Code snippets and Checksum generation library are provided below
+#### Checksumhash Verification
 
+
+All responses sent by Paytm consists checksumhash. This checksumhash needs to be verified to ensure that response have not been tampered. Checksum verification is done using our server side utility. Code snippets and Github links for the utility in your language of choice are provided below.
 
 
 <div className={`${style.checkoutWrapper}`}>
-
-
 <Tabs defaultTab="java">
 	<TabList>
             <Tab tabFor="java">JAVA</Tab>
@@ -469,9 +532,9 @@ TreeMap&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</span
 <span class="hljs-keyword">boolean</span> isValidChecksum = CheckSumServiceHelper.getCheckSumServiceHelper().verifycheckSum(merchantKey, paytmParams, paytmChecksum);
 <span class="hljs-comment">// If isValidChecksum is false, then checksum is not valid</span>
 <span class="hljs-keyword">if</span>(isValidChecksum){
-	System.out.append(<span class="hljs-string">"Checksum Matched"</span>);
+    System.out.append(<span class="hljs-string">"Checksum Matched"</span>);
 }<span class="hljs-keyword">else</span>{
-	System.out.append(<span class="hljs-string">"Checksum MisMatch"</span>);
+    System.out.append(<span class="hljs-string">"Checksum MisMatch"</span>);
 }</code></pre>
         `}}></span>
     </TabPanel>
@@ -513,12 +576,13 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 </Tabs>
 </div>
 
-<a name="codes"></a>
-
-Get the sample code for a language of your choice - 
 
 
-<div className={`${style.ecomPlatform} grid justify-start`}>
+#### Get the sample code for a language of your choice - 
+
+
+<div>
+<div className={`grid justify-start ${style.ecomPlatform}`}>
             <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
                     <span className={`grid vertical justify-between align-center`}>
@@ -575,6 +639,7 @@ Get the sample code for a language of your choice -
                     </span>
                 </a>
             </div>
+</div>
 </div>
 
 ## On completion of your integration -

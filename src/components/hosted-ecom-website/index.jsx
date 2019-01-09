@@ -16,6 +16,14 @@ class HostedEcomWeb extends Component {
             <div className={`${style.ecomCard}`}>
                 <a href='' className={`${style.cardLink} grid justify-between align-center`} >
                     <span className={`grid justify-between align-center`}>
+                        <img src='/assets/shopmatic.png' alt=''/>
+                        <label>Shopmatic</label>
+                    </span>
+                </a>
+            </div>
+            <div className={`${style.ecomCard}`}>
+                <a href='' className={`${style.cardLink} grid justify-between align-center`} >
+                    <span className={`grid justify-between align-center`}>
                         <img src='/assets/logo-zepo.png' alt=''/>
                         <label>Zepo</label>
                     </span>
@@ -45,6 +53,7 @@ class HostedEcomWeb extends Component {
                     </span>
                 </a>
             </div>
+
             
             
         </div>

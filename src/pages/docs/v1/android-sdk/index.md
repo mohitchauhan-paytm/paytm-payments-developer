@@ -283,7 +283,10 @@ public void onTransactionCancel(String inErrorMessage, Bundle inResponse)
 
 ---
 
-### Step 5: Checksum Generation and Verification
+<h3 class="checksum">Step 5: Checksum Generation and Verification
+    <a name="code"></a>
+</h3>
+
 
 #### Checksumhash Generation 
 
@@ -399,10 +402,9 @@ String paytmChecksum = paytm.CheckSum.generateCheckSum(merchantKey, paytmParams)
 </Tabs>
 </div>
 
-<a name="code"></a>
 
-<div className={`${style.dscrption}`}>
-Endpoints: <br/>
+<div >
+Endpoints:-<br/>
 Staging: https://securegw-stage.paytm.in/theia/processTransaction<br/>
 Production: https://securegw.paytm.in/theia/processTransaction
 </div>
@@ -467,6 +469,11 @@ Production: https://securegw.paytm.in/theia/processTransaction
                     </span>
                 </a>
             </div>
+</div>
+
+
+<div class="checksum">
+<a name="codes"></a>
 </div>
 
 #### Checksumhash Verification
@@ -547,14 +554,11 @@ Dictionary&lt;String, String&gt; paytmParams = <span class="hljs-keyword">new</s
 </Tabs>
 </div>
 
-<a name="codes"></a>
-
-Get the sample code for a language of your choice - 
 
 
+#### Get the sample code for a language of your choice - 
 
-
-
+<div>
 <div className={`${style.ecomPlatform} grid justify-start`}>
             <div className={`${style.ecomCard}`}>
                 <a href='https://github.com/Paytm-Payments/Paytm_App_Checksum_Kit_JAVA' target="_blank" className={`${style.cardLink} grid justify-between align-center`}>
@@ -612,6 +616,7 @@ Get the sample code for a language of your choice -
                     </span>
                 </a>
             </div>
+</div>
 </div>
 
 ## On completion of your integration -

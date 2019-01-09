@@ -10,9 +10,11 @@ import Menubar from './menu-bar/index';
 import './../style/preload.scss';
 import * as style from './markdown.module.scss';
 import Git from './githublink';
+import {connect} from 'react-redux';
+
 /* eslint-disable */
 
-export default class Layout extends Component {
+class Layout extends Component {
   constructor(props) {
     super(props);
     const currLocale = LangUtils.currentLocale;
@@ -21,8 +23,12 @@ export default class Layout extends Component {
       msg: langMap[currLocale].data,
       locale: currLocale,
     }
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange() {
+    this.props.toggleShowLoggedInPopup(false)
+  }
 
   render() {
     const root = this.state.locale === 'en' ? '' : this.state.locale;
@@ -51,7 +57,9 @@ export default class Layout extends Component {
             >
               <html lang="en" />
             </Helmet>
-          <div id='app' className = "grid justify-between activeOverlayClass" >
+          <div id='app' className = { `grid justify-between activeOverlayClass`} >
+          {this.props.state.loggedIn && this.props.state.showLoggedIn ? <div className="grid align-center justify-between logged-entry"><span>You have already logged in. </span><a onClick={this.handleChange} className="close"><img src="/assets/ic-clear-white.svg"/></a></div>
+ : null}  
               <Header />
                 <div className='wrapper grid'>
                     < Menubar />
@@ -83,7 +91,6 @@ export default class Layout extends Component {
                 maxWidth: 960,
                 padding: '2.0875rem 1.0875rem 1.45rem',
               }}>
-
               {children}
               <hr style={{ margin: 10, height: 2, background: '#f0f0f0' }} />
               MIT License | <a href="https://twitter.com/apuravchauhan">@apuravchauhan</a>
@@ -95,3 +102,18 @@ export default class Layout extends Component {
 
   }
 }
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleShowLoggedInPopup: (showLoggedIn) => dispatch({type: 'TOGGLE_SHOW_LOGGEDIN_POPUP', showLoggedIn}),
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

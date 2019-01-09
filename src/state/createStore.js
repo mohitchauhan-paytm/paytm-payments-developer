@@ -18,12 +18,17 @@ const reducer = (state, action) => {
         user: action.user,
         userText: action.userText,
         showLogin: action.showLogin,
-        showMainLogIn: action.showMainLogIn
+        showMainLogIn: action.showMainLogIn,
       });
 
     case 'TOGGLE_MAIN_SHOW_LOGIN': 
     return Object.assign({}, state, {
       showMainLogIn: action.showMainLogIn
+    });
+
+    case 'TOGGLE_SHOW_LOGGEDIN_POPUP':
+    return Object.assign({},state, {
+      showLoggedIn: action.showLoggedIn
     });
 
     default:
@@ -38,7 +43,8 @@ const initialState = {
   showLogin: false,
   loggedIn: false,
   showApiMenu: false,
-  showMainLogIn: true
+  showMainLogIn: true,
+  showLoggedIn: false,
 }
 const createStore = () => reduxCreateStore(reducer, initialState);
 

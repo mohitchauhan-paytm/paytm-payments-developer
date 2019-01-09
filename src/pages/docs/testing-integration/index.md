@@ -5,7 +5,7 @@ title: "Paytm Pre-integrated Solutions: Accept Payments on your hosted website i
 
 
 # Test Instruments
-### Live payment  instruments cannot be used in our staging payment page. Use the below test card or wallet details to make successful payment on staging payment page
+### Use the below test instrument details to make successful payment on staging payment page
 
 
 import TestInstrument from './../../../components/test-instruments/index';

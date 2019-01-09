@@ -7,13 +7,28 @@ class MdButton extends Component {
         super(props);
     }
 
-    handleChange = () =>  {
-        if(!this.props.state.showMainLogIn) {
-            this.props.toggleMainShowLogin(true);
+    handleChange = () => {
+        if (!this.props.state.loggedIn) {
+            this.addHasModalClass();
+            if (!this.props.state.showMainLogIn) {
+                this.props.toggleMainShowLogin(true);
+                this.props.toggleShowLogin(true);
+            }
             this.props.toggleShowLogin(true);
+        } else {
+
+            this.props.toggleShowLoggedInPopup(true);
+            setTimeout(() => {
+                this.props.toggleShowLoggedInPopup(false)
+            }, 3000);
         }
-        this.props.toggleShowLogin(true);
+
     }
+
+    addHasModalClass() {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+    }
+    
 
     render() {
         return(<a href="javascript:void(0)" onClick={this.handleChange}>{this.props.text}</a>);
@@ -23,7 +38,8 @@ class MdButton extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
       toggleShowLogin: (showLogin) => dispatch({type: 'TOGGLE_SHOW_LOGIN', showLogin}),
-      toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn})
+      toggleMainShowLogin: (showMainLogIn) => dispatch({type: 'TOGGLE_MAIN_SHOW_LOGIN', showMainLogIn}),
+      toggleShowLoggedInPopup: (showLoggedIn) => dispatch({type: 'TOGGLE_SHOW_LOGGEDIN_POPUP', showLoggedIn})
     }
 }
 
