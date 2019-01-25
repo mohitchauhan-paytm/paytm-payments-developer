@@ -174,9 +174,11 @@ CURLs -X POST -H "Content-Type: application/json" -d'{"email":"example@example.c
 ##### Header:
 
 
-|Parameter|Mandatory|Example Value|Description|
+<!-- |Parameter|Mandatory|Example Value|Description|
 |----|---|----|---|
-|Authorization|Yes|Basic dGVzdGNsaWVudDplODY3MDlkOS1iMjM4LTQ4MjMtODVkYi05zZhMTY5YjMyNTg=|This is a base64 encoded string of “clientId:clientSecret”|
+|Authorization|Yes|Basic dGVzdGNsaWVudDplODY3MDlkOS1iMjM4LTQ4MjMtODVkYi05zZhMTY5YjMyNTg=|This is a base64 encoded string of “clientId:clientSecret”| -->
+
+<table><thead><tr><th>Parameter</th><th>Mandatory</th><th>Example Value</th><th>Description</th></tr></thead><tbody><tr><td>Authorization</td><td>Yes</td><td className={`${style.bsc}`}>Basic dGVzdGNsaWVudDplODY3MDlkOS1iMjM4LTQ4MjMtODVkYi05zZhMTY5YjMyNTg=</td><td>This is a base64 encoded string of “clientId:clientSecret”</td></tr></tbody></table>
 
 ##### Body- This will be in json format in request body.
 
